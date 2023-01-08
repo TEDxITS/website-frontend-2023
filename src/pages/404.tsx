@@ -1,9 +1,9 @@
-'use client';
-
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-export default function HomePage() {
+import '../styles/globals.css';
+
+export default function NotFound() {
   const router = useRouter();
   React.useEffect(() => {
     router.push('/coming-soon');
