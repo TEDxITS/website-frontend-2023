@@ -22,6 +22,43 @@ interface IDefaultHeadProps extends Partial<typeof defaultMeta> {
   templateTitle?: string;
 }
 
+interface IFavicons {
+  rel: string;
+  href: string;
+  sizes?: string;
+  type?: string;
+}
+
+const favicons: Array<IFavicons> = [
+  {
+    rel: 'apple-touch-icon',
+    sizes: '180x180',
+    href: '/favicon/apple-touch-icon.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '192x192',
+    href: '/favicon/android-chrome-192x192.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '32x32',
+    href: '/favicon/favicon-32x32.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '16x16',
+    href: '/favicon/favicon-16x16.png',
+  },
+  {
+    rel: 'manifest',
+    href: '/favicon/site.webmanifest',
+  },
+];
+
 export default function DefaultHead(props: IDefaultHeadProps) {
   const pathname = usePathname();
   const meta = {
@@ -53,7 +90,9 @@ export default function DefaultHead(props: IDefaultHeadProps) {
       <meta name='twitter:description' content={meta.description} />
       <meta name='twitter:image' content={meta.image} />
       {/* Favicon */}
-      <link rel='icon' href='/favicon.ico' />
+      {favicons.map((linkProps) => (
+        <link key={linkProps.href} {...linkProps} />
+      ))}
       {/* Analytics */}
       {/* Host your own Umami Analytics and put the credentials on the script tag below */}
       {meta.umami_analytics.isActive &&
