@@ -18,12 +18,20 @@ async function getUrlByUserId(userId: string) {
         userId: userId,
       },
     });
-    if (result) {
-      return createResponse(200, 'The urls retrieved successfully', result);
+    if (result.length > 0) {
+      return createResponse(
+        200,
+        'The short links retrieved successfully',
+        result
+      );
     }
-    return createResponse(404, 'The user did not have any short url', null);
+    return createResponse(404, 'The user did not have any short link', null);
   } catch (e) {
-    return createResponse(500, 'Internal Server Error', null);
+    return createResponse(
+      500,
+      'There is error retrieving the short links',
+      null
+    );
   }
 }
 
@@ -39,27 +47,32 @@ export default async function ShortLinkList() {
     (process.env.NODE_ENV === 'development' ? 'http://' : 'https://') +
     host +
     '/links/';
+
+  if (session) {
+    return (
+      <div>
+        <h3>Your link</h3>
+        <SignOutButton />
+        {urlByUserId && urlByUserId.data
+          ? urlByUserId.data.length > 0
+            ? urlByUserId.data?.map(({ id, url, short_url }) => (
+                <ShortLinkCard
+                  key={id}
+                  id={id}
+                  url={url}
+                  short_url={fullLocation + short_url}
+                />
+              ))
+            : urlByUserId.message
+          : urlByUserId?.message}
+      </div>
+    );
+  }
+
   return (
-    <section>
-      {session ? (
-        <div>
-          <h3>Your link</h3>
-          <SignOutButton />
-          {urlByUserId.data?.map(({ id, url, short_url }) => (
-            <ShortLinkCard
-              key={id}
-              id={id}
-              url={url}
-              short_url={fullLocation + short_url}
-            />
-          ))}
-        </div>
-      ) : (
-        <div>
-          <h3>Sign in to save your short link</h3>
-          <SignInButton />
-        </div>
-      )}
-    </section>
+    <div>
+      <h3>Sign in to save your short link</h3>
+      <SignInButton />
+    </div>
   );
 }
