@@ -1,4 +1,52 @@
-# Next.js + Tailwind CSS + TypeScript Starter and Boilerplate
+# TedxITS 2023 Front-end Repository
+
+![TedxITS 2023](https://github.com/tedxits2023/frontend/blob/main/public/images/markdown/tedxits-white.png)
+
+## Getting Started
+
+### 1. Clone this repo using one of the two ways:
+
+1. Using bash or other terminal
+
+   ```
+   git clone https://github.com/tedxits2023/frontend.git
+   ```
+
+2. Using [Github Desktop](https://desktop.github.com/)
+
+   ![Clone through Github Desktop](https://github.com/tedxits2023/frontend/blob/main/public/images/markdown/github-desktop.png)
+
+### 2. Install dependencies
+
+It is encouraged to use **yarn** so the husky hooks can work properly.
+
+```bash
+yarn install
+```
+
+### 3. Run the development server
+
+You can start the server using this command:
+
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/app/page.tsx`.
+
+### 4. Commit Message Convention
+
+This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
+
+Frequently used commits :
+
+- **fix** : a commit of the type fix patches a bug in your codebase (this correlates with PATCH in Semantic Versioning).
+
+  _Note : fix commits is only used when fixing bugs from the deployed version of code. If you made a mistake in your local while in development state and accidentally commited, amend it with `git commit --amend`_
+
+- **feat** : a commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).
+
+## Shout out to the template owner
 
 <div align="center">
   <h2>🔋 ts-nextjs-tailwind-starter</h2>
@@ -11,7 +59,7 @@
 
 </div>
 
-## Features
+### Features
 
 This repository is 🔋 battery packed with:
 
@@ -40,65 +88,7 @@ You can also check all of the **details and demos** on my blog post:
 
 - [One-stop Starter to Maximize Efficiency on Next.js & Tailwind CSS Projects](https://theodorusclarence.com/blog/one-stop-starter)
 
-## Getting Started
-
-### 1. Clone this template using one of the three ways:
-
-1. Use this repository as template
-
-   **Disclosure:** by using this repository as a template, there will be an attribution on your repository.
-
-   I'll appreciate if you do, so this template can be known by others too 😄
-
-   ![Use as template](https://user-images.githubusercontent.com/55318172/129183039-1a61e68d-dd90-4548-9489-7b3ccbb35810.png)
-
-2. Using `create-next-app`
-
-   ```bash
-   npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter project-name
-   ```
-
-3. Using `degit`
-
-   ```bash
-   npx degit theodorusclarence/ts-nextjs-tailwind-starter YOUR_APP_NAME
-   ```
-
-4. Deploy to Vercel
-
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter)
-
-### 2. Install dependencies
-
-It is encouraged to use **yarn** so the husky hooks can work properly.
-
-```bash
-yarn install
-```
-
-### 3. Run the development server
-
-You can start the server using this command:
-
-```bash
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/pages/index.tsx`.
-
-### 4. Change defaults
-
-There are some things you need to change including title, urls, favicons, etc.
-
-Find all comments with !STARTERCONF, then follow the guide.
-
-Don't forget to change the package name in package.json
-
-### 5. Commit Message Convention
-
-This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
-
-## Projects using ts-nextjs-tailwind-starter
+### Projects using ts-nextjs-tailwind-starter
 
 <!--
 TEMPLATE
@@ -111,7 +101,7 @@ TEMPLATE
 
 Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/edit/main/README.md). 😃
 
-## Expansion Pack 📦
+### Expansion Pack 📦
 
 This starter is now equipped with an [expansion pack](https://github.com/theodorusclarence/expansion-pack).
 
