@@ -2,18 +2,21 @@
 import { usePathname } from 'next/navigation';
 
 const defaultMeta = {
-  title: 'Personal Next.Js Starter',
-  siteName: 'Personal Next.Js Starter',
+  title: 'TEDxITS 2023',
+  siteName: 'TEDxITS 2023',
   description:
-    'Get started with your next project quickly with this personal Next.js starter template, featuring TypeScript and Tailwind CSS for efficient and scalable development. Perfect for creating modern and performant web applications.',
-  url: '',
+    'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.',
+  url:
+    process.env.NODE_ENV === 'production'
+      ? 'https://www.tedxits.org'
+      : 'http://localhost:3000',
   type: 'website',
   robots: 'follow, index',
   image: '',
   umami_analytics: {
     id: process.env.NEXT_PUBLIC_ANALYTICS_ID,
     src: process.env.NEXT_PUBLIC_ANALYTICS_SRC,
-    isActive: process.env.NODE_ENV === 'development' ? false : true,
+    isActive: process.env.NODE_ENV === 'production',
   },
 };
 
@@ -69,6 +72,7 @@ export default function DefaultHead(props: IDefaultHeadProps) {
   meta['title'] = props.templateTitle
     ? `${props.templateTitle} | ${meta.siteName}`
     : meta.title;
+
   return (
     <>
       <title>{meta.title}</title>
@@ -82,7 +86,11 @@ export default function DefaultHead(props: IDefaultHeadProps) {
       <meta property='og:site_name' content={meta.siteName} />
       <meta property='og:description' content={meta.description} />
       <meta property='og:title' content={meta.title} />
-      <meta name='image' property='og:image' content={meta.image} />
+      <meta
+        name='image'
+        property='og:image'
+        content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+      />
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
       <meta name='twitter:site' content='@TEDxITS' />

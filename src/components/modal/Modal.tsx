@@ -8,6 +8,7 @@ type ModalProps = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
   className?: string;
+  customDialog?: React.ReactNode;
   as?: React.ElementType | undefined;
 };
 
@@ -16,6 +17,7 @@ function ModalComponent({
   setIsOpen,
   children,
   className = '',
+  customDialog,
   as,
 }: ModalProps): JSX.Element {
   return (
@@ -30,7 +32,7 @@ function ModalComponent({
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <div className='fixed inset-0 bg-black bg-opacity-40' />
+          <div className='fixed inset-0 bg-black bg-opacity-80' />
         </Transition.Child>
 
         <Transition.Child
@@ -46,12 +48,15 @@ function ModalComponent({
             <div className='flex min-h-full w-full items-center justify-center overflow-auto'>
               <Dialog.Panel
                 className={clsxm(
-                  'w-11/12 max-w-2xl rounded-2xl bg-white p-4',
+                  customDialog
+                    ? 'relative'
+                    : 'w-11/12 max-w-2xl rounded-2xl bg-white p-4',
                   className
                 )}
                 as={as}
               >
                 {children}
+                {customDialog && customDialog}
               </Dialog.Panel>
             </div>
           </div>

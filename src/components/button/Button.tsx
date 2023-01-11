@@ -4,12 +4,11 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/utils/clsxm';
 
-const ButtonVariant = ['primary', 'outline', 'ghost', 'light', 'dark'] as const;
+const ButtonVariant = ['unstyled', 'primary'] as const;
 const ButtonSize = ['sm', 'base'] as const;
 
 type ButtonProps = {
   isLoading?: boolean;
-  isDarkBg?: boolean;
   variant?: typeof ButtonVariant[number];
   size?: typeof ButtonSize[number];
   leftIcon?: IconType;
@@ -27,7 +26,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading,
       variant = 'primary',
       size = 'base',
-      isDarkBg = false,
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
       leftIconClassName,
@@ -44,49 +42,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type='button'
         disabled={disabled}
         className={clsxm(
-          'inline-flex items-center rounded font-medium',
+          'inline-flex items-center rounded-full font-medium',
           'focus:outline-none focus-visible:ring focus-visible:ring-primary-500',
           'shadow-sm',
-          'transition-colors duration-75',
+          'transition duration-200 ease-in-out',
           //#region  //*=========== Size ===========
           [
-            size === 'base' && ['px-3 py-1.5', 'text-sm md:text-base'],
+            size === 'base' && ['px-5 py-2.5', 'text-sm md:text-base'],
             size === 'sm' && ['px-2 py-1', 'text-xs md:text-sm'],
           ],
           //#endregion  //*======== Size ===========
           //#region  //*=========== Variants ===========
           [
             variant === 'primary' && [
-              'bg-primary-500 text-white',
-              'border border-primary-600',
-              'hover:bg-primary-600 hover:text-white',
-              'active:bg-primary-700',
+              'bg-gradient-to-r from-cblue to-cred text-white',
+              'hover:scale-105 hover:bg-primary-600 hover:from-cwhite hover:to-cblue hover:text-cblack',
+              'active:scale-100 active:bg-primary-700',
               'disabled:bg-primary-700',
-            ],
-            variant === 'outline' && [
-              'text-primary-500',
-              'border border-primary-500',
-              'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
-            ],
-            variant === 'ghost' && [
-              'text-primary-500',
-              'shadow-none',
-              'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
-            ],
-            variant === 'light' && [
-              'bg-white text-gray-700',
-              'border border-gray-300',
-              'hover:bg-gray-100 hover:text-dark',
-              'active:bg-white/80 disabled:bg-gray-200',
-            ],
-            variant === 'dark' && [
-              'bg-gray-900 text-white',
-              'border border-gray-600',
-              'hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-700',
             ],
           ],
           //#endregion  //*======== Variants ===========

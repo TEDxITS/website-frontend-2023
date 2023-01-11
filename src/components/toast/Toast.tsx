@@ -2,5 +2,5 @@
 import { Toaster } from 'react-hot-toast';
 
 export default function Toast() {
-  return <Toaster />;
+  return <Toaster toastOptions={{ style: { fontWeight: 'bold' } }} />;
 }
