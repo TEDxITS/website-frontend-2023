@@ -1,35 +1,16 @@
 'use client';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import React from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { MdContentCopy } from 'react-icons/md';
-import * as z from 'zod';
 
 import Button from '@/components/button/Button';
-import Input from '@/components/input/Input';
 import { Modal } from '@/components/modal/Modal';
+import LinkShortenerForm from '@/containers/links/LinkShortenerForm';
 
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import copyToClipboard from '@/utils/copy';
-import { createShortUrl } from '@/utils/short-url';
 
 import modalBg from '~/images/links/modal.png';
-
-const linkShortenerSchema = z.object({
-  url: z.string().url({ message: 'The provided link is not a valid URL' }),
-  short_url: z
-    .string()
-    .min(1, { message: 'Short link must contain at least 1 character(s)' }),
-});
-type LinkShortenerDataType = z.infer<typeof linkShortenerSchema>;
-const linkShortenerInitialValue: LinkShortenerDataType = {
-  url: '',
-  short_url: '',
-};
 
 function LinkModal({
   isOpen,
@@ -77,44 +58,10 @@ function LinkModal({
   );
 }
 
-export default function LinkShortenerForm() {
-  const methods = useForm<LinkShortenerDataType>({
-    defaultValues: linkShortenerInitialValue,
-    mode: 'onTouched',
-    reValidateMode: 'onChange',
-    resolver: zodResolver(linkShortenerSchema),
-  });
-  const { handleSubmit } = methods;
-  const session = useSession();
-  const router = useRouter();
+export default function LinkShortenerContainer() {
   const [shortLink, setShortLink] = React.useState<string>('');
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [isLinkModalOpen, setIsLinkModalOpen] = React.useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<LinkShortenerDataType> = async (data) => {
-    let dataWithUserId;
-    setIsLoading(true);
-    setShortLink('');
-    if (session && session.status === 'authenticated') {
-      dataWithUserId = { ...data, userId: session.data.user?.id };
-    }
-    const createShortUrlPromise = createShortUrl(
-      dataWithUserId ? dataWithUserId : data
-    );
-    toast
-      .promise(createShortUrlPromise, {
-        loading: 'Loading..',
-        success: 'Short link generated successfully',
-        error: (e) => e.message,
-      })
-      .then((res) => {
-        setShortLink(res.data.short_url);
-        setIsLinkModalOpen(true);
-        router.refresh();
-      })
-      .catch((e) => e)
-      .finally(() => setIsLoading(false));
-  };
+  const [isLinkModalOpen, setIsLinkModalOpen] = React.useState<boolean>(false);
 
   return (
     <>
@@ -132,35 +79,18 @@ export default function LinkShortenerForm() {
         <section className='flex h-full w-full flex-col items-start gap-y-20 px-5 sm:flex-row sm:justify-between sm:gap-y-0 sm:px-32'>
           <div className='space-y-8 sm:w-2/5'>
             <h1 className='font-baron text-cwhite'>
-              Link Shortener For <span className='text-5xl'>VOYAGERS!</span>
+              Link Shortener For <br />
+              <span className='text-4xl sm:text-5xl'>THE VOYAGERS!</span>
             </h1>
             <p className='font-medium text-cwhite sm:text-lg'>
               Feel free to use this URL link shortener tool to organize links
               related to our TEDxITS 2023
             </p>
           </div>
-          <FormProvider {...methods}>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className='w-full space-y-10 text-cwhite sm:w-1/2'
-              noValidate
-            >
-              <Input
-                id='url'
-                type='text'
-                label={<p className='font-semibold'>Original URL:</p>}
-              />
-              <div className='flex items-center gap-x-1'>
-                <p>tedxits.org/links/</p>
-                <Input id='short_url' type='text' />
-              </div>
-              <div className='flex justify-end'>
-                <Button type='submit' disabled={isLoading}>
-                  Generate
-                </Button>
-              </div>
-            </form>
-          </FormProvider>
+          <LinkShortenerForm
+            setIsLinkModalOpen={setIsLinkModalOpen}
+            setShortLink={setShortLink}
+          />
         </section>
       </div>
     </>

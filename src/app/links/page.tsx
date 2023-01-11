@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import LinkShortenerForm from '@/containers/links/LinkShortenerContainer';
+import LinkShortenerContainer from '@/containers/links/LinkShortenerContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
 import linkShortenerBg from '~/images/links/link-shortener-bg-alt.png';
@@ -24,7 +24,7 @@ export default async function LinkShortenerPage() {
         placeholder='blur'
         priority
       />
-      <LinkShortenerForm />
+      <LinkShortenerContainer />
       {/* <Suspense fallback={<p>Loading...</p>}>
         <ShortLinkList />
       </Suspense> */}

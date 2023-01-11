@@ -20,11 +20,11 @@ async function getUrl(req: NextApiRequest, res: NextApiResponse) {
     if (result) {
       return res
         .status(200)
-        .json(createResponse(200, 'The url retrieved successfully', result));
+        .json(createResponse(200, 'The link retrieved successfully', result));
     }
     return res
       .status(404)
-      .json(createResponse(404, 'The short url does not exist', null));
+      .json(createResponse(404, 'The short link does not exist', null));
   } catch (e) {
     return res
       .status(500)
@@ -43,7 +43,7 @@ async function createShortUrl(req: NextApiRequest, res: NextApiResponse) {
       return res
         .status(201)
         .json(
-          createResponse(200, 'The short url created successfully', result)
+          createResponse(200, 'The short link created successfully', result)
         );
     }
   } catch (e) {
