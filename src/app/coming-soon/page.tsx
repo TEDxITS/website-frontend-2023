@@ -26,7 +26,7 @@ export default function ComingSoonPage() {
             />
           </div>
           <h2 className='mb-12 text-center font-primary text-[1.3rem] font-semibold text-white'>
-            Stay tune as we will guide you to #ExpectTheUnexpected
+            Stay tuned as we will guide you to #ExpectTheUnexpected
           </h2>
           <UnstyledLink href='https://www.instagram.com/tedxits/' openNewTab>
             <Button className='px-8'>
