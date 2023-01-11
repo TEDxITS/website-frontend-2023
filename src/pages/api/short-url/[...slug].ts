@@ -4,6 +4,34 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
 
+async function getUrl(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const shortUrl = req.query.short_url
+      ? Array.isArray(req.query.short_url)
+        ? req.query.short_url[0]
+        : req.query.short_url
+      : '';
+
+    const result = await prisma.url.findUnique({
+      where: {
+        short_url: shortUrl,
+      },
+    });
+    if (result) {
+      return res
+        .status(200)
+        .json(createResponse(200, 'The url retrieved successfully', result));
+    }
+    return res
+      .status(404)
+      .json(createResponse(404, 'The short url does not exist', null));
+  } catch (e) {
+    return res
+      .status(500)
+      .json(createResponse(500, 'Internal Server Error Get Url', null));
+  }
+}
+
 async function createShortUrl(req: NextApiRequest, res: NextApiResponse) {
   try {
     const result = await prisma.url.create({
@@ -77,6 +105,9 @@ export default async function handler(
   const slug = req.query.slug;
   if (slug) {
     switch (slug[0]) {
+      case 'get':
+        await getUrl(req, res);
+        break;
       case 'create':
         await createShortUrl(req, res);
         break;
