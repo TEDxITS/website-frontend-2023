@@ -2,18 +2,21 @@
 import { usePathname } from 'next/navigation';
 
 const defaultMeta = {
-  title: 'Personal Next.Js Starter',
-  siteName: 'Personal Next.Js Starter',
+  title: 'TEDxITS 2023',
+  siteName: 'TEDxITS 2023',
   description:
-    'Get started with your next project quickly with this personal Next.js starter template, featuring TypeScript and Tailwind CSS for efficient and scalable development. Perfect for creating modern and performant web applications.',
-  url: '',
+    'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.',
+  url:
+    process.env.NODE_ENV === 'production'
+      ? 'https://www.tedxits.org'
+      : 'http://localhost:3000',
   type: 'website',
   robots: 'follow, index',
   image: '',
   umami_analytics: {
     id: process.env.NEXT_PUBLIC_ANALYTICS_ID,
     src: process.env.NEXT_PUBLIC_ANALYTICS_SRC,
-    isActive: process.env.NODE_ENV === 'development' ? false : true,
+    isActive: process.env.NODE_ENV === 'production',
   },
 };
 
@@ -21,6 +24,43 @@ interface IDefaultHeadProps extends Partial<typeof defaultMeta> {
   date?: string;
   templateTitle?: string;
 }
+
+interface IFavicons {
+  rel: string;
+  href: string;
+  sizes?: string;
+  type?: string;
+}
+
+const favicons: Array<IFavicons> = [
+  {
+    rel: 'apple-touch-icon',
+    sizes: '180x180',
+    href: '/favicon/apple-touch-icon.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '192x192',
+    href: '/favicon/android-chrome-192x192.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '32x32',
+    href: '/favicon/favicon-32x32.png',
+  },
+  {
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '16x16',
+    href: '/favicon/favicon-16x16.png',
+  },
+  {
+    rel: 'manifest',
+    href: '/favicon/site.webmanifest',
+  },
+];
 
 export default function DefaultHead(props: IDefaultHeadProps) {
   const pathname = usePathname();
@@ -32,6 +72,7 @@ export default function DefaultHead(props: IDefaultHeadProps) {
   meta['title'] = props.templateTitle
     ? `${props.templateTitle} | ${meta.siteName}`
     : meta.title;
+
   return (
     <>
       <title>{meta.title}</title>
@@ -45,7 +86,11 @@ export default function DefaultHead(props: IDefaultHeadProps) {
       <meta property='og:site_name' content={meta.siteName} />
       <meta property='og:description' content={meta.description} />
       <meta property='og:title' content={meta.title} />
-      <meta name='image' property='og:image' content={meta.image} />
+      <meta
+        name='image'
+        property='og:image'
+        content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+      />
       {/* Twitter */}
       <meta name='twitter:card' content='summary_large_image' />
       <meta name='twitter:site' content='@TEDxITS' />
@@ -53,7 +98,9 @@ export default function DefaultHead(props: IDefaultHeadProps) {
       <meta name='twitter:description' content={meta.description} />
       <meta name='twitter:image' content={meta.image} />
       {/* Favicon */}
-      <link rel='icon' href='/favicon.ico' />
+      {favicons.map((linkProps) => (
+        <link key={linkProps.href} {...linkProps} />
+      ))}
       {/* Analytics */}
       {/* Host your own Umami Analytics and put the credentials on the script tag below */}
       {meta.umami_analytics.isActive &&

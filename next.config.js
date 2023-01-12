@@ -9,6 +9,16 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/coming-soon',
+        permanent: true,
+      },
+    ];
+  },
+
   // SVGR
   webpack(config) {
     config.module.rules.push({

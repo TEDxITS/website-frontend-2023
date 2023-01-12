@@ -4,17 +4,10 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/utils/clsxm';
 
-const IconButtonVariant = [
-  'primary',
-  'outline',
-  'ghost',
-  'light',
-  'dark',
-] as const;
+const IconButtonVariant = ['primary'] as const;
 
 type IconButtonProps = {
   isLoading?: boolean;
-  isDarkBg?: boolean;
   variant?: typeof IconButtonVariant[number];
   icon?: IconType;
   iconClassName?: string;
@@ -27,7 +20,6 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       disabled: buttonDisabled,
       isLoading,
       variant = 'primary',
-      isDarkBg = false,
       icon: Icon,
       iconClassName,
       ...rest
@@ -55,31 +47,6 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
               'hover:bg-primary-600 hover:text-white',
               'active:bg-primary-700',
               'disabled:bg-primary-700',
-            ],
-            variant === 'outline' && [
-              'text-primary-500',
-              'border border-primary-500',
-              'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
-            ],
-            variant === 'ghost' && [
-              'text-primary-500',
-              'shadow-none',
-              'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
-            ],
-            variant === 'light' && [
-              'bg-white text-gray-700',
-              'border border-gray-300',
-              'hover:bg-gray-100 hover:text-dark',
-              'active:bg-white/80 disabled:bg-gray-200',
-            ],
-            variant === 'dark' && [
-              'bg-gray-900 text-white',
-              'border border-gray-600',
-              'hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-700',
             ],
           ],
           //#endregion  //*======== Variants ===========

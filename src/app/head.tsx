@@ -1,4 +1,4 @@
-import DefaultHead from '@/components/head/DefaultHead';
+import DefaultHead from '@/components/utils/DefaultHead';
 
 export default function Head() {
   return (

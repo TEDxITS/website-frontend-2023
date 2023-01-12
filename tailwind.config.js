@@ -7,7 +7,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...fontFamily.sans],
+        // TEDxITS 2023 font face
+        primary: ['var(--font-futura)', ...fontFamily.sans],
+        baron: ['var(--font-baron)'],
+        quaker: ['var(--font-quaker)'],
       },
       colors: {
         primary: {
@@ -24,6 +27,18 @@ module.exports = {
           900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
         },
         dark: '#222222',
+
+        // TEDxITS color palette
+        cred: '#e83525',
+        corange: '#DE633B',
+        cyellow: '#EEA332',
+        ccream: '#DCB69F',
+        cwhite: '#F0EFE5',
+        cpink: '#E34378',
+        csky: '#42779B',
+        cblue: '#354582',
+        cgreen: '#1A5B38',
+        cblack: '#1D1D1E',
       },
       keyframes: {
         flicker: {
