@@ -82,7 +82,11 @@ export default function LinkShortenerForm({
         />
         <div className='flex items-center gap-x-1'>
           <p>tedxits.org/links/</p>
-          <Input id='short_url' type='text' />
+          <Input
+            id='short_url'
+            label={<p className='sr-only'>Short URL:</p>}
+            type='text'
+          />
         </div>
         <div className='flex justify-end'>
           <Button type='submit' disabled={isLoading}>

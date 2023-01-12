@@ -37,11 +37,12 @@ export default function Input({
   };
   return (
     <div className='block w-full space-y-1'>
-      {label && <label htmlFor={id}>{label}</label>}
+      <label htmlFor={id}>{label}</label>
       <div className='flex items-center'>
         <input
           {...register(id)}
           {...rest}
+          id={id}
           type={
             type === 'password'
               ? isPasswordVisible

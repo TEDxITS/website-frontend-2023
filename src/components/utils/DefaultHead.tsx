@@ -96,14 +96,17 @@ export default function DefaultHead(props: IDefaultHeadProps) {
       <meta name='twitter:site' content='@TEDxITS' />
       <meta name='twitter:title' content={meta.title} />
       <meta name='twitter:description' content={meta.description} />
-      <meta name='twitter:image' content={meta.image} />
+      <meta
+        name='twitter:image'
+        content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+      />
       {/* Favicon */}
       {favicons.map((linkProps) => (
         <link key={linkProps.href} {...linkProps} />
       ))}
       {/* Analytics */}
-      {/* Host your own Umami Analytics and put the credentials on the script tag below */}
-      {meta.umami_analytics.isActive &&
+      {/* Host your own Umami Analytics and put the credentials on the script tag below or just use vercel analytics and comment the code below */}
+      {/* {meta.umami_analytics.isActive &&
         meta.umami_analytics.id &&
         meta.umami_analytics.src && (
           <script
@@ -112,7 +115,7 @@ export default function DefaultHead(props: IDefaultHeadProps) {
             data-website-id={meta.umami_analytics.id}
             src={meta.umami_analytics.src}
           ></script>
-        )}
+        )} */}
     </>
   );
 }

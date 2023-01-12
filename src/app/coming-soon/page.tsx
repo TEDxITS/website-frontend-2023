@@ -20,7 +20,7 @@ export default function ComingSoonPage() {
             <Image
               src={comingSoon}
               alt='Coming Soon Title'
-              className='absolute z-30 shadow'
+              className='absolute z-30'
               fill
               style={{ objectFit: 'contain' }}
             />

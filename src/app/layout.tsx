@@ -3,8 +3,10 @@ import localFont from '@next/font/local';
 import '../styles/globals.css';
 
 import Toast from '@/components/toast/Toast';
+import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
 import AuthProvider from '@/components/utils/AuthProvider';
 
+// Fonts use in Next js 13
 const baron = localFont({
   src: [
     {
@@ -52,11 +54,6 @@ const futura = localFont({
   variable: '--font-futura',
 });
 
-// const inter = Inter({
-//   variable: '--font-inter',
-//   subsets: ['latin'],
-// });
-
 export default function RootLayout({
   children,
 }: {
@@ -78,6 +75,7 @@ export default function RootLayout({
           <Toast />
           {children}
         </AuthProvider>
+        <AnalyticsProvider />
       </body>
     </html>
   );

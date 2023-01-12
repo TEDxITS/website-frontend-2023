@@ -22,12 +22,15 @@ function LinkModal({
   shortLink: string;
 }) {
   const fullShortLink = window.location.href + '/' + shortLink;
-  const shortLinkWithoutHttp = fullShortLink.split('://')[1];
+  const shortLinkWithoutHttp =
+    process.env.NODE_ENV === 'development'
+      ? fullShortLink.split('://')[1]
+      : fullShortLink.split('www.')[1];
   return (
     <Modal
       isOpen={isOpen}
       setIsOpen={setIsOpen}
-      customDialog={<Image src={modalBg} alt='Modal' />}
+      customDialog={<Image src={modalBg} alt='Modal' placeholder='blur' />}
     >
       <div className='absolute flex h-full w-full flex-col items-center space-y-2 p-8 sm:space-y-4 sm:p-14'>
         <Modal.Title>
@@ -59,8 +62,8 @@ function LinkModal({
 }
 
 export default function LinkShortenerContainer() {
+  // const [isModalReady, setIsModalReady] = React.useState<boolean>(false);
   const [shortLink, setShortLink] = React.useState<string>('');
-
   const [isLinkModalOpen, setIsLinkModalOpen] = React.useState<boolean>(false);
 
   return (
