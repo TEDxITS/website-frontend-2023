@@ -7,7 +7,7 @@ import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
 import AuthProvider from '@/components/utils/AuthProvider';
 
 // Fonts use in Next js 13
-const baron = localFont({
+export const baron = localFont({
   src: [
     {
       path: '../../public/fonts/baron-neue/regular.otf',
@@ -18,7 +18,7 @@ const baron = localFont({
   variable: '--font-baron',
 });
 
-const quaker = localFont({
+export const quaker = localFont({
   src: [
     {
       path: '../../public/fonts/quaker-free/quaker-free.ttf',
@@ -28,7 +28,7 @@ const quaker = localFont({
   variable: '--font-quaker',
 });
 
-const futura = localFont({
+export const futura = localFont({
   src: [
     {
       path: '../../public/fonts/futura/regular.ttf',

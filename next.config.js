@@ -6,7 +6,6 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
-  reactStrictMode: true,
   swcMinify: true,
 
   async redirects() {

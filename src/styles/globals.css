@@ -59,6 +59,7 @@
   }
 
   body,
+  p,
   .p {
     @apply font-primary text-sm md:text-base;
   }
