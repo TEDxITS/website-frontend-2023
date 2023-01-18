@@ -80,7 +80,9 @@ async function deleteShortUrl(req: NextApiRequest, res: NextApiResponse) {
           createResponse(200, 'The short link deleted successfully', result)
         );
     }
-    return res.status(404).json(result);
+    return res
+      .status(404)
+      .json(createResponse(404, 'The short link does not exist', null));
   } catch (e) {
     if (
       e instanceof Prisma.PrismaClientKnownRequestError ||
@@ -92,6 +94,9 @@ async function deleteShortUrl(req: NextApiRequest, res: NextApiResponse) {
       return res.status(500).json(createResponse(500, e.message, null));
   }
 }
+
+// GET /api/short-url/get
+// get a URL given the shortened URL in the request query params (short_url)
 
 // POST /api/short-url/create
 // creates a new shortened URL given an original URL in the request body (url, short_url)

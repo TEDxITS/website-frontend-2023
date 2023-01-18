@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-import LinkShortenerContainer from '@/containers/links/LinkShortenerContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
+import LinkShortenerContainer from '@/containers/tools/LinkShortenerContainer';
 
 import linkShortenerBg from '~/images/links/link-shortener-bg-alt.png';
 import linkShortenerBgMobile from '~/images/links/link-shortener-bg-mobile.png';
 
-export default async function LinkShortenerPage() {
+export default function LinkShortenerPage() {
   return (
     <RandomStarfieldContainer>
       <Image

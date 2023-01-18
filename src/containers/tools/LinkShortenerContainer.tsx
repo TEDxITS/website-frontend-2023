@@ -5,7 +5,7 @@ import { MdContentCopy } from 'react-icons/md';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
-import LinkShortenerForm from '@/containers/links/LinkShortenerForm';
+import LinkShortenerForm from '@/containers/tools/LinkShortenerForm';
 
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import copyToClipboard from '@/utils/copy';
@@ -21,7 +21,7 @@ function LinkModal({
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   shortLink: string;
 }) {
-  const fullShortLink = window.location.href + '/' + shortLink;
+  const fullShortLink = window.location.origin + '/links/' + shortLink;
   const shortLinkWithoutHttp =
     process.env.NODE_ENV === 'development'
       ? fullShortLink.split('://')[1]
@@ -62,7 +62,6 @@ function LinkModal({
 }
 
 export default function LinkShortenerContainer() {
-  // const [isModalReady, setIsModalReady] = React.useState<boolean>(false);
   const [shortLink, setShortLink] = React.useState<string>('');
   const [isLinkModalOpen, setIsLinkModalOpen] = React.useState<boolean>(false);
 
@@ -76,7 +75,7 @@ export default function LinkShortenerContainer() {
         />
       )}
       <div className='absolute z-20 h-full w-full'>
-        <div className='mb-20 flex items-center justify-end px-4 sm:mb-0 sm:h-1/3 sm:justify-start sm:px-32'>
+        <div className='mb-20 flex items-center justify-end px-4 sm:mb-0 sm:justify-start sm:py-16 sm:px-32'>
           <FullTEDLogo variant='white' className='h-20 w-20 sm:h-32 sm:w-32' />
         </div>
         <section className='flex h-full w-full flex-col items-start gap-y-20 px-5 sm:flex-row sm:justify-between sm:gap-y-0 sm:px-32'>

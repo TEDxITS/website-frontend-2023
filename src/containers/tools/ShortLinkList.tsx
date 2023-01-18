@@ -4,8 +4,8 @@ import { unstable_getServerSession } from 'next-auth';
 import {
   SignInButton,
   SignOutButton,
-} from '@/containers/links/ShortLinkAuthButton';
-import ShortLinkCard from '@/containers/links/ShortLinkCard';
+} from '@/containers/tools/ShortLinkAuthButton';
+import ShortLinkCard from '@/containers/tools/ShortLinkCard';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import prisma from '@/utils/prisma';

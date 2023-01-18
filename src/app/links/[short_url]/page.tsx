@@ -9,7 +9,7 @@ import CircularStarfieldContainer from '@/containers/stars/CircularStarfieldCont
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import { getUrl } from '@/utils/short-url';
 
-// The Server Way
+// Uncomment to use The Server Fetch Way
 // import { redirect } from 'next/navigation';
 // import React from 'react';
 // import ExternalRedirect from '@/components/utils/ExternalRedirect';
@@ -66,7 +66,7 @@ export default function ShortUrlPage({
         }
       })
       .catch((err) => {
-        router.push('/links');
+        router.push('/coming-soon');
         toast.error(err.message);
       });
   }, [params.short_url, router]);
