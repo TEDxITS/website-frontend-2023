@@ -1,3 +1,5 @@
+import DeleteExample from '@/containers/tools/database/DeleteExample';
+
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
 
@@ -46,6 +48,8 @@ export default async function LinkDatabaseTable({
     <section>
       <h1 className='text-cwhite'>Short Link Database</h1>
       <p className='text-cwhite'>{JSON.stringify(allUrl)}</p>
+      {allUrl.data &&
+        allUrl.data.map((url) => <DeleteExample key={url.id} id={url.id} />)}
     </section>
   );
 }
