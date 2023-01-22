@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { MdDelete } from 'react-icons/md';
 
 import { deleteShortUrl } from '@/utils/short-url';
 
@@ -20,9 +21,10 @@ export default function DeleteExample({ id }: { id: string }) {
       .catch((e) => e);
   };
   return (
-    <div className='bg-cwhite'>
-      <p>{id}</p>
-      <button onClick={deleteUrl}>Delete</button>
-    </div>
+    <>
+      <button onClick={deleteUrl}>
+        <MdDelete className='h-5 w-5 text-cred transition duration-300 hover:-translate-y-1' />
+      </button>
+    </>
   );
 }
