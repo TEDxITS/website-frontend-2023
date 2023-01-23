@@ -43,7 +43,7 @@ function LinkModal({
           <div className='w-full overflow-auto rounded-md rounded-r-none bg-black p-3 pl-4'>
             <div className='mx-auto w-fit pl-10'>
               <p className='typewriter text-center font-baron text-green-300'>
-                {shortLinkWithoutHttp}
+                {shortLinkWithoutHttp || fullShortLink}
               </p>
             </div>
           </div>

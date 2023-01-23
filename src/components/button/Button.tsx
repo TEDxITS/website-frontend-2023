@@ -4,13 +4,13 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/utils/clsxm';
 
-const ButtonVariant = ['unstyled', 'primary'] as const;
+const ButtonVariant = ['unstyled', 'primary', 'gradient'] as const;
 const ButtonSize = ['sm', 'base'] as const;
 
 type ButtonProps = {
   isLoading?: boolean;
-  variant?: typeof ButtonVariant[number];
-  size?: typeof ButtonSize[number];
+  variant?: (typeof ButtonVariant)[number];
+  size?: (typeof ButtonSize)[number];
   leftIcon?: IconType;
   rightIcon?: IconType;
   leftIconClassName?: string;
@@ -24,7 +24,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       disabled: buttonDisabled,
       isLoading,
-      variant = 'primary',
+      variant = 'gradient',
       size = 'base',
       leftIcon: LeftIcon,
       rightIcon: RightIcon,
@@ -55,10 +55,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           //#region  //*=========== Variants ===========
           [
             variant === 'primary' && [
+              'bg-cred text-cwhite',
+              'hover:scale-105',
+              'active:scale-100',
+              'disabled:brightness-75',
+            ],
+            variant === 'gradient' && [
               'bg-gradient-to-r from-cblue to-cred text-white',
               'hover:scale-105 hover:bg-primary-600 hover:from-cwhite hover:to-cblue hover:text-cblack',
               'active:scale-100 active:bg-primary-700',
-              'disabled:bg-primary-700',
+              'disabled:brightness-75 disabled:hover:scale-100 disabled:hover:from-cblue disabled:hover:to-cred disabled:hover:text-white',
             ],
           ],
           //#endregion  //*======== Variants ===========
@@ -72,12 +78,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading && (
           <div
             className={clsxm(
-              'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-              {
-                'text-white': ['primary', 'dark'].includes(variant),
-                'text-black': ['light'].includes(variant),
-                'text-primary-500': ['outline', 'ghost'].includes(variant),
-              }
+              'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
             )}
           >
             <ImSpinner2 className='animate-spin' />

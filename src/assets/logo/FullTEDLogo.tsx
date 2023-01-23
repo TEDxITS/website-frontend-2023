@@ -34,6 +34,7 @@ export default function FullTEDLogo({
           className='absolute'
           fill
           style={{ objectFit: 'contain' }}
+          placeholder='blur'
         />
       </div>
     </UnstyledLink>

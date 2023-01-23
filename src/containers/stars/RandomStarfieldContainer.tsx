@@ -54,15 +54,18 @@ export default function RandomStarfieldContainer({
   children,
   className = '',
   isRotating = true,
+  isOverflow = false,
 }: {
   children: React.ReactNode;
   className?: string;
   isRotating?: boolean;
+  isOverflow?: boolean;
 }) {
   return (
     <main
       className={clsxm(
-        ' relative h-screen w-screen overflow-hidden bg-black',
+        'relative h-screen w-screen bg-black',
+        isOverflow ? 'overflow-y-auto' : 'overflow-hidden',
         className
       )}
     >

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 import LinkShortenerContainer from '@/containers/tools/LinkShortenerContainer';
 
 import linkShortenerBg from '~/images/links/link-shortener-bg-alt.png';
@@ -8,7 +7,7 @@ import linkShortenerBgMobile from '~/images/links/link-shortener-bg-mobile.png';
 
 export default function LinkShortenerPage() {
   return (
-    <RandomStarfieldContainer>
+    <>
       <Image
         src={linkShortenerBgMobile}
         alt='Background'
@@ -25,9 +24,6 @@ export default function LinkShortenerPage() {
         priority
       />
       <LinkShortenerContainer />
-      {/* <Suspense fallback={<p>Loading...</p>}>
-        <ShortLinkList />
-      </Suspense> */}
-    </RandomStarfieldContainer>
+    </>
   );
 }

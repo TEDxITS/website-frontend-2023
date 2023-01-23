@@ -1,68 +1,77 @@
 'use client';
+import {
+  ColumnDef,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from '@tanstack/react-table';
+import * as React from 'react';
 
-import Link from 'next/link';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { MdContentCopy } from 'react-icons/md';
+import Filter from '@/components/table/Filter';
+import {
+  PaginationControl,
+  PaginationCount,
+} from '@/components/table/Pagination';
+import TBody from '@/components/table/TBody';
+import THead from '@/components/table/THead';
 
-import DeleteExample from '@/containers/tools/database/DeleteButton';
+import clsxm from '@/utils/clsxm';
 
-import copyToClipboard from '@/utils/copy';
+type TableProps<T extends object> = {
+  data: T[];
+  columns: ColumnDef<T>[];
+  omitSort?: boolean;
+  withFilter?: boolean;
+  withPagination?: boolean;
+} & React.ComponentPropsWithoutRef<'div'>;
 
-export default function Table({ urlData }: { urlData: any }) {
-  const [originUrl, setOriginUrl] = useState('tedxits.com');
-  useEffect(() => setOriginUrl(window.location.origin), []);
-  // if (typeof window !== "undefined") {
-  // }
+export default function Table<T extends object>({
+  className,
+  columns,
+  data,
+  omitSort = false,
+  withFilter = false,
+  withPagination = false,
+  ...rest
+}: TableProps<T>) {
+  const [globalFilter, setGlobalFilter] = React.useState('');
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      globalFilter,
+      sorting,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
 
   return (
-    <table className='w-full table-auto border-collapse border border-cwhite text-cwhite'>
-      <thead>
-        <tr>
-          <th className=' border border-cwhite'>Source URL</th>
-          <th className=' border border-cwhite'>Shorten URL</th>
-          <th className=' border border-cwhite'>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {urlData.map((url: any) => {
-          return (
-            <tr key={url.id}>
-              <td className='border border-cwhite text-center'>
-                <Link
-                  target='_blank'
-                  href={url.url}
-                  className='cursor-newtab hover:underline'
-                >
-                  {url.url}
-                </Link>
-              </td>
-              <td className='break-words border border-cwhite text-center'>
-                <Link
-                  target='_blank'
-                  href={originUrl + '/links/' + url.short_url}
-                  className=' cursor-newtab break-words hover:text-cred hover:underline'
-                >
-                  {originUrl + '/links/' + url.short_url}
-                </Link>
-              </td>
-              <td className='border border-cwhite p-4 md:px-6 md:py-4'>
-                <div className='flex justify-around gap-4'>
-                  <button
-                    onClick={() =>
-                      copyToClipboard(originUrl + '/links/' + url.short_url)
-                    }
-                  >
-                    {/* <button type='button'> */}
-                    <MdContentCopy className='h-5 w-5 text-green-200  transition duration-300 hover:-translate-y-1' />
-                  </button>
-                  <DeleteExample id={url.id} />
-                </div>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className={clsxm('flex flex-col', className)} {...rest}>
+      <div className='flex flex-col gap-y-3 sm:flex-row sm:justify-between'>
+        <div>{withFilter && <Filter table={table} />}</div>
+        {withPagination && <PaginationCount table={table} />}
+      </div>
+      <div className='-my-2 mt-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+        <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
+          <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg'>
+            <table className='min-w-full divide-y divide-gray-300'>
+              <THead table={table} omitSort={omitSort} />
+              <TBody table={table} />
+            </table>
+          </div>
+        </div>
+      </div>
+      {withPagination && <PaginationControl table={table} />}
+    </div>
   );
 }
