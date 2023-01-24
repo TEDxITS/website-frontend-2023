@@ -4,8 +4,8 @@ type UrlData = {
   userId?: string;
 };
 
-export const getUrl = async (data: string) => {
-  const res = await fetch(`/api/short-url/get?short_url=${data}`, {
+export const getUrl = async (shortUrl: string) => {
+  const res = await fetch(`/api/short-url/get?short_url=${shortUrl}`, {
     method: 'GET',
     headers: {
       'content-type': 'application/json',

@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 
 // redirect to external links using this client component because next/navigation redirect() can't work with external links

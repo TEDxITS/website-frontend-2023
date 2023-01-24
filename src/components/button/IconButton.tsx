@@ -8,7 +8,7 @@ const IconButtonVariant = ['primary'] as const;
 
 type IconButtonProps = {
   isLoading?: boolean;
-  variant?: typeof IconButtonVariant[number];
+  variant?: (typeof IconButtonVariant)[number];
   icon?: IconType;
   iconClassName?: string;
 } & React.ComponentPropsWithRef<'button'>;
