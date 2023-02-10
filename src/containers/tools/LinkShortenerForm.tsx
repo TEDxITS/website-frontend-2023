@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -40,7 +39,6 @@ export default function LinkShortenerForm({
     resolver: zodResolver(linkShortenerSchema),
   });
   const { handleSubmit } = methods;
-  const session = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -48,9 +46,6 @@ export default function LinkShortenerForm({
     let dataWithUserId;
     setIsLoading(true);
     setShortLink('');
-    if (session && session.status === 'authenticated') {
-      dataWithUserId = { ...data, userId: session.data.user?.id };
-    }
     const createShortUrlPromise = createShortUrl(
       dataWithUserId ? dataWithUserId : data
     );

@@ -4,7 +4,6 @@ import '../styles/globals.css';
 
 import Toast from '@/components/toast/Toast';
 import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
-import AuthProvider from '@/components/utils/AuthProvider';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -71,10 +70,8 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <AuthProvider>
-          <Toast />
-          {children}
-        </AuthProvider>
+        <Toast />
+        {children}
         <AnalyticsProvider />
       </body>
     </html>

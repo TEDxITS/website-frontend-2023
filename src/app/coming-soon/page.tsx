@@ -23,6 +23,7 @@ export default function ComingSoonPage() {
               className='absolute z-30'
               fill
               style={{ objectFit: 'contain' }}
+              placeholder='blur'
             />
           </div>
           <h2 className='mb-12 text-center font-primary text-[1.3rem] font-semibold text-white'>
