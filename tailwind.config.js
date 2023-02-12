@@ -60,10 +60,26 @@ module.exports = {
             backgroundPosition: '700px 0',
           },
         },
+        rotate: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '25%': {
+            transform: 'rotate(5deg)',
+          },
+          '75%': {
+            transform: 'rotate(-5deg)',
+          },
+          '100%': {
+            transform: 'rotate(0deg)',
+          },
+        },
       },
+
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
+        rotate: 'rotate 3s linear infinite',
       },
     },
   },
