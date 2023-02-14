@@ -18,7 +18,10 @@ import lady from '../../assets/speaker/speaker-7.png';
 export default function PreviousSpeakerContainer() {
   const [isPlay, setIsPlay] = useState(false);
   return (
-    <RandomStarfieldContainer className='h-[200vh] bg-black' zAxis={2}>
+    <RandomStarfieldContainer
+      className='h-[175vh] bg-black max-lg:h-[200vh]'
+      zAxis={2}
+    >
       <div className='absolute z-10 h-full w-full bg-transparent-stars bg-cover'>
         <div className='absolute z-20 h-full w-full bg-hue'>
           <h1 className='relative mt-5 p-3 font-primary text-5xl capitalize tracking-wide text-cred after:absolute after:bottom-[-5px] after:left-4 after:h-[2px] after:w-1/4 after:bg-cwhite after:content-[""] max-md:text-3xl max-md:after:bottom-1 '>
@@ -76,7 +79,7 @@ export default function PreviousSpeakerContainer() {
             </div>
             <div className='justify- flex h-1/4 w-full flex-col items-center  max-md:h-36 max-md:translate-y-24'>
               <div
-                className='shadow-4xl flex h-36 w-1/4 flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.25)] drop-shadow-lg backdrop-blur max-lg:w-4/5 
+                className='shadow-4xl min-lg:mt-32 flex h-36 w-1/4 flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.25)] drop-shadow-lg backdrop-blur max-lg:w-4/5 
             '
               >
                 <h1 className='font-baron text-sm text-cwhite max-md:text-xs'>
