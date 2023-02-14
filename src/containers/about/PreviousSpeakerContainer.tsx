@@ -76,7 +76,7 @@ export default function PreviousSpeakerContainer() {
             </div>
             <div className='justify- flex h-1/4 w-full flex-col items-center  max-md:h-36 max-md:translate-y-24'>
               <div
-                className='shadow-4xl flex h-36 w-1/4 flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.25)] backdrop-blur max-lg:w-4/5 
+                className='shadow-4xl flex h-36 w-1/4 flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.25)] drop-shadow-lg backdrop-blur max-lg:w-4/5 
             '
               >
                 <h1 className='font-baron text-sm text-cwhite max-md:text-xs'>
@@ -84,8 +84,14 @@ export default function PreviousSpeakerContainer() {
                 </h1>
                 <h2 className='text-8xl text-cred max-md:text-7xl'>239.000+</h2>
               </div>
-              <button onClick={() => setIsPlay(!isPlay)}>
+              <button
+                onClick={() => setIsPlay(!isPlay)}
+                className='relative w-96'
+              >
                 <Image src={button} alt='' />
+                <h1 className='absolute bottom-[60px] left-32 text-white max-md:text-4xl'>
+                  Watch Me!
+                </h1>
               </button>
             </div>
 
