@@ -5,94 +5,147 @@ import { useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
-import button from '../../assets/button.png';
-import dea from '../../assets/speaker/speaker-0.png';
-import adriano from '../../assets/speaker/speaker-1.png';
-import haikal from '../../assets/speaker/speaker-2.png';
-import gandhi from '../../assets/speaker/speaker-3.png';
-import permata from '../../assets/speaker/speaker-4.png';
-import samuel from '../../assets/speaker/speaker-5.png';
-import aryo from '../../assets/speaker/speaker-6.png';
-import lady from '../../assets/speaker/speaker-7.png';
+import button from '../../../public/images/about/section 3/button.png';
+import frame from '../../../public/images/about/section 3/frame.png';
+import nameframe from '../../../public/images/about/section 3/nameframe.png';
+import props from '../../../public/images/about/section 3/props.png';
+import speaker_1 from '../../../public/images/about/section 3/speaker (1).png';
+import speaker_2 from '../../../public/images/about/section 3/speaker (2).png';
+import speaker_3 from '../../../public/images/about/section 3/speaker (3).png';
+import speaker_4 from '../../../public/images/about/section 3/speaker (4).png';
+import speaker_5 from '../../../public/images/about/section 3/speaker (5).png';
+import speaker_6 from '../../../public/images/about/section 3/speaker (6).png';
+import speaker_7 from '../../../public/images/about/section 3/speaker (7).png';
+import speaker_8 from '../../../public/images/about/section 3/speaker (8).png';
 
 export default function PreviousSpeakerContainer() {
   const [isPlay, setIsPlay] = useState(false);
   return (
     <RandomStarfieldContainer
-      className='h-[175vh] bg-black max-lg:h-[200vh]'
+      className='h-[300vh] bg-black max-lg:h-[300vh] max-md:h-[250vh] lg:h-[250vh]'
       zAxis={2}
     >
       <div className='absolute z-10 h-full w-full bg-transparent-stars bg-cover'>
         <div className='absolute z-20 h-full w-full bg-hue'>
-          <h1 className='relative mt-5 p-3 font-primary text-5xl capitalize tracking-wide text-cred after:absolute after:bottom-[-5px] after:left-4 after:h-[2px] after:w-1/4 after:bg-cwhite after:content-[""] max-md:text-3xl max-md:after:bottom-1 '>
+          <Image
+            src={props}
+            alt=''
+            className='absolute right-[-50px] bottom-0 h-[200vh] w-[400vw] max-lg:top-96 max-lg:scale-[2] '
+          />
+          <h1 className='relative mt-40 p-3 font-primary text-5xl capitalize tracking-wide text-cred after:absolute after:bottom-[-5px] after:left-4 after:h-[2px] after:w-1/4 after:bg-cwhite after:content-[""] max-md:text-3xl max-md:after:bottom-1'>
             our previous speaker
           </h1>
-          <section className='min-lg:pt-5 flex h-full w-full flex-col'>
+          <section className='min-lg:pt-5 flex h-full w-full translate-y-[-250px] flex-col max-lg:translate-y-[-100px] max-md:translate-y-[-125px] '>
             <div className='flex h-3/4 w-full '>
-              <div className='m-auto grid grid-cols-4 gap-10 max-lg:grid-cols-2'>
+              <div className='m-auto grid grid-cols-4 gap-5 max-lg:grid-cols-2 max-lg:gap-36 max-md:gap-5 2xl:gap-36'>
                 {[
-                  { img: dea, link: '' },
                   {
-                    img: permata,
+                    img: speaker_8,
+                    link: '#',
+                    title: 'Women Right’s Fighter',
+                    desc: '“Debunking the Virginity Myth”',
+                  },
+                  {
+                    img: speaker_7,
                     link: 'https://www.youtube.com/watch?v=NECkw6bHgDQ',
+                    title: 'Jurnalist of Project Multituli',
+                    desc: '“Underprivileged Gen Z : Young, Woke, and Broke”',
                   },
                   {
-                    img: haikal,
+                    img: speaker_6,
                     link: 'https://www.youtube.com/watch?v=EsIt6y46BLo&t=125s',
+                    title: 'Co-Founder of AjakGerak ',
+                    desc: '“Stupid is Not Always Stupid”',
                   },
                   {
-                    img: gandhi,
+                    img: speaker_5,
                     link: 'https://www.youtube.com/watch?v=3GoMTSoDJAs',
+                    title: 'Co-Founder of AjakGerak ',
+                    desc: '“Stupid is Not Always Stupid”',
                   },
                   {
-                    img: adriano,
+                    img: speaker_4,
                     link: 'https://www.youtube.com/watch?v=cA2KxgPDWNY&t=14s',
+                    title: 'Stand Up Comedian',
+                    desc: '“Comedy and Its Emotional Intelligence”',
                   },
                   {
-                    img: samuel,
+                    img: speaker_3,
                     link: 'https://www.youtube.com/watch?v=R3zr1gtkxIY&t=141s',
+                    title: 'Content Creator',
+                    desc: '“Rediscovering Meaning of Life through Frugal Living”',
                   },
                   {
-                    img: aryo,
+                    img: speaker_2,
                     link: 'https://www.youtube.com/watch?v=GyucHZjnnwA&t=139s',
+                    title: 'Politician ',
+                    desc: '“The Price of Truth : Justice Behind Politics”',
                   },
                   {
-                    img: lady,
+                    img: speaker_1,
                     link: 'https://www.youtube.com/watch?v=Nz5qPlkzmDs',
+                    title: 'Co-Founder of Ibunda.id ',
+                    desc: '“My Parents, Everything I Don’t Want to Become”',
                   },
                 ].map((items, i) => {
                   return (
                     <div
                       key={i}
-                      className='relative mt-5 flex h-96 w-full justify-center max-md:h-56 max-md:gap-10 '
+                      className='relative mt-10 flex h-96 w-full justify-center max-md:h-64'
                     >
-                      <Image
-                        src={items.img}
-                        alt=''
-                        className='h-full w-full scale-125 cursor-pointer object-cover object-center duration-500 hover:scale-150 max-md:h-[40vh] max-md:scale-125 hover:max-md:scale-125 '
-                        onClick={() => window.open(items.link, '_blank')}
-                      />
+                      <div className='relative flex flex-col '>
+                        <Image
+                          src={items.img}
+                          alt=''
+                          className='object- h-full w-full scale-125 cursor-pointer object-cover duration-500 hover:scale-[1.3] max-md:h-[40vh] '
+                          onClick={() => window.open(items.link, '_blank')}
+                        />
+                        <div className='relative'>
+                          <div className='absolute top-0 left-0 flex w-full justify-center'>
+                            <div className='z-10 w-[250px] translate-y-[40px] flex-col items-center text-center font-primary text-xs text-white max-lg:bottom-[-100px] max-lg:left-16 max-lg:w-auto max-lg:text-lg max-md:left-[10px] max-md:w-[175px]'>
+                              <p className='max-lg:text-lg max-md:text-xs 2xl:text-xl'>
+                                {items.title}
+                              </p>
+                              <p className='text-xs font-thin leading-tight max-md:text-[7px] md:text-[13px] 2xl:text-sm'>
+                                {items.desc}
+                              </p>
+                            </div>
+                          </div>
+                          <Image
+                            src={nameframe}
+                            alt=''
+                            className='-z-30 scale-x-125 scale-y-[1.6] max-md:translate-y-5 max-md:scale-y-[1.75] max-md:scale-x-[1.3]'
+                          />
+                        </div>
+                      </div>
                     </div>
                   );
                 })}
               </div>
             </div>
-            <div className='justify- flex h-1/4 w-full flex-col items-center  max-md:h-36 max-md:translate-y-24'>
+            <div className='justify- flex h-1/4 w-full flex-col items-center    max-md:h-36 lg:translate-y-[-100px]'>
               <div
-                className='shadow-4xl min-lg:mt-32 flex h-36 w-1/4 flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.25)] drop-shadow-lg backdrop-blur max-lg:w-4/5 
+                className='shadow-4xl flex h-36 w-1/3 translate-y-[-100px] flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.1)] p-7 drop-shadow-lg backdrop-blur max-lg:mt-[100px] max-lg:w-1/2 max-md:w-4/5 2xl:mt-[-100px]
             '
               >
-                <h1 className='font-baron text-sm text-cwhite max-md:text-xs'>
+                <h1 className='font-baron text-sm text-cwhite max-md:text-[10px]'>
                   With the accumulated total views of
                 </h1>
-                <h2 className='text-8xl text-cred max-md:text-7xl'>239.000+</h2>
+                <h2 className='font-baron text-8xl text-cred max-md:text-6xl'>
+                  239.000+
+                </h2>
               </div>
+              <Image
+                src={frame}
+                alt=''
+                className='w-[720px] translate-y-[-100px] lg:w-[1000px]'
+              />
               <button
                 onClick={() => setIsPlay(!isPlay)}
-                className='relative w-96'
+                className='relative w-96 translate-y-[-400px] max-md:flex max-md:translate-y-[-260px] max-md:items-center max-md:justify-center lg:translate-y-[-450px]'
               >
-                <Image src={button} alt='' />
-                <h1 className='absolute bottom-[60px] left-32 text-white max-md:text-4xl'>
+                <Image src={button} alt='' className='max-md:w-64' />
+                <h1 className='absolute bottom-[60px] left-[110px]  font-baron text-3xl text-white max-md:left-36 max-md:bottom-[40px] max-md:text-xl'>
                   Watch Me!
                 </h1>
               </button>
