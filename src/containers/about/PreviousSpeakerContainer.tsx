@@ -5,18 +5,18 @@ import { useState } from 'react';
 import { Modal } from '@/components/modal/Modal';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
-import button from '../../../public/images/about/section 3/button.png';
-import frame from '../../../public/images/about/section 3/frame.png';
-import nameframe from '../../../public/images/about/section 3/nameframe.png';
-import props from '../../../public/images/about/section 3/props.png';
-import speaker_1 from '../../../public/images/about/section 3/speaker1.png';
-import speaker_2 from '../../../public/images/about/section 3/speaker2.png';
-import speaker_3 from '../../../public/images/about/section 3/speaker3.png';
-import speaker_4 from '../../../public/images/about/section 3/speaker4.png';
-import speaker_5 from '../../../public/images/about/section 3/speaker5.png';
-import speaker_6 from '../../../public/images/about/section 3/speaker6.png';
-import speaker_7 from '../../../public/images/about/section 3/speaker7.png';
-import speaker_8 from '../../../public/images/about/section 3/speaker8.png';
+import button from '../../../public/images/about/section3/button.png';
+import frame from '../../../public/images/about/section3/frame.png';
+import nameframe from '../../../public/images/about/section3/nameframe.png';
+import props from '../../../public/images/about/section3/props.png';
+import speaker_1 from '../../../public/images/about/section3/speaker1.png';
+import speaker_2 from '../../../public/images/about/section3/speaker2.png';
+import speaker_3 from '../../../public/images/about/section3/speaker3.png';
+import speaker_4 from '../../../public/images/about/section3/speaker4.png';
+import speaker_5 from '../../../public/images/about/section3/speaker5.png';
+import speaker_6 from '../../../public/images/about/section3/speaker6.png';
+import speaker_7 from '../../../public/images/about/section3/speaker7.png';
+import speaker_8 from '../../../public/images/about/section3/speaker8.png';
 
 export default function PreviousSpeakerContainer() {
   const [isPlay, setIsPlay] = useState(false);
