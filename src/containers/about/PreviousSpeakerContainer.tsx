@@ -22,11 +22,11 @@ export default function PreviousSpeakerContainer() {
   const [isPlay, setIsPlay] = useState(false);
   return (
     <RandomStarfieldContainer
-      className='h-[300vh] bg-black max-lg:h-[300vh] max-md:h-[250vh] lg:h-[250vh]'
+      className='h-[300vh] bg-black max-lg:h-[300vh] max-md:h-[250vh]'
       zAxis={2}
     >
       <div className='absolute z-10 h-full w-full bg-transparent-stars bg-cover'>
-        <div className='absolute z-20 h-full w-full bg-hue'>
+        <div className='absolute z-20 h-full w-full md:px-5'>
           <Image
             src={props}
             alt=''
@@ -35,9 +35,9 @@ export default function PreviousSpeakerContainer() {
           <h1 className='relative mt-40 p-3 font-primary text-5xl capitalize tracking-wide text-cred after:absolute after:bottom-[-5px] after:left-4 after:h-[2px] after:w-1/4 after:bg-cwhite after:content-[""] max-md:text-3xl max-md:after:bottom-1'>
             our previous speaker
           </h1>
-          <section className='min-lg:pt-5 flex h-full w-full translate-y-[-250px] flex-col max-lg:translate-y-[-100px] max-md:translate-y-[-125px] '>
+          <section className='min-lg:pt-5 flex h-full w-full translate-y-[-250px] flex-col max-lg:translate-y-[-100px] max-md:translate-y-[-105px] '>
             <div className='flex h-3/4 w-full '>
-              <div className='m-auto grid grid-cols-4 gap-5 max-lg:grid-cols-2 max-lg:gap-36 max-md:gap-5 2xl:gap-36'>
+              <div className='m-auto grid grid-cols-4 gap-10 max-lg:grid-cols-2 max-lg:gap-36 max-md:gap-5 2xl:gap-36'>
                 {[
                   {
                     img: speaker_8,
@@ -102,11 +102,25 @@ export default function PreviousSpeakerContainer() {
                         />
                         <div className='relative'>
                           <div className='absolute top-0 left-0 flex w-full justify-center'>
-                            <div className='z-10 w-[250px] translate-y-[40px] flex-col items-center text-center font-primary text-xs text-white max-lg:bottom-[-100px] max-lg:left-16 max-lg:w-auto max-lg:text-lg max-md:left-[10px] max-md:w-[175px]'>
-                              <p className='max-lg:text-lg max-md:text-xs 2xl:text-xl'>
+                            <div
+                              className='z-10 w-[250px] translate-y-[40px] flex-col items-center text-center font-primary text-xs text-white max-lg:bottom-[-100px] max-lg:left-16 max-lg:w-auto max-lg:text-lg max-md:left-[10px] max-md:w-[175px] md:w-[225px]
+                            md:translate-y-10
+                            lg:translate-y-7
+                            '
+                            >
+                              <p
+                                className='max-lg:text-lg max-md:text-xs 
+                              lg:text-sm
+                              2xl:text-xl
+                              '
+                              >
                                 {items.title}
                               </p>
-                              <p className='text-xs font-thin leading-tight max-md:text-[7px] md:text-[13px] 2xl:text-sm'>
+                              <p
+                                className='text-xs font-thin leading-tight max-md:text-[9px] md:text-[15px] 
+                              lg:text-[11px]
+                              2xl:text-sm'
+                              >
                                 {items.desc}
                               </p>
                             </div>
@@ -114,7 +128,10 @@ export default function PreviousSpeakerContainer() {
                           <Image
                             src={nameframe}
                             alt=''
-                            className='-z-30 scale-x-125 scale-y-[1.6] max-md:translate-y-5 max-md:scale-y-[1.75] max-md:scale-x-[1.3]'
+                            className='-z-30 scale-x-125 scale-y-[1.6] max-md:translate-y-5 max-md:scale-y-[1.75] max-md:scale-x-[1.3]
+                            md:scale-x-110
+                            lg:scale-x-[1.4]
+                            '
                           />
                         </div>
                       </div>
@@ -125,7 +142,7 @@ export default function PreviousSpeakerContainer() {
             </div>
             <div className='justify- flex h-1/4 w-full flex-col items-center    max-md:h-36 lg:translate-y-[-100px]'>
               <div
-                className='shadow-4xl flex h-36 w-1/3 translate-y-[-100px] flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.1)] p-7 drop-shadow-lg backdrop-blur max-lg:mt-[100px] max-lg:w-1/2 max-md:w-4/5 2xl:mt-[-100px]
+                className='shadow-4xl flex h-36 w-1/3 translate-y-[-100px] flex-col items-center justify-evenly rounded-3xl bg-[rgba(255,255,255,.1)] p-7 drop-shadow-lg backdrop-blur max-lg:mt-[100px] max-lg:w-1/2 max-md:w-4/5 md:w-1/2 2xl:mt-[-100px]
             '
               >
                 <h1 className='font-baron text-sm text-cwhite max-md:text-[10px]'>
