@@ -12,6 +12,10 @@ module.exports = {
         baron: ['var(--font-baron)'],
         quaker: ['var(--font-quaker)'],
       },
+      backgroundImage: {
+        stars: "url('/images/background/bg-stars.jpg')",
+        moon: "url('/images/background/bg-moon.png')",
+      },
       colors: {
         primary: {
           // Customize it on globals.css :root

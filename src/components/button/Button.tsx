@@ -4,7 +4,12 @@ import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/utils/clsxm';
 
-const ButtonVariant = ['unstyled', 'primary', 'gradient'] as const;
+const ButtonVariant = [
+  'unstyled',
+  'primary',
+  'gradient',
+  'gradient-alt',
+] as const;
 const ButtonSize = ['sm', 'base'] as const;
 
 type ButtonProps = {
@@ -62,6 +67,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ],
             variant === 'gradient' && [
               'bg-gradient-to-r from-cblue to-cred text-white',
+              'hover:scale-105 hover:bg-primary-600 hover:from-cwhite hover:to-cblue hover:text-cblack',
+              'active:scale-100 active:bg-primary-700',
+              'disabled:brightness-75 disabled:hover:scale-100 disabled:hover:from-cblue disabled:hover:to-cred disabled:hover:text-white',
+            ],
+            variant === 'gradient-alt' && [
+              'bg-gradient-to-br from-cblack via-cblue to-cblue text-white',
               'hover:scale-105 hover:bg-primary-600 hover:from-cwhite hover:to-cblue hover:text-cblack',
               'active:scale-100 active:bg-primary-700',
               'disabled:brightness-75 disabled:hover:scale-100 disabled:hover:from-cblue disabled:hover:to-cred disabled:hover:text-white',
