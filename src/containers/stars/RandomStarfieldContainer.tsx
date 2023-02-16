@@ -55,11 +55,13 @@ export default function RandomStarfieldContainer({
   className = '',
   isRotating = true,
   isOverflow = false,
+  zAxis = 1,
 }: {
   children: React.ReactNode;
   className?: string;
   isRotating?: boolean;
   isOverflow?: boolean;
+  zAxis?: number;
 }) {
   return (
     <main
@@ -70,7 +72,7 @@ export default function RandomStarfieldContainer({
       )}
     >
       {children}
-      <Canvas className='star-fade' camera={{ position: [0, 0, 1] }}>
+      <Canvas className='star-fade absolute' camera={{ position: [0, 0, zAxis] }}>
         <Stars isRotating={isRotating} />
       </Canvas>
     </main>
