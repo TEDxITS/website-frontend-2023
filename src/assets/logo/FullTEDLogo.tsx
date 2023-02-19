@@ -5,10 +5,11 @@ import UnstyledLink from '@/components/link/UnstyledLink';
 import clsxm from '@/utils/clsxm';
 
 import BlackTedLogo from '~/images/logo/tedxits-black.png';
+import MonochromeTedLogo from '~/images/logo/tedxits-monochrome.png';
 import MiniTedLogo from '~/images/logo/tedxits-text.svg';
 import WhiteTedLogo from '~/images/logo/tedxits-white.png';
 
-const logoVariant = ['black', 'white', 'text'] as const;
+const logoVariant = ['black', 'white', 'text', 'monochrome'] as const;
 type TedLogoProps = {
   className?: string;
   variant?: (typeof logoVariant)[number];
@@ -29,7 +30,13 @@ export default function FullTEDLogo({
     <UnstyledLink href='/'>
       <div className={clsxm('relative h-full w-full', className)}>
         <Image
-          src={variant === 'black' ? BlackTedLogo : WhiteTedLogo}
+          src={
+            variant === 'black'
+              ? BlackTedLogo
+              : variant === 'white'
+              ? WhiteTedLogo
+              : MonochromeTedLogo
+          }
           alt='TEDxITS 2023'
           className='absolute'
           fill

@@ -76,7 +76,11 @@ export default function DefaultHead(props: IDefaultHeadProps) {
   return (
     <>
       <title>{meta.title}</title>
-      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <meta
+        name='viewport'
+        content='width=device-width, initial-scale=1'
+        id='viewportMeta'
+      />
       <meta name='robots' content={meta.robots} />
       <meta content={meta.description} name='description' />
       <meta property='og:url' content={`${meta.url}${pathname}`} />
