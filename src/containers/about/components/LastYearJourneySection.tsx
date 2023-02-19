@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import BlurCircle from '@/containers/about/components/BlurCircle';
 import LastYearJourneyCard from '@/containers/about/components/LastYearJourneyCard';
 
 import Circle from '~/images/about/starter-kit/green-circle.png';
@@ -21,41 +20,34 @@ export default function LastYearJourneySection() {
             campaign viewer
           </span>
           <div className='flex h-full w-full flex-row md:flex-col lg:flex-row'>
-            <div className='flex h-full w-1/6 items-start justify-center md:w-full md:items-end md:justify-start lg:w-1/6 lg:items-start lg:justify-center'>
-              <BlurCircle
-                h='8vw'
-                w='8vw'
-                textSize='1.5vw'
-                colorFrom='cblack'
-                colorTo='cblue'
-                blurSize=''
-                scalingSize={1.5}
-                angka={255}
-              />
+            <div className='flex h-full w-1/6 items-start justify-center md:w-full md:scale-75 md:items-end md:justify-start lg:w-1/6 lg:items-start lg:justify-center'>
+              <span className='group peer z-10 flex h-[12vw] w-[12vw] cursor-pointer flex-col items-center justify-center rounded-full  text-cwhite duration-500 hover:scale-[1.5] md:gap-[0.3vw]'>
+                <h5 className='text-[1vw] duration-300 group-hover:rounded-lg group-hover:bg-gray-100 group-hover:bg-opacity-20 group-hover:p-[1vw] group-hover:text-[3vw] group-hover:shadow-lg'>
+                  2021
+                </h5>
+                <h2 className='text-[3vw]'>255</h2>
+              </span>
+              <span className='absolute z-0 h-[12vw] w-[12vw] cursor-pointer rounded-full bg-gradient-to-br from-cblue to-csky blur-md duration-500 peer-hover:scale-[1.5] md:blur-lg'></span>
             </div>
-            <div className='flex h-full w-1/3 items-end justify-center md:w-full md:items-start md:justify-end lg:w-1/3 lg:items-end lg:justify-center'>
-              <BlurCircle
-                h='11vw'
-                w='11vw'
-                textSize='2.5vw'
-                colorFrom='cblue'
-                colorTo='csky'
-                blurSize='-md'
-                scalingSize={1.3}
-                angka={393}
-              />
+
+            <div className='flex h-full w-1/3 items-end justify-center md:w-full md:scale-75 md:items-start md:justify-end lg:w-1/3 lg:items-end lg:justify-center'>
+              <span className='group peer z-10 flex h-[15vw] w-[15vw] cursor-pointer flex-col items-center justify-center rounded-full text-cwhite duration-500 hover:scale-[1.3] md:gap-[1vw]'>
+                <h5 className='text-[1.5vw] duration-300 group-hover:rounded-lg group-hover:bg-gray-100 group-hover:bg-opacity-20 group-hover:p-[1.5vw] group-hover:text-[4vw] group-hover:shadow-lg'>
+                  2022
+                </h5>
+                <h2 className='text-[4vw]'>393</h2>
+              </span>
+              <span className='absolute z-0 h-[15vw] w-[15vw] cursor-pointer rounded-full bg-gradient-to-br from-cblue to-csky blur-md duration-500 peer-hover:scale-[1.3] md:blur-lg'></span>
             </div>
-            <div className='flex h-full w-1/2 justify-center md:w-full lg:w-1/2'>
-              <BlurCircle
-                h='20vw'
-                w='20vw'
-                textSize='4vw'
-                colorFrom='cblue'
-                colorTo='cwhite'
-                blurSize='-md'
-                scalingSize={1.2}
-                angka={529}
-              />
+
+            <div className='flex h-full w-1/2 justify-center md:w-full md:scale-75 lg:w-1/2'>
+              <span className='group peer z-10 flex h-[25vw] w-[25vw] cursor-pointer flex-col items-center justify-center rounded-full text-cwhite duration-500 hover:scale-[1.2] md:gap-[2.5vw]'>
+                <h5 className='text-[2.5vw] duration-300 group-hover:rounded-lg group-hover:bg-gray-100 group-hover:bg-opacity-20 group-hover:p-[3vw] group-hover:text-[6vw] group-hover:shadow-lg'>
+                  2023
+                </h5>
+                <h2 className='text-[6vw]'>529</h2>
+              </span>
+              <span className='absolute z-0 h-[25vw] w-[25vw] cursor-pointer rounded-full bg-gradient-to-br from-cblue to-cwhite blur-md duration-500 peer-hover:scale-[1.2] md:blur-lg'></span>
             </div>
           </div>
         </div>
