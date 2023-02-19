@@ -1,9 +1,22 @@
 import Image from 'next/image';
 
-import LastYearJourneyCard from '@/containers/about/components/LastYearJourneyCard';
-
 import Circle from '~/images/about/starter-kit/green-circle.png';
 import BorderSquare from '~/images/about/starter-kit/rectangle.png';
+
+function LastYearJourneyCard({
+  statistics = '',
+  explanation = '',
+}: {
+  statistics: string;
+  explanation: string;
+}) {
+  return (
+    <div className='flex w-full flex-col items-end p-2 text-end text-cwhite'>
+      <h2 className='text-[42px]'>{statistics}</h2>
+      <p>{explanation}</p>
+    </div>
+  );
+}
 
 export default function LastYearJourneySection() {
   return (
