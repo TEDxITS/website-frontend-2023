@@ -1,7 +1,8 @@
-'use client'
+'use client';
 import * as React from 'react';
 
 import clsxm from '@/utils/clsxm';
+
 import { LogoType } from '@/types/components';
 
 export default function LinkedinLogoIllustration({

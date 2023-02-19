@@ -72,7 +72,10 @@ export default function RandomStarfieldContainer({
       )}
     >
       {children}
-      <Canvas className='star-fade absolute' camera={{ position: [0, 0, zAxis] }}>
+      <Canvas
+        className='star-fade absolute'
+        camera={{ position: [0, 0, zAxis] }}
+      >
         <Stars isRotating={isRotating} />
       </Canvas>
     </main>

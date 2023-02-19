@@ -4,8 +4,6 @@ import '../styles/globals.css';
 
 import Toast from '@/components/toast/Toast';
 import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -73,10 +71,8 @@ export default function RootLayout({
       <head />
       <body className='overflow-x-hidden'>
         <Toast />
-
         {children}
         <AnalyticsProvider />
-
       </body>
     </html>
   );

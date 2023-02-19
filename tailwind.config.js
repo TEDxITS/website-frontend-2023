@@ -12,6 +12,11 @@ module.exports = {
         baron: ['var(--font-baron)'],
         quaker: ['var(--font-quaker)'],
       },
+      backgroundImage: {
+        // TEDxITS 2023 background images
+        'transparent-stars':
+          "url('/images/background/bg-transparent-star.png')",
+      },
       colors: {
         primary: {
           // Customize it on globals.css :root
@@ -39,6 +44,7 @@ module.exports = {
         cblue: '#354582',
         cgreen: '#1A5B38',
         cblack: '#1D1D1E',
+        cgray: '#4D4D4D',
       },
       keyframes: {
         flicker: {

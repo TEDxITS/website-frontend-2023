@@ -1,30 +1,30 @@
-'use client'
+'use client';
+import { motion } from 'framer-motion';
+import { Sling as Hamburger } from 'hamburger-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
 
-import UnstyledLink from '@/components/link/UnstyledLink';
-import UnderlineLink from '@/components/link/UnderlineLink';
-import MultipleMobileLinks from '@/components/link/MultipleMobileLinks';
-import TedIcon from '~/images/logo/tedxits-text.svg';
-import Image from 'next/image';
-import { motion } from "framer-motion"
-import { Sling as Hamburger } from 'hamburger-react';
-import Link from 'next/link';
 import { links } from '@/data/links';
 
+import UnderlineLink from '@/components/link/UnderlineLink';
+import UnstyledLink from '@/components/link/UnstyledLink';
+
 import clsxm from '@/utils/clsxm';
+
+import TedIcon from '~/images/logo/tedxits-text.svg';
 
 type HeaderProps = {
   topBreakpoint?: number;
 };
 
 export default function Header({ topBreakpoint }: HeaderProps) {
-
-
   //#region  //*=========== Navigation Mobile State ===========
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false);
   //#endregion  //*======== Navigation Mobile State ===========
 
   //#region  //*=========== Navigation Scrolled State ===========
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const [isNavbarScrolled, setisNavbarScrolled] =
     React.useState<boolean>(false);
 
@@ -43,15 +43,16 @@ export default function Header({ topBreakpoint }: HeaderProps) {
         {/* desktop view */}
         <div className='layout hidden h-14 items-center justify-between md:py-12 lg:flex'>
           <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
-            <div className='inline-flex items-center gap-x-2 group'>
+            <div className='group inline-flex items-center gap-x-2'>
               <Image
-                src={'/images/logo/red-rocket.png'}
-                alt={'red-rocket'}
-                className={'group-hover:-translate-y-2 transition duration-300'}
+                src='/images/logo/red-rocket.png'
+                alt='red-rocket'
+                className='transition duration-300 group-hover:-translate-y-2'
                 width={40}
-                height={10} />
+                height={10}
+              />
               <TedIcon className='h-14 w-24' />
-              <p className='text-cwhite text-xl font-thin'>
+              <p className='text-sm font-thin text-cwhite'>
                 <span>&#169;</span>2023
               </p>
             </div>
@@ -60,7 +61,10 @@ export default function Header({ topBreakpoint }: HeaderProps) {
             <ul className='flex items-center justify-between space-x-16'>
               {links.map(({ href, label }) => (
                 <li key={`${href}${label}`}>
-                  <UnderlineLink href={href} className='hover:text-cred text-cwhite'>
+                  <UnderlineLink
+                    href={href}
+                    className='text-cwhite hover:text-cred'
+                  >
                     {label}
                   </UnderlineLink>
                 </li>
@@ -70,23 +74,24 @@ export default function Header({ topBreakpoint }: HeaderProps) {
         </div>
 
         {/* mobile view */}
-        <div className='block relative items-center h-16 lg:hidden text-cwhite'>
-          <div className='flex absolute inset-0 z-40 justify-between items-center w-full pt-10 px-8'>
+        <div className='relative block h-16 items-center text-cwhite lg:hidden'>
+          <div className='absolute inset-0 z-40 flex w-full items-center justify-between px-8 pt-10'>
             <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
-              <div className='inline-flex items-center gap-x-2 group'>
+              <div className='group inline-flex items-center gap-x-2'>
                 <Image
-                  src={'/images/logo/red-rocket.png'}
-                  alt={'red-rocket'}
-                  className={'group-hover:-translate-y-2 transition duration-300'}
+                  src='/images/logo/red-rocket.png'
+                  alt='red-rocket'
+                  className='transition duration-300 group-hover:-translate-y-2'
                   width={40}
-                  height={10} />
+                  height={10}
+                />
                 <TedIcon className='h-14 w-24' />
-                <p className='text-cwhite text-xl font-thin'>
+                <p className='text-xl font-thin text-cwhite'>
                   <span>&#169;</span>2023
                 </p>
               </div>
             </UnstyledLink>
-            <ul className='flex justify-between items-center space-x-4'>
+            <ul className='flex items-center justify-between space-x-4'>
               <button
                 onClick={() => setIsNavOpen(!isNavOpen)}
                 className={clsxm('cursor-pointer', {
@@ -106,7 +111,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                   duration: 0.05,
                 },
               }}
-              className='/ bg-cblack/90 fixed inset-0 z-30 pl-3 h-screen transition-all'
+              className='/ fixed inset-0 z-30 h-screen bg-cblack/90 pl-3 transition-all'
             >
               <div className='/ layout min-h-main flex flex-col justify-start pt-24'>
                 {/* anchor link */}
@@ -128,7 +133,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                     <li key={`${href}${label}`}>
                       <p className='text-left'>
                         <Link href={href} className='text-2xl'>
-                          <span className='font-fivo text-2xl text-right'>
+                          <span className='font-fivo text-right text-2xl'>
                             {label}
                           </span>
                         </Link>
@@ -169,7 +174,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
             </motion.div>
           )}
         </div>
-      </header >
-    </div >
+      </header>
+    </div>
   );
 }

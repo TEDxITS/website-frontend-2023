@@ -24,7 +24,7 @@ export const socialMediaLinks: SoialMediaLinkType[] = [
     label: 'Instagram',
     logo: (
       <InstagramLogoIllustration
-        className='h-8 md:h-7 hover:cursor-pointer'
+        className='h-8 hover:cursor-pointer md:h-7'
         pathClassName='duration-150 transition-all'
       />
     ),
@@ -34,7 +34,7 @@ export const socialMediaLinks: SoialMediaLinkType[] = [
     label: 'Twitter',
     logo: (
       <TwitterLogoIllustration
-        className='h-8 md:h-7 hover:cursor-pointer'
+        className='h-8 hover:cursor-pointer md:h-7'
         pathClassName='duration-150 transition-all'
       />
     ),
@@ -44,10 +44,9 @@ export const socialMediaLinks: SoialMediaLinkType[] = [
     label: 'LinkedIn',
     logo: (
       <LinkedinLogoIllustration
-        className='h-8 md:h-7 hover:cursor-pointer'
+        className='h-8 hover:cursor-pointer md:h-7'
         pathClassName='duration-150 transition-all'
       />
     ),
   },
 ];
-
