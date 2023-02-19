@@ -23,53 +23,81 @@ export type TestContextType = {
   setUserName: (name: string) => void;
   isPhotoUsed: boolean;
   setIsPhotoUsed: (isNeeded: boolean) => void;
+  userPhoto: string | undefined;
+  setUserPhoto: (photo: string) => void;
+  handleUserPhotoChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  fromNextPage: boolean;
+  setFromNextPage: (isNeeded: boolean) => void;
   questions: IQuestion[];
   currentQuestion: number;
   saveAnswer: (questionId: number, answer: IAnswer) => void;
   nextQuestion: () => void;
   previousQuestion: () => void;
-  getMostAnswer: () => string;
+  getMostAnswer: () => Personality;
   resetTest: () => void;
 };
 
 const questionList = [
   {
     id: 1,
-    question: 'What is your favorite color',
+    question: 'What would be your ideal day off',
     options: [
-      { id: 1, option: 'Red' },
-      { id: 2, option: 'Green' },
-      { id: 3, option: 'Blue' },
+      { id: 1, option: 'Me-time' },
+      { id: 2, option: 'Finishing tasks and homework' },
+      { id: 3, option: 'Exploring new places in your city' },
     ],
     answer: null,
   },
   {
     id: 2,
-    question: 'What is your favorite food',
+    question: 'What’s your favorite movie',
     options: [
-      { id: 1, option: 'Pizza' },
-      { id: 2, option: 'Hamburger' },
-      { id: 3, option: 'Sushi' },
+      { id: 1, option: 'Mystic River, Room, The Perks of Being a Wallflower' },
+      { id: 2, option: 'No Country for Old Man, There Will Be Blood' },
+      { id: 3, option: 'Tomorrowland, Interstellar, 2001: A Space Odyssey' },
     ],
     answer: null,
   },
   {
     id: 3,
-    question: 'What is your favorite animal',
+    question: 'Which of these following topics concerned you the most',
     options: [
-      { id: 1, option: 'Dog' },
-      { id: 2, option: 'Cat' },
-      { id: 3, option: 'Bird' },
+      { id: 1, option: 'Your own past experience' },
+      { id: 2, option: 'Country resources development' },
+      { id: 3, option: 'Artificial Intelligence (AI) takeover' },
     ],
     answer: null,
   },
   {
     id: 4,
-    question: 'What is your favorite car',
+    question: 'How do you define your success',
     options: [
-      { id: 1, option: 'BMW' },
-      { id: 2, option: 'Mercedes' },
-      { id: 3, option: 'Audi' },
+      { id: 1, option: 'Dealing with my past trauma' },
+      { id: 2, option: 'Taking part on a research project/competition' },
+      { id: 3, option: 'Knowing your purpose in life several years later' },
+    ],
+    answer: null,
+  },
+  {
+    id: 5,
+    question: 'What’s your biggest fear of the future',
+    options: [
+      { id: 1, option: 'Adulthood' },
+      {
+        id: 2,
+        option: 'Not being able to survive in my country’s demographic crisis',
+      },
+      { id: 3, option: 'Uncontrollable technology advancement' },
+    ],
+    answer: null,
+  },
+  {
+    id: 6,
+    question: 'Which statement do you think is the most important',
+    options: [
+      { id: 1, option: 'No present, no future' },
+      { id: 2, option: 'No preparation for the future, no progress' },
+      { id: 3, option: 'No anticipation towards the future, no future' },
     ],
     answer: null,
   },
@@ -108,6 +136,11 @@ const TestProvider: React.FC<{ children: React.ReactNode }> = ({
   const [step, setStep] = React.useState<number>(0);
   const [userName, setUserName] = React.useState<string>('');
   const [isPhotoUsed, setIsPhotoUsed] = React.useState<boolean>(false);
+  const [userPhoto, setUserPhoto] = React.useState<string | undefined>(
+    undefined
+  );
+  const [fromNextPage, setFromNextPage] = React.useState<boolean>(false);
+
   // Question State
   const [questions, setQuestions] = React.useState<IQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = React.useState<number>(0);
@@ -145,7 +178,7 @@ const TestProvider: React.FC<{ children: React.ReactNode }> = ({
     setCurrentQuestion(currentQuestion - 1);
   };
 
-  const getMostAnswer = () => {
+  const getMostAnswer = (): Personality => {
     const answers = questions.map((question) => question.answer?.id);
     const mostAnswerId = answers
       .sort(
@@ -164,6 +197,19 @@ const TestProvider: React.FC<{ children: React.ReactNode }> = ({
     setCurrentQuestion(0);
   };
 
+  const handleUserPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result) {
+          setUserPhoto(reader.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   React.useEffect(() => {
     setQuestions(shuffleAnswers(questionList));
   }, []);
@@ -178,6 +224,11 @@ const TestProvider: React.FC<{ children: React.ReactNode }> = ({
         setUserName,
         isPhotoUsed,
         setIsPhotoUsed,
+        userPhoto,
+        setUserPhoto,
+        handleUserPhotoChange,
+        fromNextPage,
+        setFromNextPage,
         questions,
         currentQuestion,
         saveAnswer,
