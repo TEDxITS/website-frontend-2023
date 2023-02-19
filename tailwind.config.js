@@ -15,6 +15,7 @@ module.exports = {
       backgroundImage: {
         stars: "url('/images/background/bg-stars.jpg')",
         moon: "url('/images/background/bg-moon.png')",
+        plastic: "url('/images/background/bg-transparent-plastic.png')",
       },
       colors: {
         primary: {
