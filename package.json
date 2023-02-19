@@ -30,6 +30,7 @@
     "dom-to-image": "^2.6.0",
     "framer-motion": "^9.0.2",
     "html2canvas": "^1.4.1",
+    "hamburger-react": "^2.5.0",
     "maath": "^0.5.1",
     "next": "^13.1.1",
     "react": "^18.2.0",
@@ -37,6 +38,7 @@
     "react-hook-form": "^7.41.5",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
+    "swiper": "^9.0.5",
     "tailwind-merge": "^1.8.1",
     "three": "^0.148.0",
     "zod": "^3.20.2"
