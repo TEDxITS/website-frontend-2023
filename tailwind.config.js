@@ -14,6 +14,9 @@ module.exports = {
       },
       backgroundImage: {
         // TEDxITS 2023 background images
+        stars: "url('/images/background/bg-stars.jpg')",
+        moon: "url('/images/background/bg-moon.png')",
+        plastic: "url('/images/background/bg-transparent-plastic.png')",
         'transparent-stars':
           "url('/images/background/bg-transparent-star.png')",
         hue: "url('/images/background/bg-hue.png')",
