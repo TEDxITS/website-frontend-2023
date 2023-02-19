@@ -33,7 +33,7 @@ export default function MultipleHeaderLink({
                 <span className='font-fivo text-lg'>{title}</span>
                 <HiChevronDown
                   className={`${open ? '' : 'text-opacity-70'}
-                  ml-2 h-5 w-5 text-primary-500 transition duration-150 ease-in-out group-hover:text-opacity-80`}
+                  text-primary-500 ml-2 h-5 w-5 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                   aria-hidden='true'
                 />
               </Popover.Button>

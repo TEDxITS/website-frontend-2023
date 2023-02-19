@@ -38,7 +38,7 @@ export default function MultipleMobileLinks({
               </Link>
               <HiChevronDown
                 className={`${open ? '' : 'text-opacity-70'}
-                  my-auto ml-2 h-5 w-5 content-center text-primary-500 transition duration-150  ease-in-out group-hover:text-opacity-80`}
+                  text-primary-500 my-auto ml-2 h-5 w-5 content-center transition duration-150  ease-in-out group-hover:text-opacity-80`}
                 aria-hidden='true'
               />
             </Disclosure.Button>
