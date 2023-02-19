@@ -30,6 +30,7 @@ module.exports = {
         cblue: '#354582',
         cgreen: '#1A5B38',
         cblack: '#1D1D1E',
+        cgray: '#4D4D4D',
       },
       keyframes: {
         flicker: {
