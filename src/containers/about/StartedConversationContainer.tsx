@@ -4,11 +4,12 @@ import Link from 'next/link';
 import clsxm from '@/utils/clsxm';
 
 import crackedGlassBg from '~/images/about/cracked-glass-section.png';
-import crackedGlassBgResponsive from '~/images/about/cracked-glass-section-responsive.png';
+import crackedGlassBgMobile from '~/images/about/cracked-glass-section-mobile.png';
+import crackedGlassBgResponsiveMd from '~/images/about/cracked-glass-section-responsive-md.png';
 import beautyStandards from '~/images/about/section2/beauty-standards.png';
-import comment1 from '~/images/about/section2/comment-1.png';
-import comment2 from '~/images/about/section2/comment-2.png';
-import comment3 from '~/images/about/section2/comment-3.png';
+import comment1 from '~/images/about/section2/comment1.png';
+import comment2 from '~/images/about/section2/comment2.png';
+import comment3 from '~/images/about/section2/comment3.png';
 import kaderisasi from '~/images/about/section2/kaderisasi.png';
 import preEvent1 from '~/images/about/section2/pre-event-1.png';
 import sandykala from '~/images/about/section2/sandykala.png';
@@ -18,16 +19,23 @@ function AdditionalInformation({
   numberInfo,
   textInfo,
   textStyle = '',
+  numberStyle = '',
   className = '',
 }: {
   numberInfo: string;
   textInfo: string;
   textStyle?: string;
+  numberStyle?: string;
   className?: string;
 }) {
   return (
     <div className={clsxm('mx-auto text-center', className)}>
-      <p className='text-6xl font-semibold text-cwhite md:text-8xl lg:text-6xl xl:text-8xl'>
+      <p
+        className={clsxm(
+          'text-6xl font-semibold md:text-8xl lg:text-6xl xl:text-8xl',
+          numberStyle
+        )}
+      >
         {numberInfo}
       </p>
       <p
@@ -53,14 +61,21 @@ export default function StartedConversationContainer() {
         style={{ objectFit: 'cover' }}
       />
       <Image
-        src={crackedGlassBgResponsive}
-        className='block scale-[115%] lg:hidden'
+        src={crackedGlassBgResponsiveMd}
+        className='hidden scale-[115%] sm:block lg:hidden'
+        alt='Background'
+        placeholder='blur'
+        style={{ objectFit: 'cover' }}
+      />
+      <Image
+        src={crackedGlassBgMobile}
+        className='block scale-[115%] sm:hidden'
         alt='Background'
         placeholder='blur'
         style={{ objectFit: 'cover' }}
       />
       <div className='absolute h-full w-full'>
-        <div className='mx-auto mt-28 w-11/12 lg:mt-32 lg:w-10/12'>
+        <div className='mx-auto mt-28 w-11/12 lg:mt-32 xl:w-10/12'>
           <p className='text-center text-4xl font-semibold text-cwhite md:text-5xl lg:text-left lg:text-4xl xl:text-5xl'>
             We started <br /> the conversation
           </p>
@@ -69,6 +84,7 @@ export default function StartedConversationContainer() {
             <AdditionalInformation
               numberInfo='18.000+'
               textInfo='Total Pre-Event Views'
+              numberStyle='text-cwhite'
               textStyle='text-cwhite lg:text-cblack'
               className='mt-16 lg:mt-32 lg:ml-0 lg:text-left'
             />
@@ -154,8 +170,8 @@ export default function StartedConversationContainer() {
             </div>
           </div>
           <div className='lg:flex lg:justify-between'>
-            <div className='mx-auto sm:relative lg:mx-0'>
-              <div className='z-40 mx-auto mt-6 w-10/12 sm:absolute sm:-top-10 sm:right-0 sm:mx-0 sm:mt-0 sm:w-64 lg:-right-44 lg:mt-6 xl:mt-0'>
+            <div className='sm:relative lg:mx-0 lg:-mt-28 xl:mt-0'>
+              <div className='z-40 mx-auto mt-6 w-10/12 sm:absolute sm:-top-12 sm:right-0 sm:mx-0 sm:mt-0 sm:w-64 lg:-right-16 lg:mt-4 lg:w-7/12 xl:-right-44 xl:mt-0 xl:w-9/12'>
                 <Link
                   href='https://www.instagram.com/rumahsandyakala/'
                   rel='noopener noreferrer'
@@ -174,7 +190,7 @@ export default function StartedConversationContainer() {
                   @rumahsandykala
                 </p>
               </div>
-              <div className='z-30 mx-auto mt-6 w-10/12 sm:mt-28 sm:w-96 lg:mx-0 lg:mt-0'>
+              <div className='z-30 mx-auto mt-6 w-10/12 sm:mt-28 sm:w-96 lg:mx-0 lg:-ml-4 lg:mt-0 lg:w-9/12 xl:ml-0 xl:w-11/12'>
                 <Image
                   src={story}
                   className='rounded-2xl'
@@ -184,18 +200,20 @@ export default function StartedConversationContainer() {
                 />
               </div>
             </div>
-            <div className='mx-auto mt-20 lg:mr-12 xl:mr-40'>
+            <div className='mx-auto mt-12 lg:mt-0 lg:mr-12 xl:mt-20 xl:mr-40'>
               <AdditionalInformation
                 numberInfo='66.000'
                 textInfo='Instagram Reach'
+                numberStyle='text-cblack lg:text-cwhite'
                 textStyle='text-cblack'
-                className='lg:right-0 lg:mt-8 lg:text-right'
+                className='lg:right-0 lg:mt-6 lg:text-right xl:mt-8'
               />
               <AdditionalInformation
                 numberInfo='134.000+'
                 textInfo='Total Reels or Videos View'
+                numberStyle='text-cblack lg:text-cwhite'
                 textStyle='text-cblack'
-                className='mt-20 lg:right-0 lg:mt-8 lg:text-right'
+                className='mt-12 md:mt-20 lg:right-0 lg:mt-6 lg:text-right xl:mt-8'
               />
             </div>
           </div>
