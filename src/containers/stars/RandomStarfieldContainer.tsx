@@ -30,7 +30,7 @@ function Stars({
   useFrame((state, delta) => {
     if (ref.current) {
       if (isRotating) {
-        ref.current.rotation.x -= delta / 10;
+        // ref.current.rotation.x -= delta / 10;
         ref.current.rotation.y -= delta / 15;
       } else {
         ref.current.position.z += 0.01;
