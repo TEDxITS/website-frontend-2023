@@ -11,6 +11,14 @@ interface StarsProps {
   isRotating?: boolean;
 }
 
+interface RandomStarfieldContainerProps {
+  children: React.ReactNode;
+  className?: string;
+  isRotating?: boolean;
+  isOverflow?: boolean;
+  zAxis?: number;
+}
+
 function Stars({
   isRotating,
   ...props
@@ -55,22 +63,18 @@ export default function RandomStarfieldContainer({
   className = '',
   isRotating = true,
   isOverflow = false,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  isRotating?: boolean;
-  isOverflow?: boolean;
-}) {
+  zAxis = 1,
+}: RandomStarfieldContainerProps) {
   return (
     <main
       className={clsxm(
-        'relative h-screen w-screen bg-black',
+        'relative h-screen bg-black',
         isOverflow ? 'overflow-y-auto' : 'overflow-hidden',
         className
       )}
     >
       {children}
-      <Canvas className='star-fade' camera={{ position: [0, 0, 1] }}>
+      <Canvas className='star-fade' camera={{ position: [0, 0, zAxis] }}>
         <Stars isRotating={isRotating} />
       </Canvas>
     </main>

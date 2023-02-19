@@ -48,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         className={clsxm(
           'inline-flex items-center rounded-full font-medium',
-          'focus:outline-none focus-visible:ring focus-visible:ring-primary-500',
+          'focus-visible:ring-primary-500 focus:outline-none focus-visible:ring',
           'shadow-sm',
           'transition duration-200 ease-in-out',
           //#region  //*=========== Size ===========
@@ -67,8 +67,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ],
             variant === 'gradient' && [
               'bg-gradient-to-r from-cblue to-cred text-white',
-              'hover:scale-105 hover:bg-primary-600 hover:from-cwhite hover:to-cblue hover:text-cblack',
-              'active:scale-100 active:bg-primary-700',
+              'hover:bg-primary-600 hover:scale-105 hover:from-cwhite hover:to-cblue hover:text-cblack',
+              'active:bg-primary-700 active:scale-100',
               'disabled:brightness-75 disabled:hover:scale-100 disabled:hover:from-cblue disabled:hover:to-cred disabled:hover:text-white',
             ],
             variant === 'gradient-alt' && [
