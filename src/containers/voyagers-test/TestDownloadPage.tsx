@@ -80,6 +80,8 @@ export default function TestDownloadPage() {
             <AnimatedVoyagersCard
               delay={0.3}
               cardClassName='sm:w-[30rem] sm:h-[20rem] w-[21rem] h-[14rem]'
+              nameClassName='text-xs md:text-lg'
+              dateClassName='text-[0.4rem] md:text-[0.6rem]'
             />
           </div>
         </div>

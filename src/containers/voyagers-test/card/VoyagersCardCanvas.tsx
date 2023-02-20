@@ -89,13 +89,7 @@ const VoyagersCardCanvas = React.forwardRef<
     >
       <div className='relative h-full w-full'>
         <div className={clsxm('absolute', contentClassName)}>{children}</div>
-        {/* {cardType === 'post' && (
-          <Image
-            src={moonFrontSide}
-            alt='moon front side'
-            className='absolute'
-          />
-        )} */}
+
         {cardType === 'post' && (
           // eslint-disable-next-line @next/next/no-img-element
           <img

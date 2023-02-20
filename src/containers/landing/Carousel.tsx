@@ -9,7 +9,7 @@ import 'swiper/swiper-bundle.css';
 import carouselBtn from '~/images/icons/CarouselNav.png';
 import SevenYears from '~/images/landing/7-years-later.png';
 import FiftyYears from '~/images/landing/50-years-later.png';
-import carouselBg from '~/images/landing/bg-carousel.webp';
+import carouselBg from '~/images/landing/bg-carousel.png';
 import leftCarouselBg from '~/images/landing/left-carousel.webp';
 import Tommorow from '~/images/landing/tommorow.png';
 
@@ -72,7 +72,7 @@ export default function Carousel() {
     <section className='sm:h-screen'>
       {/* desktop view */}
       <div className='relative hidden w-screen flex-col items-center justify-center pt-6 lg:flex lg:flex-row'>
-        <div className='relative z-20 flex max-w-screen-lg flex-col items-center justify-center lg:max-w-6xl lg:flex-row'>
+        <div className='relative z-20 flex max-w-screen-lg flex-col items-center justify-center p-3 lg:max-w-6xl lg:flex-row'>
           <Swiper
             effect='fade'
             loop={true}
@@ -137,14 +137,12 @@ export default function Carousel() {
             </button>
           </div>
         </div>
-        <div className='absolute -z-10 p-40'>
-          <Image
-            src={carouselBg}
-            alt='bg-carousel'
-            className='w-full'
-            placeholder='blur'
-          />
-        </div>
+        <Image
+          src={carouselBg}
+          alt='bg-carousel'
+          className='absolute h-full w-full object-contain'
+          placeholder='blur'
+        />
       </div>
 
       {/* mobile view */}
@@ -200,7 +198,7 @@ export default function Carousel() {
           >
             <Image
               src={carouselBtn}
-              className='w-10 '
+              className='w-10'
               alt='next-btn'
               placeholder='blur'
             />

@@ -12,13 +12,19 @@ export default function DownloadPhotolessVoyagersCard() {
   const { getMostAnswer } = useTestContext();
   const selectedCard = DEFAULT_CARD_FILEPATH.photoless_card[getMostAnswer()];
   const printRef = React.useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleDownloadImage = async () => {
+    setIsLoading(true);
     toast.loading('Downloading...');
     const element = printRef.current;
     if (!element) return;
     try {
-      const canvas = await html2canvas(element);
+      const canvas = await html2canvas(element, {
+        width: 1080,
+        height: 1920,
+        scale: 1,
+      });
       const data = canvas.toDataURL('image/jpg');
       const link = document.createElement('a');
 
@@ -37,11 +43,17 @@ export default function DownloadPhotolessVoyagersCard() {
     } catch (error) {
       toast.dismiss();
       toast.error(`error ${error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
     <>
-      <Button className='w-full sm:w-auto' onClick={handleDownloadImage}>
+      <Button
+        className='w-full sm:w-auto'
+        onClick={handleDownloadImage}
+        disabled={isLoading}
+      >
         <p className='w-full px-5 text-center text-lg'>Download</p>
       </Button>
       <VoyagersCardCanvas

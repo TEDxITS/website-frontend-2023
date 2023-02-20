@@ -10,7 +10,7 @@ export type LinkType = {
 export const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
-  { href: '/coming-soon', label: 'Try Me' },
+  { href: '/voyagers-test', label: 'Try Me!' },
   { href: '/coming-soon', label: 'Login' },
 ];
 

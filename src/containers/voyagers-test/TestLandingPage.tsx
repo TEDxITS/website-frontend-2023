@@ -10,7 +10,7 @@ export default function TestLandingPage() {
         What Kind Of Voyagers Are You?
       </h1>
       <h2 className='mb-12 text-center font-primary text-xl font-semibold text-white sm:text-2xl'>
-        Take this quiz and find out
+        Take this quiz to find out
       </h2>
       <Button className='px-10' onClick={nextStep}>
         <p className='text-xl sm:text-2xl'>Try Me!</p>

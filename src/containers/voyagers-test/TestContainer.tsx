@@ -17,7 +17,11 @@ export default function TestContainer() {
   } else if (step === 1) {
     return <TestNamePage />;
   } else if (step === 2) {
-    return <Questions />;
+    return (
+      <div className='h-full w-full overflow-y-auto'>
+        <Questions />
+      </div>
+    );
   } else if (step === 3) {
     return <TestResultPage />;
   } else if (step === 4) {

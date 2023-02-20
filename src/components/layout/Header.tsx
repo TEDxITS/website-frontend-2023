@@ -39,7 +39,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
 
   return (
     <div className='relative w-full'>
-      <header className='sticky top-0 z-50 bg-transparent drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)]'>
+      <header className='sticky top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)]'>
         {/* desktop view */}
         <div className='layout hidden h-14 items-center justify-between md:py-12 lg:flex'>
           <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
@@ -86,7 +86,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                   height={10}
                 />
                 <TedIcon className='h-14 w-24' />
-                <p className='text-xl font-thin text-cwhite'>
+                <p className='text-sm font-thin text-cwhite'>
                   <span>&#169;</span>2023
                 </p>
               </div>

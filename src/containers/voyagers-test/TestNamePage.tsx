@@ -48,7 +48,7 @@ export default function TestNamePage() {
               type='text'
               id='name'
               ref={ref}
-              className='border-transparent bg-transparent text-white focus:border-0 focus:border-transparent focus:outline-none focus:outline-0 focus:ring-0'
+              className='w-full border-transparent bg-transparent text-white focus:border-0 focus:border-transparent focus:outline-none focus:outline-0 focus:ring-0'
               onChange={handleNameChange}
               value={userName}
             />

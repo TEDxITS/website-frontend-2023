@@ -1,5 +1,4 @@
 import html2canvas from 'html2canvas';
-import Image from 'next/image';
 import React from 'react';
 import toast from 'react-hot-toast';
 
@@ -9,8 +8,6 @@ import VoyagersCardCanvas from '@/containers/voyagers-test/card/VoyagersCardCanv
 
 import { DEFAULT_SMALLCARD_ATTRIBUTES } from '@/constant/voyagers-test';
 import { useTestContext } from '@/context/TestContext';
-
-import MonochromeTedLogo from '~/images/logo/tedxits-monochrome.png';
 
 interface DownloadVoyagersCardProps {
   variant: 'story' | 'post';
@@ -23,19 +20,35 @@ export default function DownloadVoyagersCard({
 }: DownloadVoyagersCardProps) {
   const printRef = React.useRef<HTMLDivElement | null>(null);
   const { userPhoto } = useTestContext();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleDownloadImage = async () => {
+    setIsLoading(true);
     if (!userPhoto) {
       toast.error('Please upload your photo first!');
       setIsAnnouncmentPresent(true);
+      setIsLoading(false);
       return;
     }
     toast.loading('Downloading...');
     const element = printRef.current;
     if (!element) return;
     try {
-      const canvas = await html2canvas(element);
-      const data = canvas.toDataURL('image/jpg');
+      const canvas = await html2canvas(
+        element,
+        variant === 'story'
+          ? {
+              width: 1080,
+              height: 1920,
+              scale: 1,
+            }
+          : {
+              width: 1080,
+              height: 1080,
+              scale: 1,
+            }
+      );
+      const data = canvas.toDataURL('image/png');
       const link = document.createElement('a');
 
       if (typeof link.download === 'string') {
@@ -53,12 +66,18 @@ export default function DownloadVoyagersCard({
     } catch (error) {
       toast.dismiss();
       toast.error(`error ${error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-      <Button className='w-full sm:w-auto' onClick={handleDownloadImage}>
+      <Button
+        className='w-full sm:w-auto'
+        onClick={handleDownloadImage}
+        disabled={isLoading}
+      >
         <p className='w-full px-5 text-center text-sm sm:text-lg'>
           Download {variant === 'post' ? 'Post Version' : 'Story Version'}
         </p>
@@ -70,9 +89,10 @@ export default function DownloadVoyagersCard({
           contentClassName='h-full w-full'
         >
           <div className='flex justify-center pt-28'>
-            <Image src={MonochromeTedLogo} alt='TEDxITS 2023' />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src='/images/logo/tedxits-monochrome.png' alt='TEDxITS 2023' />
           </div>
-          <div className='relative flex h-[70%] items-center justify-center'>
+          <div className='relative flex h-[65%] items-center justify-center'>
             <VoyagersCard
               className='absolute h-[40rem] w-[60rem] rotate-[15deg]'
               nameClassName='text-3xl'
@@ -85,8 +105,16 @@ export default function DownloadVoyagersCard({
             />
             <VoyagersCard
               className='absolute h-[40rem] w-[60rem]'
-              nameClassName='text-3xl'
-              dateClassName='text-xl my-4'
+              nameClassName='text-4xl'
+              dateClassName='text-xl my-3'
+            />
+          </div>
+          <div className='flex flex-col items-center pl-5'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src='/images/voyagers-test/announcement.png'
+              alt='announcement'
+              className=''
             />
           </div>
         </VoyagersCardCanvas>

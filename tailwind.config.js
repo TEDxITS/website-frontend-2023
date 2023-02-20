@@ -6,6 +6,10 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        // TEDxITS 2023 screen sizes
+        xs: '330px',
+      },
       fontFamily: {
         // TEDxITS 2023 font face
         primary: ['var(--font-futura)', ...fontFamily.sans],

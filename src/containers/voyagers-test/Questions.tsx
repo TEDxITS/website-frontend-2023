@@ -99,7 +99,7 @@ export default function Questions() {
 
   return (
     <section className='flex h-full w-full flex-col gap-x-10 gap-y-4 p-4 md:flex-row md:p-10 lg:p-16'>
-      <div className='flex h-[35%] flex-col items-start justify-between md:h-full md:w-1/2 lg:w-3/5'>
+      <div className='flex flex-col items-start justify-between md:h-full md:w-1/2 lg:w-3/5'>
         <div className='flex w-full items-center justify-between sm:mb-10 md:justify-start'>
           <FullTEDLogo variant='text' className='w-20 md:w-32' />
           <PreviousQuestionButton
@@ -108,7 +108,7 @@ export default function Questions() {
             startChildAnimation={startChildAnimation}
           />
         </div>
-        <div className='h-auto md:h-full'>
+        <div className='h-[18rem] md:h-full'>
           <p className='mb-4 text-lg font-medium text-cwhite sm:mb-6 sm:text-2xl'>
             {selectedQuestion.id} of {questions.length}
           </p>
@@ -122,10 +122,10 @@ export default function Questions() {
           startChildAnimation={startChildAnimation}
         />
       </div>
-      <div className='h-[65%] md:h-full md:w-1/2 lg:w-1/3'>
+      <div className='md:w-1/2 lg:w-1/3'>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: 200 },
+            hidden: { opacity: 0.7, y: '250%' },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'
@@ -145,7 +145,7 @@ export default function Questions() {
           variants={container}
           initial='hidden'
           animate={startChildAnimation ? 'show' : 'hidden'}
-          className='h-[70%] px-7'
+          className='px-7 md:h-[27rem]'
         >
           <RadioGroup
             className='h-full bg-cwhite/[40%] px-3 py-3 backdrop-blur-sm'
@@ -160,7 +160,7 @@ export default function Questions() {
                 fill
               />
             </div>
-            <div className='grid h-full grid-cols-1 gap-y-4 md:px-4 xl:h-[85%]'>
+            <div className='question grid h-full grid-cols-1 gap-y-4 md:px-4 xl:h-[85%]'>
               {selectedQuestion?.options.map((option, i) => (
                 <motion.div className='' key={option.id} variants={item}>
                   <RadioGroup.Option
@@ -170,9 +170,11 @@ export default function Questions() {
                       'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 font-baron shadow-md transition-transform ease-in-out hover:scale-110 focus:outline-none active:scale-100 sm:text-lg'
                     )}
                   >
-                    <div className='w-1/6 sm:h-14'>
-                      <div className='flex h-full w-full items-center justify-center rounded-full bg-white pb-2 text-4xl shadow-lg'>
-                        {ALPHABET[i]}
+                    <div className='w-1/4 xs:w-1/6 sm:h-14 md:w-1/4 lg:w-1/6'>
+                      <div className='flex h-full w-full items-center justify-center rounded-full bg-white shadow-lg'>
+                        <h2 className='text-2xl font-semibold xs:text-3xl md:text-4xl'>
+                          {ALPHABET[i]}
+                        </h2>
                       </div>
                     </div>
                     <p className='w-5/6 leading-tight'>{option.option}</p>
@@ -184,7 +186,7 @@ export default function Questions() {
         </motion.div>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: -200 },
+            hidden: { opacity: 0.7, y: '-250%' },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'

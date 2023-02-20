@@ -7,7 +7,7 @@ export default function TestPage() {
   return (
     <TestProvider>
       <RandomStarfieldContainer className='bg-black'>
-        <div className='absolute z-20 h-screen w-screen'>
+        <div className='absolute z-20 h-screen w-screen '>
           <TestContainer />
         </div>
       </RandomStarfieldContainer>

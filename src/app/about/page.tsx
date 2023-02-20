@@ -1,15 +1,20 @@
-import GrandThemeContainer from '@/containers/about/GrandThemeContainer';
-import PreviousSpeakerContainer from '@/containers/about/PreviousSpeakerContainer';
-import StartedConversationContainer from '@/containers/about/StartedConversationContainer';
-import StarterKitContainer from '@/containers/about/StarterKitContainer';
+import { NormalFooter } from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
+import NewThemeContainer from '@/containers/coba/NewThemeContainer';
+import SpeakerContainer from '@/containers/coba/SpeakerContainer';
+import StartedConversationContainer from '@/containers/coba/StartedConversationContainer';
+import StarterKitContainer from '@/containers/coba/StarterKitContainer';
 
 export default function AboutPage() {
   return (
-    <div className='bg-black'>
+    <div className='w-screen overflow-x-clip bg-black bg-stars bg-contain bg-repeat'>
+      <Header />
       <StarterKitContainer />
       <StartedConversationContainer />
-      <PreviousSpeakerContainer />
-      <GrandThemeContainer />
+      <SpeakerContainer />
+      <NewThemeContainer />
+
+      <NormalFooter />
     </div>
   );
 }

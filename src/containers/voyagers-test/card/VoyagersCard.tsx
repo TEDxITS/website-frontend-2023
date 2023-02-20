@@ -12,21 +12,27 @@ interface VoyagersCardProps {
   className?: string;
   nameClassName?: string;
   dateClassName?: string;
+  nameContainerClassName?: string;
 }
 
 interface AnimatedVoyagersCardProps
   extends Omit<AnimatedCardContainerProps, 'children'> {
   cardClassName: string;
+  nameClassName?: string;
+  dateClassName?: string;
 }
 
 export default function VoyagersCard({
   className,
   nameClassName,
   dateClassName,
+  nameContainerClassName,
 }: VoyagersCardProps) {
   const { getMostAnswer, userName, userPhoto, handleUserPhotoChange } =
     useTestContext();
   const selectedCard = DEFAULT_CARD_FILEPATH.card[getMostAnswer()];
+  const newUsername = 'Dear, ' + userName.replace(/\s/g, '<span> </span>');
+  const isNameLong = userName.length > 18;
 
   return (
     <figure
@@ -39,7 +45,8 @@ export default function VoyagersCard({
       <img
         src={selectedCard}
         alt='voyagers card'
-        className='absolute object-contain shadow'
+        className='absolute object-contain'
+        loading='eager'
       />
       <div className='absolute top-[24.5%] left-[10%] z-30 h-[48%] w-[31%]'>
         <input
@@ -73,16 +80,25 @@ export default function VoyagersCard({
           </div>
         )}
       </div>
-      <div className='absolute top-[25%] right-[6%] w-[50%]'>
+      <div
+        className={clsxm(
+          'absolute top-[25%] right-[7%] w-[48%]',
+          isNameLong && 'top-[22%]',
+          nameContainerClassName
+        )}
+      >
         <p
+          style={{
+            wordBreak: 'break-word',
+            whiteSpace: 'normal',
+          }}
           className={clsxm(
             'w-full text-center font-quaker text-lg text-cwhite',
             getMostAnswer() === 'The Survivor' && 'text-cblack',
             nameClassName
           )}
-        >
-          Dear, {userName}
-        </p>
+          dangerouslySetInnerHTML={{ __html: newUsername }}
+        ></p>
       </div>
       <div className='absolute top-[11.5%] left-[23%] w-[10%]'>
         <p
@@ -105,6 +121,8 @@ export function AnimatedVoyagersCard({
   rotateTo = 0,
   className,
   cardClassName,
+  nameClassName,
+  dateClassName,
 }: AnimatedVoyagersCardProps) {
   return (
     <AnimatedCardContainer
@@ -114,7 +132,12 @@ export function AnimatedVoyagersCard({
       rotateTo={rotateTo}
       x='350%'
     >
-      <VoyagersCard className={clsxm(cardClassName)} />;
+      <VoyagersCard
+        nameClassName={nameClassName}
+        dateClassName={dateClassName}
+        className={clsxm(cardClassName)}
+      />
+      ;
     </AnimatedCardContainer>
   );
 }

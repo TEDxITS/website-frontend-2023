@@ -45,7 +45,7 @@ const futura = localFont({
       style: 'normal',
     },
     {
-      path: '../../public/fonts/futura/bold.ttf',
+      path: '../../public/fonts/futura/bold-3.ttf',
       weight: '700',
       style: 'normal',
     },

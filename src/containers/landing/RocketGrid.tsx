@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import React from 'react';
 
-import BgGlass1 from '~/images/landing/bg-glass.webp';
 import BgGlass2 from '~/images/landing/bg-glass2.webp';
+import BgGlass1 from '~/images/landing/crackedreal.png';
 import grayRocket from '~/images/landing/rockets/gray2.png';
 import grayRocket3 from '~/images/landing/rockets/gray3.png';
 import grayRocket4 from '~/images/landing/rockets/gray4.png';
@@ -48,7 +48,7 @@ export default function RocketGrid() {
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [isShowing, setIsShowing] = React.useState(false);
   return (
-    <section className='relative mt-24 flex w-screen flex-col items-center justify-center lg:mt-[24rem]'>
+    <section className='bw relative mt-24 flex w-screen flex-col items-center justify-center lg:mt-[24rem]'>
       <h3 className='mt-24 text-center font-baron text-4xl text-cblue transition duration-300 lg:text-7xl'>
         Here We Go!
       </h3>
@@ -182,7 +182,7 @@ export default function RocketGrid() {
       <Image
         src={BgGlass1}
         alt='bg-glass'
-        className='absolute top-0 left-0 z-[-1] hidden w-screen opacity-80 lg:block'
+        className='absolute top-0 left-0 z-[-1] hidden w-screen scale-[110%] lg:block'
         placeholder='blur'
       />
       <Image
