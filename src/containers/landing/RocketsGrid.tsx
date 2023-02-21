@@ -110,11 +110,10 @@ export default function RocketsGrid() {
 
   // Temporary
   async function sequence(href: string) {
-    await animationControls.start({ scale: 1.3 });
     animationControls.start({
-      x: 2,
-      y: 2,
-      rotate: 2,
+      x: '2px',
+      y: '2px',
+      rotate: 5,
       transition: {
         ease: 'easeInOut',
         duration: 0.1,
@@ -122,10 +121,10 @@ export default function RocketsGrid() {
         repeatType: 'reverse',
       },
     });
+    await animationControls.start({ scale: 1.3, rotate: 45, zIndex: 50 });
     await animationControls.start({
-      x: 200,
-      y: -200,
-      transition: { delay: 0.5 },
+      x: '100vw',
+      transition: { delay: 0.5, duration: 0.6, ease: 'easeInOut' },
     });
     router.push(href);
   }
@@ -177,7 +176,7 @@ export default function RocketsGrid() {
                   src={rocket.src}
                   alt={rocket.alt}
                   fill
-                  className='absolute z-30 object-contain transition duration-300 hover:-translate-y-2'
+                  className='absolute z-50 object-contain transition duration-300 hover:-translate-y-2'
                 />
               </motion.div>
 
