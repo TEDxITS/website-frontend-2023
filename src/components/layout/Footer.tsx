@@ -19,6 +19,7 @@ export default function Footer({ className }: { className?: string }) {
             src={footerBg}
             alt='footer-bg'
             className='absolute h-full object-cover lg:w-screen'
+            placeholder='blur'
           />
           <footer className='layout relative flex flex-col items-center justify-center gap-8 py-16'>
             <ul className='relative z-10 flex items-center gap-4'>
@@ -60,6 +61,7 @@ export function NormalFooter({ className }: { className?: string }) {
             src={footerBg}
             alt='footer-bg'
             className='absolute h-full object-cover lg:w-screen'
+            placeholder='blur'
           />
           <footer className='layout relative flex flex-col items-center justify-center gap-8 pt-16'>
             <ul className='relative z-10 flex items-center gap-4'>

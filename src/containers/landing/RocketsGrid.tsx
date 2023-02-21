@@ -1,7 +1,8 @@
 'use client';
 
+import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import BgGlass2 from '~/images/landing/bg-glass2.webp';
@@ -22,10 +23,51 @@ const rocketList = [
     src: redRocket,
     alt: 'red-rocket-1',
     isComingSoon: false,
+    href: '/voyagers-test',
+    text: 'Try me!',
+  },
+  {
+    id: 2,
+    src: grayRocket,
+    alt: 'gray-rocket-1',
+    isComingSoon: true,
+    href: '#',
+    text: 'Coming-soon',
+  },
+  {
+    id: 3,
+    src: grayRocket3,
+    alt: 'gray-rocket-3',
+    isComingSoon: true,
+    href: '#',
+    text: 'Coming-soon',
+  },
+  {
+    id: 4,
+    src: grayRocket4,
+    alt: 'gray-rocket-4',
+    isComingSoon: true,
+    href: '#',
+    text: 'Coming-soon',
+  },
+  {
+    id: 5,
+    src: grayRocket5,
+    alt: 'gray-rocket-5',
+    isComingSoon: true,
+    href: '#',
+    text: 'Coming-soon',
+  },
+  {
+    id: 6,
+    src: grayRocket6,
+    alt: 'gray-rocket-6',
+    isComingSoon: true,
+    href: '#',
+    text: 'Coming-soon',
   },
 ];
 
-// eslint-disable-next-line unused-imports/no-unused-vars
 function ComingSoonLock() {
   return (
     <>
@@ -47,174 +89,106 @@ function ComingSoonLock() {
   );
 }
 
+const containerAnimation = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemAnimation = {
+  hidden: { opacity: 0, y: 100 },
+  show: { opacity: 1, y: 0 },
+};
+
 export default function RocketsGrid() {
+  const animationControls = useAnimation();
+  const router = useRouter();
+
+  // Temporary
+  async function sequence(href: string) {
+    await animationControls.start({ scale: 1.3 });
+    animationControls.start({
+      x: 2,
+      y: 2,
+      rotate: 2,
+      transition: {
+        ease: 'easeInOut',
+        duration: 0.1,
+        repeat: Infinity,
+        repeatType: 'reverse',
+      },
+    });
+    await animationControls.start({
+      x: 200,
+      y: -200,
+      transition: { delay: 0.5 },
+    });
+    router.push(href);
+  }
+
   return (
     <section className='relative flex h-[70rem] flex-col items-center justify-center bg-black bg-transparent-stars pb-40 pt-24 md:h-[73rem]'>
       <h3 className='z-20 mt-10 text-center font-baron text-4xl text-cblue md:mt-0 md:text-5xl lg:mt-0 lg:text-7xl'>
         Here We Go!
       </h3>
-      <div className='layout z-20 mt-8 mb-4 grid h-5/6 max-w-6xl grid-cols-2 gap-8 lg:grid-cols-3'>
-        <Link
-          href='/voyagers-test'
-          className='group relative flex items-end justify-center border-4 border-dashed border-cblack'
-        >
-          <Image
-            placeholder='blur'
-            src={redRocket}
-            alt='red1'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <p className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
-            Try Me!
-          </p>
-        </Link>
-        <div className='group relative flex items-end justify-center border-4 border-dashed border-cblack'>
-          <Image
-            placeholder='blur'
-            src={grayRocket}
-            alt='gray2'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <Image
-            placeholder='blur'
-            src={lockedLock}
-            alt='lock'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2 group-hover:hidden'
-          />
-          <Image
-            placeholder='blur'
-            src={unlockedLock}
-            alt='lock'
-            fill
-            className='absolute hidden object-contain transition duration-300 hover:-translate-y-2 group-hover:block'
-          />
-          <a
-            href='#'
-            className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '
-          >
-            Coming Soon!
-          </a>
-        </div>
-        <div className='group relative flex items-end justify-center border-4 border-dashed border-cblack'>
-          <Image
-            placeholder='blur'
-            src={grayRocket3}
-            alt='gray2'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <Image
-            placeholder='blur'
-            src={lockedLock}
-            alt='lock'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2 group-hover:hidden'
-          />
-          <Image
-            placeholder='blur'
-            src={unlockedLock}
-            alt='lock'
-            fill
-            className='absolute hidden object-contain transition duration-300 hover:-translate-y-2 group-hover:block'
-          />
-          <a
-            href='#'
-            className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '
-          >
-            Coming Soon!
-          </a>
-        </div>
-        <div className='group relative flex items-end justify-center border-4 border-dashed border-cblack'>
-          <Image
-            placeholder='blur'
-            src={grayRocket4}
-            alt='gray2'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <Image
-            placeholder='blur'
-            src={lockedLock}
-            alt='lock'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2 group-hover:hidden'
-          />
-          <Image
-            placeholder='blur'
-            src={unlockedLock}
-            alt='lock'
-            fill
-            className='absolute hidden object-contain transition duration-300 hover:-translate-y-2 group-hover:block'
-          />
-          <a
-            href='#'
-            className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '
-          >
-            Coming Soon!
-          </a>
-        </div>
-        <div className='group relative flex items-end justify-center border-4 border-dashed border-cblack'>
-          <Image
-            placeholder='blur'
-            src={grayRocket5}
-            alt='gray2'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <Image
-            placeholder='blur'
-            src={lockedLock}
-            alt='lock'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2 group-hover:hidden'
-          />
-          <Image
-            placeholder='blur'
-            src={unlockedLock}
-            alt='lock'
-            fill
-            className='absolute hidden object-contain transition duration-300 hover:-translate-y-2 group-hover:block'
-          />
-          <a
-            href='#'
-            className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '
-          >
-            Coming Soon!
-          </a>
-        </div>
-        <div className='group relative flex items-end justify-center border-4 border-dashed border-cblack'>
-          <Image
-            placeholder='blur'
-            src={grayRocket6}
-            alt='gray2'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2'
-          />
-          <Image
-            placeholder='blur'
-            src={lockedLock}
-            alt='lock'
-            fill
-            className='absolute object-contain transition duration-300 hover:-translate-y-2 group-hover:hidden'
-          />
-          <Image
-            placeholder='blur'
-            src={unlockedLock}
-            alt='lock'
-            fill
-            className='absolute hidden object-contain transition duration-300 hover:-translate-y-2 group-hover:block'
-          />
-          <a
-            href='#'
-            className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '
-          >
-            Coming Soon!
-          </a>
-        </div>
-      </div>
+      <motion.div
+        variants={containerAnimation}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true }}
+        className='layout z-20 mt-8 mb-4 grid h-5/6 max-w-6xl grid-cols-2 gap-8 lg:grid-cols-3'
+      >
+        {rocketList.map((rocket) =>
+          rocket.isComingSoon ? (
+            <motion.div
+              key={rocket.id}
+              variants={itemAnimation}
+              className='group relative flex items-end justify-center border-4 border-dashed border-cblack'
+            >
+              <Image
+                placeholder='blur'
+                src={rocket.src}
+                alt={rocket.alt}
+                fill
+                className='absolute object-contain transition duration-300 group-hover:-translate-y-2'
+              />
+              <ComingSoonLock />
+              <p className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
+                {rocket.text}
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={rocket.id}
+              variants={itemAnimation}
+              onClick={() => sequence(rocket.href)}
+              className='group  flex h-full w-full cursor-pointer items-end justify-center border-4 border-dashed border-cblack'
+            >
+              <motion.div
+                animate={animationControls}
+                className='relative flex h-full w-full items-end justify-center'
+              >
+                <Image
+                  placeholder='blur'
+                  src={rocket.src}
+                  alt={rocket.alt}
+                  fill
+                  className='absolute z-30 object-contain transition duration-300 hover:-translate-y-2'
+                />
+              </motion.div>
+
+              <p className='absolute -translate-y-4 text-center font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
+                {rocket.text}
+              </p>
+            </motion.div>
+          )
+        )}
+      </motion.div>
+
       <h3 className='z-20 text-center font-baron text-4xl text-cwhite transition duration-300 lg:text-7xl'>
         COMING SOON
       </h3>

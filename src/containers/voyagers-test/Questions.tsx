@@ -107,7 +107,7 @@ export default function Questions() {
       transition={{ duration: 0.2 }}
       className='flex w-full flex-col gap-x-10 gap-y-4 p-4 md:flex-row md:p-10 lg:p-16'
     >
-      <div className='flex h-[20rem] flex-col items-start justify-between md:h-[43rem] md:w-1/2 lg:h-[37rem] xl:w-3/5'>
+      <div className='flex h-[19rem] flex-col items-start justify-between md:h-[43rem] md:w-1/2 lg:h-[37rem] xl:w-3/5'>
         <div className='flex w-full items-center justify-between sm:mb-10 md:justify-start'>
           <FullTEDLogo variant='text' className='w-20 md:w-32' />
           <PreviousQuestionButton
@@ -120,7 +120,7 @@ export default function Questions() {
           <p className='mb-4 text-lg font-medium text-cwhite sm:mb-6 sm:text-2xl'>
             {selectedQuestion.id} of {questions.length}
           </p>
-          <h1 className='md: font-quaker text-3xl text-cwhite md:text-5xl lg:text-6xl'>
+          <h1 className='font-quaker text-3xl text-cwhite md:text-5xl lg:text-6xl'>
             {selectedQuestion?.question}
           </h1>
         </div>
@@ -153,7 +153,7 @@ export default function Questions() {
           variants={container}
           initial='hidden'
           animate={startChildAnimation ? 'show' : 'hidden'}
-          className='h-[70%] px-7'
+          className='h-[70%] xs:px-7'
         >
           <RadioGroup
             className='h-full bg-cwhite/[40%] px-3 py-3 backdrop-blur-sm'
@@ -175,7 +175,7 @@ export default function Questions() {
                     id={`answer-${option.id}`}
                     value={option}
                     className={clsxm(
-                      'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 font-baron shadow-md transition-transform ease-in-out hover:scale-110 focus:outline-none active:scale-100 sm:text-lg'
+                      'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 focus:outline-none active:scale-100 '
                     )}
                   >
                     <div className='w-1/4 xs:w-1/6 sm:h-14 md:w-1/4 lg:w-1/6'>
@@ -185,7 +185,9 @@ export default function Questions() {
                         </h2>
                       </div>
                     </div>
-                    <p className='w-5/6 leading-tight'>{option.option}</p>
+                    <p className='w-5/6 font-baron leading-tight sm:text-lg'>
+                      {option.option}
+                    </p>
                   </RadioGroup.Option>
                 </motion.div>
               ))}
