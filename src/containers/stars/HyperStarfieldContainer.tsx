@@ -1,6 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import React from 'react';
+
+import redRocket from '~/images/voyagers-test/red-rocket.png';
 
 function Star() {
   const [x, setX] = React.useState(0);
@@ -52,11 +55,11 @@ export default function HyperStarfieldContainer({
           animate={{ y: isLoading ? '10%' : '-100%' }}
           className='rocket'
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src='/images/voyagers-test/red-rocket.png'
+          <Image
+            src={redRocket}
             alt='rocket'
             className='-rotate-90'
+            placeholder='blur'
           />
         </motion.div>
       </div>

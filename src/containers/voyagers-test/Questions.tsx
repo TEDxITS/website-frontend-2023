@@ -68,6 +68,8 @@ export default function Questions() {
     nextStep,
   } = useTestContext();
   const selectedQuestion = questions[currentQuestion];
+  const [areWeGoingNextStep, setAreWeGoingNextStep] =
+    React.useState<boolean>(false);
   const [startAnimation, setStartAnimation] = React.useState<boolean>(true);
   const [startChildAnimation, setStartChildAnimation] =
     React.useState<boolean>(false);
@@ -82,9 +84,10 @@ export default function Questions() {
     }, 100);
     saveAnswer(selectedQuestion.id, value);
     if (currentQuestion === questions.length - 1) {
-      // exit the quiz if its the end of the questions
-      // setShowLoading(true);
-      nextStep();
+      setAreWeGoingNextStep(true);
+      setTimeout(() => {
+        nextStep();
+      }, 500);
     }
   };
 
@@ -98,8 +101,13 @@ export default function Questions() {
   };
 
   return (
-    <section className='flex h-full w-full flex-col gap-x-10 gap-y-4 p-4 md:flex-row md:p-10 lg:p-16'>
-      <div className='flex flex-col items-start justify-between md:h-full md:w-1/2 lg:w-3/5'>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={areWeGoingNextStep ? { opacity: 0 } : { opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className='flex w-full flex-col gap-x-10 gap-y-4 p-4 md:flex-row md:p-10 lg:p-16'
+    >
+      <div className='flex h-[20rem] flex-col items-start justify-between md:h-[43rem] md:w-1/2 lg:h-[37rem] xl:w-3/5'>
         <div className='flex w-full items-center justify-between sm:mb-10 md:justify-start'>
           <FullTEDLogo variant='text' className='w-20 md:w-32' />
           <PreviousQuestionButton
@@ -122,10 +130,10 @@ export default function Questions() {
           startChildAnimation={startChildAnimation}
         />
       </div>
-      <div className='md:w-1/2 lg:w-1/3'>
+      <div className='h-[43rem] md:w-1/2 lg:h-[37rem] xl:w-2/5'>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: '250%' },
+            hidden: { opacity: 0.7, y: '14rem' },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'
@@ -145,14 +153,14 @@ export default function Questions() {
           variants={container}
           initial='hidden'
           animate={startChildAnimation ? 'show' : 'hidden'}
-          className='px-7 md:h-[27rem]'
+          className='h-[70%] px-7'
         >
           <RadioGroup
             className='h-full bg-cwhite/[40%] px-3 py-3 backdrop-blur-sm'
             value={selectedQuestion.answer}
             onChange={(value: IAnswer) => handleChange(value)}
           >
-            <div className='relative hidden h-[15%] w-[25%] xl:block'>
+            <div className='relative hidden h-[15%] w-[25%] xs:block md:hidden xl:block'>
               <Image
                 src={quizContainerOrnament}
                 alt='quiz container ornament'
@@ -160,7 +168,7 @@ export default function Questions() {
                 fill
               />
             </div>
-            <div className='question grid h-full grid-cols-1 gap-y-4 md:px-4 xl:h-[85%]'>
+            <div className='question grid h-full grid-cols-1 gap-y-4 xs:h-[85%] md:h-full xl:h-[85%]'>
               {selectedQuestion?.options.map((option, i) => (
                 <motion.div className='' key={option.id} variants={item}>
                   <RadioGroup.Option
@@ -172,7 +180,7 @@ export default function Questions() {
                   >
                     <div className='w-1/4 xs:w-1/6 sm:h-14 md:w-1/4 lg:w-1/6'>
                       <div className='flex h-full w-full items-center justify-center rounded-full bg-white shadow-lg'>
-                        <h2 className='text-2xl font-semibold xs:text-3xl md:text-4xl'>
+                        <h2 className='text-2xl font-semibold xs:text-3xl'>
                           {ALPHABET[i]}
                         </h2>
                       </div>
@@ -186,7 +194,7 @@ export default function Questions() {
         </motion.div>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: '-250%' },
+            hidden: { opacity: 0.7, y: '-14rem' },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'
@@ -202,7 +210,7 @@ export default function Questions() {
           />
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
