@@ -6,6 +6,7 @@ import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
 import HyperStarfieldContainer from '@/containers/stars/HyperStarfieldContainer';
 
+import { DEFAULT_CARD_FILEPATH } from '@/constant/voyagers-test';
 import { useTestContext } from '@/context/TestContext';
 
 import modalBgLarge from '~/images/voyagers-test/large-modal.png';
@@ -86,10 +87,10 @@ export default function TestResultPage() {
 
   React.useEffect(() => {
     // Preload the voyagers card image
-    // for (const image of Object.values(DEFAULT_CARD_FILEPATH.card)) {
-    //   const imageElement = new Image();
-    //   imageElement.src = image;
-    // }
+    for (const image of Object.values(DEFAULT_CARD_FILEPATH.card)) {
+      const imageElement = new Image();
+      imageElement.src = image;
+    }
     // ends here
     setTimeout(() => {
       setIsLoading(false);
