@@ -26,6 +26,7 @@ export default function ComingSoonPage() {
               placeholder='blur'
             />
           </div>
+          <h1 className='sr-only'>Coming Soon</h1>
           <h2 className='mb-12 text-center font-primary text-[1.3rem] font-semibold text-white'>
             Stay tuned as we will guide you to #ExpectTheUnexpected
           </h2>
