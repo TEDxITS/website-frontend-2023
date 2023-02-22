@@ -7,13 +7,12 @@ import StarterKitContainer from '@/containers/coba/StarterKitContainer';
 
 export default function AboutPage() {
   return (
-    <div className='w-screen overflow-x-clip bg-black bg-stars bg-contain bg-repeat'>
+    <div className='w-screen overflow-hidden overflow-x-clip bg-black bg-stars bg-contain bg-repeat'>
       <Header />
       <StarterKitContainer />
       <StartedConversationContainer />
       <SpeakerContainer />
       <NewThemeContainer />
-
       <NormalFooter />
     </div>
   );

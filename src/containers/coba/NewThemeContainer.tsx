@@ -83,7 +83,7 @@ export default function NewThemeContainer() {
 
               <div className='grid grid-cols-1 gap-3 md:grid-cols-3'>
                 <div
-                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[125%] hover:bg-cwhite lg:px-3 lg:px-9'
+                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[115%] hover:bg-cwhite lg:px-3 '
                   onMouseEnter={() =>
                     setRocket({
                       today: false,
@@ -118,7 +118,7 @@ export default function NewThemeContainer() {
                 </div>
 
                 <div
-                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[125%] hover:bg-cwhite lg:px-3 lg:px-9'
+                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[115%] hover:bg-cwhite lg:px-3'
                   onMouseEnter={() =>
                     setRocket({
                       today: false,
@@ -155,7 +155,7 @@ export default function NewThemeContainer() {
                 </div>
 
                 <div
-                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[125%] hover:bg-cwhite lg:px-3 lg:px-9'
+                  className='col-span-1 transform cursor-pointer rounded-[3rem] bg-cwhite/50 py-7 px-9 shadow-lg transition duration-500 ease-in-out hover:z-20 hover:scale-[115%] hover:bg-cwhite lg:px-3'
                   onMouseEnter={() =>
                     setRocket({
                       today: false,
