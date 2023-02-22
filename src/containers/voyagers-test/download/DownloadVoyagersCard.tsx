@@ -78,7 +78,7 @@ export default function DownloadVoyagersCard({
         onClick={handleDownloadImage}
         disabled={isLoading}
       >
-        <p className='w-full px-5 text-center text-sm sm:text-lg'>
+        <p className='w-full px-1 text-center text-xs sm:px-5 sm:text-lg'>
           Download {variant === 'post' ? 'Post Version' : 'Story Version'}
         </p>
       </Button>
@@ -107,12 +107,13 @@ export default function DownloadVoyagersCard({
               className='absolute h-[40rem] w-[60rem]'
               nameClassName='text-4xl'
               dateClassName='text-xl my-3'
+              dateContainerClassName='top-[10.7%] sm:top-[10.7%] font-bold'
             />
           </div>
           <div className='flex flex-col items-center pl-5'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='/images/voyagers-test/announcement.png'
+              src='/images/voyagers-test/announcement-3.png'
               alt='announcement'
               className=''
             />
@@ -127,6 +128,7 @@ export default function DownloadVoyagersCard({
           <VoyagersCard
             className={DEFAULT_SMALLCARD_ATTRIBUTES.post.size}
             nameClassName={DEFAULT_SMALLCARD_ATTRIBUTES.post.nameClassName}
+            dateContainerClassName='top-[11.5%] sm:top-[11.5%] font-bold'
           />
         </VoyagersCardCanvas>
       )}

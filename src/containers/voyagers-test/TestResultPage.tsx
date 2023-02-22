@@ -53,20 +53,20 @@ function TestResultModal({
       }
     >
       <div className='absolute flex h-full w-full flex-col items-center justify-center space-y-2 p-12 sm:space-y-4 sm:p-14'>
-        <p className='mb-6 text-center text-xl font-medium text-cwhite'>
+        <p className='mb-2 text-center text-sm font-medium text-cwhite xs:text-base sm:mb-6 sm:text-xl'>
           Would you like to attach your photo to the voyagers card?
         </p>
         <div className='flex gap-x-4'>
           <Button
             variant='primary'
-            className='flex w-24 justify-center rounded-lg bg-cgreen'
+            className='flex justify-center rounded-lg bg-cgreen px-2 py-1 xs:w-24 xs:px-5 xs:py-2.5'
             onClick={handleYes}
           >
             Yes
           </Button>
           <Button
             variant='primary'
-            className='flex w-24 justify-center rounded-lg bg-red-700'
+            className='flex justify-center rounded-lg bg-red-700 px-2 py-1 xs:w-24 xs:px-5 xs:py-2.5'
             onClick={handleNo}
           >
             No

@@ -70,18 +70,23 @@ export default function TestDownloadPage() {
               rotateFrom={-13}
               rotateTo={13}
               cardClassName='sm:w-[30rem] sm:h-[20rem] w-[21rem] h-[14rem]'
+              nameClassName='text-xs md:text-lg'
+              dateClassName='text-[0.4rem] md:text-[0.6rem]'
             />
             <AnimatedVoyagersCard
               delay={0.15}
               rotateFrom={13}
               rotateTo={-13}
               cardClassName='sm:w-[30rem] sm:h-[20rem] w-[21rem] h-[14rem]'
+              nameClassName='text-xs md:text-lg'
+              dateClassName='text-[0.4rem] md:text-[0.6rem]'
             />
             <AnimatedVoyagersCard
               delay={0.3}
               cardClassName='sm:w-[30rem] sm:h-[20rem] w-[21rem] h-[14rem]'
               nameClassName='text-xs md:text-lg'
-              dateClassName='text-[0.4rem] md:text-[0.6rem]'
+              dateClassName='text-[0.4rem] md:text-[0.6rem] font-semibold'
+              dateContainerClassName='sm:top-[12%] top-[11.5%]'
             />
           </div>
         </div>

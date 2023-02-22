@@ -5,9 +5,9 @@ export const DEFAULT_CARD_FILEPATH = {
     'The Visioner': '/images/voyagers-test/the-visioner-card.png',
   },
   photoless_card: {
-    'The Opportunist': '/images/voyagers-test/the-opportunist-long-card.png',
-    'The Survivor': '/images/voyagers-test/the-survivor-long-card.png',
-    'The Visioner': '/images/voyagers-test/the-visioner-long-card.png',
+    'The Opportunist': '/images/voyagers-test/the-opportunist-longcard.png',
+    'The Survivor': '/images/voyagers-test/the-survivor-longcard.png',
+    'The Visioner': '/images/voyagers-test/the-visioner-longcard.png',
   },
 };
 

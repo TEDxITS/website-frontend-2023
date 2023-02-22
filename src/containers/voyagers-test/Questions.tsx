@@ -122,6 +122,7 @@ export default function Questions() {
           </p>
           <h1 className='font-quaker text-3xl text-cwhite md:text-5xl lg:text-6xl'>
             {selectedQuestion?.question}
+            <span className='font-primary font-bold'>?</span>
           </h1>
         </div>
         <PreviousQuestionButton

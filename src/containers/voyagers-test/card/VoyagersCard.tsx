@@ -13,13 +13,13 @@ interface VoyagersCardProps {
   nameClassName?: string;
   dateClassName?: string;
   nameContainerClassName?: string;
+  dateContainerClassName?: string;
 }
 
 interface AnimatedVoyagersCardProps
-  extends Omit<AnimatedCardContainerProps, 'children'> {
+  extends Omit<AnimatedCardContainerProps, 'children'>,
+    VoyagersCardProps {
   cardClassName: string;
-  nameClassName?: string;
-  dateClassName?: string;
 }
 
 export default function VoyagersCard({
@@ -27,6 +27,7 @@ export default function VoyagersCard({
   nameClassName,
   dateClassName,
   nameContainerClassName,
+  dateContainerClassName,
 }: VoyagersCardProps) {
   const { getMostAnswer, userName, userPhoto, handleUserPhotoChange } =
     useTestContext();
@@ -48,7 +49,7 @@ export default function VoyagersCard({
         className='absolute object-contain'
         loading='eager'
       />
-      <div className='absolute top-[24.5%] left-[10%] z-30 h-[48%] w-[31%]'>
+      <div className='absolute top-[24.5%] left-[10%] z-30 h-[47%] w-[31%]'>
         <input
           type='file'
           id='avatar'
@@ -74,7 +75,7 @@ export default function VoyagersCard({
               <img
                 src='/images/background/bg-transparent-plastic.png'
                 alt='avatar'
-                className='absolute h-full w-full object-cover opacity-[40%]'
+                className='absolute h-full w-full object-cover opacity-[30%]'
               />
             </div>
           </div>
@@ -100,10 +101,15 @@ export default function VoyagersCard({
           dangerouslySetInnerHTML={{ __html: newUsername }}
         ></p>
       </div>
-      <div className='absolute top-[11.5%] left-[23%] w-[10%]'>
+      <div
+        className={clsxm(
+          'absolute top-[12%] left-[23%] w-[10%]',
+          dateContainerClassName
+        )}
+      >
         <p
           className={clsxm(
-            'text-xsfont-medium w-full text-center font-primary text-cblack',
+            'w-full text-center font-primary text-xs font-semibold text-cblack',
             getMostAnswer() === 'The Visioner' && 'text-white',
             dateClassName
           )}
@@ -123,6 +129,8 @@ export function AnimatedVoyagersCard({
   cardClassName,
   nameClassName,
   dateClassName,
+  nameContainerClassName,
+  dateContainerClassName,
 }: AnimatedVoyagersCardProps) {
   return (
     <AnimatedCardContainer
@@ -136,6 +144,8 @@ export function AnimatedVoyagersCard({
         nameClassName={nameClassName}
         dateClassName={dateClassName}
         className={clsxm(cardClassName)}
+        nameContainerClassName={nameContainerClassName}
+        dateContainerClassName={dateContainerClassName}
       />
       ;
     </AnimatedCardContainer>
