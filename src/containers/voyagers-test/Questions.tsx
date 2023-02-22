@@ -175,8 +175,9 @@ export default function Questions() {
                   <RadioGroup.Option
                     id={`answer-${option.id}`}
                     value={option}
+                    disabled={!startChildAnimation}
                     className={clsxm(
-                      'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 focus:outline-none active:scale-100 '
+                      'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 hover:from-cwhite hover:via-cwhite hover:to-cblue focus:outline-none active:scale-100 '
                     )}
                   >
                     <div className='w-1/4 xs:w-1/6 sm:h-14 md:w-1/4 lg:w-1/6'>

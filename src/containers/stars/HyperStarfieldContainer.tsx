@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
-import redRocket from '~/images/voyagers-test/red-rocket.png';
+import redRocket from '~/images/landing/rockets/red1.png';
 
 function Star() {
   const [x, setX] = React.useState(0);
@@ -58,7 +58,7 @@ export default function HyperStarfieldContainer({
           <Image
             src={redRocket}
             alt='rocket'
-            className='-rotate-90'
+            className='ml-1 h-32 -rotate-[45deg] object-contain xl:ml-2'
             placeholder='blur'
           />
         </motion.div>

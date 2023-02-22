@@ -155,7 +155,7 @@ export default function TestDownloadPage() {
               <Image
                 src={characterVariant[getMostAnswer()]}
                 alt='personality'
-                className='absolute scale-90 object-contain sm:scale-100'
+                className='absolute scale-[80%] object-contain xs:scale-90 sm:scale-100'
                 fill
                 priority={true}
               />

@@ -111,9 +111,9 @@ export default function RocketsGrid() {
   // Temporary
   async function sequence(href: string) {
     animationControls.start({
-      x: '2px',
-      y: '2px',
-      rotate: 5,
+      x: '3px',
+      y: '3px',
+      rotate: 10,
       transition: {
         ease: 'easeInOut',
         duration: 0.1,
@@ -123,7 +123,7 @@ export default function RocketsGrid() {
     });
     await animationControls.start({ scale: 1.3, rotate: 45, zIndex: 50 });
     await animationControls.start({
-      x: '100vw',
+      x: '110vw',
       transition: { delay: 0.5, duration: 0.6, ease: 'easeInOut' },
     });
     router.push(href);

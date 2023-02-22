@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import React from 'react';
 
 import Button from '@/components/button/Button';
@@ -37,13 +37,13 @@ function TestResultModal({
       setIsOpen={setIsOpen}
       customDialog={
         <>
-          <Image
+          <NextImage
             src={modalBg}
             alt='Modal'
             placeholder='blur'
             className='hidden sm:block'
           />
-          <Image
+          <NextImage
             src={modalBgLarge}
             alt='Modal'
             placeholder='blur'
@@ -85,6 +85,12 @@ export default function TestResultPage() {
   );
 
   React.useEffect(() => {
+    // Preload the voyagers card image
+    // for (const image of Object.values(DEFAULT_CARD_FILEPATH.card)) {
+    //   const imageElement = new Image();
+    //   imageElement.src = image;
+    // }
+    // ends here
     setTimeout(() => {
       setIsLoading(false);
     }, 4000);

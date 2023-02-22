@@ -54,7 +54,9 @@ export default function DownloadPhotolessVoyagersCard() {
         onClick={handleDownloadImage}
         disabled={isLoading}
       >
-        <p className='w-full px-5 text-center text-lg'>Download</p>
+        <p className='w-full text-center text-base xs:px-5 xs:text-lg'>
+          Download
+        </p>
       </Button>
       <VoyagersCardCanvas
         cardType='story'
