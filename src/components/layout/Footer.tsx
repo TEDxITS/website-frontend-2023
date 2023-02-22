@@ -19,6 +19,7 @@ export default function Footer({ className }: { className?: string }) {
             src={footerBg}
             alt='footer-bg'
             className='absolute h-full object-cover lg:w-screen'
+            placeholder='blur'
           />
           <footer className='layout relative flex flex-col items-center justify-center gap-8 py-16'>
             <ul className='relative z-10 flex items-center gap-4'>
@@ -51,15 +52,16 @@ export default function Footer({ className }: { className?: string }) {
   );
 }
 
-export function NormalFooter() {
+export function NormalFooter({ className }: { className?: string }) {
   return (
     <div className={clsxm('bottom-0')}>
-      <div className='relative h-[216px] bg-stars'>
+      <div className={clsxm('relative h-[216px] bg-stars', className)}>
         <div className='absolute h-full w-screen'>
           <Image
             src={footerBg}
             alt='footer-bg'
             className='absolute h-full object-cover lg:w-screen'
+            placeholder='blur'
           />
           <footer className='layout relative flex flex-col items-center justify-center gap-8 pt-16'>
             <ul className='relative z-10 flex items-center gap-4'>

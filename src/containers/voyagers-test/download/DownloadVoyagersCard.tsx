@@ -21,6 +21,12 @@ export default function DownloadVoyagersCard({
   const printRef = React.useRef<HTMLDivElement | null>(null);
   const { userPhoto } = useTestContext();
   const [isLoading, setIsLoading] = React.useState(false);
+  const dateClassNameContainer = {
+    post:
+      window.innerWidth > 768 ? 'top-[11%] font-bold' : 'top-[11.5%] font-bold',
+    story:
+      window.innerWidth > 768 ? 'top-[12%] font-bold' : 'top-[12.2%] font-bold',
+  };
 
   const handleDownloadImage = async () => {
     setIsLoading(true);
@@ -78,7 +84,7 @@ export default function DownloadVoyagersCard({
         onClick={handleDownloadImage}
         disabled={isLoading}
       >
-        <p className='w-full px-5 text-center text-sm sm:text-lg'>
+        <p className='w-full px-1 text-center text-xs sm:px-5 sm:text-lg'>
           Download {variant === 'post' ? 'Post Version' : 'Story Version'}
         </p>
       </Button>
@@ -106,13 +112,14 @@ export default function DownloadVoyagersCard({
             <VoyagersCard
               className='absolute h-[40rem] w-[60rem]'
               nameClassName='text-4xl'
-              dateClassName='text-xl my-3'
+              dateClassName='text-xl'
+              dateContainerClassName={dateClassNameContainer.story}
             />
           </div>
           <div className='flex flex-col items-center pl-5'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='/images/voyagers-test/announcement.png'
+              src='/images/voyagers-test/announcement-3.png'
               alt='announcement'
               className=''
             />
@@ -127,6 +134,7 @@ export default function DownloadVoyagersCard({
           <VoyagersCard
             className={DEFAULT_SMALLCARD_ATTRIBUTES.post.size}
             nameClassName={DEFAULT_SMALLCARD_ATTRIBUTES.post.nameClassName}
+            dateContainerClassName={dateClassNameContainer.post}
           />
         </VoyagersCardCanvas>
       )}

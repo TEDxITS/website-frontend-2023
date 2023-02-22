@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 
@@ -11,6 +12,8 @@ import quizBgAlt from '~/images/voyagers-test/quiz-bg-2.png';
 export default function TestNamePage() {
   const { nextStep, setUserName, userName } = useTestContext();
   const [isNameEmpty, setIsNameEmpty] = React.useState<boolean>(false);
+  const [areWeGoingNextStep, setAreWeGoingNextStep] =
+    React.useState<boolean>(false);
   const ref = React.useCallback((node: HTMLInputElement) => {
     node?.focus();
   }, []);
@@ -22,13 +25,21 @@ export default function TestNamePage() {
   const handleSubmitName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (userName) {
-      nextStep();
+      setAreWeGoingNextStep(true);
+      setTimeout(() => {
+        nextStep();
+      }, 200);
     } else {
       setIsNameEmpty(true);
     }
   };
   return (
-    <section className='relative h-full w-full'>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={areWeGoingNextStep ? { opacity: 0 } : { opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className='relative h-full w-full'
+    >
       <div className='absolute z-10 flex h-full w-full flex-col items-center justify-center px-5 md:px-0'>
         <h1 className='mb-5 text-center font-quaker text-[4rem] font-normal text-cwhite shadow-lg md:text-[4.7rem]'>
           Hello...
@@ -71,6 +82,6 @@ export default function TestNamePage() {
         className='absolute right-0 -bottom-0 z-0'
         placeholder='blur'
       />
-    </section>
+    </motion.section>
   );
 }

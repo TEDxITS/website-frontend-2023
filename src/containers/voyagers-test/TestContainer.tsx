@@ -13,7 +13,11 @@ import { useTestContext } from '@/context/TestContext';
 export default function TestContainer() {
   const { step } = useTestContext();
   if (step === 0) {
-    return <TestLandingPage />;
+    return (
+      <div className='h-full w-full overflow-y-auto overflow-x-hidden'>
+        <TestLandingPage />
+      </div>
+    );
   } else if (step === 1) {
     return <TestNamePage />;
   } else if (step === 2) {

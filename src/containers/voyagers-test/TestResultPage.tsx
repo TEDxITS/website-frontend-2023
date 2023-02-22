@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import React from 'react';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
 import HyperStarfieldContainer from '@/containers/stars/HyperStarfieldContainer';
 
+import { DEFAULT_CARD_FILEPATH } from '@/constant/voyagers-test';
 import { useTestContext } from '@/context/TestContext';
 
 import modalBgLarge from '~/images/voyagers-test/large-modal.png';
@@ -37,13 +38,13 @@ function TestResultModal({
       setIsOpen={setIsOpen}
       customDialog={
         <>
-          <Image
+          <NextImage
             src={modalBg}
             alt='Modal'
             placeholder='blur'
             className='hidden sm:block'
           />
-          <Image
+          <NextImage
             src={modalBgLarge}
             alt='Modal'
             placeholder='blur'
@@ -53,20 +54,20 @@ function TestResultModal({
       }
     >
       <div className='absolute flex h-full w-full flex-col items-center justify-center space-y-2 p-12 sm:space-y-4 sm:p-14'>
-        <p className='mb-6 text-center text-xl font-medium text-cwhite'>
+        <p className='mb-2 text-center text-sm font-medium text-cwhite xs:text-base sm:mb-6 sm:text-xl'>
           Would you like to attach your photo to the voyagers card?
         </p>
         <div className='flex gap-x-4'>
           <Button
             variant='primary'
-            className='flex w-24 justify-center rounded-lg bg-cgreen'
+            className='flex justify-center rounded-lg bg-cgreen px-2 py-1 xs:w-24 xs:px-5 xs:py-2.5'
             onClick={handleYes}
           >
             Yes
           </Button>
           <Button
             variant='primary'
-            className='flex w-24 justify-center rounded-lg bg-red-700'
+            className='flex justify-center rounded-lg bg-red-700 px-2 py-1 xs:w-24 xs:px-5 xs:py-2.5'
             onClick={handleNo}
           >
             No
@@ -85,9 +86,15 @@ export default function TestResultPage() {
   );
 
   React.useEffect(() => {
+    // Preload the voyagers card image
+    for (const image of Object.values(DEFAULT_CARD_FILEPATH.card)) {
+      const imageElement = new Image();
+      imageElement.src = image;
+    }
+    // ends here
     setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 4000);
   }, []);
 
   return (

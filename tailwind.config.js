@@ -73,12 +73,21 @@ module.exports = {
             transform: 'rotate(0deg)',
           },
         },
+        stutter: {
+          '0%': {
+            transform: 'translateX(0) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translateX(5px) rotate(2deg)',
+          },
+        },
       },
 
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
         rotate: 'rotate 3s linear infinite',
+        stutter: 'stutter 0.2s ease-in-out infinite',
       },
     },
   },
