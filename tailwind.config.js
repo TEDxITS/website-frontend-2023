@@ -6,28 +6,26 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        // TEDxITS 2023 screen sizes
+        xs: '330px',
+      },
       fontFamily: {
         // TEDxITS 2023 font face
         primary: ['var(--font-futura)', ...fontFamily.sans],
         baron: ['var(--font-baron)'],
         quaker: ['var(--font-quaker)'],
       },
+      backgroundImage: {
+        // TEDxITS 2023 background images
+        stars: "url('/images/background/bg-stars.jpg')",
+        moon: "url('/images/background/bg-moon.png')",
+        plastic: "url('/images/background/bg-transparent-plastic.png')",
+        'transparent-stars':
+          "url('/images/background/bg-transparent-star.png')",
+        hue: "url('/images/background/bg-hue.png')",
+      },
       colors: {
-        primary: {
-          // Customize it on globals.css :root
-          50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
-          100: 'rgb(var(--tw-color-primary-100) / <alpha-value>)',
-          200: 'rgb(var(--tw-color-primary-200) / <alpha-value>)',
-          300: 'rgb(var(--tw-color-primary-300) / <alpha-value>)',
-          400: 'rgb(var(--tw-color-primary-400) / <alpha-value>)',
-          500: 'rgb(var(--tw-color-primary-500) / <alpha-value>)',
-          600: 'rgb(var(--tw-color-primary-600) / <alpha-value>)',
-          700: 'rgb(var(--tw-color-primary-700) / <alpha-value>)',
-          800: 'rgb(var(--tw-color-primary-800) / <alpha-value>)',
-          900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
-        },
-        dark: '#222222',
-
         // TEDxITS color palette
         cred: '#e83525',
         corange: '#DE633B',
@@ -39,6 +37,7 @@ module.exports = {
         cblue: '#354582',
         cgreen: '#1A5B38',
         cblack: '#1D1D1E',
+        cgray: '#4D4D4D',
       },
       keyframes: {
         flicker: {
@@ -60,10 +59,35 @@ module.exports = {
             backgroundPosition: '700px 0',
           },
         },
+        rotate: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '25%': {
+            transform: 'rotate(5deg)',
+          },
+          '75%': {
+            transform: 'rotate(-5deg)',
+          },
+          '100%': {
+            transform: 'rotate(0deg)',
+          },
+        },
+        stutter: {
+          '0%': {
+            transform: 'translateX(0) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translateX(5px) rotate(2deg)',
+          },
+        },
       },
+
       animation: {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
+        rotate: 'rotate 3s linear infinite',
+        stutter: 'stutter 0.2s ease-in-out infinite',
       },
     },
   },

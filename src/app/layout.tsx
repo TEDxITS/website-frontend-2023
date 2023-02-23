@@ -45,7 +45,7 @@ const futura = localFont({
       style: 'normal',
     },
     {
-      path: '../../public/fonts/futura/bold.ttf',
+      path: '../../public/fonts/futura/bold-3.ttf',
       weight: '700',
       style: 'normal',
     },
@@ -69,7 +69,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body className='overflow-x-hidden'>
         <Toast />
         {children}
         <AnalyticsProvider />
