@@ -54,10 +54,10 @@ export default function TestLandingPage() {
           />
         </motion.div>
         <h1 className='mb-5 text-center font-baron text-4xl text-cwhite shadow-lg sm:text-6xl'>
-          What Kind Of Voyagers Are You?
+          What Kind Of Voyager Are You?
         </h1>
         <h2 className='mb-12 text-center font-primary text-xl font-semibold text-white sm:text-2xl'>
-          Take this quiz to find out
+          Take this quiz to find out!
         </h2>
         <Button className='px-10' onClick={handleStart}>
           <p className='text-xl sm:text-2xl'>Try Me!</p>

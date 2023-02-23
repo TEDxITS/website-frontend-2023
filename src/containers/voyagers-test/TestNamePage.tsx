@@ -12,6 +12,7 @@ import quizBgAlt from '~/images/voyagers-test/quiz-bg-2.png';
 export default function TestNamePage() {
   const { nextStep, setUserName, userName } = useTestContext();
   const [isNameEmpty, setIsNameEmpty] = React.useState<boolean>(false);
+  const [isNameValid, setIsNameValid] = React.useState<boolean>(true);
   const [areWeGoingNextStep, setAreWeGoingNextStep] =
     React.useState<boolean>(false);
   const ref = React.useCallback((node: HTMLInputElement) => {
@@ -25,10 +26,16 @@ export default function TestNamePage() {
   const handleSubmitName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (userName) {
-      setAreWeGoingNextStep(true);
-      setTimeout(() => {
-        nextStep();
-      }, 200);
+      setIsNameEmpty(false);
+      if (userName.length < 15) {
+        setIsNameValid(true);
+        setAreWeGoingNextStep(true);
+        setTimeout(() => {
+          nextStep();
+        }, 200);
+      } else {
+        setIsNameValid(false);
+      }
     } else {
       setIsNameEmpty(true);
     }
@@ -65,6 +72,9 @@ export default function TestNamePage() {
             />
           </div>
           {isNameEmpty && <p className='text-cred'>Name is required</p>}
+          {!isNameValid && (
+            <p className='text-cred'>Name must be less than 15 characters</p>
+          )}
           <Button className='mt-6 px-10' type='submit'>
             <p className='w-full text-xl sm:text-2xl'>Start Here</p>
           </Button>
@@ -73,13 +83,13 @@ export default function TestNamePage() {
       <Image
         src={quizBg}
         alt='background'
-        className='absolute left-0 top-0 z-0'
+        className='absolute -top-20 z-0 lg:-left-80 xl:top-0 xl:left-0'
         placeholder='blur'
       />
       <Image
         src={quizBgAlt}
         alt='background'
-        className='absolute right-0 -bottom-0 z-0'
+        className='absolute -right-20 -bottom-0 z-0 xl:right-0'
         placeholder='blur'
       />
     </motion.section>

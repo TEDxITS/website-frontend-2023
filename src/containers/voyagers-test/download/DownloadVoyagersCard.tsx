@@ -7,7 +7,7 @@ import VoyagersCard from '@/containers/voyagers-test/card/VoyagersCard';
 import VoyagersCardCanvas from '@/containers/voyagers-test/card/VoyagersCardCanvas';
 
 import { DEFAULT_SMALLCARD_ATTRIBUTES } from '@/constant/voyagers-test';
-import { useTestContext } from '@/context/TestContext';
+import { Personality, useTestContext } from '@/context/TestContext';
 
 interface DownloadVoyagersCardProps {
   variant: 'story' | 'post';
@@ -19,13 +19,26 @@ export default function DownloadVoyagersCard({
   setIsAnnouncmentPresent,
 }: DownloadVoyagersCardProps) {
   const printRef = React.useRef<HTMLDivElement | null>(null);
-  const { userPhoto } = useTestContext();
+  const { userPhoto, getMostAnswer } = useTestContext();
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const personality = getMostAnswer();
+  const personalityOrder: Personality[] =
+    personality === 'The Visioner'
+      ? ['The Opportunist', 'The Survivor']
+      : personality === 'The Opportunist'
+      ? ['The Visioner', 'The Survivor']
+      : ['The Visioner', 'The Opportunist'];
+
   const dateClassNameContainer = {
     post:
-      window.innerWidth > 768 ? 'top-[11%] font-bold' : 'top-[11.5%] font-bold',
+      window.innerWidth > 768
+        ? 'top-[11.5%] font-bold'
+        : 'top-[11.5%] font-bold',
     story:
-      window.innerWidth > 768 ? 'top-[12%] font-bold' : 'top-[12.2%] font-bold',
+      window.innerWidth > 768
+        ? 'top-[12.2%] font-bold'
+        : 'top-[12.2%] font-bold',
   };
 
   const handleDownloadImage = async () => {
@@ -100,11 +113,13 @@ export default function DownloadVoyagersCard({
           </div>
           <div className='relative flex h-[65%] items-center justify-center'>
             <VoyagersCard
+              personality={personalityOrder[0]}
               className='absolute h-[40rem] w-[60rem] rotate-[15deg]'
               nameClassName='text-3xl'
               dateClassName='text-xl my-4'
             />
             <VoyagersCard
+              personality={personalityOrder[1]}
               className='absolute h-[40rem] w-[60rem] -rotate-[15deg]'
               nameClassName='text-3xl'
               dateClassName='text-xl my-4'

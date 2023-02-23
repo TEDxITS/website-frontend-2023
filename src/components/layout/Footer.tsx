@@ -54,7 +54,7 @@ export default function Footer({ className }: { className?: string }) {
 
 export function NormalFooter({ className }: { className?: string }) {
   return (
-    <div className={clsxm('bottom-0')}>
+    <div className={clsxm('-pt-10 bottom-0')}>
       <div className={clsxm('relative h-[216px] bg-stars', className)}>
         <div className='absolute h-full w-screen'>
           <Image

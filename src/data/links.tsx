@@ -14,6 +14,12 @@ export const links = [
   { href: '/coming-soon', label: 'Login' },
 ];
 
+export const aboutLinks = [
+  { href: '/starter-kit', label: 'TED and TEDx Starter Kit' },
+  { href: '/last-year-journey', label: 'Last Year’s Journey' },
+  { href: '/grand-theme', label: 'Grand Theme' },
+];
+
 type SoialMediaLinkType = LinkType & {
   logo: React.ReactNode;
 };

@@ -10,7 +10,7 @@ import { AnimatedVoyagersCard } from '@/containers/voyagers-test/card/VoyagersCa
 import DownloadPhotolessVoyagersCard from '@/containers/voyagers-test/download/DownloadPhotolessVoyagersCard';
 import DownloadVoyagersCard from '@/containers/voyagers-test/download/DownloadVoyagersCard';
 
-import { useTestContext } from '@/context/TestContext';
+import { Personality, useTestContext } from '@/context/TestContext';
 
 import blueCard from '~/images/voyagers-test/blue-card.png';
 import creamCard from '~/images/voyagers-test/cream-card.png';
@@ -52,6 +52,13 @@ export default function TestDownloadPage() {
     React.useState<boolean>(false);
   const [isAnnouncmentPresent, setIsAnnouncmentPresent] =
     React.useState<boolean>(false);
+  const personality = getMostAnswer();
+  const personalityOrder: Personality[] =
+    personality === 'The Visioner'
+      ? ['The Opportunist', 'The Survivor']
+      : personality === 'The Opportunist'
+      ? ['The Visioner', 'The Survivor']
+      : ['The Visioner', 'The Opportunist'];
 
   if (isPhotoUsed) {
     return (
@@ -67,6 +74,7 @@ export default function TestDownloadPage() {
               </p>
             )}
             <AnimatedVoyagersCard
+              personality={personalityOrder[0]}
               rotateFrom={-13}
               rotateTo={13}
               cardClassName='sm:w-[30rem] sm:h-[20rem] w-[21rem] h-[14rem]'
@@ -74,6 +82,7 @@ export default function TestDownloadPage() {
               dateClassName='text-[0.4rem] md:text-[0.6rem]'
             />
             <AnimatedVoyagersCard
+              personality={personalityOrder[1]}
               delay={0.15}
               rotateFrom={13}
               rotateTo={-13}

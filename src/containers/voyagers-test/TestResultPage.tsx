@@ -79,11 +79,17 @@ function TestResultModal({
 }
 
 export default function TestResultPage() {
-  const { getMostAnswer, resetTest, fromNextPage } = useTestContext();
+  const { getMostAnswer, resetTest, fromNextPage, setFromNextPage } =
+    useTestContext();
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(
     fromNextPage ? false : true
   );
+
+  const resethandler = () => {
+    setFromNextPage(false);
+    resetTest();
+  };
 
   React.useEffect(() => {
     // Preload the voyagers card image
@@ -126,7 +132,7 @@ export default function TestResultPage() {
             >
               <p className='w-full text-center'>Download Your Card Here!</p>
             </Button>
-            <Button className='px-10' onClick={resetTest}>
+            <Button className='px-10' onClick={resethandler}>
               <p className='w-full text-center'>Retake the Test</p>
             </Button>
           </div>

@@ -5,10 +5,11 @@ import AnimatedCardContainer, {
 } from '@/containers/voyagers-test/card/AnimatedCardContainer';
 
 import { DEFAULT_CARD_FILEPATH } from '@/constant/voyagers-test';
-import { useTestContext } from '@/context/TestContext';
+import { Personality, useTestContext } from '@/context/TestContext';
 import clsxm from '@/utils/clsxm';
 
 interface VoyagersCardProps {
+  personality?: Personality;
   className?: string;
   nameClassName?: string;
   dateClassName?: string;
@@ -23,6 +24,7 @@ interface AnimatedVoyagersCardProps
 }
 
 export default function VoyagersCard({
+  personality,
   className,
   nameClassName,
   dateClassName,
@@ -31,7 +33,8 @@ export default function VoyagersCard({
 }: VoyagersCardProps) {
   const { getMostAnswer, userName, userPhoto, handleUserPhotoChange } =
     useTestContext();
-  const selectedCard = DEFAULT_CARD_FILEPATH.card[getMostAnswer()];
+  const selectedCard =
+    DEFAULT_CARD_FILEPATH.card[personality || getMostAnswer()];
   const newUsername = 'Dear, ' + userName.replace(/\s/g, '<span> </span>');
   const isNameLong = userName.length > 18;
 
@@ -127,10 +130,7 @@ export function AnimatedVoyagersCard({
   rotateTo = 0,
   className,
   cardClassName,
-  nameClassName,
-  dateClassName,
-  nameContainerClassName,
-  dateContainerClassName,
+  ...props
 }: AnimatedVoyagersCardProps) {
   return (
     <AnimatedCardContainer
@@ -140,14 +140,7 @@ export function AnimatedVoyagersCard({
       rotateTo={rotateTo}
       x='350%'
     >
-      <VoyagersCard
-        nameClassName={nameClassName}
-        dateClassName={dateClassName}
-        className={clsxm(cardClassName)}
-        nameContainerClassName={nameContainerClassName}
-        dateContainerClassName={dateContainerClassName}
-      />
-      ;
+      <VoyagersCard className={cardClassName} {...props} />;
     </AnimatedCardContainer>
   );
 }

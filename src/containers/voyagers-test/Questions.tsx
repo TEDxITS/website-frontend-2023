@@ -74,7 +74,7 @@ export default function Questions() {
   const [startChildAnimation, setStartChildAnimation] =
     React.useState<boolean>(false);
 
-  const handleChange = (value: IAnswer) => {
+  const handleClick = () => {
     setStartChildAnimation(false);
     setTimeout(() => {
       setStartAnimation(false);
@@ -82,13 +82,16 @@ export default function Questions() {
         nextQuestion();
       }, 300);
     }, 100);
-    saveAnswer(selectedQuestion.id, value);
     if (currentQuestion === questions.length - 1) {
       setAreWeGoingNextStep(true);
       setTimeout(() => {
         nextStep();
       }, 500);
     }
+  };
+
+  const handleChange = (value: IAnswer) => {
+    saveAnswer(selectedQuestion.id, value);
   };
 
   const handleChildAnimation = async () => {
@@ -131,17 +134,20 @@ export default function Questions() {
           startChildAnimation={startChildAnimation}
         />
       </div>
-      <div className='h-[43rem] md:w-1/2 lg:h-[37rem] xl:w-2/5'>
+      <div className={clsxm('h-[43rem] md:h-[52rem] md:w-1/2 xl:w-2/5', {})}>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: '14rem' },
+            hidden: {
+              opacity: 0.7,
+              y: window.innerWidth > 700 ? '18rem' : '14rem',
+            },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'
           animate={startAnimation ? 'visible' : 'hidden'}
           transition={{ ease: 'easeInOut', duration: 1 }}
           onAnimationComplete={handleChildAnimation}
-          className='relative h-[15%] w-full'
+          className='relative h-[6rem] w-full'
         >
           <Image
             src={quizContainerTop}
@@ -176,6 +182,7 @@ export default function Questions() {
                     id={`answer-${option.id}`}
                     value={option}
                     disabled={!startChildAnimation}
+                    onClick={handleClick}
                     className={clsxm(
                       'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 hover:from-cwhite hover:via-cwhite hover:to-cblue focus:outline-none active:scale-100 '
                     )}
@@ -193,18 +200,45 @@ export default function Questions() {
                   </RadioGroup.Option>
                 </motion.div>
               ))}
+              {selectedQuestion.id === 2 && (
+                <motion.div className='' key={4} variants={item}>
+                  <RadioGroup.Option
+                    id='answer-4'
+                    value={{ id: 4, option: 'None of the above' }}
+                    disabled={!startChildAnimation}
+                    onClick={handleClick}
+                    className={clsxm(
+                      'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 hover:from-cwhite hover:via-cwhite hover:to-cblue focus:outline-none active:scale-100 '
+                    )}
+                  >
+                    <div className='w-1/4 xs:w-1/6 sm:h-14 md:w-1/4 lg:w-1/6'>
+                      <div className='flex h-full w-full items-center justify-center rounded-full bg-white shadow-lg'>
+                        <h2 className='text-2xl font-semibold xs:text-3xl'>
+                          {ALPHABET[3]}
+                        </h2>
+                      </div>
+                    </div>
+                    <p className='w-5/6 font-baron leading-tight sm:text-lg'>
+                      None of the above
+                    </p>
+                  </RadioGroup.Option>
+                </motion.div>
+              )}
             </div>
           </RadioGroup>
         </motion.div>
         <motion.div
           variants={{
-            hidden: { opacity: 0.7, y: '-14rem' },
+            hidden: {
+              opacity: 0.7,
+              y: window.innerWidth > 700 ? '-18rem' : '-14rem',
+            },
             visible: { opacity: 1, y: 0 },
           }}
           initial='hidden'
           animate={startAnimation ? 'visible' : 'hidden'}
           transition={{ ease: 'easeInOut', duration: 1 }}
-          className='relative h-[15%] w-full'
+          className='relative h-[6rem] w-full'
         >
           <Image
             src={quizContainerBottom}

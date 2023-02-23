@@ -1,12 +1,11 @@
 'use client';
-
 import { motion, useAnimation } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import BgGlass2 from '~/images/landing/bg-glass2.webp';
-import BgGlass1 from '~/images/landing/crackedreal.png';
+import BgGlass1 from '~/images/landing/cracked-bg.png';
+import BgGlass2 from '~/images/landing/cracked-bg-lg.png';
 import lockedLock from '~/images/landing/locks/locked.png';
 import unlockedLock from '~/images/landing/locks/unlock.png';
 import grayRocket from '~/images/landing/rockets/gray2.png';
@@ -110,6 +109,7 @@ export default function RocketsGrid() {
 
   // Temporary
   async function sequence(href: string) {
+    router.prefetch('/voyagers-test');
     animationControls.start({
       x: '3px',
       y: '3px',
@@ -130,78 +130,88 @@ export default function RocketsGrid() {
   }
 
   return (
-    <section className='relative flex h-[70rem] flex-col items-center justify-center bg-black bg-transparent-stars pb-40 pt-24 md:h-[73rem]'>
-      <h3 className='z-20 mt-10 text-center font-baron text-4xl text-cblue md:mt-0 md:text-5xl lg:mt-0 lg:text-7xl'>
-        Here We Go!
-      </h3>
-      <motion.div
-        variants={containerAnimation}
-        initial='hidden'
-        whileInView='show'
-        viewport={{ once: true }}
-        className='layout z-20 mt-8 mb-4 grid h-5/6 max-w-6xl grid-cols-2 gap-8 lg:grid-cols-3'
-      >
-        {rocketList.map((rocket) =>
-          rocket.isComingSoon ? (
-            <motion.div
-              key={rocket.id}
-              variants={itemAnimation}
-              className='group relative flex items-end justify-center border-4 border-dashed border-cblack'
-            >
-              <Image
-                placeholder='blur'
-                src={rocket.src}
-                alt={rocket.alt}
-                fill
-                className='absolute object-contain transition duration-300 group-hover:-translate-y-2'
-              />
-              <ComingSoonLock />
-              <p className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
-                {rocket.text}
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={rocket.id}
-              variants={itemAnimation}
-              onClick={() => sequence(rocket.href)}
-              className='group  flex h-full w-full cursor-pointer items-end justify-center border-4 border-dashed border-cblack'
-            >
+    <section className='relative flex h-[80rem] flex-col items-center justify-center bg-black bg-transparent-stars pb-40 pt-24 md:h-[73rem]'>
+      <div className='z-30 h-full w-full'>
+        <h3 className='mt-10 text-center font-baron text-4xl text-cblue md:mt-0 md:text-5xl lg:mt-0 lg:text-7xl'>
+          Here We Go!
+        </h3>
+        <motion.div
+          variants={containerAnimation}
+          initial='hidden'
+          whileInView='show'
+          viewport={{ once: true }}
+          className='layout mt-8 mb-4 grid h-5/6 max-w-6xl grid-cols-2 gap-5 sm:gap-8 lg:grid-cols-3'
+        >
+          {rocketList.map((rocket) =>
+            rocket.isComingSoon ? (
               <motion.div
-                animate={animationControls}
-                className='relative flex h-full w-full items-end justify-center'
+                key={rocket.id}
+                variants={itemAnimation}
+                className='group relative flex items-end justify-center border-4 border-dashed border-cblack'
               >
                 <Image
                   placeholder='blur'
                   src={rocket.src}
                   alt={rocket.alt}
                   fill
-                  className='absolute z-50 object-contain transition duration-300 hover:-translate-y-2'
+                  className='absolute object-contain transition duration-300 group-hover:-translate-y-2'
                 />
+                <ComingSoonLock />
+                <p className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
+                  {rocket.text}
+                </p>
               </motion.div>
+            ) : (
+              <motion.div
+                key={rocket.id}
+                variants={itemAnimation}
+                onClick={() => sequence(rocket.href)}
+                className='group relative flex h-full w-full cursor-pointer items-end justify-center border-4 border-dashed border-cblack'
+              >
+                <motion.div
+                  animate={animationControls}
+                  className='relative flex h-full w-full items-end justify-center'
+                >
+                  <Image
+                    placeholder='blur'
+                    src={rocket.src}
+                    alt={rocket.alt}
+                    fill
+                    className='absolute z-50 object-contain transition duration-300 hover:-translate-y-2'
+                  />
+                </motion.div>
+                <p className='absolute -translate-y-4 font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
+                  {rocket.text}
+                </p>
+                <div className='absolute top-0 font-quaker '>
+                  <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-xl text-xl text-transparent  xs:text-3xl sm:text-7xl'>
+                    Voyagers
+                  </span>
+                  <br />
+                  <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-2xl text-transparent xs:text-4xl sm:text-7xl'>
+                    Test
+                  </span>
+                </div>
+              </motion.div>
+            )
+          )}
+        </motion.div>
 
-              <p className='absolute -translate-y-4 text-center font-baron text-lg text-cwhite opacity-0 transition duration-300 group-hover:opacity-100 lg:text-2xl '>
-                {rocket.text}
-              </p>
-            </motion.div>
-          )
-        )}
-      </motion.div>
-
-      <h3 className='z-20 text-center font-baron text-4xl text-cwhite transition duration-300 lg:text-7xl'>
-        COMING SOON
-      </h3>
+        <h3 className='z-20 text-center font-baron text-cwhite transition duration-300 xs:text-4xl lg:text-7xl'>
+          COMING SOON
+        </h3>
+      </div>
       <Image
         src={BgGlass1}
         alt='bg-glass'
-        className='absolute top-0  left-0 hidden w-screen scale-[110%] object-cover md:block'
+        className='absolute top-0 left-0  z-0 hidden w-screen scale-[110%] object-cover md:block'
         fill
         placeholder='blur'
       />
       <Image
         src={BgGlass2}
         alt='bg-glass'
-        className='absolute top-0 left-0 block w-screen object-cover md:hidden'
+        className='absolute top-0 left-0 z-0 block w-screen scale-[110%] object-cover md:hidden'
         fill
         placeholder='blur'
       />

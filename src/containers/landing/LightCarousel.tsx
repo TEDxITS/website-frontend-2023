@@ -107,7 +107,7 @@ export default function Carousel() {
               prevEl: '#button-prev-swiper',
             }}
             modules={[Navigation]}
-            className='mySwiper  !relative !-z-[999] h-[576px] w-full'
+            className='mySwiper !relative !-z-[999] h-[576px] w-full'
           >
             {carouselData.map((item, index) => (
               <SwiperSlide
@@ -128,9 +128,11 @@ export default function Carousel() {
                 </div>
               </SwiperSlide>
             ))}
-          </Swiper>
-          <div className='text-cwhite'>
-            <button id='button-next-swiper' className='absolute right-5 z-50'>
+
+            <button
+              id='button-next-swiper'
+              className='absolute inset-y-0 right-5 z-50'
+            >
               <Image
                 src={carouselBtn}
                 className='w-12'
@@ -138,7 +140,18 @@ export default function Carousel() {
                 placeholder='blur'
               />
             </button>
-          </div>
+            <button
+              id='button-prev-swiper'
+              className='absolute inset-y-0 left-5 z-50 rotate-180'
+            >
+              <Image
+                src={carouselBtn}
+                className='w-12'
+                alt='next-btn'
+                placeholder='blur'
+              />
+            </button>
+          </Swiper>
         </div>
       </div>
 

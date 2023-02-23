@@ -12,8 +12,8 @@ import comment2 from '~/images/about/section2/comment2.png';
 import comment3 from '~/images/about/section2/comment3.png';
 import kaderisasi from '~/images/about/section2/kaderisasi.png';
 import preEvent1 from '~/images/about/section2/pre-event-1.png';
-import sandykala from '~/images/about/section2/sandykala.png';
-import story from '~/images/about/section2/story.png';
+import sandykala from '~/images/about/section2/sandykala.jpg';
+import story from '~/images/about/section2/story.jpg';
 
 function AdditionalInformation({
   numberInfo,
@@ -189,7 +189,7 @@ export default function StartedConversationContainer() {
             <div className='sm:relative lg:mx-0 lg:-mt-28 xl:mt-0'>
               <div className='z-40 mx-auto mt-6 w-full rounded-xl bg-cwhite/50 p-3 sm:absolute sm:-top-12 sm:right-0 sm:mx-0 sm:mt-0 sm:w-64 lg:-right-16 lg:mt-4 lg:w-7/12 xl:-right-44 xl:mt-0 xl:w-9/12'>
                 <Link
-                  href='https://www.instagram.com/rumahsandyakala/'
+                  href='https://www.instagram.com/stories/highlights/18160993690215798/?hl=en'
                   rel='noopener noreferrer'
                   target='_blank'
                 >
@@ -206,10 +206,10 @@ export default function StartedConversationContainer() {
                   @rumahsandykala
                 </p>
               </div>
-              <div className='z-30 mx-auto mt-6 w-full rounded-xl bg-cwhite/50 sm:mt-28 sm:w-96 lg:mx-0 lg:-ml-4 lg:mt-0 lg:w-9/12 xl:ml-0 xl:w-11/12'>
+              <div className='z-30 mx-auto mt-6 flex w-full justify-center rounded-xl bg-cwhite/50 sm:mt-28 sm:w-96 lg:mx-0 lg:-ml-4 lg:mt-0 lg:w-9/12 xl:ml-0 xl:w-11/12'>
                 <Image
                   src={story}
-                  className='rounded-2xl shadow-2xl transition-transform hover:scale-105'
+                  className='hidden w-[10rem] rounded-2xl shadow-2xl transition-transform hover:scale-105 xs:block sm:w-[22rem]'
                   alt='profile sandykala'
                   placeholder='blur'
                   style={{ objectFit: 'fill' }}

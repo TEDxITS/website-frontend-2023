@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
-import { links } from '@/data/links';
+import { aboutLinks, links } from '@/data/links';
 
+import MultipleHeaderLink from '@/components/link/MultipleHeaderLink';
+import MultipleMobileHeaderLink from '@/components/link/MultipleMobileHeaderLink';
 import UnderlineLink from '@/components/link/UnderlineLink';
 import UnstyledLink from '@/components/link/UnstyledLink';
 
@@ -38,10 +40,51 @@ export default function Header({ topBreakpoint }: HeaderProps) {
   }, []);
 
   return (
-    <div className='relative w-full'>
-      <header className='sticky top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)]'>
-        {/* desktop view */}
-        <div className='layout hidden h-14 items-center justify-between md:py-12 lg:flex'>
+    <header className='relative top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)]'>
+      {/* desktop view */}
+      <div className='layout hidden h-14 items-center justify-between md:py-12 lg:flex'>
+        <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
+          <div className='group inline-flex items-center gap-x-2'>
+            <Image
+              src='/images/logo/red-rocket.png'
+              alt='red-rocket'
+              className='transition duration-300 group-hover:-translate-y-2'
+              width={40}
+              height={10}
+            />
+            <TedIcon className='h-14 w-24' />
+            <p className='text-sm font-thin text-cwhite'>
+              <span>&#169;</span>2023
+            </p>
+          </div>
+        </UnstyledLink>
+        <nav>
+          <ul className='flex items-center justify-between space-x-16'>
+            {links.map(({ href, label }, i) =>
+              i === 1 ? (
+                <MultipleHeaderLink
+                  key={`${href}${label}`}
+                  title='About'
+                  linksData={aboutLinks}
+                />
+              ) : (
+                <li key={`${href}${label}`}>
+                  <UnderlineLink
+                    href={href}
+                    className='font-primary text-cwhite hover:text-cred'
+                  >
+                    {label}
+                  </UnderlineLink>
+                </li>
+              )
+            )}
+          </ul>
+        </nav>
+      </div>
+
+      {/* mobile view */}
+      <div className='relative block h-16 items-center text-cwhite lg:hidden'>
+        <div className='absolute inset-0 z-40 flex w-full items-center justify-between px-8 pt-10'>
           <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
             <div className='group inline-flex items-center gap-x-2'>
               <Image
@@ -57,93 +100,62 @@ export default function Header({ topBreakpoint }: HeaderProps) {
               </p>
             </div>
           </UnstyledLink>
-          <nav>
-            <ul className='flex items-center justify-between space-x-16'>
-              {links.map(({ href, label }) => (
-                <li key={`${href}${label}`}>
-                  <UnderlineLink
-                    href={href}
-                    className='text-cwhite hover:text-cred'
-                  >
-                    {label}
-                  </UnderlineLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-
-        {/* mobile view */}
-        <div className='relative block h-16 items-center text-cwhite lg:hidden'>
-          <div className='absolute inset-0 z-40 flex w-full items-center justify-between px-8 pt-10'>
-            <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
-              <div className='group inline-flex items-center gap-x-2'>
-                <Image
-                  src='/images/logo/red-rocket.png'
-                  alt='red-rocket'
-                  className='transition duration-300 group-hover:-translate-y-2'
-                  width={40}
-                  height={10}
-                />
-                <TedIcon className='h-14 w-24' />
-                <p className='text-sm font-thin text-cwhite'>
-                  <span>&#169;</span>2023
-                </p>
-              </div>
-            </UnstyledLink>
-            <ul className='flex items-center justify-between space-x-4'>
-              <button
-                onClick={() => setIsNavOpen(!isNavOpen)}
-                className={clsxm('cursor-pointer', {
-                  'text-cdark': !isNavOpen,
-                })}
-              >
-                <Hamburger color='#F0EFE5' />
-              </button>
-            </ul>
-          </div>
-          {isNavOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: {
-                  duration: 0.05,
-                },
-              }}
-              className='/ fixed inset-0 z-30 h-screen bg-cblack/90 pl-3 transition-all'
+          <ul className='flex items-center justify-between space-x-4'>
+            <button
+              onClick={() => setIsNavOpen(!isNavOpen)}
+              className={clsxm('cursor-pointer', {
+                'text-cdark': !isNavOpen,
+              })}
             >
-              <div className='/ layout min-h-main flex flex-col justify-start pt-24'>
-                {/* anchor link */}
-                <motion.ul
-                  className='flex flex-col gap-8'
-                  initial={{
-                    y: 60,
-                  }}
-                  animate={{
-                    y: 0,
-                    transition: {
-                      duration: 0.5,
-                      ease: [0.6, -0.05, 0.01, 0.99],
-                    },
-                  }}
-                >
-                  {/* home */}
-                  {links.map(({ href, label }) => (
-                    <li key={`${href}${label}`}>
-                      <p className='text-left'>
-                        <Link href={href} className='text-2xl'>
-                          <span className='font-fivo text-right text-2xl'>
-                            {label}
-                          </span>
-                        </Link>
-                      </p>
+              <Hamburger color='#F0EFE5' />
+            </button>
+          </ul>
+        </div>
+        {isNavOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 0.05,
+              },
+            }}
+            className='fixed inset-0 z-30 h-screen max-h-screen overflow-clip bg-cblack/90 transition-all'
+          >
+            <div className='layout min-h-main flex flex-col items-center justify-start pt-32'>
+              {/* anchor link */}
+              <motion.ul
+                className='flex flex-col gap-8'
+                initial={{
+                  y: 60,
+                }}
+                animate={{
+                  y: 0,
+                  transition: {
+                    duration: 0.5,
+                    ease: [0.6, -0.05, 0.01, 0.99],
+                  },
+                }}
+              >
+                {/* home */}
+                {links.map(({ href, label }, i) =>
+                  i === 1 ? (
+                    <MultipleMobileHeaderLink
+                      key={`${href}${label}`}
+                      linksData={aboutLinks}
+                      title='About'
+                    />
+                  ) : (
+                    <li key={`${href}${label}`} className='text-center'>
+                      <Link href={href} className='text-2xl'>
+                        <span className='font-primary text-2xl'>{label}</span>
+                      </Link>
                     </li>
-                  ))}
-                  {/* about */}
-                </motion.ul>
-                {/* <motion.ul
-                  className='flex flex-row-reverse gap-4 mt-8'
+                  )
+                )}
+              </motion.ul>
+              {/* <motion.ul
+                  className='mt-8 flex flex-row-reverse gap-4'
                   initial={{
                     y: 60,
                   }}
@@ -162,19 +174,18 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                     </UnstyledLink>
                   ))}
                   <UnstyledLink
-                    href={'#'}
+                    href='#'
                     className={clsxm(
-                      'font-fivo flex gap-1 items-center px-4 py-1 text-base rounded-full transition-all duration-200 hover:bg-cred hover:text-clight '
+                      'font-fivo hover:text-clight flex items-center gap-1 rounded-full px-4 py-1 text-base transition-all duration-200 hover:bg-cred '
                     )}
                   >
                     Login
                   </UnstyledLink>
                 </motion.ul> */}
-              </div>
-            </motion.div>
-          )}
-        </div>
-      </header>
-    </div>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </header>
   );
 }
