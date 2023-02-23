@@ -1,4 +1,5 @@
 'use client';
+import Head from 'next/head';
 import { usePathname } from 'next/navigation';
 
 const defaultMeta = {
@@ -23,6 +24,7 @@ const defaultMeta = {
 interface IDefaultHeadProps extends Partial<typeof defaultMeta> {
   date?: string;
   templateTitle?: string;
+  isUsingAppDir?: boolean;
 }
 
 interface IFavicons {
@@ -73,44 +75,45 @@ export default function DefaultHead(props: IDefaultHeadProps) {
     ? `${props.templateTitle} | ${meta.siteName}`
     : meta.title;
 
-  return (
-    <>
-      <title>{meta.title}</title>
-      <meta
-        name='viewport'
-        content='width=device-width, initial-scale=1'
-        id='viewportMeta'
-      />
-      <meta name='robots' content={meta.robots} />
-      <meta content={meta.description} name='description' />
-      <meta property='og:url' content={`${meta.url}${pathname}`} />
-      <link rel='canonical' href={`${meta.url}${pathname}`} />
-      {/* Open Graph */}
-      <meta property='og:type' content={meta.type} />
-      <meta property='og:site_name' content={meta.siteName} />
-      <meta property='og:description' content={meta.description} />
-      <meta property='og:title' content={meta.title} />
-      <meta
-        name='image'
-        property='og:image'
-        content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
-      />
-      {/* Twitter */}
-      <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:site' content='@TEDxITS' />
-      <meta name='twitter:title' content={meta.title} />
-      <meta name='twitter:description' content={meta.description} />
-      <meta
-        name='twitter:image'
-        content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
-      />
-      {/* Favicon */}
-      {favicons.map((linkProps) => (
-        <link key={linkProps.href} {...linkProps} />
-      ))}
-      {/* Analytics */}
-      {/* Host your own Umami Analytics and put the credentials on the script tag below or just use vercel analytics and comment the code below */}
-      {/* {meta.umami_analytics.isActive &&
+  if (props.isUsingAppDir)
+    return (
+      <>
+        <title>{meta.title}</title>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1'
+          id='viewportMeta'
+        />
+        <meta name='robots' content={meta.robots} />
+        <meta content={meta.description} name='description' />
+        <meta property='og:url' content={`${meta.url}${pathname}`} />
+        <link rel='canonical' href={`${meta.url}${pathname}`} />
+        {/* Open Graph */}
+        <meta property='og:type' content={meta.type} />
+        <meta property='og:site_name' content={meta.siteName} />
+        <meta property='og:description' content={meta.description} />
+        <meta property='og:title' content={meta.title} />
+        <meta
+          name='image'
+          property='og:image'
+          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+        />
+        {/* Twitter */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:site' content='@TEDxITS' />
+        <meta name='twitter:title' content={meta.title} />
+        <meta name='twitter:description' content={meta.description} />
+        <meta
+          name='twitter:image'
+          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+        />
+        {/* Favicon */}
+        {favicons.map((linkProps) => (
+          <link key={linkProps.href} {...linkProps} />
+        ))}
+        {/* Analytics */}
+        {/* Host your own Umami Analytics and put the credentials on the script tag below or just use vercel analytics and comment the code below */}
+        {/* {meta.umami_analytics.isActive &&
         meta.umami_analytics.id &&
         meta.umami_analytics.src && (
           <script
@@ -120,6 +123,57 @@ export default function DefaultHead(props: IDefaultHeadProps) {
             src={meta.umami_analytics.src}
           ></script>
         )} */}
-    </>
-  );
+      </>
+    );
+  else {
+    return (
+      <Head>
+        <title>{meta.title}</title>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1'
+          id='viewportMeta'
+        />
+        <meta name='robots' content={meta.robots} />
+        <meta content={meta.description} name='description' />
+        <meta property='og:url' content={`${meta.url}${pathname}`} />
+        <link rel='canonical' href={`${meta.url}${pathname}`} />
+        {/* Open Graph */}
+        <meta property='og:type' content={meta.type} />
+        <meta property='og:site_name' content={meta.siteName} />
+        <meta property='og:description' content={meta.description} />
+        <meta property='og:title' content={meta.title} />
+        <meta
+          name='image'
+          property='og:image'
+          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+        />
+        {/* Twitter */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:site' content='@TEDxITS' />
+        <meta name='twitter:title' content={meta.title} />
+        <meta name='twitter:description' content={meta.description} />
+        <meta
+          name='twitter:image'
+          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+        />
+        {/* Favicon */}
+        {favicons.map((linkProps) => (
+          <link key={linkProps.href} {...linkProps} />
+        ))}
+        {/* Analytics */}
+        {/* Host your own Umami Analytics and put the credentials on the script tag below or just use vercel analytics and comment the code below */}
+        {/* {meta.umami_analytics.isActive &&
+        meta.umami_analytics.id &&
+        meta.umami_analytics.src && (
+          <script
+            async
+            defer
+            data-website-id={meta.umami_analytics.id}
+            src={meta.umami_analytics.src}
+          ></script>
+        )} */}
+      </Head>
+    );
+  }
 }

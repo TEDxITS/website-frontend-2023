@@ -54,8 +54,8 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 20, zIndex: -10 },
+  show: { opacity: 1, y: 0, zIndex: 0 },
 };
 
 export default function Questions() {
@@ -73,8 +73,11 @@ export default function Questions() {
   const [startAnimation, setStartAnimation] = React.useState<boolean>(true);
   const [startChildAnimation, setStartChildAnimation] =
     React.useState<boolean>(false);
+  const [isOptionDisabled, setIsOptionDisabled] =
+    React.useState<boolean>(false);
 
   const handleClick = () => {
+    if (isOptionDisabled) return;
     setStartChildAnimation(false);
     setTimeout(() => {
       setStartAnimation(false);
@@ -134,7 +137,7 @@ export default function Questions() {
           startChildAnimation={startChildAnimation}
         />
       </div>
-      <div className={clsxm('h-[43rem] md:h-[52rem] md:w-1/2 xl:w-2/5', {})}>
+      <div className={clsxm('h-[43rem] md:h-[52rem] md:w-1/2 xl:w-2/5')}>
         <motion.div
           variants={{
             hidden: {
@@ -177,11 +180,20 @@ export default function Questions() {
             </div>
             <div className='question grid h-full grid-cols-1 gap-y-4 xs:h-[85%] md:h-full xl:h-[85%]'>
               {selectedQuestion?.options.map((option, i) => (
-                <motion.div className='' key={option.id} variants={item}>
+                <motion.div
+                  className=''
+                  key={option.id}
+                  variants={item}
+                  onAnimationComplete={() => {
+                    if (i === selectedQuestion?.options.length - 1) {
+                      setIsOptionDisabled(!isOptionDisabled);
+                    }
+                  }}
+                >
                   <RadioGroup.Option
                     id={`answer-${option.id}`}
                     value={option}
-                    disabled={!startChildAnimation}
+                    disabled={isOptionDisabled}
                     onClick={handleClick}
                     className={clsxm(
                       'flex h-full cursor-pointer items-center gap-x-4 rounded-[2rem] bg-gradient-to-r from-cwhite/75 via-cwhite/75 to-cblue/75 py-4 px-3 shadow-md transition-transform ease-in-out hover:scale-110 hover:from-cwhite hover:via-cwhite hover:to-cblue focus:outline-none active:scale-100 '

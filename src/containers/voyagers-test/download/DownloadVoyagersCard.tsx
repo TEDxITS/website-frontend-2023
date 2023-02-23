@@ -32,13 +32,11 @@ export default function DownloadVoyagersCard({
 
   const dateClassNameContainer = {
     post:
-      window.innerWidth > 768
-        ? 'top-[11.5%] font-bold'
-        : 'top-[11.5%] font-bold',
+      window.innerWidth > 768 ? 'top-[11.5%] font-bold' : 'top-[12%] font-bold',
     story:
       window.innerWidth > 768
         ? 'top-[12.2%] font-bold'
-        : 'top-[12.2%] font-bold',
+        : 'top-[12.6%] font-bold',
   };
 
   const handleDownloadImage = async () => {
@@ -73,6 +71,7 @@ export default function DownloadVoyagersCard({
       if (typeof link.download === 'string') {
         link.href = data;
         link.download = 'voyagers-card';
+        link.target = '_blank';
 
         document.body.appendChild(link);
         link.click();

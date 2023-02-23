@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -39,7 +38,6 @@ export default function LinkShortenerForm({
     resolver: zodResolver(linkShortenerSchema),
   });
   const { handleSubmit } = methods;
-  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const onSubmit: SubmitHandler<LinkShortenerDataType> = async (data) => {
@@ -58,7 +56,6 @@ export default function LinkShortenerForm({
       .then((res) => {
         setShortLink(res.data.short_url);
         setIsLinkModalOpen(true);
-        router.refresh();
       })
       .catch((e) => e)
       .finally(() => setIsLoading(false));

@@ -31,6 +31,7 @@ export default function DownloadPhotolessVoyagersCard() {
       if (typeof link.download === 'string') {
         link.href = data;
         link.download = 'voyagers-card';
+        link.target = '_blank';
 
         document.body.appendChild(link);
         link.click();

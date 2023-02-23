@@ -27,7 +27,6 @@
     "@vercel/analytics": "^0.1.7-beta.1",
     "@vercel/og": "^0.0.23",
     "clsx": "^1.2.1",
-    "dom-to-image": "^2.6.0",
     "framer-motion": "^9.0.2",
     "hamburger-react": "^2.5.0",
     "html2canvas": "^1.4.1",

@@ -34,7 +34,7 @@ export default function TestLandingPage() {
         initial={{ opacity: 0 }}
         animate={areWeGoingNextStep ? { opacity: 0 } : { opacity: 1 }}
         transition={{ duration: 0.2 }}
-        className='relative flex h-[37rem] w-full flex-col items-center justify-center px-4 sm:px-0'
+        className='relative flex h-[37rem] w-full flex-col items-center justify-center px-4 sm:px-0 xl:h-full'
       >
         <motion.div
           initial={{ x: '-100vw', rotate: 45 }}
