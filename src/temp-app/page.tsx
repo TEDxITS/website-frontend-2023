@@ -5,7 +5,6 @@ import RocketsGrid from '@/containers/landing/RocketsGrid';
 import ThisYearContainer from '@/containers/landing/ThisYearContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
-// xs:h-[315vh] md:h-[370vh] lg:h-[335vh] xl:h-[390vh]P
 export default function LandingPage() {
   return (
     <>

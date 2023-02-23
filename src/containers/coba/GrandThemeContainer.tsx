@@ -22,7 +22,7 @@ export default function GrandThemeContainer() {
     fiftyYears: false,
   });
   return (
-    <section className='relative mt-16 rounded-[10rem] bg-gradient-to-r from-cblack via-cblue to-cwhite'>
+    <section className='relative mt-16 overflow-hidden rounded-[10rem] bg-gradient-to-r from-cblack via-cblue to-cwhite'>
       <div className='noisy h-full w-full rounded-[10rem] px-4 py-16 sm:py-20 sm:px-10'>
         <div className='flex h-full w-full flex-col'>
           <div className=' mb-4 flex w-full p-1 md:mx-10 xl:mx-16'>

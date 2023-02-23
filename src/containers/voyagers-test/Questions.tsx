@@ -134,7 +134,7 @@ export default function Questions() {
           startChildAnimation={startChildAnimation}
         />
       </div>
-      <div className={clsxm('h-[43rem] md:h-[52rem] md:w-1/2 xl:w-2/5', {})}>
+      <div className={clsxm('h-[43rem] md:h-[52rem] md:w-1/2 xl:w-2/5')}>
         <motion.div
           variants={{
             hidden: {
