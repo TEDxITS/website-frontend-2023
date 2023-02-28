@@ -11,7 +11,7 @@ export const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/voyagers-test', label: 'Try Me!' },
-  { href: '/coming-soon', label: 'Login' },
+  { href: '/login', label: 'Login' },
 ];
 
 export const aboutLinks = [

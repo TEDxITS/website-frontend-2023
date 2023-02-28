@@ -1,6 +1,6 @@
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
-import StarterKitSection from '@/containers/coba/StarterKitSection';
+import StarterKitSection from '@/containers/about/StarterKitSection';
 
 export default function AboutPage() {
   return (

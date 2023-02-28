@@ -1,7 +1,7 @@
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import DefaultHead from '@/components/utils/DefaultHead';
-import GrandThemeContainer from '@/containers/coba/GrandThemeContainer';
+import GrandThemeContainer from '@/containers/about/GrandThemeContainer';
 
 export default function GrandTheme() {
   return (

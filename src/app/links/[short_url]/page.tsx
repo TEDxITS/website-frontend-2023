@@ -56,6 +56,7 @@ export default function ShortUrlPage({
   params: { short_url: string };
 }) {
   const router = useRouter();
+
   React.useEffect(() => {
     getUrl(params.short_url || '')
       .then((data) => {
@@ -69,6 +70,7 @@ export default function ShortUrlPage({
         toast.error(err.message);
       });
   }, [params.short_url, router]);
+
   return (
     <CircularStarfieldContainer>
       <main className='relative h-screen w-screen bg-black'>

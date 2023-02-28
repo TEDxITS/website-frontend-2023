@@ -1,9 +1,12 @@
 import localFont from '@next/font/local';
+import { Metadata } from 'next';
 
 import '../styles/globals.css';
 
 import Toast from '@/components/toast/Toast';
 import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
+
+import { BASE_METADATA } from '@/constant/metadata';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -52,6 +55,10 @@ const futura = localFont({
   ],
   variable: '--font-futura',
 });
+
+export const metadata: Metadata = {
+  ...BASE_METADATA,
+};
 
 export default function RootLayout({
   children,

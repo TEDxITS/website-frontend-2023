@@ -154,34 +154,6 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                   )
                 )}
               </motion.ul>
-              {/* <motion.ul
-                  className='mt-8 flex flex-row-reverse gap-4'
-                  initial={{
-                    y: 60,
-                  }}
-                  animate={{
-                    y: 0,
-                    transition: {
-                      duration: 0.5,
-                      ease: [0.6, -0.05, 0.01, 0.99],
-                      delay: 0.5,
-                    },
-                  }}
-                >
-                  {links.map(({ href, label }) => (
-                    <UnstyledLink key={`${href}${label}`} href={href}>
-                      #
-                    </UnstyledLink>
-                  ))}
-                  <UnstyledLink
-                    href='#'
-                    className={clsxm(
-                      'font-fivo hover:text-clight flex items-center gap-1 rounded-full px-4 py-1 text-base transition-all duration-200 hover:bg-cred '
-                    )}
-                  >
-                    Login
-                  </UnstyledLink>
-                </motion.ul> */}
             </div>
           </motion.div>
         )}

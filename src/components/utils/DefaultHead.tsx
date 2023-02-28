@@ -1,24 +1,10 @@
-'use client';
 import Head from 'next/head';
 import { usePathname } from 'next/navigation';
 
+import { BASE_METADATA } from '@/constant/metadata';
+
 const defaultMeta = {
-  title: 'TEDxITS 2023',
-  siteName: 'TEDxITS 2023',
-  description:
-    'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.',
-  url:
-    process.env.NODE_ENV === 'production'
-      ? 'https://www.tedxits.org'
-      : 'http://localhost:3000',
-  type: 'website',
-  robots: 'follow, index',
-  image: '',
-  umami_analytics: {
-    id: process.env.NEXT_PUBLIC_ANALYTICS_ID,
-    src: process.env.NEXT_PUBLIC_ANALYTICS_SRC,
-    isActive: process.env.NODE_ENV === 'production',
-  },
+  ...BASE_METADATA,
 };
 
 interface IDefaultHeadProps extends Partial<typeof defaultMeta> {
@@ -72,7 +58,7 @@ export default function DefaultHead(props: IDefaultHeadProps) {
   };
 
   meta['title'] = props.templateTitle
-    ? `${props.templateTitle} | ${meta.siteName}`
+    ? `${props.templateTitle} | ${meta.title}`
     : meta.title;
 
   if (props.isUsingAppDir)
@@ -86,27 +72,30 @@ export default function DefaultHead(props: IDefaultHeadProps) {
         />
         <meta name='robots' content={meta.robots} />
         <meta content={meta.description} name='description' />
-        <meta property='og:url' content={`${meta.url}${pathname}`} />
-        <link rel='canonical' href={`${meta.url}${pathname}`} />
+        <meta
+          property='og:url'
+          content={`${meta.alternates.canonical}${pathname}`}
+        />
+        <link
+          rel='canonical'
+          href={`${meta.alternates.canonical}${pathname}`}
+        />
         {/* Open Graph */}
-        <meta property='og:type' content={meta.type} />
-        <meta property='og:site_name' content={meta.siteName} />
+        <meta property='og:type' content={meta.openGraph.type} />
+        <meta property='og:site_name' content={meta.title} />
         <meta property='og:description' content={meta.description} />
         <meta property='og:title' content={meta.title} />
         <meta
           name='image'
           property='og:image'
-          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+          content={meta.openGraph.images.url}
         />
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@TEDxITS' />
         <meta name='twitter:title' content={meta.title} />
         <meta name='twitter:description' content={meta.description} />
-        <meta
-          name='twitter:image'
-          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
-        />
+        <meta name='twitter:image' content={meta.twitter.images.url} />
         {/* Favicon */}
         {favicons.map((linkProps) => (
           <link key={linkProps.href} {...linkProps} />
@@ -136,27 +125,30 @@ export default function DefaultHead(props: IDefaultHeadProps) {
         />
         <meta name='robots' content={meta.robots} />
         <meta content={meta.description} name='description' />
-        <meta property='og:url' content={`${meta.url}${pathname}`} />
-        <link rel='canonical' href={`${meta.url}${pathname}`} />
+        <meta
+          property='og:url'
+          content={`${meta.alternates.canonical}${pathname}`}
+        />
+        <link
+          rel='canonical'
+          href={`${meta.alternates.canonical}${pathname}`}
+        />
         {/* Open Graph */}
-        <meta property='og:type' content={meta.type} />
-        <meta property='og:site_name' content={meta.siteName} />
+        <meta property='og:type' content={meta.openGraph.type} />
+        <meta property='og:site_name' content={meta.title} />
         <meta property='og:description' content={meta.description} />
         <meta property='og:title' content={meta.title} />
         <meta
           name='image'
           property='og:image'
-          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
+          content={meta.openGraph.images.url}
         />
         {/* Twitter */}
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@TEDxITS' />
         <meta name='twitter:title' content={meta.title} />
         <meta name='twitter:description' content={meta.description} />
-        <meta
-          name='twitter:image'
-          content={`${meta.url}/api/og?title=${meta.templateTitle}&description=${meta.description}`}
-        />
+        <meta name='twitter:image' content={meta.twitter.images.url} />
         {/* Favicon */}
         {favicons.map((linkProps) => (
           <link key={linkProps.href} {...linkProps} />
