@@ -7,8 +7,10 @@ import { HiArrowLeft } from 'react-icons/hi';
 import Button from '@/components/button/Button';
 
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
-import { IAnswer, useTestContext } from '@/context/TestContext';
+import { useTestContext } from '@/context/TestContext';
 import clsxm from '@/utils/clsxm';
+
+import { IAnswer } from '@/types/voyagers-test.types';
 
 import quizContainerBottom from '~/images/voyagers-test/quiz-container-bottom.png';
 import quizContainerOrnament from '~/images/voyagers-test/quiz-container-ornament.png';

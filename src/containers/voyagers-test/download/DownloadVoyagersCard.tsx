@@ -7,7 +7,9 @@ import VoyagersCard from '@/containers/voyagers-test/card/VoyagersCard';
 import VoyagersCardCanvas from '@/containers/voyagers-test/card/VoyagersCardCanvas';
 
 import { DEFAULT_SMALLCARD_ATTRIBUTES } from '@/constant/voyagers-test';
-import { Personality, useTestContext } from '@/context/TestContext';
+import { useTestContext } from '@/context/TestContext';
+
+import { Personality } from '@/types/voyagers-test.types';
 
 interface DownloadVoyagersCardProps {
   variant: 'story' | 'post';
