@@ -17,9 +17,9 @@ interface FirebaseUserType {
 type FirebaseAuthContextType = {
   user: FirebaseUserType | null;
   isLoading: boolean;
-  signUp: (email: string, password: string) => void;
-  logIn: (email: string, password: string) => void;
-  logOut: () => void;
+  signUp: (email: string, password: string) => Promise<void>;
+  logIn: (email: string, password: string) => Promise<void>;
+  logOut: () => Promise<void>;
 };
 
 const FirebaseAuthContext = React.createContext<FirebaseAuthContextType>(
@@ -33,12 +33,12 @@ function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
-  const signUp = (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password);
+  const signUp = async (email: string, password: string) => {
+    await createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const logIn = (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password);
+  const logIn = async (email: string, password: string) => {
+    await signInWithEmailAndPassword(auth, email, password);
   };
 
   const logOut = async () => {

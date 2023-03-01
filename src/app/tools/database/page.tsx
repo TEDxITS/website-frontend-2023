@@ -7,7 +7,7 @@ import LinkDatabaseContainer from '@/containers/tools/database/LinkDatabaseConta
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 
 // Revalidate on every request (same as getServerSideProps)
-export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 export default function LinkDatabasePage() {
   return (
