@@ -7,6 +7,8 @@ import * as React from 'react';
 
 import { aboutLinks, links } from '@/data/links';
 
+import AuthHeaderLink from '@/components/link/AuthHeaderLink';
+import AuthMobileHeaderLink from '@/components/link/AuthMobileHeaderLink';
 import MultipleHeaderLink from '@/components/link/MultipleHeaderLink';
 import MultipleMobileHeaderLink from '@/components/link/MultipleMobileHeaderLink';
 import UnderlineLink from '@/components/link/UnderlineLink';
@@ -16,31 +18,16 @@ import clsxm from '@/utils/clsxm';
 
 import TedIcon from '~/images/logo/tedxits-text.svg';
 
-type HeaderProps = {
-  topBreakpoint?: number;
-};
-
-export default function Header({ topBreakpoint }: HeaderProps) {
-  //#region  //*=========== Navigation Mobile State ===========
+export default function Header({ userEmail }: { userEmail?: string }) {
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false);
-  //#endregion  //*======== Navigation Mobile State ===========
-
-  //#region  //*=========== Navigation Scrolled State ===========
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const [isNavbarScrolled, setisNavbarScrolled] =
-    React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    document.addEventListener('scroll', () => {
-      window.scrollY < 64 + (topBreakpoint ? topBreakpoint : 0)
-        ? setisNavbarScrolled(false)
-        : setisNavbarScrolled(true);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
-    <header className='relative top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)]'>
+    <header
+      className={clsxm(
+        'top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)] backdrop-blur-sm sm:relative',
+        isNavOpen && 'sticky bg-transparent'
+      )}
+    >
       {/* desktop view */}
       <div className='layout hidden h-14 items-center justify-between md:py-12 lg:flex'>
         <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
@@ -78,13 +65,23 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                 </li>
               )
             )}
+            {userEmail ? (
+              <AuthHeaderLink email={userEmail} />
+            ) : (
+              <UnderlineLink
+                href='/login'
+                className='font-primary text-cwhite hover:text-cred'
+              >
+                Login
+              </UnderlineLink>
+            )}
           </ul>
         </nav>
       </div>
 
       {/* mobile view */}
-      <div className='relative block h-16 items-center text-cwhite lg:hidden'>
-        <div className='absolute inset-0 z-40 flex w-full items-center justify-between px-8 pt-10'>
+      <div className='relative block h-24 items-center text-cwhite lg:hidden'>
+        <div className='absolute inset-0 z-40 flex w-full items-center justify-between px-8'>
           <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
             <div className='group inline-flex items-center gap-x-2'>
               <Image
@@ -120,7 +117,7 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                 duration: 0.05,
               },
             }}
-            className='fixed inset-0 z-30 h-screen max-h-screen overflow-clip bg-cblack/90 transition-all'
+            className='fixed inset-0 z-30 h-screen bg-cblack/90 transition-all'
           >
             <div className='layout min-h-main flex flex-col items-center justify-start pt-32'>
               {/* anchor link */}
@@ -152,6 +149,15 @@ export default function Header({ topBreakpoint }: HeaderProps) {
                       </Link>
                     </li>
                   )
+                )}
+                {userEmail ? (
+                  <AuthMobileHeaderLink email={userEmail} />
+                ) : (
+                  <li className='text-center'>
+                    <Link href='/login' className='text-2xl'>
+                      <span className='font-primary text-2xl'>Login</span>
+                    </Link>
+                  </li>
                 )}
               </motion.ul>
             </div>

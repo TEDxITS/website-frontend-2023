@@ -1,19 +1,30 @@
 import { Popover, Transition } from '@headlessui/react';
-import Link from 'next/link';
 import React, { Fragment } from 'react';
+import toast from 'react-hot-toast';
 import { HiChevronDown } from 'react-icons/hi';
 
-import { LinkType } from '@/data/links';
-
+import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
+import { handleFirebaseError } from '@/utils/firebase/shared';
 
-export default function MultipleHeaderLink({
-  linksData,
-  title,
-}: {
-  linksData: LinkType[];
-  title: string;
-}) {
+export default function AuthHeaderLink({ email }: { email: string }) {
+  const { logOut } = useFirebaseAuthContext();
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const logOutHandler = async () => {
+    setIsLoading(true);
+    const logOutPromise = logOut();
+    toast
+      .promise(logOutPromise, {
+        loading: 'Loading..',
+        success: 'Logged out successfully',
+        error: (e) => handleFirebaseError(e),
+      })
+      .then(() => undefined)
+      .catch((e) => e)
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <li className='relative'>
       <Popover className='relative'>
@@ -25,7 +36,7 @@ export default function MultipleHeaderLink({
               )}
             >
               <span className='font-primary font-medium group-hover:text-cred'>
-                {title}
+                {email}
               </span>
               <HiChevronDown
                 className={`${open ? '' : 'text-opacity-70'}
@@ -44,22 +55,14 @@ export default function MultipleHeaderLink({
             >
               <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
-                  <div className='grid border-[10px] border-cgray bg-black shadow-inner'>
-                    {linksData.map((item, index) => (
-                      <Link
-                        href={item.href}
-                        className={clsxm(
-                          'py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black',
-                          {
-                            'space-y-1 border-b border-cgray':
-                              index !== linksData.length - 1,
-                          }
-                        )}
-                        key={index}
-                      >
-                        <span className='ml-2 pb-1'>{item.label}</span>
-                      </Link>
-                    ))}
+                  <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
+                    <button
+                      className='py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'
+                      onClick={logOutHandler}
+                      disabled={isLoading}
+                    >
+                      Logout
+                    </button>
                   </div>
                   <div className='h-4 rounded-b-lg bg-cgray'></div>
                 </div>

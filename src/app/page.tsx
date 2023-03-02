@@ -5,10 +5,13 @@ import RocketsGrid from '@/containers/landing/RocketsGrid';
 import ThisYearContainer from '@/containers/landing/ThisYearContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
-export default function LandingPage() {
+import { getCurrentUser } from '@/utils/firebase/server';
+
+export default async function LandingPage() {
+  const user = await getCurrentUser();
   return (
-    <>
-      <Header />
+    <div className='bg-black'>
+      <Header userEmail={user?.email} />
       <div className='overflow-hidden'>
         <RandomStarfieldContainer
           className='relative h-[90rem] md:h-[110rem]'
@@ -23,6 +26,6 @@ export default function LandingPage() {
         <div className='w-screen bg-stars py-16'></div>
         <NormalFooter />
       </div>
-    </>
+    </div>
   );
 }

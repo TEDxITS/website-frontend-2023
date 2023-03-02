@@ -1,6 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -12,55 +13,51 @@ import Input from '@/components/input/Input';
 import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import { handleFirebaseError } from '@/utils/firebase/shared';
 
-const loginSchema = z.object({
-  email: z.string().email({ message: 'The provided email is not valid' }),
-  password: z.string(),
-});
-type LoginDataType = z.infer<typeof loginSchema>;
+const registerSchema = z
+  .object({
+    email: z.string().email({ message: 'The provided email is not valid' }),
+    password: z
+      .string()
+      .min(6, { message: 'Password must be at least 6 characters' }),
+    confirm: z.string(),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "Passwords don't match",
+    path: ['confirm'],
+  });
 
-const loginFormInitialValue: LoginDataType = {
+type RegisterDataType = z.infer<typeof registerSchema>;
+
+const registerFormInitialValue: RegisterDataType = {
   email: '',
   password: '',
+  confirm: '',
 };
 
-export default function LoginForm() {
-  const { logIn, logInWithGoogle } = useFirebaseAuthContext();
-  const methods = useForm<LoginDataType>({
-    defaultValues: loginFormInitialValue,
+export default function RegisterForm() {
+  const router = useRouter();
+  const { signUp } = useFirebaseAuthContext();
+  const methods = useForm<RegisterDataType>({
+    defaultValues: registerFormInitialValue,
     mode: 'onTouched',
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
   });
   const { handleSubmit } = methods;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
+  const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
     setIsLoading(true);
-    const loginPromise = logIn(data.email, data.password);
+    const registerPromise = signUp(data.email, data.password);
     toast
-      .promise(loginPromise, {
+      .promise(registerPromise, {
         loading: 'Loading..',
-        success: 'Logged in successfully',
+        success: 'Account created successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => undefined)
+      .then(() => router.push('/login'))
       .catch((e) => e)
       .finally(() => setIsLoading(false));
   };
-
-  const logInWithGoogleHandler = async () => {
-    setIsLoading(true);
-    const loginPromise = logInWithGoogle();
-    toast
-      .promise(loginPromise, {
-        loading: 'Loading..',
-        success: 'Logged in successfully',
-        error: (e) => handleFirebaseError(e),
-      })
-      .then(() => undefined)
-      .catch((e) => e)
-      .finally(() => setIsLoading(false));
-  };
-
   return (
     <FormProvider {...methods}>
       <form
@@ -75,27 +72,25 @@ export default function LoginForm() {
             label='Password'
             className='rounded-md'
           />
+          <Input
+            id='confirm'
+            type='password'
+            label='Confirm Password'
+            className='rounded-md'
+          />
         </div>
 
         <Button type='submit' className='mb-4 w-full py-3' disabled={isLoading}>
-          <p className='w-full text-center'>Login</p>
-        </Button>
-        <Button
-          type='button'
-          className='mb-4 w-full py-3'
-          onClick={logInWithGoogleHandler}
-          disabled={isLoading}
-        >
-          <p className='w-full text-center'>Login With Google</p>
+          <p className='w-full text-center'>Register</p>
         </Button>
         <p className='text-center text-cwhite'>
-          Dont have an account?
+          Already have an account?
           <span className='ml-1'>
             <Link
-              href='/register'
+              href='/login'
               className='animated-underline font-medium hover:text-cred'
             >
-              Register
+              Login
             </Link>
           </span>
         </p>

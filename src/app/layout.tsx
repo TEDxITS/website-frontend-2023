@@ -7,6 +7,7 @@ import Toast from '@/components/toast/Toast';
 import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
 
 import { BASE_METADATA } from '@/constant/metadata';
+import FirebaseAuthProvider from '@/context/FirebaseAuthContext';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -77,9 +78,11 @@ export default function RootLayout({
       */}
       <head />
       <body className='overflow-x-hidden'>
-        <Toast />
-        {children}
-        <AnalyticsProvider />
+        <FirebaseAuthProvider>
+          <Toast />
+          <AnalyticsProvider />
+          {children}
+        </FirebaseAuthProvider>
       </body>
     </html>
   );

@@ -61,7 +61,7 @@ export default function Input({
       </div>
       <p className='text-xs text-gray-500'>{helperText}</p>
       {showError && (
-        <p className='text-red-400'>
+        <p className='text-sm text-red-400'>
           {errors[id] && String(errors[id]?.message)}
         </p>
       )}
