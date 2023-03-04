@@ -51,6 +51,7 @@ export default function Input({
         {type === 'password' && (
           <div className='-ml-9 mt-2'>
             <button
+              type='button'
               className='p-0'
               onClick={() => setIsPasswordVisible((old) => !old)}
             >

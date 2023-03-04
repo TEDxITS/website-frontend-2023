@@ -1,6 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -25,12 +26,13 @@ const loginFormInitialValue: LoginDataType = {
 
 export default function LoginForm() {
   const { logIn, logInWithGoogle } = useFirebaseAuthContext();
+  const router = useRouter();
   const methods = useForm<LoginDataType>({
     defaultValues: loginFormInitialValue,
     mode: 'onTouched',
     resolver: zodResolver(loginSchema),
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
@@ -42,9 +44,12 @@ export default function LoginForm() {
         success: 'Logged in successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => undefined)
+      .then(() => router.push('/'))
       .catch((e) => e)
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        reset();
+      });
   };
 
   const logInWithGoogleHandler = async () => {

@@ -13,12 +13,12 @@ import { auth, googleProvider } from '@/utils/firebase/client';
 import { removeFirebaseIdToken, setFirebaseIdToken } from '@/utils/token';
 
 interface FirebaseUserType {
-  email: string | null;
-  uid: string | null;
+  email: string | undefined | null;
+  uid: string | undefined | null;
 }
 
 type FirebaseAuthContextType = {
-  user: FirebaseUserType | null;
+  user: FirebaseUserType;
   isLoading: boolean;
   signUp: (email: string, password: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
@@ -30,12 +30,15 @@ const FirebaseAuthContext = React.createContext<FirebaseAuthContextType>(
   null as unknown as FirebaseAuthContextType
 );
 
-function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
+function FirebaseAuthProvider({
+  children,
+  initialUser,
+}: {
+  children: React.ReactNode;
+  initialUser: FirebaseUserType;
+}) {
   const router = useRouter();
-  const [user, setUser] = React.useState<FirebaseUserType>({
-    email: null,
-    uid: null,
-  });
+  const [user, setUser] = React.useState<FirebaseUserType>(initialUser);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   const signUp = async (email: string, password: string) => {
@@ -63,7 +66,6 @@ function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logOut = async () => {
-    setUser({ email: null, uid: null });
     try {
       await signOut(auth);
     } catch (error) {
@@ -75,24 +77,24 @@ function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoading(true);
       if (user) {
-        setUser({
-          email: user.email,
-          uid: user.uid,
-        });
         user.getIdToken().then((idToken) => {
           setFirebaseIdToken(idToken);
+          router.refresh();
         });
       } else {
-        setUser({ email: null, uid: null });
         removeFirebaseIdToken();
+        router.refresh();
       }
-      router.refresh();
       setIsLoading(false);
     });
 
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  React.useEffect(() => {
+    setUser(initialUser);
+  }, [initialUser]);
 
   return (
     <FirebaseAuthContext.Provider

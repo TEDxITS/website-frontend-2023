@@ -1,3 +1,4 @@
+'use client';
 import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import toast from 'react-hot-toast';
@@ -7,8 +8,8 @@ import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 import { handleFirebaseError } from '@/utils/firebase/shared';
 
-export default function AuthHeaderLink({ email }: { email: string }) {
-  const { logOut } = useFirebaseAuthContext();
+export default function AuthHeaderLink() {
+  const { logOut, user } = useFirebaseAuthContext();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const logOutHandler = async () => {
@@ -36,7 +37,7 @@ export default function AuthHeaderLink({ email }: { email: string }) {
               )}
             >
               <span className='font-primary font-medium group-hover:text-cred'>
-                {email}
+                {user.email}
               </span>
               <HiChevronDown
                 className={`${open ? '' : 'text-opacity-70'}

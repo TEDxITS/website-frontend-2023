@@ -2,7 +2,7 @@ import admin, { ServiceAccount } from 'firebase-admin';
 import { DecodedIdToken } from 'firebase-admin/lib/auth/token-verifier';
 import { cookies } from 'next/headers';
 
-const fireConfig: ServiceAccount = {
+export const fireConfig: ServiceAccount = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
   privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY,
@@ -12,6 +12,7 @@ const fireConfig: ServiceAccount = {
 export const getCurrentUser = async () => {
   const cookieStore = cookies();
   const token = cookieStore.get('tedxits2023-firebase')?.value || 'No Token';
+
   if (!admin.apps.length) {
     admin.initializeApp({
       credential: admin.credential.cert(JSON.parse(JSON.stringify(fireConfig))),
@@ -23,6 +24,7 @@ export const getCurrentUser = async () => {
     return userData;
   } catch (error) {
     // TODO: Handle server error
+
     return null;
   }
 };

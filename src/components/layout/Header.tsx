@@ -14,12 +14,14 @@ import MultipleMobileHeaderLink from '@/components/link/MultipleMobileHeaderLink
 import UnderlineLink from '@/components/link/UnderlineLink';
 import UnstyledLink from '@/components/link/UnstyledLink';
 
+import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 
 import TedIcon from '~/images/logo/tedxits-text.svg';
 
-export default function Header({ userEmail }: { userEmail?: string }) {
+export default function Header() {
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false);
+  const { user } = useFirebaseAuthContext();
 
   return (
     <header
@@ -65,8 +67,8 @@ export default function Header({ userEmail }: { userEmail?: string }) {
                 </li>
               )
             )}
-            {userEmail ? (
-              <AuthHeaderLink email={userEmail} />
+            {user.email ? (
+              <AuthHeaderLink />
             ) : (
               <UnderlineLink
                 href='/login'
@@ -150,8 +152,8 @@ export default function Header({ userEmail }: { userEmail?: string }) {
                     </li>
                   )
                 )}
-                {userEmail ? (
-                  <AuthMobileHeaderLink email={userEmail} />
+                {user.email ? (
+                  <AuthMobileHeaderLink email={user.email} />
                 ) : (
                   <li className='text-center'>
                     <Link href='/login' className='text-2xl'>

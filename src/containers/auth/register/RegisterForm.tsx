@@ -42,7 +42,7 @@ export default function RegisterForm() {
     mode: 'onTouched',
     resolver: zodResolver(registerSchema),
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, reset } = methods;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
@@ -54,9 +54,12 @@ export default function RegisterForm() {
         success: 'Account created successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => router.push('/login'))
+      .then(() => router.push('/'))
       .catch((e) => e)
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        reset();
+      });
   };
   return (
     <FormProvider {...methods}>
