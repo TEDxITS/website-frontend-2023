@@ -15,6 +15,7 @@ import { removeFirebaseIdToken, setFirebaseIdToken } from '@/utils/token';
 interface FirebaseUserType {
   email: string | undefined | null;
   uid: string | undefined | null;
+  role: string | undefined | null;
 }
 
 type FirebaseAuthContextType = {

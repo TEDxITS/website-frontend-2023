@@ -1,4 +1,4 @@
-import LinkDatabaseTable from '@/containers/tools/database/LinkDatabaseTable';
+import LinkDatabaseTable from '@/containers/admin/links/LinkDatabaseTable';
 
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';

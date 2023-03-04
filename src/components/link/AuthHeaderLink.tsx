@@ -1,5 +1,7 @@
 'use client';
 import { Popover, Transition } from '@headlessui/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { Fragment } from 'react';
 import toast from 'react-hot-toast';
 import { HiChevronDown } from 'react-icons/hi';
@@ -8,8 +10,13 @@ import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 import { handleFirebaseError } from '@/utils/firebase/shared';
 
-export default function AuthHeaderLink() {
+export default function AuthHeaderLink({
+  isDashboard = false,
+}: {
+  isDashboard?: boolean;
+}) {
   const { logOut, user } = useFirebaseAuthContext();
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
 
   const logOutHandler = async () => {
@@ -21,7 +28,7 @@ export default function AuthHeaderLink() {
         success: 'Logged out successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => undefined)
+      .then(() => (isDashboard ? router.push('/') : undefined))
       .catch((e) => e)
       .finally(() => setIsLoading(false));
   };
@@ -54,15 +61,23 @@ export default function AuthHeaderLink() {
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-3'
             >
-              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
+              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-40 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
                   <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
+                    {user.role === 'admin' && (
+                      <Link
+                        href='/admin'
+                        className='space-y-1 border-b border-cgray py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'
+                      >
+                        <span className='ml-2 pb-1'>Dashboard</span>
+                      </Link>
+                    )}
                     <button
-                      className='py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'
+                      className='py-0.5 text-left font-baron text-green-300 hover:bg-green-300 hover:text-black'
                       onClick={logOutHandler}
                       disabled={isLoading}
                     >
-                      Logout
+                      <span className='ml-2 pb-1'>Logout</span>
                     </button>
                   </div>
                   <div className='h-4 rounded-b-lg bg-cgray'></div>

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import Button from '@/components/button/Button';
@@ -5,10 +6,21 @@ import UnstyledLink from '@/components/link/UnstyledLink';
 import ComingSoonFooter from '@/containers/coming-soon/ComingSoonFooter';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
 
+import { generateTemplateMetadata } from '@/utils/metadata';
+
 import comingSoon from '~/images/coming-soon/coming-soon.png';
 import comingsoonBg from '~/images/coming-soon/coming-soon-bg-alt-2.png';
 import leftBg from '~/images/coming-soon/left-bg.png';
 import rightBg from '~/images/coming-soon/right-bg.png';
+
+const metadataObject = generateTemplateMetadata(
+  'Coming Soon',
+  '',
+  '/coming-soon'
+);
+export const metadata: Metadata = {
+  ...metadataObject,
+};
 
 export default function ComingSoonPage() {
   return (

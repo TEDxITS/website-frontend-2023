@@ -24,7 +24,7 @@ export default async function DashboardPageLayout({
         <div className='w-full sm:w-5/6'>
           <section className='layout flex w-full items-center justify-end sm:h-40'>
             <div className='hidden sm:block'>
-              <AuthHeaderLink />
+              <AuthHeaderLink isDashboard={true} />
             </div>
           </section>
           {children}

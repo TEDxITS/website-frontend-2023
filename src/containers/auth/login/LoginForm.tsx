@@ -44,7 +44,7 @@ export default function LoginForm() {
         success: 'Logged in successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => router.push('/'))
+      .then(() => router.back())
       .catch((e) => e)
       .finally(() => {
         setIsLoading(false);
@@ -61,7 +61,7 @@ export default function LoginForm() {
         success: 'Logged in successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => undefined)
+      .then(() => router.back())
       .catch((e) => e)
       .finally(() => setIsLoading(false));
   };
@@ -91,10 +91,10 @@ export default function LoginForm() {
           onClick={logInWithGoogleHandler}
           disabled={isLoading}
         >
-          <p className='w-full text-center'>Login With Google</p>
+          <p className='w-full text-center'>Login with Google</p>
         </Button>
         <p className='text-center text-cwhite'>
-          Dont have an account?
+          Don't have an account?
           <span className='ml-1'>
             <Link
               href='/register'

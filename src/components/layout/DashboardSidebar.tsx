@@ -7,6 +7,8 @@ import { toast } from 'react-hot-toast';
 
 import { dashboardLinks } from '@/data/links';
 
+import MultipleSidebarLink from '@/components/link/MultipleSidebarLink';
+
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
@@ -19,7 +21,7 @@ export default function SidebarDashboard() {
 
   const logOutHandler = () => {
     toast.loading('Logging out...', { id: 'logout' });
-    router.push('/login');
+    router.push('/');
     logOut().then(() => {
       toast.dismiss('logout');
       toast.success('Logged out successfully!');
@@ -34,21 +36,29 @@ export default function SidebarDashboard() {
         <nav className='mt-10 h-3/4 px-4'>
           <ul className='flex h-3/4 flex-col gap-y-2'>
             {dashboardLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <li
+              <li key={link.href}>
+                <Link
+                  href={link.href}
                   className={clsxm(
-                    'inline-flex w-full items-center justify-center gap-x-5 rounded-md  py-1.5 text-center font-medium text-black hover:bg-cred/25',
+                    'flex rounded-md hover:bg-cred/25',
                     link.segment === segment &&
                       'bg-cred/50 text-cwhite hover:bg-cred/50'
                   )}
                 >
-                  {link.logo} {link.label}
-                </li>
-              </Link>
+                  <div
+                    className={clsxm(
+                      'inline-flex w-full items-center gap-x-5 py-1.5 pl-8 text-center font-medium text-inherit'
+                    )}
+                  >
+                    {link.logo} {link.label}
+                  </div>
+                </Link>
+              </li>
             ))}
+            <MultipleSidebarLink />
           </ul>
           <button
-            className='inline-flex w-full items-center justify-center gap-x-5 rounded-md  py-1.5 text-center font-medium text-black hover:bg-cred/25'
+            className='inline-flex w-full items-center justify-center gap-x-5 rounded-md py-1.5 text-center font-medium text-black hover:bg-cred/25'
             onClick={logOutHandler}
           >
             <svg
@@ -123,21 +133,29 @@ export default function SidebarDashboard() {
                   <nav className='mt-10 h-3/4 px-4'>
                     <ul className='flex h-3/4 flex-col gap-y-2'>
                       {dashboardLinks.map((link) => (
-                        <Link key={link.href} href={link.href}>
-                          <li
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
                             className={clsxm(
-                              'inline-flex w-full items-center justify-center gap-x-5 rounded-md  py-1.5 text-center font-medium text-black hover:bg-cred/25',
+                              'flex rounded-md hover:bg-cred/25',
                               link.segment === segment &&
                                 'bg-cred/50 text-cwhite hover:bg-cred/50'
                             )}
                           >
-                            {link.logo} {link.label}
-                          </li>
-                        </Link>
+                            <div
+                              className={clsxm(
+                                'inline-flex w-full items-center gap-x-5 py-1.5 pl-8 text-center font-medium text-inherit'
+                              )}
+                            >
+                              {link.logo} {link.label}
+                            </div>
+                          </Link>
+                        </li>
                       ))}
+                      <MultipleSidebarLink />
                     </ul>
                     <button
-                      className='inline-flex w-full items-center justify-center gap-x-5 rounded-md  py-1.5 text-center font-medium text-black hover:bg-cred/25'
+                      className='inline-flex w-full items-center justify-center gap-x-5 rounded-md py-1.5 text-center font-medium text-black hover:bg-cred/25'
                       onClick={logOutHandler}
                     >
                       <svg

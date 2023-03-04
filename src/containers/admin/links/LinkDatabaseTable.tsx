@@ -5,7 +5,7 @@ import { MdContentCopy } from 'react-icons/md';
 import UnderlineLink from '@/components/link/UnderlineLink';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import Table from '@/components/table/Table';
-import DeleteButton from '@/containers/tools/database/DeleteButton';
+import DeleteButton from '@/containers/admin/links/DeleteButton';
 
 import copyToClipboard from '@/utils/copy';
 

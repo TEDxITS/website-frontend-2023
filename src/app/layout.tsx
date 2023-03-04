@@ -81,7 +81,7 @@ export default async function RootLayout({
       <head />
       <body className='overflow-x-hidden'>
         <FirebaseAuthProvider
-          initialUser={{ email: user?.email, uid: user?.uid }}
+          initialUser={{ email: user?.email, uid: user?.uid, role: user?.role }}
         >
           <Toast />
           <AnalyticsProvider />

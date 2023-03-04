@@ -21,6 +21,9 @@ export const aboutLinks = [
 
 export const dashboardLinks = [
   {
+    href: '/admin',
+    label: 'Home',
+    segment: null,
     logo: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -37,11 +40,11 @@ export const dashboardLinks = [
         />
       </svg>
     ),
-    href: '/admin',
-    label: 'Home',
-    segment: null,
   },
   {
+    href: '/admin/links',
+    label: 'Links',
+    segment: 'links',
     logo: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -58,9 +61,6 @@ export const dashboardLinks = [
         />
       </svg>
     ),
-    href: '/admin/links',
-    label: 'Links',
-    segment: 'links',
   },
 ];
 

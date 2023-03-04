@@ -12,10 +12,10 @@ export const getMetadataItems = (
     ? `${templateTitle} | TEDxITS 2023`
     : 'TEDxITS 2023';
   const description = templateDescription
-    ? `${templateDescription} 'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.`
+    ? 'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.'
     : 'TEDxITS paves the way to ideas discussion from various perspectives in enjoyable delivery method across Institut Teknologi Sepuluh Nopember (ITS) and Surabaya.';
   const ogUrl = new URL(
-    baseUrl + `/api/og?title=${title}&description=${description}`
+    baseUrl + `/api/og?title=${templateTitle}&description=${description}`
   ).href;
 
   return {

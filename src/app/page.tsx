@@ -1,9 +1,18 @@
+import { Metadata } from 'next';
+
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import LightCarousel from '@/containers/landing/LightCarousel';
 import RocketsGrid from '@/containers/landing/RocketsGrid';
 import ThisYearContainer from '@/containers/landing/ThisYearContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
+
+import { generateTemplateMetadata } from '@/utils/metadata';
+
+const metadataObject = generateTemplateMetadata('Home', '', '/');
+export const metadata: Metadata = {
+  ...metadataObject,
+};
 
 export default function LandingPage() {
   return (

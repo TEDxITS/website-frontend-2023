@@ -1,5 +1,7 @@
 'use client';
 import Head from 'next/head';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { usePathname } from 'next/navigation';
 
 import { BASE_METADATA } from '@/constant/metadata';

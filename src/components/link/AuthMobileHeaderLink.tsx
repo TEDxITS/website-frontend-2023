@@ -1,11 +1,12 @@
 import { Disclosure } from '@headlessui/react';
+import Link from 'next/link';
 import { HiChevronDown } from 'react-icons/hi';
 
 import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 
 export default function AuthMobileHeaderLink({ email }: { email: string }) {
-  const { logOut } = useFirebaseAuthContext();
+  const { logOut, user } = useFirebaseAuthContext();
   return (
     <li>
       <Disclosure>
@@ -20,6 +21,14 @@ export default function AuthMobileHeaderLink({ email }: { email: string }) {
               />
             </Disclosure.Button>
             <Disclosure.Panel className={clsxm('mx-5 flex flex-col gap-5')}>
+              {user.role === 'admin' && (
+                <Link
+                  href='/admin'
+                  className='text-center font-primary text-lg'
+                >
+                  Dashboard
+                </Link>
+              )}
               <button
                 className='text-center font-primary text-lg'
                 onClick={logOut}
