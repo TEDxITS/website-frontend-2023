@@ -13,22 +13,24 @@ const logoVariant = ['black', 'white', 'text', 'monochrome'] as const;
 type TedLogoProps = {
   className?: string;
   variant?: (typeof logoVariant)[number];
+  href?: string;
 };
 
 export default function FullTEDLogo({
   className,
   variant = 'black',
+  href = '/',
 }: TedLogoProps) {
   if (variant === 'text')
     return (
-      <UnstyledLink href='/'>
+      <UnstyledLink href={href}>
         <MiniTedLogo className={clsxm('h-10 w-10', className)} />;
       </UnstyledLink>
     );
 
   return (
-    <UnstyledLink href='/'>
-      <div className={clsxm('relative h-full w-full', className)}>
+    <UnstyledLink href={href}>
+      <figure className={clsxm('relative h-full w-full', className)}>
         <Image
           src={
             variant === 'black'
@@ -43,7 +45,7 @@ export default function FullTEDLogo({
           style={{ objectFit: 'contain' }}
           placeholder='blur'
         />
-      </div>
+      </figure>
     </UnstyledLink>
   );
 }

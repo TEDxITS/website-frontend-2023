@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import React from 'react';
 
 import { socialMediaLinks } from '@/data/links';
 
@@ -56,7 +55,7 @@ export function NormalFooter({ className }: { className?: string }) {
   return (
     <div
       className={clsxm(
-        'relative bottom-0 h-[216px] overflow-x-clip bg-stars',
+        'relative h-[216px] overflow-x-clip bg-stars',
         className
       )}
     >

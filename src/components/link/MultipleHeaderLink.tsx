@@ -44,7 +44,7 @@ export default function MultipleHeaderLink({
             >
               <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
-                  <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
+                  <div className='grid border-[10px] border-cgray bg-black shadow-inner'>
                     {linksData.map((item, index) => (
                       <Link
                         href={item.href}

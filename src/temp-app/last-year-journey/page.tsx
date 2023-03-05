@@ -1,8 +1,8 @@
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
-import LastYearJourneySection from '@/containers/coba/LastYearJourneySection';
-import PreviousSpeakerContainer from '@/containers/coba/PreviousSpeakerContainer';
-import StartedConversationContainer from '@/containers/coba/StartedConversationContainer';
+import LastYearJourneySection from '@/containers/about/LastYearJourneySection';
+import PreviousSpeakerContainer from '@/containers/about/PreviousSpeakerContainer';
+import StartedConversationContainer from '@/containers/about/StartedConversationContainer';
 
 export default function JourneyPage() {
   return (

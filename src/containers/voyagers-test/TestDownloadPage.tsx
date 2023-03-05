@@ -10,7 +10,9 @@ import { AnimatedVoyagersCard } from '@/containers/voyagers-test/card/VoyagersCa
 import DownloadPhotolessVoyagersCard from '@/containers/voyagers-test/download/DownloadPhotolessVoyagersCard';
 import DownloadVoyagersCard from '@/containers/voyagers-test/download/DownloadVoyagersCard';
 
-import { Personality, useTestContext } from '@/context/TestContext';
+import { useTestContext } from '@/context/TestContext';
+
+import { Personality } from '@/types/voyagers-test.types';
 
 import blueCard from '~/images/voyagers-test/blue-card.png';
 import creamCard from '~/images/voyagers-test/cream-card.png';

@@ -51,13 +51,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'focus-visible:ring-primary-500 focus:outline-none focus-visible:ring',
           'shadow-sm',
           'transition duration-200 ease-in-out',
-          //#region  //*=========== Size ===========
           [
             size === 'base' && ['px-5 py-2.5', 'text-sm md:text-base'],
             size === 'sm' && ['px-2 py-1', 'text-xs md:text-sm'],
           ],
-          //#endregion  //*======== Size ===========
-          //#region  //*=========== Variants ===========
           [
             variant === 'primary' && [
               'bg-cred text-cwhite',
@@ -78,10 +75,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               'disabled:brightness-75 disabled:hover:scale-100 disabled:hover:from-cblue disabled:hover:to-cred disabled:hover:text-white',
             ],
           ],
-          //#endregion  //*======== Variants ===========
           'disabled:cursor-not-allowed',
           isLoading &&
-            'relative text-transparent transition-none hover:text-transparent disabled:cursor-wait',
+            'relative text-transparent transition-none hover:text-transparent',
           className
         )}
         {...rest}

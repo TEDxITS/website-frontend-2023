@@ -1,19 +1,9 @@
 'use client';
 import React from 'react';
 
-export type Personality = 'The Survivor' | 'The Opportunist' | 'The Visioner';
+import { getPersonality, shuffleAnswers } from '@/utils/voyagers-test';
 
-export interface IAnswer {
-  id: number;
-  option: string;
-}
-
-export interface IQuestion {
-  id: number;
-  question: string;
-  options: IAnswer[];
-  answer: IAnswer | null;
-}
+import { IAnswer, IQuestion, Personality } from '@/types/voyagers-test.types';
 
 export type TestContextType = {
   step: number;
@@ -36,6 +26,10 @@ export type TestContextType = {
   getMostAnswer: () => Personality;
   resetTest: () => void;
 };
+
+const TestContext = React.createContext<TestContextType>(
+  null as unknown as TestContextType
+);
 
 const questionList = [
   {
@@ -102,32 +96,6 @@ const questionList = [
     answer: null,
   },
 ];
-
-const shuffleAnswers = (questions: IQuestion[]) => {
-  return questions.map((question) => {
-    return {
-      ...question,
-      options: question.options.sort(() => Math.random() - 0.5),
-    };
-  });
-};
-
-const getPersonality = (mostAnswerId: number): Personality => {
-  switch (mostAnswerId) {
-    case 1:
-      return 'The Survivor';
-    case 2:
-      return 'The Opportunist';
-    case 3:
-      return 'The Visioner';
-    default:
-      return 'The Survivor';
-  }
-};
-
-const TestContext = React.createContext<TestContextType>(
-  null as unknown as TestContextType
-);
 
 const TestProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import clsxm from '@/utils/clsxm';
 
-import { LogoType } from '@/types/components';
+import { LogoType } from '@/types/components.types';
 export default function TwitterLogoIllustration({
   pathClassName,
   ...rest

@@ -51,6 +51,7 @@ export default function Input({
         {type === 'password' && (
           <div className='-ml-9 mt-2'>
             <button
+              type='button'
               className='p-0'
               onClick={() => setIsPasswordVisible((old) => !old)}
             >
@@ -61,7 +62,7 @@ export default function Input({
       </div>
       <p className='text-xs text-gray-500'>{helperText}</p>
       {showError && (
-        <p className='text-red-400'>
+        <p className='text-sm text-red-400'>
           {errors[id] && String(errors[id]?.message)}
         </p>
       )}

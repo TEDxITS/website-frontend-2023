@@ -1,6 +1,4 @@
-import Head from 'next/head';
 import Image from 'next/image';
-import React from 'react';
 
 import '../styles/globals.css';
 
@@ -19,10 +17,7 @@ import moonImage from '~/images/404/moon-with-rocket.png';
 export default function NotFound() {
   return (
     <>
-      <Head>
-        <title>Not Found | TEDxITS 2023</title>
-        <DefaultHead templateTitle='Not Found' />
-      </Head>
+      <DefaultHead templateTitle='Not Found' isUsingAppDir={false} />
       <RandomStarfieldContainer>
         <div className='absolute z-30 flex h-full w-full flex-col sm:flex-row'>
           <section className='flex h-3/4 flex-col justify-center pl-10 sm:h-full sm:w-1/3 sm:pl-80'>

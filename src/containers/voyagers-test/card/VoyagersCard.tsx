@@ -5,8 +5,10 @@ import AnimatedCardContainer, {
 } from '@/containers/voyagers-test/card/AnimatedCardContainer';
 
 import { DEFAULT_CARD_FILEPATH } from '@/constant/voyagers-test';
-import { Personality, useTestContext } from '@/context/TestContext';
+import { useTestContext } from '@/context/TestContext';
 import clsxm from '@/utils/clsxm';
+
+import { Personality } from '@/types/voyagers-test.types';
 
 interface VoyagersCardProps {
   personality?: Personality;
