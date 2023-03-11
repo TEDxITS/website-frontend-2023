@@ -62,6 +62,8 @@ export const metadata: Metadata = {
   ...BASE_METADATA,
 };
 
+export const dynamic = 'auto';
+
 export default async function RootLayout({
   children,
 }: {
