@@ -13,3 +13,17 @@ model Url {
   short_url  String   @unique
   created_at DateTime @default(now())
 }
+
+model LocalSpeaker {
+  id                String   @id @default(cuid())
+  full_name         String
+  email             String
+  department        String
+  batch             String
+  student_id        String
+  instagram         String
+  reels_link        String
+  google_drive_link String
+  reason_to_join    String
+  created_at        DateTime @default(now())
+}

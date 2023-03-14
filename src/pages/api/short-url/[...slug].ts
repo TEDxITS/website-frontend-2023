@@ -16,6 +16,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // TODO: use method instead of slug
   const slug = req.query.slug;
   if (slug) {
     switch (slug[0]) {
