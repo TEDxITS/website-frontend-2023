@@ -35,7 +35,7 @@ export default function SelectInput({
           {...rest}
           id={id}
           className={clsxm(
-            'block w-full rounded-full border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 transition ease-in-out focus:border-cblue focus:outline-none focus:ring-1 focus:ring-cblue',
+            'block w-full rounded-full border border-gray-300 bg-cwhite p-2.5 text-sm text-gray-900 transition ease-in-out focus:border-cblue focus:outline-none focus:ring-1 focus:ring-cblue',
             className
           )}
         >

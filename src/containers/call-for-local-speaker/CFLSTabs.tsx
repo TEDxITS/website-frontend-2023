@@ -89,7 +89,7 @@ export default function CFLSTabs({
 
   return (
     <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-      <div className='relative w-full' ref={gamepadRef}>
+      <div className='relative w-full' ref={gamepadRef} id="gamepad">
         <Image
           src={bgOrnament}
           alt='ornament'
