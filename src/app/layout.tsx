@@ -1,5 +1,6 @@
-import localFont from '@next/font/local';
 import { Metadata } from 'next';
+import { VT323 } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import '../styles/globals.css';
 
@@ -58,6 +59,12 @@ const futura = localFont({
   variable: '--font-futura',
 });
 
+const vt323 = VT323({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-vt323',
+});
+
 export const metadata: Metadata = {
   ...BASE_METADATA,
 };
@@ -74,7 +81,7 @@ export default async function RootLayout({
     <html
       lang='en'
       suppressHydrationWarning={true}
-      className={`${baron.variable} ${futura.variable} ${quaker.variable}`}
+      className={`${baron.variable} ${futura.variable} ${quaker.variable} ${vt323.variable}`}
     >
       {/*
         <head /> will contain the components returned by the nearest parent

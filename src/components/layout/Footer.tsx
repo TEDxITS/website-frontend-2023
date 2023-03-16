@@ -51,11 +51,18 @@ export default function Footer({ className }: { className?: string }) {
   );
 }
 
-export function NormalFooter({ className }: { className?: string }) {
+export function NormalFooter({
+  className,
+  theme = '50-years',
+}: {
+  className?: string;
+  theme?: '50-years' | '7-years';
+}) {
   return (
     <div
       className={clsxm(
-        'relative h-[216px] overflow-x-clip bg-stars',
+        'relative h-[216px] overflow-x-clip',
+        theme === '50-years' && 'bg-stars',
         className
       )}
     >
@@ -63,7 +70,10 @@ export function NormalFooter({ className }: { className?: string }) {
         <Image
           src={footerBg}
           alt='footer-bg'
-          className='absolute h-full object-cover'
+          className={clsxm(
+            'absolute h-full object-cover',
+            theme === '7-years' && 'hidden'
+          )}
           placeholder='blur'
         />
         <footer className='layout relative flex flex-col items-center justify-center gap-8 pt-16'>
@@ -78,7 +88,12 @@ export function NormalFooter({ className }: { className?: string }) {
               </UnstyledLink>
             ))}
           </ul>
-          <p className='relative z-10 text-center text-cwhite'>
+          <p
+            className={clsxm(
+              'relative z-10 text-center text-cwhite',
+              theme === '7-years' && 'text-cwhite'
+            )}
+          >
             <span>&#169;</span>2023 All Rights Reserved · This independent{' '}
             <span className='text-cred'>
               <UnderlineLink

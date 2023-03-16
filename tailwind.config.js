@@ -15,6 +15,7 @@ module.exports = {
         primary: ['var(--font-futura)', ...fontFamily.sans],
         baron: ['var(--font-baron)'],
         quaker: ['var(--font-quaker)'],
+        vt323: ['var(--font-vt323)'],
       },
       backgroundImage: {
         // TEDxITS 2023 background images
@@ -24,6 +25,7 @@ module.exports = {
         'transparent-stars':
           "url('/images/background/bg-transparent-star.png')",
         hue: "url('/images/background/bg-hue.png')",
+        '7-years': "url('/images/background/bg-7-years.png')",
       },
       colors: {
         // TEDxITS color palette
@@ -81,6 +83,28 @@ module.exports = {
             transform: 'translateX(5px) rotate(2deg)',
           },
         },
+        hover: {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '25%': {
+            transform: 'translateY(-5px)',
+          },
+          '50%': {
+            transform: 'translateY(5px)',
+          },
+          '100%': {
+            transform: 'translateY(0)',
+          },
+        },
+        spin: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
       },
 
       animation: {
@@ -88,6 +112,9 @@ module.exports = {
         shimmer: 'shimmer 1.3s linear infinite',
         rotate: 'rotate 3s linear infinite',
         stutter: 'stutter 0.2s ease-in-out infinite',
+        hover: 'hover 2s linear infinite',
+        spin: 'spin 10s linear infinite',
+        'spin-reverse': 'spin 10s linear infinite reverse',
       },
     },
   },

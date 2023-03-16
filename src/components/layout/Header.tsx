@@ -18,16 +18,22 @@ import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 
 import TedIcon from '~/images/logo/tedxits-text.svg';
+import TedIconBlack from '~/images/logo/tedxits-text-black.svg';
 
-export default function Header() {
+export default function Header({
+  theme = '50-years',
+}: {
+  theme?: '50-years' | '7-years';
+}) {
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false);
   const { user } = useFirebaseAuthContext();
 
   return (
     <header
       className={clsxm(
-        'top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)] backdrop-blur-sm sm:relative',
-        isNavOpen && 'sticky bg-transparent'
+        'top-0 z-50 bg-transparent drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)] sm:relative',
+        isNavOpen && 'sticky bg-transparent',
+        theme === '50-years' && 'bg-black'
       )}
     >
       {/* desktop view */}
@@ -41,7 +47,12 @@ export default function Header() {
               width={40}
               height={10}
             />
-            <TedIcon className='h-14 w-24' />
+            {theme === '50-years' ? (
+              <TedIcon className='h-14 w-24' />
+            ) : (
+              <TedIconBlack className='h-14 w-24' />
+            )}
+
             <p className='text-sm font-thin text-cwhite'>
               <span>&#169;</span>2023
             </p>
@@ -55,12 +66,16 @@ export default function Header() {
                   key={`${href}${label}`}
                   title='About'
                   linksData={aboutLinks}
+                  theme={theme}
                 />
               ) : (
                 <li key={`${href}${label}`}>
                   <UnderlineLink
                     href={href}
-                    className='font-primary text-cwhite hover:text-cred'
+                    className={clsxm(
+                      'font-primary text-cwhite hover:text-cred',
+                      theme === '7-years' && 'text-black'
+                    )}
                   >
                     {label}
                   </UnderlineLink>
@@ -68,11 +83,14 @@ export default function Header() {
               )
             )}
             {user.email ? (
-              <AuthHeaderLink />
+              <AuthHeaderLink theme={theme} />
             ) : (
               <UnderlineLink
                 href='/login'
-                className='font-primary text-cwhite hover:text-cred'
+                className={clsxm(
+                  'font-primary text-cwhite hover:text-cred',
+                  theme === '7-years' && 'text-black'
+                )}
               >
                 Login
               </UnderlineLink>
@@ -93,7 +111,11 @@ export default function Header() {
                 width={40}
                 height={10}
               />
-              <TedIcon className='h-14 w-24' />
+              {theme === '50-years' || isNavOpen ? (
+                <TedIcon className='h-14 w-24' />
+              ) : (
+                <TedIconBlack className='h-14 w-24' />
+              )}
               <p className='text-sm font-thin text-cwhite'>
                 <span>&#169;</span>2023
               </p>
@@ -106,7 +128,9 @@ export default function Header() {
                 'text-cdark': !isNavOpen,
               })}
             >
-              <Hamburger color='#F0EFE5' />
+              <Hamburger
+                color={theme === '50-years' || isNavOpen ? '#F0EFE5' : '#000'}
+              />
             </button>
           </ul>
         </div>

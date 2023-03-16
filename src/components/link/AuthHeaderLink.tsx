@@ -12,8 +12,10 @@ import { handleFirebaseError } from '@/utils/firebase/shared';
 
 export default function AuthHeaderLink({
   isDashboard = false,
+  theme = '50-years',
 }: {
   isDashboard?: boolean;
+  theme?: '50-years' | '7-years';
 }) {
   const { logOut, user } = useFirebaseAuthContext();
   const router = useRouter();
@@ -43,7 +45,12 @@ export default function AuthHeaderLink({
                 'animated-underline custom-link border-dark group inline-flex items-center border-b border-dotted px-1 text-base font-light text-cwhite'
               )}
             >
-              <span className='font-primary font-medium group-hover:text-cred'>
+              <span
+                className={clsxm(
+                  'font-primary font-medium group-hover:text-cred',
+                  theme === '7-years' && 'text-black'
+                )}
+              >
                 {user.email}
               </span>
               <HiChevronDown
