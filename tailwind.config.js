@@ -26,6 +26,7 @@ module.exports = {
           "url('/images/background/bg-transparent-star.png')",
         hue: "url('/images/background/bg-hue.png')",
         '7-years': "url('/images/background/bg-7-years.png')",
+        '7-years-jpg': "url('/images/background/bg-7-years.jpg')",
       },
       colors: {
         // TEDxITS color palette

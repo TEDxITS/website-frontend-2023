@@ -25,7 +25,7 @@ export default async function CFLSPage({
   searchParams?: { [key: string]: string };
 }) {
   return (
-    <div className='relative overflow-x-hidden bg-7-years bg-cover bg-center'>
+    <div className='relative overflow-x-hidden bg-7-years-jpg bg-cover bg-center'>
       <Image
         src={bgCircularOrnament}
         alt='ornament'

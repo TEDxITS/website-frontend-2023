@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
-    "@hookform/resolvers": "^2.9.10",
+    "@hookform/resolvers": "^2.9.11",
     "@next/font": "^13.1.1",
     "@prisma/client": "^4.8.1",
     "@react-three/drei": "^9.51.22",
@@ -38,13 +38,13 @@
     "next": "^13.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.41.5",
+    "react-hook-form": "^7.43.5",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.7.1",
     "swiper": "^9.0.5",
     "tailwind-merge": "^1.8.1",
     "three": "^0.148.0",
-    "zod": "^3.20.2"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",

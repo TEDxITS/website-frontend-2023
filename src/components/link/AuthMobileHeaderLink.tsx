@@ -21,7 +21,7 @@ export default function AuthMobileHeaderLink({ email }: { email: string }) {
               />
             </Disclosure.Button>
             <Disclosure.Panel className={clsxm('mx-5 flex flex-col gap-5')}>
-              {user.role === 'admin' && (
+              {user.email === 'admin@tedxits.com' && (
                 <Link
                   href='/admin'
                   className='text-center font-primary text-lg'

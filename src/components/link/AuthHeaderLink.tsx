@@ -71,7 +71,7 @@ export default function AuthHeaderLink({
               <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-40 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
                   <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
-                    {user.role === 'admin' && (
+                    {user.email === 'admin@tedxits.org' && (
                       <Link
                         href='/admin'
                         className='space-y-1 border-b border-cgray py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'

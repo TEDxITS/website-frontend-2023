@@ -9,7 +9,6 @@ import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
 
 import { BASE_METADATA } from '@/constant/metadata';
 import FirebaseAuthProvider from '@/context/FirebaseAuthContext';
-import { getCurrentUser } from '@/utils/firebase/server';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -69,14 +68,14 @@ export const metadata: Metadata = {
   ...BASE_METADATA,
 };
 
-export const dynamic = 'auto';
+// export const dynamic = 'auto';
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser();
+  // const user = await getCurrentUser();
   return (
     <html
       lang='en'
@@ -89,9 +88,7 @@ export default async function RootLayout({
       */}
       <head />
       <body className='overflow-x-hidden'>
-        <FirebaseAuthProvider
-          initialUser={{ email: user?.email, uid: user?.uid, role: user?.role }}
-        >
+        <FirebaseAuthProvider>
           <Toast />
           <AnalyticsProvider />
           {children}

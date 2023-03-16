@@ -15,7 +15,6 @@ import { removeFirebaseIdToken, setFirebaseIdToken } from '@/utils/token';
 interface FirebaseUserType {
   email: string | undefined | null;
   uid: string | undefined | null;
-  role: string | undefined | null;
 }
 
 type FirebaseAuthContextType = {
@@ -31,13 +30,12 @@ const FirebaseAuthContext = React.createContext<FirebaseAuthContextType>(
   null as unknown as FirebaseAuthContextType
 );
 
-function FirebaseAuthProvider({
-  children,
-  initialUser,
-}: {
-  children: React.ReactNode;
-  initialUser: FirebaseUserType;
-}) {
+const initialUser: FirebaseUserType = {
+  email: null,
+  uid: null,
+};
+
+function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [user, setUser] = React.useState<FirebaseUserType>(initialUser);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
@@ -74,18 +72,41 @@ function FirebaseAuthProvider({
     }
   };
 
+  // React.useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     setIsLoading(true);
+  //     if (user) {
+  //       user.getIdToken().then((idToken) => {
+  //         setFirebaseIdToken(idToken);
+  //         router.refresh();
+  //       });
+  //     } else {
+  //       removeFirebaseIdToken();
+  //       router.refresh();
+  //     }
+  //     setIsLoading(false);
+  //   });
+
+  //   return () => unsubscribe();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsLoading(true);
       if (user) {
+        setUser({
+          email: user.email,
+          uid: user.uid,
+        });
         user.getIdToken().then((idToken) => {
           setFirebaseIdToken(idToken);
-          router.refresh();
         });
       } else {
+        setUser({ email: null, uid: null });
         removeFirebaseIdToken();
-        router.refresh();
       }
+      router.refresh();
       setIsLoading(false);
     });
 
@@ -93,9 +114,9 @@ function FirebaseAuthProvider({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
-    setUser(initialUser);
-  }, [initialUser]);
+  // React.useEffect(() => {
+  //   setUser(initialUser);
+  // }, [initialUser]);
 
   return (
     <FirebaseAuthContext.Provider

@@ -162,19 +162,41 @@ export default function Header({
               >
                 {/* home */}
                 {links.map(({ href, label }, i) =>
-                  i === 1 ? (
-                    <MultipleMobileHeaderLink
-                      key={`${href}${label}`}
-                      linksData={aboutLinks}
-                      title='About'
-                    />
-                  ) : (
-                    <li key={`${href}${label}`} className='text-center'>
-                      <Link href={href} className='text-2xl'>
-                        <span className='font-primary text-2xl'>{label}</span>
-                      </Link>
-                    </li>
-                  )
+                  // i === 1 ? (
+                  //   <MultipleMobileHeaderLink
+                  //     key={`${href}${label}`}
+                  //     linksData={aboutLinks}
+                  //     title='About'
+                  //   />
+                  // ) : (
+                  //   <li key={`${href}${label}`} className='text-center'>
+                  //     <Link href={href} className='text-2xl'>
+                  //       <span className='font-primary text-2xl'>{label}</span>
+                  //     </Link>
+                  //   </li>
+                  // )
+                  {
+                    switch (i) {
+                      case 1:
+                        return (
+                          <MultipleMobileHeaderLink
+                            key={`${href}${label}`}
+                            linksData={aboutLinks}
+                            title='About'
+                          />
+                        );
+                      default:
+                        return (
+                          <li key={`${href}${label}`} className='text-center'>
+                            <Link href={href} className='text-2xl'>
+                              <span className='font-primary text-2xl'>
+                                {label}
+                              </span>
+                            </Link>
+                          </li>
+                        );
+                    }
+                  }
                 )}
                 {user.email ? (
                   <AuthMobileHeaderLink email={user.email} />
