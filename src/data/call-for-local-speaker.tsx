@@ -69,7 +69,8 @@ function RequirementsSection() {
           Essay of max. 500 words explaining about your idea (PDF)
         </li>
         <li className='mb-2'>
-          Make two videos that shows your face and can be heard clearly:
+          Make a presentation video and show everyone your recruitment twibbon
+          with details as follows:
         </li>
         <ul>
           <li className='mb-2'>
@@ -78,14 +79,23 @@ function RequirementsSection() {
             three subthemes (Tomorrow/7 Years Later/50 Years Later). Let your
             mind go wild!
           </li>
-          <li className='mb-2'>B. Twibbon story (details ngikut dari MnB)</li>
+          <li className='mb-2'>
+            B. Recruitment Twibbon posted on your Instagram, make sure to mark
+            your chosen subtheme! Link can be accessed through:{' '}
+            <UnstyledLink
+              href='https://tedxits.org/links/CFLSTwibbon'
+              className='hover:underline'
+            >
+              tedxits.org/links/CFLSTwibbon
+            </UnstyledLink>
+          </li>
         </ul>
         <li>
-          Compile the requirements of points 2, 3, 4, 5a and upload them to your
-          Google Drive folder (make sure that the folder is accessible for
-          everyone). For point 5b, Upload it on your Instagram as a Reels and
-          tag @tedxits (Make sure that your account is public). Keep the link
-          and submit it on the registration form.
+          Compile the requirements of points 2, 3, 4, 5a, 5b and upload them to
+          your Google Drive folder (make sure that the folder is accessible for
+          everyone). For point 5b, upload it on your Instagram Feed and tag
+          @tedxits (make sure your account is public). Keep the link and submit
+          it on the registration form.
         </li>
       </ul>
       <p className='font-vt323'>
@@ -104,22 +114,17 @@ function TimelineSection() {
         <li className='mb-4'>
           Registration:
           <br />
-          <span className='text-xl'>17-25 March 2023</span>
-        </li>
-        <li className='mb-4'>
-          Extend:
-          <br />
-          <span className='text-xl'>26-30 March 2023</span>
+          <span className='text-2xl'>18-25 March 2023</span>
         </li>
         <li className='mb-4'>
           Interview Phase:
           <br />
-          <span className='text-xl'>1-2 April 2023</span>
+          <span className='text-2xl'>1-2 April 2023</span>
         </li>
         <li className='mb-1'>
           Final Announcement:
           <br />
-          <span className='text-xl'>4 April 2022</span>
+          <span className='text-2xl'>4 April 2022</span>
         </li>
       </ul>
     </div>
@@ -146,7 +151,7 @@ function CommandmentSection() {
         </UnstyledLink>
       </p>
 
-      <p className='font-vt323 text-2xl sm:text-3xl'>The TED Commandments</p>
+      <p className='font-vt323 text-2xl sm:text-3xl'>The TEDx Commandments</p>
       <div className='my-3 w-full border-b-2 border-green-300'></div>
       <ul className='mb-4 list-decimal pl-6 font-vt323 text-lg font-normal sm:text-2xl'>
         <li className='mb-2'>
@@ -199,10 +204,12 @@ function RegistrationSection() {
   return (
     <div className='flex h-full flex-col items-center justify-center bg-black bg-transparent-stars'>
       <h1 className='mb-10 text-center font-baron text-4xl text-green-300 sm:text-5xl md:text-6xl'>
-        BE THE NEXT TEDxITS LOCAL SPEAKER!
+        BE OUR NEXT
+        <br />
+        LOCAL SPEAKER!
       </h1>
       <Link
-        href='/call-for-local-speaker/register'
+        href='/CFLS/register'
         className='rounded-full border border-green-300 px-5 py-2 text-center text-2xl font-semibold text-green-300 hover:bg-green-300 hover:text-black'
       >
         Register Here

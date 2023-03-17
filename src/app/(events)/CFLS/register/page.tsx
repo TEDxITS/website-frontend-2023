@@ -21,8 +21,8 @@ export default async function CFLSFormPage() {
     <RandomStarfieldContainer>
       <div className='absolute z-20 h-screen w-full overflow-y-auto'>
         <Header />
-        <section className='3xl:h-screen z-20 flex h-fit flex-col items-center justify-center py-20'>
-          <h1 className='mb-2 text-center font-baron text-5xl text-cwhite sm:mb-6 sm:text-6xl'>
+        <section className='3xl:h-screen z-20 flex h-fit flex-col items-center justify-center pt-10 pb-20 sm:pt-20'>
+          <h1 className='mb-2 text-center font-baron text-4xl text-cwhite sm:mb-6 sm:text-6xl'>
             CALL FOR <br /> LOCAL SPEAKER
           </h1>
           <div className='layout'>

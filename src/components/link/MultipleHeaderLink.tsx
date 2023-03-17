@@ -49,7 +49,7 @@ export default function MultipleHeaderLink({
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-3'
             >
-              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
+              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-64 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
                   <div
                     className={clsxm(

@@ -22,7 +22,7 @@ model LocalSpeaker {
   batch             String
   student_id        String
   instagram         String
-  reels_link        String
+  twibbon_link      String
   google_drive_link String
   reason_to_join    String
   created_at        DateTime @default(now())

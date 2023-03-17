@@ -1,4 +1,12 @@
-export const BATCH_OPTION = ['2021', '2020', '2019', '2018', '2017', 'Alumni'];
+export const BATCH_OPTION = [
+  '2022',
+  '2021',
+  '2020',
+  '2019',
+  '2018',
+  '2017',
+  'Alumni',
+];
 
 export const DEPARTMENT_OPTION = [
   'Actuarial Science',

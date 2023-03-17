@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
-import { aboutLinks, links } from '@/data/links';
+import { aboutLinks, eventLinks, links } from '@/data/links';
 
 import AuthHeaderLink from '@/components/link/AuthHeaderLink';
 import AuthMobileHeaderLink from '@/components/link/AuthMobileHeaderLink';
@@ -61,26 +61,62 @@ export default function Header({
         <nav>
           <ul className='flex items-center justify-between space-x-16'>
             {links.map(({ href, label }, i) =>
-              i === 1 ? (
-                <MultipleHeaderLink
-                  key={`${href}${label}`}
-                  title='About'
-                  linksData={aboutLinks}
-                  theme={theme}
-                />
-              ) : (
-                <li key={`${href}${label}`}>
-                  <UnderlineLink
-                    href={href}
-                    className={clsxm(
-                      'font-primary text-cwhite hover:text-cred',
-                      theme === '7-years' && 'text-black'
-                    )}
-                  >
-                    {label}
-                  </UnderlineLink>
-                </li>
-              )
+              // i === 1 ? (
+              //   <MultipleHeaderLink
+              //     key={`${href}${label}`}
+              //     title='About'
+              //     linksData={aboutLinks}
+              //     theme={theme}
+              //   />
+              // ) : (
+              //   <li key={`${href}${label}`}>
+              //     <UnderlineLink
+              //       href={href}
+              //       className={clsxm(
+              //         'font-primary text-cwhite hover:text-cred',
+              //         theme === '7-years' && 'text-black'
+              //       )}
+              //     >
+              //       {label}
+              //     </UnderlineLink>
+              //   </li>
+              // )
+              {
+                switch (i) {
+                  case 1:
+                    return (
+                      <MultipleHeaderLink
+                        key={`${href}${label}`}
+                        title='About'
+                        linksData={aboutLinks}
+                        theme={theme}
+                      />
+                    );
+                  case 2:
+                    return (
+                      <MultipleHeaderLink
+                        key={`${href}${label}`}
+                        title='Events'
+                        linksData={eventLinks}
+                        theme={theme}
+                      />
+                    );
+                  default:
+                    return (
+                      <li key={`${href}${label}`}>
+                        <UnderlineLink
+                          href={href}
+                          className={clsxm(
+                            'font-primary text-cwhite hover:text-cred',
+                            theme === '7-years' && 'text-black'
+                          )}
+                        >
+                          {label}
+                        </UnderlineLink>
+                      </li>
+                    );
+                }
+              }
             )}
             {user.email ? (
               <AuthHeaderLink theme={theme} />
@@ -183,6 +219,14 @@ export default function Header({
                             key={`${href}${label}`}
                             linksData={aboutLinks}
                             title='About'
+                          />
+                        );
+                      case 2:
+                        return (
+                          <MultipleMobileHeaderLink
+                            key={`${href}${label}`}
+                            linksData={eventLinks}
+                            title='Events'
                           />
                         );
                       default:
