@@ -89,7 +89,7 @@ export default function CFLSTabs({
 
   return (
     <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-      <div className='relative w-full' ref={gamepadRef} id="gamepad">
+      <div className='relative w-full' ref={gamepadRef} id='gamepad'>
         <Image
           src={bgOrnament}
           alt='ornament'
@@ -113,7 +113,7 @@ export default function CFLSTabs({
           />
           <section className='w-full rounded-xl bg-[#457493] py-5 px-5 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.6)] sm:px-10 md:w-[70%]'>
             <div
-              className='question h-[25rem] overflow-y-auto border-[10px] border-black bg-white'
+              className='gamepad h-[25rem] overflow-y-auto border-[10px] border-black bg-white'
               ref={scrollableRef}
               onMouseEnter={() => {
                 if (window.innerWidth < 768) return;

@@ -20,7 +20,7 @@ model LocalSpeaker {
   email             String
   department        String
   batch             String
-  student_id        String
+  role              String
   instagram         String
   twibbon_link      String
   google_drive_link String

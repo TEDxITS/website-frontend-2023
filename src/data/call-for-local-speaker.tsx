@@ -62,8 +62,13 @@ function RequirementsSection() {
     <div className='question flex flex-col items-center bg-black bg-transparent-stars py-5 px-2 text-green-300 sm:px-8'>
       <h2 className='mb-5 font-baron font-bold sm:text-4xl'>REQUIREMENTS</h2>
       <ul className='mb-4 list-decimal pl-6 font-vt323 text-lg font-normal sm:text-2xl'>
-        <li className='mb-2'>Active student or alumni of ITS</li>
-        <li className='mb-2'>Proof of study at ITS (PDF)</li>
+        <li className='mb-2'>
+          Civitas academica of ITS (Academic community; ITS students, staffs,
+          and lecturers)
+        </li>
+        <li className='mb-2'>Proof of affiliation in ITS community (PDF)</li>
+        {/* <li className='mb-2'>Active student or alumni of ITS</li>
+        <li className='mb-2'>Proof of study at ITS (PDF)</li> */}
         <li className='mb-2'>Curriculum Vitae (PDF)</li>
         <li className='mb-2'>
           Essay of max. 500 words explaining about your idea (PDF)
@@ -77,7 +82,15 @@ function RequirementsSection() {
             A. 3-5 minutes video of you presenting your own idea and topic for
             TEDx talk. Please keep in mind your idea should belong to one of the
             three subthemes (Tomorrow/7 Years Later/50 Years Later). Let your
-            mind go wild!
+            mind go wild! Still unfamiliar with TEDxITS and our themes this
+            year?{' '}
+            <UnstyledLink
+              href='https://tedxits.org/grand-theme'
+              className='hover:underline'
+            >
+              Click here
+            </UnstyledLink>{' '}
+            for more information.
           </li>
           <li className='mb-2'>
             B. Recruitment Twibbon posted on your Instagram, make sure to mark
@@ -98,10 +111,6 @@ function RequirementsSection() {
           it on the registration form.
         </li>
       </ul>
-      <p className='font-vt323'>
-        Notes: Still unfamiliar with TEDxITS and our themes this year? Visit the
-        About and Grand Theme page for more information.
-      </p>
     </div>
   );
 }
@@ -133,13 +142,22 @@ function TimelineSection() {
 
 function CommandmentSection() {
   return (
-    <div className='flex flex-col items-center bg-black bg-transparent-stars py-5 px-2 text-green-300 sm:px-8'>
+    <div className='flex flex-col bg-black bg-transparent-stars py-5 px-2 text-green-300 sm:px-8'>
       <h2 className='mb-5 text-center font-baron font-bold sm:text-4xl'>
         BEFORE YOU REGISTER...
       </h2>
       <p className='mb-2 font-vt323 text-lg sm:text-2xl'>
         Here are some resources that will help you as a candidate TEDx talk
         speaker!
+      </p>
+      <p className='mb-4 text-left font-vt323 text-lg sm:text-2xl'>
+        TED Official explanation about what is a TEDx Talk{' '}
+        <UnstyledLink
+          className='hover:underline'
+          href='https://www.ted.com/participate/organize-a-local-tedx-event/tedx-organizer-guide/speakers-program/what-is-a-tedx-talk'
+        >
+          (click here)
+        </UnstyledLink>
       </p>
       <p className='mb-4 font-vt323 text-lg sm:text-2xl'>
         Chris Anderson’s TED talk on the secret to great public speaking{' '}
@@ -150,8 +168,19 @@ function CommandmentSection() {
           (click here)
         </UnstyledLink>
       </p>
+      <p className='mb-4 font-vt323 text-lg sm:text-2xl'>
+        Will Stephen’s TEDx talk on how to sound smart in your TEDx Talk{' '}
+        <UnstyledLink
+          className='hover:underline'
+          href='https://www.youtube.com/watch?v=8S0FDjFBj8o'
+        >
+          (click here)
+        </UnstyledLink>
+      </p>
 
-      <p className='font-vt323 text-2xl sm:text-3xl'>The TEDx Commandments</p>
+      <p className='text-center font-vt323 text-2xl sm:text-3xl'>
+        The TEDx Commandments
+      </p>
       <div className='my-3 w-full border-b-2 border-green-300'></div>
       <ul className='mb-4 list-decimal pl-6 font-vt323 text-lg font-normal sm:text-2xl'>
         <li className='mb-2'>

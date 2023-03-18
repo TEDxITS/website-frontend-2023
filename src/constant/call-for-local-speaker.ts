@@ -1,4 +1,5 @@
 export const BATCH_OPTION = [
+  'Not a Student',
   '2022',
   '2021',
   '2020',
@@ -9,6 +10,7 @@ export const BATCH_OPTION = [
 ];
 
 export const DEPARTMENT_OPTION = [
+  'Not a Student',
   'Actuarial Science',
   'Architecture',
   'Automation Electronic Engineering',
@@ -49,3 +51,5 @@ export const DEPARTMENT_OPTION = [
   'Technology Management',
   'Visual Communication Design',
 ];
+
+export const ROLE_OPTION = ['Lecturer', 'Staff', 'Student'];

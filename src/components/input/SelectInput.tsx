@@ -9,6 +9,7 @@ type SelectInputProps = {
   helperText?: React.ReactNode | string;
   label?: React.ReactNode | string;
   showError?: boolean;
+  topHelperText?: string;
   children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'select'>;
 
@@ -18,6 +19,7 @@ export default function SelectInput({
   label = '',
   helperText,
   showError = true,
+  topHelperText,
   children,
   ...rest
 }: SelectInputProps) {
@@ -29,6 +31,7 @@ export default function SelectInput({
   return (
     <div className='block w-full space-y-1'>
       <label htmlFor={id}>{label}</label>
+      <p className='text-xs text-ccream'>{topHelperText}</p>
       <div className='flex items-center'>
         <select
           {...register(id)}

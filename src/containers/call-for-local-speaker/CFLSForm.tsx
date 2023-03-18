@@ -17,6 +17,7 @@ import Tooltip from '@/components/utils/Tooltip';
 import {
   BATCH_OPTION,
   DEPARTMENT_OPTION,
+  ROLE_OPTION,
 } from '@/constant/call-for-local-speaker';
 import clsxm from '@/utils/clsxm';
 
@@ -28,7 +29,7 @@ const localSpeakerSchema = z.object({
     .email({ message: 'The provided email is not valid' }),
   department: z.string().min(1, { message: 'The department cannot be empty' }),
   batch: z.string().min(1, { message: 'The batch cannot be empty' }),
-  student_id: z.string().min(1, { message: 'The student ID cannot be empty' }),
+  role: z.string().min(1, { message: 'The role cannot be empty' }),
   instagram: z
     .string()
     .min(1, { message: 'The Instagram profile link cannot be empty' })
@@ -53,7 +54,7 @@ const localSpeakerInitialValue: LocalSpeaker = {
   email: '',
   department: '',
   batch: '',
-  student_id: '',
+  role: '',
   instagram: '',
   twibbon_link: '',
   google_drive_link: '',
@@ -133,16 +134,22 @@ export default function CFLSForm() {
                 label='Full Name'
                 className='rounded-md text-lg'
               />
-              <Input
-                id='student_id'
-                type='text'
-                label='Student ID (NRP)'
+              <SelectInput
+                id='role'
+                label='Role'
                 className='rounded-md text-lg'
-              />
+              >
+                {ROLE_OPTION.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </SelectInput>
               <SelectInput
                 id='department'
                 label='Department'
                 className='rounded-md text-lg'
+                topHelperText='Select "Not a Student" if you are not a student or alumni'
               >
                 {DEPARTMENT_OPTION.map((option) => (
                   <option key={option} value={option}>
@@ -154,6 +161,7 @@ export default function CFLSForm() {
                 id='batch'
                 label='Batch'
                 className='rounded-md text-lg'
+                topHelperText='Select "Not a Student" if you are not a student or alumni'
               >
                 {BATCH_OPTION.map((option) => (
                   <option key={option} value={option}>
