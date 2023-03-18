@@ -8,6 +8,7 @@ import clsxm from '@/utils/clsxm';
 type InputProps = {
   id: string;
   helperText?: React.ReactNode | string;
+  topHelperText?: React.ReactNode | string;
   label?: React.ReactNode | string;
   showError?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
@@ -18,6 +19,7 @@ export default function Input({
   type = 'text',
   label = '',
   helperText,
+  topHelperText,
   showError = true,
   ...rest
 }: InputProps) {
@@ -31,6 +33,7 @@ export default function Input({
   return (
     <div className='block w-full space-y-1'>
       <label htmlFor={id}>{label}</label>
+      <p className='text-xs text-ccream'>{topHelperText}</p>
       <div className='flex items-center'>
         <input
           {...register(id)}
@@ -44,7 +47,7 @@ export default function Input({
               : type
           }
           className={clsxm(
-            'block w-full rounded-full border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 transition ease-in-out focus:border-cblue focus:outline-none focus:ring-1 focus:ring-cblue',
+            'block w-full rounded-full border border-gray-300 bg-cwhite p-2.5 text-sm text-gray-900 transition ease-in-out focus:border-cblue focus:outline-none focus:ring-1 focus:ring-cblue',
             className
           )}
         />
@@ -60,7 +63,7 @@ export default function Input({
           </div>
         )}
       </div>
-      <p className='text-xs text-gray-500'>{helperText}</p>
+      <p className='text-xs text-ccream'>{helperText}</p>
       {showError && (
         <p className='text-sm text-red-400'>
           {errors[id] && String(errors[id]?.message)}

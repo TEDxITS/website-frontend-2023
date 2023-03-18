@@ -1,5 +1,6 @@
-import localFont from '@next/font/local';
 import { Metadata } from 'next';
+import { VT323 } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import '../styles/globals.css';
 
@@ -8,7 +9,6 @@ import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
 
 import { BASE_METADATA } from '@/constant/metadata';
 import FirebaseAuthProvider from '@/context/FirebaseAuthContext';
-import { getCurrentUser } from '@/utils/firebase/server';
 
 // Fonts use in Next js 13
 const baron = localFont({
@@ -58,21 +58,29 @@ const futura = localFont({
   variable: '--font-futura',
 });
 
+const vt323 = VT323({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-vt323',
+});
+
 export const metadata: Metadata = {
   ...BASE_METADATA,
 };
+
+// export const dynamic = 'auto';
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser();
+  // const user = await getCurrentUser();
   return (
     <html
       lang='en'
       suppressHydrationWarning={true}
-      className={`${baron.variable} ${futura.variable} ${quaker.variable}`}
+      className={`${baron.variable} ${futura.variable} ${quaker.variable} ${vt323.variable}`}
     >
       {/*
         <head /> will contain the components returned by the nearest parent
@@ -80,9 +88,7 @@ export default async function RootLayout({
       */}
       <head />
       <body className='overflow-x-hidden'>
-        <FirebaseAuthProvider
-          initialUser={{ email: user?.email, uid: user?.uid, role: user?.role }}
-        >
+        <FirebaseAuthProvider>
           <Toast />
           <AnalyticsProvider />
           {children}

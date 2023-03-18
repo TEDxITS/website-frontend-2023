@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 
-import { aboutLinks, links } from '@/data/links';
+import { aboutLinks, eventLinks, links } from '@/data/links';
 
 import AuthHeaderLink from '@/components/link/AuthHeaderLink';
 import AuthMobileHeaderLink from '@/components/link/AuthMobileHeaderLink';
@@ -18,16 +18,22 @@ import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
 import clsxm from '@/utils/clsxm';
 
 import TedIcon from '~/images/logo/tedxits-text.svg';
+import TedIconBlack from '~/images/logo/tedxits-text-black.svg';
 
-export default function Header() {
+export default function Header({
+  theme = '50-years',
+}: {
+  theme?: '50-years' | '7-years';
+}) {
   const [isNavOpen, setIsNavOpen] = React.useState<boolean>(false);
   const { user } = useFirebaseAuthContext();
 
   return (
     <header
       className={clsxm(
-        'top-0 z-50 bg-black drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)] backdrop-blur-sm sm:relative',
-        isNavOpen && 'sticky bg-transparent'
+        'top-0 z-50 bg-transparent drop-shadow-[0_45px_35px_rgba(0,0,0,0.1)] sm:relative',
+        isNavOpen && 'sticky bg-transparent',
+        theme === '50-years' && 'bg-black'
       )}
     >
       {/* desktop view */}
@@ -41,7 +47,12 @@ export default function Header() {
               width={40}
               height={10}
             />
-            <TedIcon className='h-14 w-24' />
+            {theme === '50-years' ? (
+              <TedIcon className='h-14 w-24' />
+            ) : (
+              <TedIconBlack className='h-14 w-24' />
+            )}
+
             <p className='text-sm font-thin text-cwhite'>
               <span>&#169;</span>2023
             </p>
@@ -50,29 +61,72 @@ export default function Header() {
         <nav>
           <ul className='flex items-center justify-between space-x-16'>
             {links.map(({ href, label }, i) =>
-              i === 1 ? (
-                <MultipleHeaderLink
-                  key={`${href}${label}`}
-                  title='About'
-                  linksData={aboutLinks}
-                />
-              ) : (
-                <li key={`${href}${label}`}>
-                  <UnderlineLink
-                    href={href}
-                    className='font-primary text-cwhite hover:text-cred'
-                  >
-                    {label}
-                  </UnderlineLink>
-                </li>
-              )
+              // i === 1 ? (
+              //   <MultipleHeaderLink
+              //     key={`${href}${label}`}
+              //     title='About'
+              //     linksData={aboutLinks}
+              //     theme={theme}
+              //   />
+              // ) : (
+              //   <li key={`${href}${label}`}>
+              //     <UnderlineLink
+              //       href={href}
+              //       className={clsxm(
+              //         'font-primary text-cwhite hover:text-cred',
+              //         theme === '7-years' && 'text-black'
+              //       )}
+              //     >
+              //       {label}
+              //     </UnderlineLink>
+              //   </li>
+              // )
+              {
+                switch (i) {
+                  case 1:
+                    return (
+                      <MultipleHeaderLink
+                        key={`${href}${label}`}
+                        title='About'
+                        linksData={aboutLinks}
+                        theme={theme}
+                      />
+                    );
+                  case 2:
+                    return (
+                      <MultipleHeaderLink
+                        key={`${href}${label}`}
+                        title='Events'
+                        linksData={eventLinks}
+                        theme={theme}
+                      />
+                    );
+                  default:
+                    return (
+                      <li key={`${href}${label}`}>
+                        <UnderlineLink
+                          href={href}
+                          className={clsxm(
+                            'font-primary text-cwhite hover:text-cred',
+                            theme === '7-years' && 'text-black'
+                          )}
+                        >
+                          {label}
+                        </UnderlineLink>
+                      </li>
+                    );
+                }
+              }
             )}
             {user.email ? (
-              <AuthHeaderLink />
+              <AuthHeaderLink theme={theme} />
             ) : (
               <UnderlineLink
                 href='/login'
-                className='font-primary text-cwhite hover:text-cred'
+                className={clsxm(
+                  'font-primary text-cwhite hover:text-cred',
+                  theme === '7-years' && 'text-black'
+                )}
               >
                 Login
               </UnderlineLink>
@@ -93,7 +147,11 @@ export default function Header() {
                 width={40}
                 height={10}
               />
-              <TedIcon className='h-14 w-24' />
+              {theme === '50-years' || isNavOpen ? (
+                <TedIcon className='h-14 w-24' />
+              ) : (
+                <TedIconBlack className='h-14 w-24' />
+              )}
               <p className='text-sm font-thin text-cwhite'>
                 <span>&#169;</span>2023
               </p>
@@ -106,7 +164,9 @@ export default function Header() {
                 'text-cdark': !isNavOpen,
               })}
             >
-              <Hamburger color='#F0EFE5' />
+              <Hamburger
+                color={theme === '50-years' || isNavOpen ? '#F0EFE5' : '#000'}
+              />
             </button>
           </ul>
         </div>
@@ -138,19 +198,49 @@ export default function Header() {
               >
                 {/* home */}
                 {links.map(({ href, label }, i) =>
-                  i === 1 ? (
-                    <MultipleMobileHeaderLink
-                      key={`${href}${label}`}
-                      linksData={aboutLinks}
-                      title='About'
-                    />
-                  ) : (
-                    <li key={`${href}${label}`} className='text-center'>
-                      <Link href={href} className='text-2xl'>
-                        <span className='font-primary text-2xl'>{label}</span>
-                      </Link>
-                    </li>
-                  )
+                  // i === 1 ? (
+                  //   <MultipleMobileHeaderLink
+                  //     key={`${href}${label}`}
+                  //     linksData={aboutLinks}
+                  //     title='About'
+                  //   />
+                  // ) : (
+                  //   <li key={`${href}${label}`} className='text-center'>
+                  //     <Link href={href} className='text-2xl'>
+                  //       <span className='font-primary text-2xl'>{label}</span>
+                  //     </Link>
+                  //   </li>
+                  // )
+                  {
+                    switch (i) {
+                      case 1:
+                        return (
+                          <MultipleMobileHeaderLink
+                            key={`${href}${label}`}
+                            linksData={aboutLinks}
+                            title='About'
+                          />
+                        );
+                      case 2:
+                        return (
+                          <MultipleMobileHeaderLink
+                            key={`${href}${label}`}
+                            linksData={eventLinks}
+                            title='Events'
+                          />
+                        );
+                      default:
+                        return (
+                          <li key={`${href}${label}`} className='text-center'>
+                            <Link href={href} className='text-2xl'>
+                              <span className='font-primary text-2xl'>
+                                {label}
+                              </span>
+                            </Link>
+                          </li>
+                        );
+                    }
+                  }
                 )}
                 {user.email ? (
                   <AuthMobileHeaderLink email={user.email} />

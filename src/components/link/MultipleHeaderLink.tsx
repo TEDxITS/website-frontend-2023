@@ -10,9 +10,11 @@ import clsxm from '@/utils/clsxm';
 export default function MultipleHeaderLink({
   linksData,
   title,
+  theme = '50-years',
 }: {
   linksData: LinkType[];
   title: string;
+  theme?: '50-years' | '7-years';
 }) {
   return (
     <li className='relative'>
@@ -24,7 +26,12 @@ export default function MultipleHeaderLink({
                 'animated-underline custom-link border-dark group inline-flex items-center border-b border-dotted px-1 text-base font-light text-cwhite'
               )}
             >
-              <span className='font-primary font-medium group-hover:text-cred'>
+              <span
+                className={clsxm(
+                  'font-primary font-medium group-hover:text-cred',
+                  theme === '7-years' && 'text-black'
+                )}
+              >
                 {title}
               </span>
               <HiChevronDown
@@ -42,9 +49,15 @@ export default function MultipleHeaderLink({
               leaveFrom='opacity-100 translate-y-0'
               leaveTo='opacity-0 -translate-y-3'
             >
-              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
+              <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-64 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
-                  <div className='grid border-[10px] border-cgray bg-black shadow-inner'>
+                  <div
+                    className={clsxm(
+                      'grid border-[10px] bg-black shadow-inner',
+                      theme === '50-years' && 'border-cgray',
+                      theme === '7-years' && 'border-[#457493]'
+                    )}
+                  >
                     {linksData.map((item, index) => (
                       <Link
                         href={item.href}
@@ -61,7 +74,13 @@ export default function MultipleHeaderLink({
                       </Link>
                     ))}
                   </div>
-                  <div className='h-4 rounded-b-lg bg-cgray'></div>
+                  <div
+                    className={clsxm(
+                      'h-4 rounded-b-lg',
+                      theme === '50-years' && 'bg-cgray',
+                      theme === '7-years' && 'bg-[#457493]'
+                    )}
+                  ></div>
                 </div>
               </Popover.Panel>
             </Transition>

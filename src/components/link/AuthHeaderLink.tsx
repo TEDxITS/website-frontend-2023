@@ -12,8 +12,10 @@ import { handleFirebaseError } from '@/utils/firebase/shared';
 
 export default function AuthHeaderLink({
   isDashboard = false,
+  theme = '50-years',
 }: {
   isDashboard?: boolean;
+  theme?: '50-years' | '7-years';
 }) {
   const { logOut, user } = useFirebaseAuthContext();
   const router = useRouter();
@@ -43,7 +45,12 @@ export default function AuthHeaderLink({
                 'animated-underline custom-link border-dark group inline-flex items-center border-b border-dotted px-1 text-base font-light text-cwhite'
               )}
             >
-              <span className='font-primary font-medium group-hover:text-cred'>
+              <span
+                className={clsxm(
+                  'font-primary font-medium group-hover:text-cred',
+                  theme === '7-years' && 'text-black'
+                )}
+              >
                 {user.email}
               </span>
               <HiChevronDown
@@ -64,7 +71,7 @@ export default function AuthHeaderLink({
               <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-40 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
                   <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
-                    {user.role === 'admin' && (
+                    {user.email === 'admin@tedxits.org' && (
                       <Link
                         href='/admin'
                         className='space-y-1 border-b border-cgray py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'

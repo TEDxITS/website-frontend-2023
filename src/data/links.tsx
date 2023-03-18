@@ -19,6 +19,11 @@ export const aboutLinks = [
   { href: '/grand-theme', label: 'Grand Theme' },
 ];
 
+export const eventLinks = [
+  { href: '/CFLS', label: 'Call for Local Speaker' },
+  { href: '/voyagers-test', label: 'Voyagers Test' },
+];
+
 export const dashboardLinks = [
   {
     href: '/admin',
