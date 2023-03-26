@@ -123,7 +123,12 @@ function TimelineSection() {
         <li className='mb-4'>
           Registration:
           <br />
-          <span className='text-2xl'>18-25 March 2023</span>
+          <span className='text-2xl'>18-26 March 2023</span>
+        </li>
+        <li className='mb-4'>
+          Extend:
+          <br />
+          <span className='text-2xl'>26-30 March 2023</span>
         </li>
         <li className='mb-4'>
           Interview Phase:
