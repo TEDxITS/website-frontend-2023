@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import UnstyledLink from '@/components/link/UnstyledLink';
 
+import { CFLS_DEADLINE } from '@/constant/call-for-local-speaker';
+
 import commandmentIcon from '~/images/call-for-local-speaker/commandment.png';
 import registrationIcon from '~/images/call-for-local-speaker/registration-form.png';
 import requirementsIcon from '~/images/call-for-local-speaker/requirements.png';
@@ -235,6 +237,7 @@ function CommandmentSection() {
 }
 
 function RegistrationSection() {
+  const isExceedingDeadline = new Date() > new Date(CFLS_DEADLINE);
   return (
     <div className='flex h-full flex-col items-center justify-center bg-black bg-transparent-stars'>
       <h1 className='mb-10 text-center font-baron text-4xl text-green-300 sm:text-5xl md:text-6xl'>
@@ -242,12 +245,18 @@ function RegistrationSection() {
         <br />
         LOCAL SPEAKER!
       </h1>
-      <Link
-        href='/CFLS/register'
-        className='rounded-full border border-green-300 px-5 py-2 text-center text-2xl font-semibold text-green-300 hover:bg-green-300 hover:text-black'
-      >
-        Register Here
-      </Link>
+      {isExceedingDeadline ? (
+        <div className='rounded-full border border-green-300 px-5 py-2 text-center text-2xl font-semibold text-green-300'>
+          Registration Closed
+        </div>
+      ) : (
+        <Link
+          href='/CFLS/register'
+          className='rounded-full border border-green-300 px-5 py-2 text-center text-2xl font-semibold text-green-300 hover:bg-green-300 hover:text-black'
+        >
+          Register Here
+        </Link>
+      )}
     </div>
   );
 }

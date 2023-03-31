@@ -1,3 +1,5 @@
+export const CFLS_DEADLINE = '2023-03-31T20:00:00';
+
 export const BATCH_OPTION = [
   'Not a Student',
   '2022',

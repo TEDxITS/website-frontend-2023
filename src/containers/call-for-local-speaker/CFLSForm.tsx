@@ -1,5 +1,6 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -16,6 +17,7 @@ import Tooltip from '@/components/utils/Tooltip';
 
 import {
   BATCH_OPTION,
+  CFLS_DEADLINE,
   DEPARTMENT_OPTION,
   ROLE_OPTION,
 } from '@/constant/call-for-local-speaker';
@@ -62,6 +64,7 @@ const localSpeakerInitialValue: LocalSpeaker = {
 };
 
 export default function CFLSForm() {
+  const router = useRouter();
   const methods = useForm<LocalSpeaker>({
     defaultValues: localSpeakerInitialValue,
     mode: 'onTouched',
@@ -72,8 +75,15 @@ export default function CFLSForm() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] =
     React.useState<boolean>(false);
+  const [isRegistrationClosedModalOpen, setIsRegistrationClosedModalOpen] =
+    React.useState<boolean>(false);
+  const isExceedingDeadline = new Date() > new Date(CFLS_DEADLINE);
 
   const onSubmit: SubmitHandler<LocalSpeaker> = async () => {
+    if (isExceedingDeadline) {
+      toast.error('The deadline has passed');
+      return;
+    }
     setIsOpen(true);
   };
 
@@ -95,9 +105,9 @@ export default function CFLSForm() {
         return Promise.reject(error);
       }
     };
-    const loginPromise = localSpeakerPromise();
+    const cflsPromise = localSpeakerPromise();
     toast
-      .promise(loginPromise, {
+      .promise(cflsPromise, {
         loading: 'Loading..',
         success: 'Success!',
         error: (e) => `Error: ${JSON.stringify(e)}`,
@@ -113,10 +123,13 @@ export default function CFLSForm() {
       });
   };
 
-  // const onClickSubmit = (event: any) => {
-  //   handleSubmit(onSubmit)(event);
-  //   setIsOpen(false);
-  // };
+  React.useEffect(() => {
+    if (isExceedingDeadline) {
+      setTimeout(() => {
+        setIsRegistrationClosedModalOpen(true);
+      }, 1000);
+    }
+  }, [isExceedingDeadline]);
 
   return (
     <>
@@ -256,6 +269,7 @@ export default function CFLSForm() {
           </Button>
         </form>
       </FormProvider>
+      {/* Confirmation Modal */}
       <Modal
         setIsOpen={setIsOpen}
         isOpen={isOpen}
@@ -290,6 +304,7 @@ export default function CFLSForm() {
           </Button>
         </div>
       </Modal>
+      {/* Success Modal */}
       <Modal
         setIsOpen={setIsSuccessModalOpen}
         isOpen={isSuccessModalOpen}
@@ -314,6 +329,33 @@ export default function CFLSForm() {
             className='bg-cred hover:bg-cred'
           >
             Close
+          </Button>
+        </div>
+      </Modal>
+      {/* Registration Closed Modal */}
+      <Modal
+        setIsOpen={setIsRegistrationClosedModalOpen}
+        isOpen={isRegistrationClosedModalOpen}
+        className='noisy border-[10px] border-cgray bg-black'
+      >
+        <div className='z-20 flex flex-col items-center justify-center'>
+          <h1 className='text-center font-baron text-xl text-cwhite sm:text-4xl'>
+            Registration Closed
+          </h1>
+          <p className='mt-4 mb-8 text-center text-base font-medium text-cwhite sm:text-lg'>
+            The registration for local speaker has been closed. If you have any
+            questions, please contact us at our social media
+          </p>
+        </div>
+        <div className='flex justify-center gap-x-2'>
+          <Button
+            onClick={() => {
+              router.push('/CFLS');
+            }}
+            variant='primary'
+            className='bg-cred hover:bg-cred'
+          >
+            Back
           </Button>
         </div>
       </Modal>
