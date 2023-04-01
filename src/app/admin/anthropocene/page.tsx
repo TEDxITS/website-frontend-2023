@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import LinkDatabaseContainer from '@/containers/admin/links/LinkDatabaseContainer';
+import AddItemModal from '@/containers/admin/anthropocene/AddItemModal';
+import ItemDatabaseContainer from '@/containers/admin/anthropocene/ItemDatabaseContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
@@ -9,26 +10,28 @@ import { generateTemplateMetadata } from '@/utils/metadata';
 export const dynamic = 'force-dynamic';
 
 const metadataObject = generateTemplateMetadata(
-  'Link Shortener Database',
+  'Gallery Database',
   '',
-  '/admin/links'
+  '/admin/anthropocene'
 );
 export const metadata: Metadata = {
   ...metadataObject,
 };
 
-export default function LinkDashboardPage() {
+export default function GalleryDashboardPage() {
   return (
     <section className='layout z-20'>
-      <h1 className='mb-5 font-baron text-cwhite'>Link Shortener Database</h1>
-
+      <div className='mb-5 flex flex-wrap items-center justify-between'>
+        <h1 className='font-baron text-cwhite'>Gallery Database</h1>
+        <AddItemModal />
+      </div>
       <Suspense
         fallback={
           <p className='py-10 text-center text-lg text-cwhite'>Loading..</p>
         }
       >
         {/* @ts-expect-error Server Component */}
-        <LinkDatabaseContainer />
+        <ItemDatabaseContainer />
       </Suspense>
     </section>
   );

@@ -27,6 +27,7 @@ module.exports = {
         hue: "url('/images/background/bg-hue.png')",
         '7-years': "url('/images/background/bg-7-years.png')",
         '7-years-jpg': "url('/images/background/bg-7-years.jpg')",
+        '7-years-repeat': "url('/images/background/bg-7-years-repeat.jpg')",
         'textured-paper': "url('/images/background/bg-textured-paper.jpg')",
       },
       colors: {

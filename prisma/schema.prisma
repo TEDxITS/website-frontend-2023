@@ -27,3 +27,12 @@ model LocalSpeaker {
   reason_to_join    String
   created_at        DateTime @default(now())
 }
+
+model Anthropocene {
+  id         String   @id @default(cuid())
+  src        String?
+  thumbnail  String?
+  caption    String
+  type       String
+  created_at DateTime @default(now())
+}

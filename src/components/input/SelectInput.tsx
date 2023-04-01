@@ -6,6 +6,7 @@ import clsxm from '@/utils/clsxm';
 
 type SelectInputProps = {
   id: string;
+  labelClassName?: string;
   helperText?: React.ReactNode | string;
   label?: React.ReactNode | string;
   showError?: boolean;
@@ -16,6 +17,7 @@ type SelectInputProps = {
 export default function SelectInput({
   id,
   className,
+  labelClassName,
   label = '',
   helperText,
   showError = true,
@@ -30,7 +32,9 @@ export default function SelectInput({
 
   return (
     <div className='block w-full space-y-1'>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className={labelClassName}>
+        {label}
+      </label>
       <p className='text-xs text-ccream'>{topHelperText}</p>
       <div className='flex items-center'>
         <select
