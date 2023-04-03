@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
-import ItemDetailContainer from '@/containers/anthropocene/ItemDetailContainer';
+import ItemGalleryContainer from '@/containers/anthropocene/ItemGalleryContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
@@ -19,11 +19,7 @@ export const metadata: Metadata = {
 // Revalidate on every request (same as getServerSideProps)
 export const dynamic = 'force-dynamic';
 
-export default async function AnthropoceneDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function AnthropocenePage() {
   return (
     <div
       className='bg-7-years-repeat'
@@ -38,7 +34,7 @@ export default async function AnthropoceneDetailPage({
           fallback={<p className='py-10 text-center text-lg'>Loading..</p>}
         >
           {/* @ts-expect-error Server Component */}
-          <ItemDetailContainer itemId={params.id} />
+          <ItemGalleryContainer />
         </Suspense>
       </main>
       <NormalFooter theme='7-years' />
