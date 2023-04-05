@@ -24,5 +24,5 @@ export default async function ItemDatabaseContainer() {
       </p>
     );
   }
-  return <ItemDatabaseTable items={items.data} />;
+  return <ItemDatabaseTable data={items.data ? items.data : []} />;
 }
