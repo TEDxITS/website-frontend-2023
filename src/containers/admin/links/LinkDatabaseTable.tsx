@@ -45,7 +45,8 @@ const columns: ColumnDef<ShortUrlTableProps>[] = [
           className='w-1/2 p-1 transition duration-300 hover:-translate-y-1'
           onClick={() =>
             copyToClipboard(
-              window.location.origin + '/links/' + props.row.original.short_url
+              window.location.origin + '/links/' + props.row.original.short_url,
+              'Short link'
             )
           }
         >

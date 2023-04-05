@@ -1,10 +1,10 @@
 import { toast } from 'react-hot-toast';
 
-export default async function copyToClipboard(text: string) {
+export default async function copyToClipboard(text: string, msg: string) {
   if (navigator.clipboard) {
     try {
       await navigator.clipboard.writeText(text);
-      toast.success('Short link copied to clipboard');
+      toast.success(`${msg} copied to clipboard`);
     } catch (err) {
       toast.error('Error copying to clipboard');
     }
