@@ -87,11 +87,7 @@ export default async function ItemDetailContainer({
               </div>
               <div className='mx-auto w-full lg:w-1/4'>
                 <p className='my-16 ml-10 text-xl font-semibold md:text-3xl'>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Veritatis illo ipsam error deserunt voluptas, reiciendis
-                  doloribus eos nobis voluptatum laudantium mollitia incidunt
-                  vero maiores accusantium odit vel nostrum! Cumque,
-                  reprehenderit!
+                  {itemDetail.data.caption}
                 </p>
               </div>
             </>
