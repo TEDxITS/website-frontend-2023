@@ -50,7 +50,7 @@ function LinkModal({
           <div className='flex items-center rounded-md rounded-l-none bg-black'>
             <Button
               variant='unstyled'
-              onClick={() => copyToClipboard(fullShortLink)}
+              onClick={() => copyToClipboard(fullShortLink, 'Link')}
             >
               <MdContentCopy className='h-5 w-5 text-green-200' />
             </Button>

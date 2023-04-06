@@ -1,14 +1,12 @@
 'use client';
 import { Anthropocene } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
-import { MdContentCopy } from 'react-icons/md';
 
 import UnderlineLink from '@/components/link/UnderlineLink';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import Table from '@/components/table/Table';
 import DeleteItemButton from '@/containers/admin/anthropocene/DeleteItemButton';
-
-import copyToClipboard from '@/utils/copy';
+import EditItemModal from '@/containers/admin/anthropocene/EditItemModal';
 
 const columns: ColumnDef<Anthropocene>[] = [
   {
@@ -51,15 +49,8 @@ const columns: ColumnDef<Anthropocene>[] = [
     accessorKey: 'id',
     header: 'Action',
     cell: (props) => (
-      <div className='flex'>
-        <button
-          className='w-1/2 p-1 transition duration-300 hover:-translate-y-1'
-          onClick={() =>
-            copyToClipboard(props.row.original.src as string, 'Source item')
-          }
-        >
-          <MdContentCopy className='h-5 w-5 text-green-500 ' />
-        </button>
+      <div className='flex gap-x-2'>
+        <EditItemModal initialValue={props.row.original} />
         <DeleteItemButton
           id={props.getValue() as string}
           sourceItem={props.row.original.src as string}

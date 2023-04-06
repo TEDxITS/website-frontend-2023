@@ -4,14 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import DeleteItemButton from '@/containers/admin/anthropocene/DeleteItemButton';
+import EditItemModal from '@/containers/admin/anthropocene/EditItemModal';
+
 import bgTexturedPaper from '~/images/background/bg-textured-paper.jpg';
 /* eslint-disable @next/next/no-img-element */
 
 interface ItemGalleryProps {
   items: Anthropocene[];
+  userRole?: string;
 }
 
-export default function ItemGallery({ items }: ItemGalleryProps) {
+export default function ItemGallery({ items, userRole }: ItemGalleryProps) {
   const [type, setType] = useState<string>('all');
   const [filterItem, setFilterItem] = useState<Anthropocene[]>([]);
 
@@ -54,8 +58,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
         {filterItem.map((item) => {
           if (item.type === 'caption') {
             return (
-              <Link key={item.id} href={`/anthropocene/${item.id}`}>
-                <div className=' h-80 w-80 overflow-hidden transition delay-200 duration-200 ease-in hover:scale-110'>
+              <div key={item.id}>
+                <div className='w-80 overflow-hidden transition duration-200 ease-in hover:scale-110'>
                   <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
                     <Image
                       src={bgTexturedPaper}
@@ -66,72 +70,103 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                     />
                     <div className='relative flex h-full w-full items-center'>
                       <div className='relative mx-auto border border-black p-4'>
-                        <h1 className='mx-auto text-center text-xl font-semibold'>
+                        <h1 className='mx-auto text-center font-baron text-xl font-semibold'>
                           {item.caption}
                         </h1>
                       </div>
                     </div>
                   </div>
+                  <div className='mt-3 mb-10'></div>
                 </div>
-              </Link>
+                {userRole === 'admin' && (
+                  <div className='mt-5 flex justify-end gap-x-2'>
+                    <EditItemModal initialValue={item} />
+                    <DeleteItemButton
+                      id={item.id}
+                      sourceItem={item.src || ''}
+                    />
+                  </div>
+                )}
+              </div>
             );
           } else if (item.type === 'photo') {
             return (
-              <Link key={item.id} href={`/anthropocene/${item.id}`}>
-                <div className=' h-80 w-80 overflow-hidden transition delay-200 duration-200 ease-in hover:scale-110'>
-                  <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
-                    <Image
-                      src={bgTexturedPaper}
-                      alt='textured paper'
-                      fill
-                      className='absolute z-0 object-cover opacity-100'
-                      placeholder='blur'
-                    />
-                    <div className='relativ flex h-full items-center'>
-                      <img
-                        alt={item.caption}
-                        src={item.src || ''}
-                        className='z-10'
+              <div key={item.id}>
+                <Link href={`/anthropocene/${item.id}`}>
+                  <div className='w-80 transition duration-200 ease-in hover:scale-110'>
+                    <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
+                      <Image
+                        src={bgTexturedPaper}
+                        alt='textured paper'
+                        fill
+                        className='absolute z-0 object-cover opacity-100'
+                        placeholder='blur'
                       />
+                      <div className='relative flex flex h-full items-center justify-center'>
+                        <img
+                          alt={item.caption}
+                          src={item.thumbnail || ''}
+                          className='h-full w-full object-contain'
+                        />
+                      </div>
                     </div>
-                    <div className='mx-auto mt-4 flex w-full text-base'>
+                    <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
                       <span className='mx-auto font-primary font-semibold text-cblack'>
-                        {' '}
-                        {item.caption}{' '}
+                        {item.caption}
                       </span>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+                {userRole === 'admin' && (
+                  <div className='mt-5 flex justify-end gap-x-2'>
+                    <EditItemModal initialValue={item} />
+                    <DeleteItemButton
+                      id={item.id}
+                      sourceItem={item.src || ''}
+                    />
+                  </div>
+                )}
+              </div>
             );
           } else if (item.type === 'video') {
             return (
-              <Link key={item.id} href={`/anthropocene/${item.id}`}>
-                <div className=' h-80 w-80 overflow-hidden transition delay-200 duration-200 ease-in hover:scale-110'>
-                  <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
-                    <Image
-                      src={bgTexturedPaper}
-                      alt='textured paper'
-                      fill
-                      className='absolute z-0 object-cover opacity-100'
-                      placeholder='blur'
-                    />
-                    <div className='relativ flex h-full items-center'>
-                      <img
-                        alt={item.caption}
-                        src={item.thumbnail || ''}
-                        className='z-10'
+              <div key={item.id}>
+                <Link href={`/anthropocene/${item.id}`}>
+                  <div className='w-80 overflow-hidden transition  duration-200 ease-in hover:scale-110'>
+                    <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
+                      <Image
+                        src={bgTexturedPaper}
+                        alt='textured paper'
+                        fill
+                        className='absolute z-0 object-cover opacity-100'
+                        placeholder='blur'
                       />
+                      <div className='relative flex h-full items-center'>
+                        <img
+                          alt={item.caption}
+                          src={item.thumbnail || ''}
+                          className='z-10'
+                        />
+                      </div>
                     </div>
-                    <div className='mx-auto mt-4 flex w-full text-base'>
+                    <div className='mx-auto mt-3 mb-10 flex w-full text-base'>
                       <span className='mx-auto font-primary font-semibold text-cblack'>
                         {' '}
                         {item.caption}{' '}
                       </span>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+                {userRole === 'admin' && (
+                  <div className='mt-5 flex justify-end gap-x-2'>
+                    <EditItemModal initialValue={item} />
+                    <DeleteItemButton
+                      id={item.id}
+                      sourceItem={item.src || ''}
+                    />
+                  </div>
+                )}
+              </div>
             );
           }
         })}

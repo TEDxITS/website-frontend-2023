@@ -33,7 +33,6 @@ export const getCurrentUser = async () => {
     return userDataWithRoles;
   } catch (error) {
     // TODO: Handle server error
-
     return null;
   }
 };

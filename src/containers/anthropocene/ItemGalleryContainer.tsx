@@ -1,5 +1,7 @@
+import AddItemModal from '@/containers/admin/anthropocene/AddItemModal';
 import ItemGallery from '@/containers/anthropocene/ItemGallery';
 
+import { getCurrentUser } from '@/utils/firebase/server';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
 
@@ -17,6 +19,7 @@ async function getItems() {
 
 export default async function ItemGalleryContainer() {
   const items = await getItems();
+  const user = await getCurrentUser();
   if (!items.data) {
     return (
       <p className='py-10 text-center text-lg'>
@@ -24,5 +27,14 @@ export default async function ItemGalleryContainer() {
       </p>
     );
   }
-  return <ItemGallery items={items.data} />;
+  return (
+    <>
+      {user && user.role === 'admin' && (
+        <div className='layout my-2 flex justify-end'>
+          <AddItemModal />
+        </div>
+      )}
+      <ItemGallery items={items.data} userRole={user?.role} />;
+    </>
+  );
 }

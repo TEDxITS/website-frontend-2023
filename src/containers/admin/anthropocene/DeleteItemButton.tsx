@@ -77,7 +77,7 @@ function DeleteModal({
   );
 }
 
-export default function DeleteButton({
+export default function DeleteItemButton({
   id,
   sourceItem,
 }: {
@@ -95,9 +95,10 @@ export default function DeleteButton({
       />
       <button
         onClick={() => setIsOpen(true)}
-        className='transition duration-300 hover:-translate-y-1'
+        className='inline-flex gap-x-2 rounded-md bg-cred p-2 text-white transition duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-cred focus:ring-offset-2 focus:ring-offset-gray-50'
       >
-        <MdDelete className='h-5 w-5 text-cred' />
+        <MdDelete className='h-5 w-5 text-white' />
+        Delete
       </button>
     </>
   );
