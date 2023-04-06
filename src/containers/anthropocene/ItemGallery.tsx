@@ -88,7 +88,11 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                       placeholder='blur'
                     />
                     <div className='relativ flex h-full items-center'>
-                      <img alt={item.caption} src={item.src} className='z-10' />
+                      <img
+                        alt={item.caption}
+                        src={item.src || ''}
+                        className='z-10'
+                      />
                     </div>
                     <div className='mx-auto mt-4 flex w-full text-base'>
                       <span className='mx-auto font-primary font-semibold text-cblack'>
@@ -115,7 +119,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                     <div className='relativ flex h-full items-center'>
                       <img
                         alt={item.caption}
-                        src={item.thumbnail}
+                        src={item.thumbnail || ''}
                         className='z-10'
                       />
                     </div>
