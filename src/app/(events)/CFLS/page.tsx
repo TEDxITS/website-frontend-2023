@@ -74,7 +74,7 @@ export default async function CFLSPage({
           }
         />
       </main>
-      <NormalFooter theme='7-years' />
+      <NormalFooter theme='7-years' textColor='black' />
     </div>
   );
 }

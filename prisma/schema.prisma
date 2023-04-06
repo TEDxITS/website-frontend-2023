@@ -29,10 +29,11 @@ model LocalSpeaker {
 }
 
 model Anthropocene {
-  id         String   @id @default(cuid())
-  src        String?
-  thumbnail  String?
-  caption    String
-  type       String
-  created_at DateTime @default(now())
+  id          String   @id @default(cuid())
+  src         String?
+  article_src String?  @default("")
+  thumbnail   String?
+  caption     String
+  type        String
+  created_at  DateTime @default(now())
 }

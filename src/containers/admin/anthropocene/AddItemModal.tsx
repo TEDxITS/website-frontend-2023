@@ -17,6 +17,7 @@ const itemSchema = z.object({
   src: z.string().optional(),
   thumbnail: z.string().optional(),
   caption: z.string().min(1, { message: 'The caption cannot be empty' }),
+  article_src: z.string().optional(),
 });
 
 type itemType = z.infer<typeof itemSchema>;
@@ -26,6 +27,7 @@ const itemInitialValue: itemType = {
   src: '',
   thumbnail: '',
   caption: '',
+  article_src: '',
 };
 
 function getThumbnailLink(url: string): string | null {
@@ -138,16 +140,31 @@ export default function AddItemModal() {
               <option value='photo'>Photo</option>
               <option value='video'>Video</option>
               <option value='caption'>Caption</option>
+              <option value='article'>Article</option>
             </SelectInput>
-            {(watch('type') === 'video' || watch('type') === 'photo') && (
+            {(watch('type') === 'video' ||
+              watch('type') === 'photo' ||
+              watch('type') === 'article') && (
               <Input
                 id='src'
-                label={`Link to ${watch('type')}`}
+                label={
+                  watch('type') === 'article'
+                    ? 'Article screenshot link'
+                    : `Link to ${watch('type')}`
+                }
                 topHelperText={
                   <div className='text-gray-600'>
                     make sure the {watch('type')} link is public
                   </div>
                 }
+                className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
+                labelClassName='block text-sm font-medium text-gray-900'
+              />
+            )}
+            {watch('type') === 'article' && (
+              <Input
+                id='article_src'
+                label='Article link'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
                 labelClassName='block text-sm font-medium text-gray-900'
               />

@@ -1,11 +1,9 @@
-import Image from 'next/image';
-
+/* eslint-disable @next/next/no-img-element */
 import BackButton from '@/components/button/BackButton';
 
+import clsxm from '@/utils/clsxm';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
-
-import bgTexturedPaper from '~/images/background/bg-textured-paper.jpg';
 
 function convertYoutubeLinkToEmbed(link: string) {
   const videoId = link.split('v=')[1];
@@ -48,35 +46,33 @@ export default async function ItemDetailContainer({
   }
 
   return (
-    <div>
-      <div className='mx-auto w-10/12'>
+    <div className='py-10 sm:mb-16 md:h-screen'>
+      <div className='mx-auto mb-10 flex w-10/12 justify-end'>
         <BackButton />
       </div>
-      <div className='relative mx-auto h-full w-10/12 shadow-lg shadow-black/50'>
-        <Image
-          src={bgTexturedPaper}
-          alt='textured paper'
-          fill
-          className='absolute object-cover'
-          placeholder='blur'
-        />
-        <div className='relative z-20 mx-12 lg:mx-24 lg:flex'>
+      <div className='relative mx-auto h-[90%] w-10/12'>
+        <div className='relative z-20 h-full md:flex'>
           {itemDetail.data.type === 'photo' && (
             <>
-              <div className='my-auto w-full lg:w-3/4'>
-                <Image
+              <div
+                className={clsxm(
+                  'relative mb-5 flex h-full w-full justify-center p-3 sm:mb-0',
+                  itemDetail.data.caption && 'md:w-3/4'
+                )}
+              >
+                <img
                   src={itemDetail.data.src || ''}
-                  width={500}
-                  height={500}
                   alt='image'
-                  className='mx-auto w-full object-contain lg:my-16'
+                  className='border-[20px] border-cwhite bg-cwhite object-contain shadow-xl'
                 />
               </div>
-              <div className='mx-auto w-full lg:w-1/4'>
-                <p className='my-16 text-xl font-semibold md:text-3xl lg:ml-10'>
-                  {itemDetail.data.caption}
-                </p>
-              </div>
+              {itemDetail.data.caption && (
+                <div className='mx-auto w-full bg-textured-paper p-3 shadow-lg shadow-black/50 sm:p-5 md:w-1/4'>
+                  <p className='text-xl font-semibold md:text-3xl'>
+                    {itemDetail.data.caption}
+                  </p>
+                </div>
+              )}
             </>
           )}
           {itemDetail.data.type === 'video' && (

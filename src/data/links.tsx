@@ -126,3 +126,36 @@ export const socialMediaLinks: SoialMediaLinkType[] = [
     ),
   },
 ];
+
+export const darkSocialMediaLinks: SoialMediaLinkType[] = [
+  {
+    href: 'https://www.instagram.com/tedxits/',
+    label: 'Instagram',
+    logo: (
+      <InstagramLogoIllustration
+        className='h-8 hover:cursor-pointer md:h-7'
+        pathClassName='duration-150 transition-all fill-black'
+      />
+    ),
+  },
+  {
+    href: 'https://twitter.com/TEDxITS',
+    label: 'Twitter',
+    logo: (
+      <TwitterLogoIllustration
+        className='h-8 hover:cursor-pointer md:h-7'
+        pathClassName='duration-150 transition-all fill-black'
+      />
+    ),
+  },
+  {
+    href: 'https://www.linkedin.com/company/tedxits/',
+    label: 'LinkedIn',
+    logo: (
+      <LinkedinLogoIllustration
+        className='h-8 hover:cursor-pointer md:h-7'
+        pathClassName='duration-150 transition-all fill-black'
+      />
+    ),
+  },
+];

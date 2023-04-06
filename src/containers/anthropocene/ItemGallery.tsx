@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import UnstyledLink from '@/components/link/UnstyledLink';
 import DeleteItemButton from '@/containers/admin/anthropocene/DeleteItemButton';
 import EditItemModal from '@/containers/admin/anthropocene/EditItemModal';
 
@@ -24,6 +25,7 @@ export default function ItemGallery({ items, userRole }: ItemGalleryProps) {
     { type: 'video' },
     { type: 'photo' },
     { type: 'caption' },
+    { type: 'article' },
   ];
 
   useEffect(() => {
@@ -78,6 +80,45 @@ export default function ItemGallery({ items, userRole }: ItemGalleryProps) {
                   </div>
                   <div className='mt-3 mb-10'></div>
                 </div>
+                {userRole === 'admin' && (
+                  <div className='mt-5 flex justify-end gap-x-2'>
+                    <EditItemModal initialValue={item} />
+                    <DeleteItemButton
+                      id={item.id}
+                      sourceItem={item.src || ''}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          } else if (item.type === 'article') {
+            return (
+              <div key={item.id}>
+                <UnstyledLink href={item.article_src || ''} openNewTab>
+                  <div className='w-80 transition duration-200 ease-in hover:scale-110'>
+                    <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-72'>
+                      <Image
+                        src={bgTexturedPaper}
+                        alt='textured paper'
+                        fill
+                        className='absolute z-0 object-cover opacity-100'
+                        placeholder='blur'
+                      />
+                      <div className='relative flex flex h-full items-center justify-center'>
+                        <img
+                          alt={item.caption}
+                          src={item.thumbnail || ''}
+                          className='h-full w-full object-contain'
+                        />
+                      </div>
+                    </div>
+                    <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
+                      <span className='mx-auto font-primary font-semibold text-cblack'>
+                        {item.caption}
+                      </span>
+                    </div>
+                  </div>
+                </UnstyledLink>
                 {userRole === 'admin' && (
                   <div className='mt-5 flex justify-end gap-x-2'>
                     <EditItemModal initialValue={item} />

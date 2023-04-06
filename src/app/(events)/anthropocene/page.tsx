@@ -33,7 +33,7 @@ export default async function AnthropocenePage() {
     >
       <Header theme='7-years' />
       <main className='flex min-h-screen flex-col items-center overflow-x-hidden'>
-        <div className='relative mt-10 mb-10 flex w-full items-center justify-center sm:mt-20 sm:w-3/4'>
+        <div className='relative mt-10 mb-20 flex w-full items-center justify-center sm:mt-20 sm:w-3/4'>
           <Image
             src={bgCircularOrnament}
             alt='ornament'
@@ -69,7 +69,7 @@ export default async function AnthropocenePage() {
           <ItemGalleryContainer />
         </Suspense>
       </main>
-      <NormalFooter theme='7-years' />
+      <NormalFooter theme='7-years' textColor='black' />
     </div>
   );
 }

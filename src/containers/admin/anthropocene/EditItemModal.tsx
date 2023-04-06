@@ -19,6 +19,7 @@ const itemSchema = z.object({
   src: z.string().optional(),
   thumbnail: z.string().optional(),
   caption: z.string().min(1, { message: 'The caption cannot be empty' }),
+  article_src: z.string().optional(),
 });
 
 type itemType = z.infer<typeof itemSchema>;
@@ -54,7 +55,6 @@ export default function EditItemModal({
   initialValue: Anthropocene;
 }) {
   const router = useRouter();
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const methods = useForm<itemType>({
     mode: 'onTouched',
     resolver: zodResolver(itemSchema),
@@ -145,12 +145,18 @@ export default function EditItemModal({
               <option value='photo'>Photo</option>
               <option value='video'>Video</option>
               <option value='caption'>Caption</option>
+              <option value='article'>Article</option>
             </SelectInput>
             {(initialValue.type === 'video' ||
-              initialValue.type === 'photo') && (
+              initialValue.type === 'photo' ||
+              initialValue.type === 'article') && (
               <Input
                 id='src'
-                label={`Link to ${initialValue.type}`}
+                label={
+                  initialValue.type === 'article'
+                    ? 'Article screenshot link'
+                    : `Link to ${initialValue.type}`
+                }
                 topHelperText={
                   <div className='text-gray-600'>
                     make sure the {initialValue.type} link is public
@@ -159,6 +165,15 @@ export default function EditItemModal({
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
                 labelClassName='block text-sm font-medium text-gray-900'
                 defaultValue={initialValue.src || ''}
+              />
+            )}
+            {initialValue.type === 'article' && (
+              <Input
+                id='article_src'
+                label='Article link'
+                className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
+                labelClassName='block text-sm font-medium text-gray-900'
+                defaultValue={initialValue.article_src || ''}
               />
             )}
             <TextAreaInput

@@ -33,7 +33,7 @@ export default async function AnthropocenePage({
       }}
     >
       <Header theme='7-years' />
-      <main className='min-h-screen'>
+      <main className='min-h-[80vh] sm:min-h-screen'>
         <Suspense
           fallback={<p className='py-10 text-center text-lg'>Loading..</p>}
         >
@@ -41,7 +41,7 @@ export default async function AnthropocenePage({
           <ItemDetailContainer itemId={params.id} />
         </Suspense>
       </main>
-      <NormalFooter theme='7-years' />
+      <NormalFooter theme='7-years' textColor='black' />
     </div>
   );
 }
