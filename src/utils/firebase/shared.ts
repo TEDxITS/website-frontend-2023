@@ -12,7 +12,7 @@ export const handleFirebaseError = (error: {
     case 'auth/user-not-found':
       return 'User account not found.';
     case 'auth/wrong-password':
-      return 'Incorrect password.';
+      return 'Incorrect email or password.';
     case 'auth/email-already-in-use':
       return 'Email address already in use.';
     case 'auth/weak-password':
@@ -20,7 +20,7 @@ export const handleFirebaseError = (error: {
     case 'auth/popup-closed-by-user':
       return 'Login cancelled.';
     case 'auth/internal-error':
-      return 'Incorrect password.';
+      return 'Incorrect email or password.';
     default:
       return 'An error occurred.';
   }

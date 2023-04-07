@@ -1,17 +1,14 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
-import Button from '@/components/button/Button';
-import UnstyledLink from '@/components/link/UnstyledLink';
-import ComingSoonFooter from '@/containers/coming-soon/ComingSoonFooter';
-import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
+import { NormalFooter } from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
+import ItemGalleryContainer from '@/containers/anthropocene/ItemGalleryContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
-import comingSoon from '~/images/coming-soon/coming-soon.png';
-import comingsoonBg from '~/images/coming-soon/coming-soon-bg-alt-2.png';
-import leftBg from '~/images/coming-soon/left-bg.png';
-import rightBg from '~/images/coming-soon/right-bg.png';
+import bgCircularOrnament from '~/images/call-for-local-speaker/bg-ornament-3.png';
 
 const metadataObject = generateTemplateMetadata(
   'Cities and Anthropocene',
@@ -22,66 +19,57 @@ export const metadata: Metadata = {
   ...metadataObject,
 };
 
-export default function ComingSoonPage() {
+// Revalidate on every request (same as getServerSideProps)
+export const dynamic = 'force-dynamic';
+
+export default async function AnthropocenePage() {
   return (
-    <RandomStarfieldContainer className='bg-black'>
-      <div className='absolute z-30 flex h-full w-full flex-col items-center justify-between'>
-        <section className='h-1/4 sm:h-1/3'></section>
-        <section className='flex h-[40%] w-full flex-col items-center justify-center px-4 sm:px-0'>
-          <h2 className='font-baron text-white'>CITIES AND ANTHROPOCENE</h2>
-          <div className='relative h-full w-full sm:w-1/2'>
-            <Image
-              src={comingSoon}
-              alt='Coming Soon Title'
-              className='absolute z-30'
-              fill
-              style={{ objectFit: 'contain' }}
-              placeholder='blur'
-            />
-          </div>
-          <h1 className='sr-only'>Coming Soon</h1>
-          <h3 className='mb-12 text-center font-primary text-[1.3rem] font-semibold text-white'>
-            Stay tuned as we will guide you to #ExpectTheUnexpected
-          </h3>
-          <UnstyledLink href='https://www.instagram.com/tedxits/' openNewTab>
-            <Button className='px-8'>
-              <p className='font-primary'>EXPLORE HERE</p>
-            </Button>
-          </UnstyledLink>
-        </section>
-        <ComingSoonFooter />
-      </div>
-      {/* Large Background */}
-      <Image
-        src={comingsoonBg}
-        alt='Background'
-        className='absolute z-20 hidden sm:block'
-        fill
-        style={{ objectFit: 'cover' }}
-        placeholder='blur'
-        priority
-      />
-      {/* Mobile Background */}
-      <div className='absolute bottom-36 -right-32 z-20 h-1/2 w-full rotate-12'>
-        <Image
-          src={rightBg}
-          alt='Background'
-          className='absolute block sm:hidden'
-          fill
-          style={{ objectFit: 'contain' }}
-          placeholder='blur'
-        />
-      </div>
-      <div className='absolute top-5 -left-24 z-20 h-1/2 w-full rotate-12'>
-        <Image
-          src={leftBg}
-          alt='Background'
-          className='absolute block sm:hidden'
-          fill
-          style={{ objectFit: 'contain' }}
-          placeholder='blur'
-        />
-      </div>
-    </RandomStarfieldContainer>
+    <div
+      className='bg-7-years-repeat'
+      style={{
+        backgroundSize: '100%',
+        backgroundRepeat: 'repeat-y',
+      }}
+    >
+      <Header theme='7-years' />
+      <main className='flex min-h-screen flex-col items-center overflow-x-hidden'>
+        <div className='relative mt-10 mb-20 flex w-full items-center justify-center sm:mt-20 sm:w-3/4'>
+          <Image
+            src={bgCircularOrnament}
+            alt='ornament'
+            className='absolute -top-16 -right-16 h-32 w-32 animate-spin sm:h-56 sm:w-56'
+            placeholder='blur'
+          />
+          <Image
+            src={bgCircularOrnament}
+            alt='ornament'
+            className='absolute -left-16 top-4 h-36 w-36 animate-spin sm:h-60 sm:w-60'
+            placeholder='blur'
+          />
+          <Image
+            src={bgCircularOrnament}
+            alt='ornament'
+            className='absolute inset-x-1/3 -top-10 hidden h-40 w-40 animate-spin-reverse md:block'
+            placeholder='blur'
+          />
+          <Image
+            src={bgCircularOrnament}
+            alt='ornament'
+            className='absolute inset-x-1/2 -bottom-10 h-32 w-32 animate-spin-reverse sm:-bottom-16 sm:h-40 sm:w-40'
+            placeholder='blur'
+          />
+          <h1 className='relative bg-white bg-textured-paper py-10 px-4 text-center font-quaker text-3xl shadow-xl sm:px-20 sm:text-6xl'>
+            ANTHROPOCENE
+          </h1>
+        </div>
+        <Suspense
+          fallback={<p className='py-10 text-center text-lg'>Loading..</p>}
+        >
+          {/* @ts-expect-error Server Component */}
+          <ItemGalleryContainer />
+        </Suspense>
+      </main>
+      <NormalFooter theme='7-years' textColor='black' />
+    </div>
   );
 }

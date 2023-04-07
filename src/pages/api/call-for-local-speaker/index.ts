@@ -14,14 +14,6 @@ export default async function handler(
 ) {
   const method = req.method;
   switch (method) {
-    case 'GET':
-      await addRowToSheet(
-        process.env.CALL_FOR_LOCAL_SPEAKER_SPREADSHEET_ID || '',
-        {
-          full_name: 'Test',
-        }
-      );
-      break;
     case 'POST':
       await createLocalSpeaker(req, res);
       break;

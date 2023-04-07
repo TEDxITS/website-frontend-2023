@@ -70,7 +70,13 @@ export default function AuthHeaderLink({
             >
               <Popover.Panel className='absolute left-1/2 z-10 mt-3 w-40 max-w-sm -translate-x-1/2 transform px-4 drop-shadow-xl sm:px-0 lg:max-w-3xl'>
                 <div className='overflow-hidden rounded-b-lg shadow-lg'>
-                  <div className='relative grid border-[10px] border-cgray bg-black shadow-inner'>
+                  <div
+                    className={clsxm(
+                      'grid border-[10px] bg-black shadow-inner',
+                      theme === '50-years' && 'border-cgray',
+                      theme === '7-years' && 'border-[#457493]'
+                    )}
+                  >
                     {user.email === 'admin@tedxits.org' && (
                       <Link
                         href='/admin'
@@ -87,7 +93,13 @@ export default function AuthHeaderLink({
                       <span className='ml-2 pb-1'>Logout</span>
                     </button>
                   </div>
-                  <div className='h-4 rounded-b-lg bg-cgray'></div>
+                  <div
+                    className={clsxm(
+                      'h-4 rounded-b-lg',
+                      theme === '50-years' && 'bg-cgray',
+                      theme === '7-years' && 'bg-[#457493]'
+                    )}
+                  ></div>
                 </div>
               </Popover.Panel>
             </Transition>

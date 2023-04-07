@@ -82,5 +82,8 @@
     "**/*.{json,css,scss,md,webmanifest}": [
       "prettier -w"
     ]
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }

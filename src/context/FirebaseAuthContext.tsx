@@ -15,6 +15,7 @@ import { removeFirebaseIdToken, setFirebaseIdToken } from '@/utils/token';
 interface FirebaseUserType {
   email: string | undefined | null;
   uid: string | undefined | null;
+  role: string | undefined | null;
 }
 
 type FirebaseAuthContextType = {
@@ -33,6 +34,7 @@ const FirebaseAuthContext = React.createContext<FirebaseAuthContextType>(
 const initialUser: FirebaseUserType = {
   email: null,
   uid: null,
+  role: null,
 };
 
 function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
@@ -98,12 +100,13 @@ function FirebaseAuthProvider({ children }: { children: React.ReactNode }) {
         setUser({
           email: user.email,
           uid: user.uid,
+          role: user.email === 'admin@tedxits.org' ? 'admin' : 'user',
         });
         user.getIdToken().then((idToken) => {
           setFirebaseIdToken(idToken);
         });
       } else {
-        setUser({ email: null, uid: null });
+        setUser({ email: null, uid: null, role: null });
         removeFirebaseIdToken();
       }
       router.refresh();

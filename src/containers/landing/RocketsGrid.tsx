@@ -6,12 +6,12 @@ import Rocket from '@/containers/landing/Rocket';
 
 import BgGlass1 from '~/images/landing/cracked-bg.png';
 import BgGlass2 from '~/images/landing/cracked-bg-lg.png';
-import grayRocket3 from '~/images/landing/rockets/gray3.png';
 import grayRocket4 from '~/images/landing/rockets/gray4.png';
 import grayRocket5 from '~/images/landing/rockets/gray5.png';
 import grayRocket6 from '~/images/landing/rockets/gray6.png';
 import redRocket from '~/images/landing/rockets/red1.png';
 import redRocket2 from '~/images/landing/rockets/red2.png';
+import redRocket3 from '~/images/landing/rockets/red3.png';
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const rocketList = [
@@ -101,12 +101,18 @@ const rocketList = [
   },
   {
     id: 3,
-    src: grayRocket3,
-    alt: 'gray-rocket-3',
-    isComingSoon: true,
-    href: '#',
-    text: 'Coming-soon',
-    title: <></>,
+    src: redRocket3,
+    alt: 'red-rocket-3',
+    isComingSoon: false,
+    href: '/anthropocene',
+    text: 'Try me!',
+    title: (
+      <div className='absolute top-0 font-quaker'>
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-xl text-transparent xs:text-2xl sm:text-5xl'>
+          Anthropocene
+        </span>
+      </div>
+    ),
     className: '',
     animationSequenceFn: async function sequence(
       animationControls: AnimationControls

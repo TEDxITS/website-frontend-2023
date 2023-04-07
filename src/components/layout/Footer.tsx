@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { socialMediaLinks } from '@/data/links';
+import { darkSocialMediaLinks, socialMediaLinks } from '@/data/links';
 
 import UnderlineLink from '@/components/link/UnderlineLink';
 import UnstyledLink from '@/components/link/UnstyledLink';
@@ -54,10 +54,14 @@ export default function Footer({ className }: { className?: string }) {
 export function NormalFooter({
   className,
   theme = '50-years',
+  textColor = 'white',
 }: {
   className?: string;
   theme?: '50-years' | '7-years';
+  textColor?: 'white' | 'black';
 }) {
+  const socmedLinks =
+    textColor === 'white' ? socialMediaLinks : darkSocialMediaLinks;
   return (
     <div
       className={clsxm(
@@ -78,7 +82,7 @@ export function NormalFooter({
         />
         <footer className='layout relative flex flex-col items-center justify-center gap-8 pt-16'>
           <ul className='relative z-10 flex items-center gap-4'>
-            {socialMediaLinks.map(({ href, label, logo }) => (
+            {socmedLinks.map(({ href, label, logo }) => (
               <UnstyledLink
                 key={`${href}${label}`}
                 href={href}
@@ -91,7 +95,8 @@ export function NormalFooter({
           <p
             className={clsxm(
               'relative z-10 text-center text-cwhite',
-              theme === '7-years' && 'text-cwhite'
+              theme === '7-years' && 'text-cwhite',
+              textColor === 'black' && 'text-cblack'
             )}
           >
             <span>&#169;</span>2023 All Rights Reserved · This independent{' '}

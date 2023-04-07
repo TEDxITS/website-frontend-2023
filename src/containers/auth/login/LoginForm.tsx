@@ -44,7 +44,9 @@ export default function LoginForm() {
         success: 'Logged in successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => router.back())
+      .then(() => {
+        router.push('/');
+      })
       .catch((e) => e)
       .finally(() => {
         setIsLoading(false);
@@ -61,7 +63,7 @@ export default function LoginForm() {
         success: 'Logged in successfully',
         error: (e) => handleFirebaseError(e),
       })
-      .then(() => router.back())
+      .then(() => router.push('/'))
       .catch((e) => e)
       .finally(() => setIsLoading(false));
   };
