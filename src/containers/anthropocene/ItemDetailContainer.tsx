@@ -77,19 +77,26 @@ export default async function ItemDetailContainer({
           )}
           {itemDetail.data.type === 'video' && (
             <>
-              <div className='my-auto w-full lg:w-3/4'>
+              <div
+                className={clsxm(
+                  'relative mb-5 flex w-full justify-center p-3 sm:mb-0',
+                  itemDetail.data.caption && 'md:w-3/4'
+                )}
+              >
                 <iframe
                   title='Embedded Video'
                   src={convertYoutubeLinkToEmbed(itemDetail.data.src || '')}
                   allowFullScreen
-                  className='my-16 h-[500px] w-full object-contain'
+                  className='w-full object-contain'
                 />
               </div>
-              <div className='mx-auto w-full lg:w-1/4'>
-                <p className='my-16 ml-10 text-xl font-semibold md:text-3xl'>
-                  {itemDetail.data.caption}
-                </p>
-              </div>
+              {itemDetail.data.caption && (
+                <div className='mx-auto w-full bg-textured-paper p-3 shadow-lg shadow-black/50 sm:p-5 md:w-1/4'>
+                  <p className='text-xl font-semibold md:text-3xl'>
+                    {itemDetail.data.caption}
+                  </p>
+                </div>
+              )}
             </>
           )}
           {itemDetail.data.type === 'caption' && (

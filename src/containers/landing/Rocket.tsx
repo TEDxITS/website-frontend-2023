@@ -54,7 +54,6 @@ export default function Rocket({ rocket }: RocketProps) {
   const router = useRouter();
 
   const handleAnimation = () => {
-    router.prefetch(rocket.href);
     rocket
       .animationSequenceFn(animationControls)
       .then(() => router.push(rocket.href));

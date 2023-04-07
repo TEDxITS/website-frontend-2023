@@ -20,6 +20,7 @@ export const aboutLinks = [
 ];
 
 export const eventLinks = [
+  { href: '/anthropocene', label: 'Anthropocene' },
   { href: '/CFLS', label: 'Call for Local Speaker' },
   { href: '/voyagers-test', label: 'Voyagers Test' },
 ];
