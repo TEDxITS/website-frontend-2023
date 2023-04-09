@@ -11,3 +11,15 @@ export const removeFirebaseIdToken = () => {
 export const setFirebaseIdToken = (token: string) => {
   Cookies.set('tedxits2023-firebase', token);
 };
+
+export const getToken = (): string => {
+  return Cookies.get('tedxits2023-token') || '';
+};
+
+export const removeToken = () => {
+  Cookies.remove('tedxits2023-token');
+};
+
+export const setToken = (token: string) => {
+  Cookies.set('tedxits2023-token', token);
+};

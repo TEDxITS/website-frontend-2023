@@ -4,11 +4,7 @@ import GreetingText from '@/containers/admin/GreetingText';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
-const metadataObject = generateTemplateMetadata(
-  'Admin Dashboard',
-  '',
-  '/admin'
-);
+const metadataObject = generateTemplateMetadata('Dashboard', '', '/dashboard');
 export const metadata: Metadata = {
   ...metadataObject,
 };

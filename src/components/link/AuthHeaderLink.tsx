@@ -85,6 +85,12 @@ export default function AuthHeaderLink({
                         <span className='ml-2 pb-1'>Dashboard</span>
                       </Link>
                     )}
+                    <Link
+                      href='/dashboard/profile'
+                      className='space-y-1 border-b border-cgray py-0.5 font-baron text-green-300 hover:bg-green-300 hover:text-black'
+                    >
+                      <span className='ml-2 pb-1'>Profile</span>
+                    </Link>
                     <button
                       className='py-0.5 text-left font-baron text-green-300 hover:bg-green-300 hover:text-black'
                       onClick={logOutHandler}
