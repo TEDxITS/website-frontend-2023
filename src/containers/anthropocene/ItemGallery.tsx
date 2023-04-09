@@ -68,7 +68,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
             ))}
           </div>
         </div>
-        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-5 pt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-1 xl:gap-y-10'>
+        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-x-2 pt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {filterItem.map((item) => {
             if (item.type === 'caption') {
               return (
