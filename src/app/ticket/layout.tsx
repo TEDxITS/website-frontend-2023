@@ -11,10 +11,10 @@ export default async function TicketPageLayout({
 }) {
   return (
     <RandomStarfieldContainer>
-      <div className='absolute z-20 h-screen w-full overflow-y-auto'>
+      <div className='absolute z-20 h-screen w-full overflow-y-auto overflow-x-hidden'>
         <Header />
         {children}
-        <NormalFooter className='bg-transparent' />
+        <NormalFooter className='z-50 bg-transparent' />
       </div>
     </RandomStarfieldContainer>
   );
