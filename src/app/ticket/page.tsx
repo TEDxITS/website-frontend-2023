@@ -1,6 +1,11 @@
+'use client';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+
+import Button from '@/components/button/Button';
+import { Modal } from '@/components/modal/Modal';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
@@ -22,7 +27,8 @@ export const metadata: Metadata = {
   ...metadataObject,
 };
 
-export default async function TicketPage() {
+export default function TicketPage() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className='relative min-h-screen w-screen overflow-clip'>
       <div className='relative flex h-fit w-full flex-col items-center pt-32 text-white'>
@@ -59,7 +65,6 @@ export default async function TicketPage() {
           </h1>
         </div>
         <div className='mt-14 flex h-fit items-center justify-center gap-7 sm:mt-24 md:gap-11 xl:gap-16 '>
-          {/* ubah href */}
           <Link
             className='z-10 cursor-pointer rounded-lg border-[2.2px] border-cgreen px-2 duration-300 hover:-translate-y-3 hover:scale-125 xl:rounded-2xl xl:border-[3px] xl:px-3'
             href='/ticket/benefit'
@@ -76,14 +81,38 @@ export default async function TicketPage() {
               How To Buy?
             </h1>
           </Link>
-          <Link
+          <div
             className='z-10 cursor-pointer rounded-lg border-[2.2px] border-cgreen px-2 duration-300 hover:-translate-y-3 hover:scale-125 xl:rounded-2xl xl:border-[3px] xl:px-3'
-            href='/ticket/our-pilots'
+            onClick={() => setIsOpen(!isOpen)}
           >
             <h1 className='z-10 cursor-pointer font-primary text-xs font-medium xl:text-base'>
               Our Pilots
             </h1>
-          </Link>
+          </div>
+          <Modal
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            className='noisy border-[10px] border-cgray bg-black'
+          >
+            <div className='z-20 flex flex-col items-center justify-center'>
+              <h1 className='text-center font-baron text-xl text-cwhite sm:text-4xl'>
+                Coming Soon
+              </h1>
+              <p className='mt-4 mb-5 text-center text-base font-medium text-cwhite sm:text-lg'>
+                We're thrilled to announce that we'll be revealing our
+                incredible lineup of speakers very soon.
+                <br />
+                Stay tuned for updates on our social media.
+              </p>
+              <Button
+                variant='primary'
+                className='px-9 text-base xs:text-xl'
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                Back
+              </Button>
+            </div>
+          </Modal>
         </div>
         <Link href='/dashboard/tickets'>
           <h1 className='relative z-10 mt-24 cursor-pointer font-quaker text-base font-medium duration-300 hover:-translate-y-2 hover:scale-125 sm:mt-12 sm:text-xl md:text-2xl xl:text-3xl'>
