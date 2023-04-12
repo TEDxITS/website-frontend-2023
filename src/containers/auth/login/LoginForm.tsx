@@ -9,6 +9,7 @@ import * as z from 'zod';
 
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
+import UnstyledLink from '@/components/link/UnstyledLink';
 
 import api from '@/utils/api';
 import { handleFirebaseError } from '@/utils/firebase/shared';
@@ -79,6 +80,12 @@ export default function LoginForm() {
             label='Password'
             className='rounded-md'
           />
+          <UnstyledLink
+            href='/auth/forgot-password'
+            className='hover:opacity-50'
+          >
+            Forgot Password?
+          </UnstyledLink>
         </div>
         <Button type='submit' className='mb-4 w-full py-3' disabled={isLoading}>
           <p className='w-full text-center'>Login</p>
