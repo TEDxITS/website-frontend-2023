@@ -145,7 +145,7 @@ export default function TicketPage() {
       </div>
 
       {/* Background Property */}
-      <div className='absolute top-4 -left-20 z-10 w-full sm:top-6 sm:-left-56 lg:-left-64 xl:-left-[28rem]'>
+      <div className='absolute top-4 -left-20 z-0 w-full sm:top-6 sm:-left-56 lg:-left-64 xl:-left-[28rem]'>
         <Image
           src={satellite}
           alt='Satellite'
@@ -154,7 +154,7 @@ export default function TicketPage() {
           placeholder='blur'
         />
       </div>
-      <div className='absolute bottom-40 -left-16 z-10 w-full sm:bottom-56 sm:left-64 md:left-72 xl:left-[28rem]'>
+      <div className='absolute bottom-40 -left-16 z-0 w-full sm:bottom-56 sm:left-64 md:left-72 xl:left-[28rem]'>
         <Image
           src={spaceShuttle}
           alt='Space Shuttle'
@@ -163,7 +163,7 @@ export default function TicketPage() {
           placeholder='blur'
         />
       </div>
-      <div className='absolute bottom-32 -left-6 z-10 w-full sm:bottom-40 sm:left-72 md:left-80 xl:left-[28rem]'>
+      <div className='absolute bottom-32 -left-6 z-0 w-full sm:bottom-40 sm:left-72 md:left-80 xl:left-[28rem]'>
         <Image
           src={astronaut}
           alt='Astronaut'
