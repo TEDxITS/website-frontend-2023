@@ -31,7 +31,7 @@ export default function SidebarDashboard({
   return (
     <>
       {/* Desktop View */}
-      <aside className='noisy sticky top-0 hidden h-screen w-1/6 bg-white sm:block'>
+      <aside className='noisy sticky top-0 hidden h-screen w-1/6 bg-white lg:block'>
         <FullTEDLogo className='mt-8 h-20' />
         <nav className='mt-10 h-3/4 px-4'>
           <ul className='flex h-3/4 flex-col gap-y-2'>
@@ -82,7 +82,7 @@ export default function SidebarDashboard({
         </nav>
       </aside>
       {/* Mobile View */}
-      <aside className='flex items-center justify-between rounded-full py-3 px-7 sm:hidden'>
+      <aside className='flex items-center justify-between rounded-full py-3 px-7 lg:hidden'>
         <FullTEDLogo className='mt-5 h-10 w-24' variant='text' />
         <button
           className='p-1 text-cwhite'
@@ -130,7 +130,7 @@ export default function SidebarDashboard({
                 leaveFrom='opacity-100 translate-x-0'
                 leaveTo='opacity-80 -translate-x-full'
               >
-                <Dialog.Panel className='noisy relative flex h-screen w-[85%] flex-col bg-white shadow sm:hidden'>
+                <Dialog.Panel className='noisy relative flex h-screen w-[85%] flex-col bg-white shadow lg:hidden'>
                   <FullTEDLogo className='mt-8 h-20' />
                   <nav className='mt-10 h-3/4 px-4'>
                     <ul className='flex h-3/4 flex-col gap-y-2'>

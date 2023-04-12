@@ -10,7 +10,7 @@ const ButtonVariant = [
   'gradient',
   'gradient-alt',
 ] as const;
-const ButtonSize = ['sm', 'base'] as const;
+const ButtonSize = ['sm', 'base', 'lg', 'xl'] as const;
 
 type ButtonProps = {
   isLoading?: boolean;
@@ -52,6 +52,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'shadow-sm',
           'transition duration-200 ease-in-out',
           [
+            size === 'xl' && ['px-10 py-4', 'text-lg md:text-xl'],
+            size === 'lg' && ['px-5 py-2.5', 'text-base md:text-lg'],
             size === 'base' && ['px-5 py-2.5', 'text-sm md:text-base'],
             size === 'sm' && ['px-2 py-1', 'text-xs md:text-sm'],
           ],

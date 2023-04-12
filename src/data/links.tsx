@@ -117,9 +117,9 @@ export const dashboardLinks = [
     ),
   },
   {
-    href: '/dashboard/tickets',
-    label: 'Tickets',
-    segment: 'tickets',
+    href: '/dashboard/ticket',
+    label: 'Ticket',
+    segment: 'ticket',
     logo: (
       <svg
         xmlns='http://www.w3.org/2000/svg'
