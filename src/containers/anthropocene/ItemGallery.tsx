@@ -68,13 +68,13 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
             ))}
           </div>
         </div>
-        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-x-2 pt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-5 p-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {filterItem.map((item) => {
             if (item.type === 'caption') {
               return (
                 <div key={item.id}>
-                  <div className='w-64 overflow-hidden transition duration-200 ease-in hover:scale-110'>
-                    <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                  <div className='w-56 overflow-hidden transition duration-200 ease-in hover:scale-110'>
+                    <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                       <Image
                         src={bgTexturedPaper}
                         alt='textured paper'
@@ -83,14 +83,13 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                         placeholder='blur'
                       />
                       <div className='relative flex h-full w-full items-center'>
-                        <div className='relative mx-auto border border-black p-4'>
+                        <div className='relative mx-auto p-4'>
                           <h1 className='mx-auto text-center font-baron text-xl font-semibold'>
                             {item.caption}
                           </h1>
                         </div>
                       </div>
                     </div>
-                    <div className='mt-3 mb-10'></div>
                   </div>
                   {userRole === 'admin' && (
                     <div className='mt-5 flex justify-end gap-x-2'>
@@ -107,8 +106,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <UnstyledLink href={item.article_src || ''} openNewTab>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -123,11 +122,6 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                             className='h-full w-full object-contain'
                           />
                         </div>
-                      </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
                       </div>
                     </div>
                   </UnstyledLink>
@@ -146,8 +140,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <Link href={`/anthropocene/${item.id}`}>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -162,11 +156,6 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                             className='h-full w-full object-contain'
                           />
                         </div>
-                      </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
                       </div>
                     </div>
                   </Link>
@@ -185,8 +174,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <Link href={`/anthropocene/${item.id}`}>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -201,11 +190,6 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                             className='h-full w-full object-contain'
                           />
                         </div>
-                      </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
                       </div>
                     </div>
                   </Link>
