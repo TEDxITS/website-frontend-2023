@@ -33,7 +33,7 @@ const forgotPassword = async (email: string) => {
   }
 };
 
-export default function ForgotForm() {
+export default function ForgetForm() {
   const methods = useForm<ForgotPasswordDataType>({
     defaultValues: forgotPasswordFormInitialValue,
     mode: 'onTouched',
@@ -68,7 +68,7 @@ export default function ForgotForm() {
   return (
     <>
       {isSubmit && (
-        <Modal isOpen={isSubmit} setIsOpen={() => setIsSubmit(true)}>
+        <Modal isOpen={isSubmit} setIsOpen={() => setIsSubmit(!isSubmit)}>
           Kindly Check Your Email
         </Modal>
       )}
