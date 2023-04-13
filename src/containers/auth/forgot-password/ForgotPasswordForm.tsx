@@ -66,35 +66,46 @@ export default function ForgotForm() {
   };
 
   return (
-    <FormProvider {...methods}>
+    <>
       {isSubmit && (
         <Modal isOpen={isSubmit} setIsOpen={() => setIsSubmit(true)}>
           Kindly Check Your Email
         </Modal>
       )}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className='h-full w-full p-4 pt-6 text-cwhite'
-      >
-        <div className='mb-10'>
-          <Input id='email' type='email' label='Email' className='rounded-md' />
-        </div>
-        <Button type='submit' className='mb-4 w-full py-3' disabled={isLoading}>
-          <p className='w-full text-center'>Submit</p>
-        </Button>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='h-full w-full p-4 pt-6 text-cwhite'
+        >
+          <div className='mb-10'>
+            <Input
+              id='email'
+              type='email'
+              label='Email'
+              className='rounded-md'
+            />
+          </div>
+          <Button
+            type='submit'
+            className='mb-4 w-full py-3'
+            disabled={isLoading}
+          >
+            <p className='w-full text-center'>Submit</p>
+          </Button>
 
-        <p className='text-center text-cwhite'>
-          Don't have an account?
-          <span className='ml-1'>
-            <Link
-              href='/auth/register'
-              className='animated-underline font-medium hover:text-cred'
-            >
-              Register
-            </Link>
-          </span>
-        </p>
-      </form>
-    </FormProvider>
+          <p className='text-center text-cwhite'>
+            Don't have an account?
+            <span className='ml-1'>
+              <Link
+                href='/auth/register'
+                className='animated-underline font-medium hover:text-cred'
+              >
+                Register
+              </Link>
+            </span>
+          </p>
+        </form>
+      </FormProvider>
+    </>
   );
 }

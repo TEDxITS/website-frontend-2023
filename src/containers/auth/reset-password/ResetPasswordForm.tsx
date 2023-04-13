@@ -1,6 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -11,7 +12,7 @@ import Input from '@/components/input/Input';
 
 import api from '@/utils/api';
 
-const resetPasswordSchema = z
+const registerSchema = z
   .object({
     password: z
       .string()
@@ -23,39 +24,45 @@ const resetPasswordSchema = z
     path: ['confirm'],
   });
 
-type ResetPasswordDataType = z.infer<typeof resetPasswordSchema>;
+type ResetPasswordDataType = z.infer<typeof registerSchema>;
 
-const resetPasswordFormInitialValue: ResetPasswordDataType = {
+const RestartPasswordFormInitialValue: ResetPasswordDataType = {
   password: '',
   confirm: '',
 };
 
-const resetPassword = async (requestData: ResetPasswordDataType) => {
+const restartPassword = async (password: string, token: string) => {
   try {
-    const { data } = await api.post('/api/auth/reset-password', requestData);
+    const { data } = await api.post(`/auth/reset-password/${token}`, {
+      password,
+    });
     return data;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export default function ResetPasswordForm() {
+export default function RestartPasswordForm() {
+  const searchParams = useSearchParams();
+  const token = searchParams ? searchParams.get('token') : null;
+
   const router = useRouter();
   const methods = useForm<ResetPasswordDataType>({
-    defaultValues: resetPasswordFormInitialValue,
+    defaultValues: RestartPasswordFormInitialValue,
     mode: 'onTouched',
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(registerSchema),
   });
   const { handleSubmit, reset } = methods;
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const onSubmit: SubmitHandler<ResetPasswordDataType> = async (data) => {
     setIsLoading(true);
-    const resetPasswordPromise = resetPassword(data);
+    // if (token) {
+    const registerPromise = restartPassword(data.password, token ?? '');
     toast
-      .promise(resetPasswordPromise, {
+      .promise(registerPromise, {
         loading: 'Loading..',
-        success: 'Password reset successfully',
+        success: 'Account created successfully',
         error: (e) => e.message,
       })
       .then(() => router.push(`/auth/login`))
@@ -64,8 +71,8 @@ export default function ResetPasswordForm() {
         setIsLoading(false);
         reset();
       });
+    // }
   };
-
   return (
     <>
       <FormProvider {...methods}>
@@ -74,15 +81,14 @@ export default function ResetPasswordForm() {
           className='h-full w-full p-4 pt-6 text-cwhite'
         >
           <div className='mb-10'>
-            {' '}
             <Input
-              id='token'
+              id='password'
               type='password'
-              label='New Password'
+              label='Password'
               className='rounded-md'
             />
             <Input
-              id='password'
+              id='confirm'
               type='password'
               label='Confirm Password'
               className='rounded-md'
@@ -94,8 +100,19 @@ export default function ResetPasswordForm() {
             disabled={isLoading}
             className='mb-4 w-full py-3'
           >
-            <p className='w-full text-center'>Submit</p>
+            <p className='w-full text-center'>Register</p>
           </Button>
+          <p className='text-center text-cwhite'>
+            Already have an account?
+            <span className='ml-1'>
+              <Link
+                href='/auth/login'
+                className='animated-underline font-medium hover:text-cred'
+              >
+                Login
+              </Link>
+            </span>
+          </p>
         </form>
       </FormProvider>
     </>
