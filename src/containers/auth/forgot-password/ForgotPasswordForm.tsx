@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { HiOutlineMail } from 'react-icons/hi';
 import * as z from 'zod';
 
 import Button from '@/components/button/Button';
@@ -68,8 +69,17 @@ export default function ForgetForm() {
   return (
     <>
       {isSubmit && (
-        <Modal isOpen={isSubmit} setIsOpen={() => setIsSubmit(!isSubmit)}>
-          Kindly Check Your Email
+        <Modal
+          isOpen={isSubmit}
+          setIsOpen={() => setIsSubmit(!isSubmit)}
+          className='flex h-80 w-80 flex-col items-center justify-center space-y-4'
+        >
+          <HiOutlineMail className='text-5xl ' />
+          <h1>Thank You</h1>
+          <p className='w-3/4 text-center'>
+            We have sent email to your email to confirm the validity of your
+            email address
+          </p>
         </Modal>
       )}
       <FormProvider {...methods}>

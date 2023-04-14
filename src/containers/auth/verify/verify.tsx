@@ -25,6 +25,16 @@ export default function Verify() {
     fetchData();
   }, [isLoading, router, token]);
   return (
-    <div>{isLoading ? <p>Loading...</p> : <p>Verification complete!</p>}</div>
+    <div>
+      {isLoading ? (
+        <p className='text-center text-white'>
+          Please wait while we verify your information
+        </p>
+      ) : (
+        <p className='text-white'>
+          Verification successful. Thank you for providing your information.
+        </p>
+      )}
+    </div>
   );
 }
