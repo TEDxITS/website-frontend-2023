@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
+import Image from 'next/image';
 import { generateTemplateMetadata } from '@/utils/metadata';
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
+import BlackTedLogo from '~/images/logo/tedxits-black.png';
 
 const metadataObject = generateTemplateMetadata('Dashboard', '', '/dashboard');
 export const metadata: Metadata = {
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function YourPurchasePage() {
+  const date = new Date().toUTCString().slice(5, 16);
   return (
     <section className='layout z-20'>
       <h1 className='mb-5 font-baron text-cwhite'>YOUR PURCHASE</h1>
@@ -21,9 +24,12 @@ export default function YourPurchasePage() {
           <div className="flex flex-col bg-[url('/images/purchase/bg-receipt.png')] bg-cover w-[380px] h-full">
             <div className='flex flex-row justify-center items-center border-dashed border-b-2 border-cblack mx-4'>
               <FullTEDLogo className='h-24 w-48' />
-              <p className='text-3xl font-thin text-cblack'>
-                <span>&#169;</span>2023
-              </p>
+              <div className='flex flex-col'>
+                <p className='text-3xl font-thin text-cblack'>
+                  <span>&#169;</span>2023
+                </p>
+                <small className='mt-2'>{date}</small>
+              </div>
             </div>
             <div className='flex flex-col mx-4 items-center justify-center'>
               <h3 className='uppercase font-baron text-center mt-4 mb-8'>RECEIPT</h3>
@@ -61,51 +67,60 @@ export default function YourPurchasePage() {
 
           {/* Payment Method */}
           <div className="flex flex-row w-full h-full bg-[url('/images/purchase/bg-payment-method.png')] bg-cover">
-            <div className='border-r-2 border-cblack my-4'>
-              <FullTEDLogo className='-rotate-90 w-32 h-full' />
+            <div className='border-r-2 border-cblack my-4 w-32 h-full hidden lg:flex justify-center items-center'>
+              {/* <FullTEDLogo className='-rotate-90 w-32 h-full' /> */}
+              <Image src={BlackTedLogo} alt="ted-logo-2023" className='-rotate-90 w-full' />
             </div>
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full  lg:mb-0 mb-24'>
               <div className='flex justify-center items-center w-full border-b-2 border-cblack'>
                 <h3 className='uppercase font-baron text-4xl text-cblack text-center my-6'>Payment Method</h3>
               </div>
               <ul className='px-8 py-4 mb-8 border-b-2 border-cblack'>
-                <li className='flex '>
-                  1363122830 <span>..........................................</span>BCA a/n Gek Weda
+                <li className='inline lg:hidden'>BCA a/n Gek Weda</li>
+                <li className='flex'>
+                  1363122830  <span className='hidden lg:inline'>.......................................... </span> <span className='hidden lg:inline'> BCA a/n Gek Weda </span>
                 </li>
+                <li className='inline lg:hidden'>BCA a/n I Ayu Pradnya Widyanti Sandhi</li>
                 <li className='flex '>
-                  1299877186 <span>..........................................</span>BCA a/n I Ayu Pradnya Widyanti Sandhi
+                  1299877186 <span className='hidden lg:inline'>.......................................... </span> <span className='hidden lg:inline'> BCA a/n I Ayu Pradnya Widyanti Sandhi </span>
                 </li>
+                <li className='inline lg:hidden'>BCA a/n I Ayu Pradnya Widyanti Sandhi </li>
                 <li className='flex '>
-                  081238300488 <span>......................................</span>BCA a/n I Ayu Pradnya Widyanti Sandhi
+                  081238300488 <span className='hidden lg:inline'>...................................... </span> <span className='hidden lg:inline'> BCA a/n I Ayu Pradnya Widyanti Sandhi </span>
                 </li>
               </ul>
               <div className='w-full flex justify-center items-center'>
-                <form className="flex flex-col lg:flex-row items-center px-4">
-                  <div className='flex flex-col items-center space-y-6 h-[84px]'>
-                    <div className="shrink-0">
-                      <h3 className='text-base font-baron font-bold text-cblack'>UPLOAD YOUR PAYMENT PROOF!</h3>
-                    </div>
-                    <label className="block">
-                      <span className="sr-only">Choose profile photo</span>
-                      <input type="file" className="block w-full text-ms text-slate-500
+                <form className="flex flex-col  items-center justify-center px-4" action='#'>
+                  <div className="flex flex-col lg:flex-row items-center px-4">
+                    <div className='flex flex-col items-center space-y-6 lg:h-[84px]'>
+                      <div className="shrink-0">
+                        <h3 className='text-base font-baron font-bold text-cblack'>UPLOAD YOUR PAYMENT PROOF!</h3>
+                      </div>
+                      <label className="block">
+                        <span className="sr-only">Choose profile photo</span>
+                        <input type="file" className="block w-full text-ms text-slate-500
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0
       file:text-sm file:font-semibold
       file:bg-violet-50 file:text-cblack
       hover:file:bg-slate-100
     "/>
-                    </label>
-                  </div>
-                  <div className='flex flex-col items-center space-y-6 h-[84px]'>
-                    <div className="shrink-0">
-                      <h3 className='text-base font-baron font-bold text-cblack'>Before the times runs out</h3>
+                      </label>
                     </div>
-                    <label className="block">
-                      <span className="sr-only">Choose profile photo</span>
-                      <p>
-                        00:00:00
-                      </p>
-                    </label>
+                    <div className='flex flex-col items-center space-y-6 lg:h-[84px]'>
+                      <div className="shrink-0">
+                        <h3 className='text-base font-baron font-bold text-cblack'>Before the times runs out</h3>
+                      </div>
+                      <label className="block">
+                        <span className="sr-only">Choose profile photo</span>
+                        <p>
+                          00:00:00
+                        </p>
+                      </label>
+                    </div>
+                  </div>
+                  <div className='lg:mt-8'>
+                    <button type='submit' className='bg-corange text-cwhite px-6 py-2 rounded-full hover:-translate-y-1 duration-300 transition focus:translate-y-0 hover:shadow-xl'>Submit</button>
                   </div>
                 </form>
               </div>

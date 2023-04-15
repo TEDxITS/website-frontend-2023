@@ -11,7 +11,7 @@ export default async function DashboardPageLayout({
 }) {
   return (
     <RandomStarfieldContainer>
-      <div className='absolute z-20 flex h-screen w-screen flex-col overflow-y-auto sm:flex-row'>
+      <div className='absolute z-20 flex max-h-full w-screen flex-col overflow-y-auto sm:flex-row'>
         <DashboardSidebar />
         <div className='w-full sm:w-5/6'>
           <section className='layout flex w-full items-center justify-end sm:h-40'>
