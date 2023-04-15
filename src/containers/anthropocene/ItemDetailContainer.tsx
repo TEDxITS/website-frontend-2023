@@ -6,13 +6,15 @@ import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
 
 function convertYoutubeLinkToEmbed(link: string) {
-  const videoId = link.split('v=')[1];
+  let videoId;
+  if (link.includes('youtu.be/')) {
+    videoId = link.split('youtu.be/')[1];
+  } else {
+    videoId = link.split('v=')[1];
+  }
   const ampersandPosition = videoId.indexOf('&');
   if (ampersandPosition !== -1) {
-    return `https://www.youtube.com/embed/${videoId.substring(
-      0,
-      ampersandPosition
-    )}`;
+    videoId = videoId.substring(0, ampersandPosition);
   }
   return `https://www.youtube.com/embed/${videoId}`;
 }
