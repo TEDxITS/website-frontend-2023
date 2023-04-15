@@ -37,7 +37,7 @@ const registerFormInitialValue: RegisterDataType = {
 
 const registerUser = async (name: string, email: string, password: string) => {
   try {
-    const { data } = await api.post('/api/auth/register', {
+    const { data } = await api.post('/auth/register', {
       name,
       email,
       password,
@@ -65,9 +65,11 @@ export default function RegisterForm() {
       .promise(registerPromise, {
         loading: 'Loading..',
         success: 'Account created successfully',
-        error: (e) => e.message,
+        error: (e) => e.response.data.message,
       })
-      .then(() => router.push('/auth/verify-account'))
+      .then(() => {
+        router.push('/auth/login');
+      })
       .catch((e) => e)
       .finally(() => {
         setIsLoading(false);

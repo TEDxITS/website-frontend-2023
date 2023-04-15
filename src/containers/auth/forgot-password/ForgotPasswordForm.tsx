@@ -1,10 +1,9 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { HiOutlineMail } from 'react-icons/hi';
 import * as z from 'zod';
 
 import Button from '@/components/button/Button';
@@ -12,7 +11,6 @@ import Input from '@/components/input/Input';
 import { Modal } from '@/components/modal/Modal';
 
 import api from '@/utils/api';
-import { handleFirebaseError } from '@/utils/firebase/shared';
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({ message: 'The provided email is not valid' }),
@@ -35,6 +33,7 @@ const forgotPassword = async (email: string) => {
 };
 
 export default function ForgetForm() {
+  const router = useRouter();
   const methods = useForm<ForgotPasswordDataType>({
     defaultValues: forgotPasswordFormInitialValue,
     mode: 'onTouched',
@@ -51,13 +50,11 @@ export default function ForgetForm() {
     toast
       .promise(forgotPasswordPromise, {
         loading: 'Loading..',
-        success: 'Sending forgot password request ',
-        error: (e) => handleFirebaseError(e),
+        success: 'Email sent successfully',
+        error: (e) => e.response.data.message,
       })
       .then(() => {
-        {
-          setIsSubmit(true);
-        }
+        setIsSubmit(true);
       })
       .catch((e) => e)
       .finally(() => {
@@ -71,15 +68,25 @@ export default function ForgetForm() {
       {isSubmit && (
         <Modal
           isOpen={isSubmit}
-          setIsOpen={() => setIsSubmit(!isSubmit)}
-          className='flex h-80 w-80 flex-col items-center justify-center space-y-4'
+          setIsOpen={setIsSubmit}
+          className='noisy border-[10px] border-cgray bg-black'
         >
-          <HiOutlineMail className='text-5xl ' />
-          <h1>Thank You</h1>
-          <p className='w-3/4 text-center'>
-            We have sent email to your email to confirm the validity of your
-            email address
-          </p>
+          <div className='z-20 flex flex-col items-center justify-center'>
+            <h1 className='text-center font-baron text-xl text-cwhite sm:text-4xl'>
+              Thank You
+            </h1>
+            <p className='mt-4 mb-5 text-center text-base font-medium text-cwhite sm:text-lg'>
+              We have sent you an email with a link to reset your password.
+              Please check your email inbox.
+            </p>
+            <Button
+              variant='primary'
+              className='px-9 text-base xs:text-xl'
+              onClick={() => router.push('/auth/login')}
+            >
+              Back
+            </Button>
+          </div>
         </Modal>
       )}
       <FormProvider {...methods}>
@@ -102,18 +109,6 @@ export default function ForgetForm() {
           >
             <p className='w-full text-center'>Submit</p>
           </Button>
-
-          <p className='text-center text-cwhite'>
-            Don't have an account?
-            <span className='ml-1'>
-              <Link
-                href='/auth/register'
-                className='animated-underline font-medium hover:text-cred'
-              >
-                Register
-              </Link>
-            </span>
-          </p>
         </form>
       </FormProvider>
     </>

@@ -1,6 +1,7 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
@@ -31,7 +32,7 @@ const RestartPasswordFormInitialValue: ResetPasswordDataType = {
   confirm: '',
 };
 
-const restartPassword = async (password: string, token: string) => {
+const restartPassword = async (password: string, token: string | null) => {
   try {
     const { data } = await api.post(`/auth/reset-password/${token}`, {
       password,
@@ -44,7 +45,7 @@ const restartPassword = async (password: string, token: string) => {
 
 export default function RestartPasswordForm() {
   const searchParams = useSearchParams();
-  const token = searchParams ? searchParams.get('token') : null;
+  const token = searchParams ? searchParams.get('token') : '';
 
   const router = useRouter();
   const methods = useForm<ResetPasswordDataType>({
@@ -58,12 +59,12 @@ export default function RestartPasswordForm() {
   const onSubmit: SubmitHandler<ResetPasswordDataType> = async (data) => {
     setIsLoading(true);
     // if (token) {
-    const registerPromise = restartPassword(data.password, token ?? '');
+    const registerPromise = restartPassword(data.password, token ?? null);
     toast
       .promise(registerPromise, {
         loading: 'Loading..',
-        success: 'Account created successfully',
-        error: (e) => e.message,
+        success: 'Password changed successfully',
+        error: (e) => e.response.data.message,
       })
       .then(() => router.push(`/auth/login`))
       .catch((e) => e)
@@ -100,19 +101,8 @@ export default function RestartPasswordForm() {
             disabled={isLoading}
             className='mb-4 w-full py-3'
           >
-            <p className='w-full text-center'>Register</p>
+            <p className='w-full text-center'>Change Password</p>
           </Button>
-          <p className='text-center text-cwhite'>
-            Already have an account?
-            <span className='ml-1'>
-              <Link
-                href='/auth/login'
-                className='animated-underline font-medium hover:text-cred'
-              >
-                Login
-              </Link>
-            </span>
-          </p>
         </form>
       </FormProvider>
     </>

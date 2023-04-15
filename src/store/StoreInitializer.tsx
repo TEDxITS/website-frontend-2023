@@ -7,8 +7,8 @@ import { useAuthStore } from '@/store/useAuthStore';
 import api from '@/utils/api';
 
 export default function StoreInitializer() {
-  const setName = useAuthStore((state) => state.setName);
-  const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+  const logIn = useAuthStore((state) => state.logIn);
+  const logOut = useAuthStore((state) => state.logOut);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useQuery({
@@ -18,11 +18,14 @@ export default function StoreInitializer() {
       return data;
     },
     onSuccess(data) {
-      setName(data.name);
-      setIsAuthenticated(true);
+      logIn(
+        data.response.user,
+        data.response.accessToken,
+        data.response.refreshToken
+      );
     },
     onError() {
-      setIsAuthenticated(false);
+      logOut();
     },
     enabled: !isAuthenticated,
   });
