@@ -56,7 +56,7 @@ export default function Header({
           </div>
         </UnstyledLink>
         <nav>
-          <ul className='flex items-center justify-between space-x-16'>
+          <ul className='flex items-center justify-between space-x-14'>
             {links.map(({ href, label }, i) => {
               switch (i) {
                 case 1:
