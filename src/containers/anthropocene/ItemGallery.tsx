@@ -9,7 +9,7 @@ import AddItemModal from '@/containers/admin/anthropocene/AddItemModal';
 import DeleteItemButton from '@/containers/admin/anthropocene/DeleteItemButton';
 import EditItemModal from '@/containers/admin/anthropocene/EditItemModal';
 
-import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
+import { useAuthStore } from '@/store/useAuthStore';
 
 import bgTexturedPaper from '~/images/background/bg-textured-paper.jpg';
 /* eslint-disable @next/next/no-img-element */
@@ -19,8 +19,7 @@ interface ItemGalleryProps {
 }
 
 export default function ItemGallery({ items }: ItemGalleryProps) {
-  const { user } = useFirebaseAuthContext();
-  const userRole = user?.role;
+  const admin = useAuthStore((state) => state.admin);
   const [type, setType] = useState<string>('all');
   const [filterItem, setFilterItem] = useState<Anthropocene[]>([]);
 
@@ -43,7 +42,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
 
   return (
     <>
-      {userRole === 'admin' && (
+      {admin && (
         <div className='layout my-2 flex justify-end'>
           <AddItemModal />
         </div>
@@ -68,13 +67,13 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
             ))}
           </div>
         </div>
-        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-x-2 pt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+        <div className='mx-auto mt-3 grid w-fit grid-cols-1 gap-5 p-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {filterItem.map((item) => {
             if (item.type === 'caption') {
               return (
                 <div key={item.id}>
-                  <div className='w-64 overflow-hidden transition duration-200 ease-in hover:scale-110'>
-                    <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                  <div className='w-56 overflow-hidden transition duration-200 ease-in hover:scale-110'>
+                    <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                       <Image
                         src={bgTexturedPaper}
                         alt='textured paper'
@@ -83,16 +82,15 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                         placeholder='blur'
                       />
                       <div className='relative flex h-full w-full items-center'>
-                        <div className='relative mx-auto border border-black p-4'>
+                        <div className='relative mx-auto p-4'>
                           <h1 className='mx-auto text-center font-baron text-xl font-semibold'>
                             {item.caption}
                           </h1>
                         </div>
                       </div>
                     </div>
-                    <div className='mt-3 mb-10'></div>
                   </div>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -107,8 +105,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <UnstyledLink href={item.article_src || ''} openNewTab>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -124,14 +122,9 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                           />
                         </div>
                       </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
-                      </div>
                     </div>
                   </UnstyledLink>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -146,8 +139,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <Link href={`/anthropocene/${item.id}`}>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -163,14 +156,9 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                           />
                         </div>
                       </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
-                      </div>
                     </div>
                   </Link>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -185,8 +173,8 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
               return (
                 <div key={item.id}>
                   <Link href={`/anthropocene/${item.id}`}>
-                    <div className='w-64 transition duration-200 ease-in hover:scale-110'>
-                      <div className='relative mx-auto h-72 w-64 bg-white p-3 shadow-lg md:w-64'>
+                    <div className='w-56 transition duration-200 ease-in hover:scale-110'>
+                      <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image
                           src={bgTexturedPaper}
                           alt='textured paper'
@@ -202,14 +190,9 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                           />
                         </div>
                       </div>
-                      <div className='mx-auto mt-3 mb-10 flex w-full text-center text-base'>
-                        <span className='mx-auto font-primary font-semibold text-cblack'>
-                          {item.caption}
-                        </span>
-                      </div>
                     </div>
                   </Link>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton

@@ -16,7 +16,7 @@ const itemSchema = z.object({
   type: z.string().min(1, { message: 'The type cannot be empty' }),
   src: z.string().optional(),
   thumbnail: z.string().optional(),
-  caption: z.string().min(1, { message: 'The caption cannot be empty' }),
+  caption: z.string().optional(),
   article_src: z.string().optional(),
 });
 

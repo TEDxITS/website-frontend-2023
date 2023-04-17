@@ -14,6 +14,7 @@ import api from '@/utils/api';
 
 const registerSchema = z
   .object({
+    name: z.string(),
     email: z.string().email({ message: 'The provided email is not valid' }),
     password: z
       .string()
@@ -28,14 +29,16 @@ const registerSchema = z
 type RegisterDataType = z.infer<typeof registerSchema>;
 
 const registerFormInitialValue: RegisterDataType = {
+  name: '',
   email: '',
   password: '',
   confirm: '',
 };
 
-const registerUser = async (email: string, password: string) => {
+const registerUser = async (name: string, email: string, password: string) => {
   try {
-    const { data } = await api.post('/api/register', {
+    const { data } = await api.post('/auth/register', {
+      name,
       email,
       password,
     });
@@ -57,14 +60,16 @@ export default function RegisterForm() {
 
   const onSubmit: SubmitHandler<RegisterDataType> = async (data) => {
     setIsLoading(true);
-    const registerPromise = registerUser(data.email, data.password);
+    const registerPromise = registerUser(data.name, data.email, data.password);
     toast
       .promise(registerPromise, {
         loading: 'Loading..',
         success: 'Account created successfully',
-        error: (e) => e.message,
+        error: (e) => e.response.data.message,
       })
-      .then(() => router.push('/auth/login'))
+      .then(() => {
+        router.push('/auth/login');
+      })
       .catch((e) => e)
       .finally(() => {
         setIsLoading(false);
@@ -80,6 +85,7 @@ export default function RegisterForm() {
           className='h-full w-full p-4 pt-6 text-cwhite'
         >
           <div className='mb-10'>
+            <Input id='name' type='name' label='Name' className='rounded-md' />
             <Input
               id='email'
               type='email'

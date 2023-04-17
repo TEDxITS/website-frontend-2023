@@ -9,9 +9,11 @@ import * as z from 'zod';
 
 import Button from '@/components/button/Button';
 import Input from '@/components/input/Input';
+import UnstyledLink from '@/components/link/UnstyledLink';
+
+import { useAuthStore } from '@/store/useAuthStore';
 
 import api from '@/utils/api';
-import { handleFirebaseError } from '@/utils/firebase/shared';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'The provided email is not valid' }),
@@ -24,19 +26,24 @@ const loginFormInitialValue: LoginDataType = {
   password: '',
 };
 
-const loginUser = async (email: string, password: string) => {
+const loginUser = async (email: string, password: string, isAdmin: boolean) => {
   try {
-    const { data } = await api.post('/api/login', {
-      email,
-      password,
-    });
+    const { data } = await api.post(
+      isAdmin ? '/auth/login-admin' : '/auth/login',
+      {
+        email,
+        password,
+      }
+    );
     return data;
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export default function LoginForm() {
+export default function LoginForm({ isAdmin = false }: { isAdmin?: boolean }) {
+  const logIn = useAuthStore((state) => state.logIn);
+  const adminLogIn = useAuthStore((state) => state.adminLogIn);
   const router = useRouter();
   const methods = useForm<LoginDataType>({
     defaultValues: loginFormInitialValue,
@@ -48,14 +55,23 @@ export default function LoginForm() {
 
   const onSubmit: SubmitHandler<LoginDataType> = async (data) => {
     setIsLoading(true);
-    const loginPromise = loginUser(data.email, data.password);
+    const loginPromise = loginUser(data.email, data.password, isAdmin);
     toast
       .promise(loginPromise, {
         loading: 'Loading..',
         success: 'Logged in successfully',
-        error: (e) => handleFirebaseError(e),
+        error: (e) => e.response.data.message,
       })
-      .then(() => {
+      .then((res) => {
+        if (isAdmin) {
+          adminLogIn(
+            res.data.user,
+            res.data.accessToken,
+            res.data.refreshToken
+          );
+        } else {
+          logIn(res.data.user, res.data.accessToken, res.data.refreshToken);
+        }
         router.push('/');
       })
       .catch((e) => e)
@@ -79,22 +95,34 @@ export default function LoginForm() {
             label='Password'
             className='rounded-md'
           />
+          {!isAdmin && (
+            <div className='flex justify-end'>
+              <UnstyledLink
+                href='/auth/forgot-password'
+                className='font-medium hover:opacity-50'
+              >
+                Forgot Your Password?
+              </UnstyledLink>
+            </div>
+          )}
         </div>
         <Button type='submit' className='mb-4 w-full py-3' disabled={isLoading}>
           <p className='w-full text-center'>Login</p>
         </Button>
 
-        <p className='text-center text-cwhite'>
-          Don't have an account?
-          <span className='ml-1'>
-            <Link
-              href='/auth/register'
-              className='animated-underline font-medium hover:text-cred'
-            >
-              Register
-            </Link>
-          </span>
-        </p>
+        {!isAdmin && (
+          <p className='text-center text-cwhite'>
+            Don't have an account?
+            <span className='ml-1'>
+              <Link
+                href='/auth/register'
+                className='animated-underline font-medium hover:text-cred'
+              >
+                Register
+              </Link>
+            </span>
+          </p>
+        )}
       </form>
     </FormProvider>
   );
