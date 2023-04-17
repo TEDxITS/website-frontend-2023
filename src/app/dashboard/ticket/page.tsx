@@ -22,18 +22,18 @@ export const metadata: Metadata = {
 
 const ticketType = [
   {
-    id: '52e79553-c157-48c3-8c6f-4c5bec2929b8',
+    id: '7f6df20c-1a5b-461a-adff-aae544158841',
     name: 'Early Bird',
     quota: 20,
     price: 80000,
     dateOpen: '2023-04-14 09:00:00',
     createdAt: '2023-04-16 23:33:43.846',
     updatedAt: '2023-04-16 23:33:43.846',
-    type: 'With Kit',
+    type: 'Non Kit',
     dateClose: '2023-04-20 16:59:00',
   },
   {
-    id: 'c6cb7c39-904d-4fca-9c42-2f53903f3b7e',
+    id: '6c91b5d2-1ddd-49e1-ac7e-5d87bd82e7f6',
     name: 'Normal',
     quota: 55,
     price: 110000,
@@ -44,7 +44,7 @@ const ticketType = [
     dateClose: '2023-05-16 16:59:00',
   },
   {
-    id: '1ca3c769-1ba8-4398-b6e8-a0d42afd48ef',
+    id: '71c66c4b-426f-4f3d-baa8-e16dafd45f42',
     name: 'Normal',
     quota: 25,
     price: 135000,
@@ -55,7 +55,7 @@ const ticketType = [
     dateClose: '2023-05-16 16:59:00',
   },
   {
-    id: 'bf3312d8-b5d8-43ea-af6e-c5feb461bb73',
+    id: 'd0348384-3ab3-4f2b-bde2-20abf9bd2e6b',
     name: 'Pre Sale',
     quota: 40,
     price: 90000,
@@ -66,18 +66,18 @@ const ticketType = [
     dateClose: '2023-04-27 16:59:00',
   },
   {
-    id: 'be08ac0d-41a8-4bec-bae2-59a866500d7c',
+    id: '20ccb20f-9831-4b57-85bc-eef11a3fd7b1',
     name: 'Early Bird',
     quota: 10,
     price: 105000,
     dateOpen: '2023-04-14 09:00:00',
     createdAt: '2023-04-16 23:33:43.846',
     updatedAt: '2023-04-16 23:33:43.846',
-    type: 'Non Kit',
+    type: 'With Kit',
     dateClose: '2023-04-20 16:59:00',
   },
   {
-    id: '503c21a9-a199-42ce-be58-8dffc631ee50',
+    id: 'cedc215a-6d41-4ac0-ad0a-017272cc7e73',
     name: 'Pre Sale',
     quota: 15,
     price: 115000,

@@ -20,7 +20,7 @@ export function TicketLeftSide({ children, type }: TicketProps) {
         'relative w-full rounded-t-3xl border-b-2 border-r-0 border-dashed border-black md:w-[75%] md:rounded-l-3xl md:border-b-0 md:border-r-2',
         type === 'Early Bird'
           ? 'noisy bg-white'
-          : type === 'Presale'
+          : type === 'Pre Sale'
           ? 'bg-gradient-to-b from-cyellow via-corange to-cpink md:bg-gradient-to-r'
           : 'bg-gradient-50-years-to-tr'
       )}
@@ -50,7 +50,7 @@ export function TicketRightSide({ children, type }: TicketProps) {
         'w-full rounded-b-3xl md:w-[25%] md:rounded-r-3xl',
         type === 'Early Bird'
           ? 'noisy bg-cred'
-          : type === 'Presale'
+          : type === 'Pre Sale'
           ? 'bg-gradient-to-b from-cpink to-cblue md:bg-gradient-to-r'
           : 'bg-gradient-50-years-to-br'
       )}

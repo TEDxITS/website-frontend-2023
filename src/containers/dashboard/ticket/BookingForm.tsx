@@ -159,7 +159,8 @@ export default function BookingForm({
             {Object.keys(orderSummary).map((key) => (
               <li key={key} className='flex justify-between'>
                 <span>
-                  {orderSummary[key]}x {JSON.parse(key).name}
+                  {orderSummary[key]}x {JSON.parse(key).name}{' '}
+                  {JSON.parse(key).type}
                 </span>
                 <span className='whitespace-nowrap'>
                   Rp. {JSON.parse(key).price * orderSummary[key]}

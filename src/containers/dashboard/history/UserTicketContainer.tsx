@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
-import TicketForm from '@/containers/dashboard/ticket/BookingForm';
 
 import api from '@/utils/api';
 
@@ -58,9 +57,6 @@ export default function UserTicketContainer({
   return (
     <section className='layout z-20 p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>BUY TICKET</h1>
-      <div className='pb-16'>
-        <TicketForm />
-      </div>
     </section>
   );
 }
