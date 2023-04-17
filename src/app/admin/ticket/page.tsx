@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import LinkDatabaseContainer from '@/containers/admin/links/LinkDatabaseContainer';
+import TicketDatabaseContainer from '@/containers/admin/tickets/TicketDatabaseContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
@@ -28,7 +28,7 @@ export default function TicketDashboardPage() {
         }
       >
         {/* @ts-expect-error Server Component */}
-        <LinkDatabaseContainer />
+        <TicketDatabaseContainer />
       </Suspense>
     </section>
   );
