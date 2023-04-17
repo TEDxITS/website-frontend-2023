@@ -65,12 +65,16 @@ export default function LoginForm({ isAdmin = false }: { isAdmin?: boolean }) {
       .then((res) => {
         if (isAdmin) {
           adminLogIn(
-            res.data.user,
+            { name: res.data.user.name, email: res.data.user.email },
             res.data.accessToken,
             res.data.refreshToken
           );
         } else {
-          logIn(res.data.user, res.data.accessToken, res.data.refreshToken);
+          logIn(
+            { name: res.data.user.name, email: res.data.user.email },
+            res.data.accessToken,
+            res.data.refreshToken
+          );
         }
         router.push('/');
       })

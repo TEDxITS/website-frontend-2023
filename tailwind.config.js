@@ -118,6 +118,7 @@ module.exports = {
         hover: 'hover 2s linear infinite',
         spin: 'spin 10s linear infinite',
         'spin-reverse': 'spin 10s linear infinite reverse',
+        'fast-spin': 'spin 1s linear infinite',
       },
     },
   },

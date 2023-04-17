@@ -106,6 +106,28 @@
   .question::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
   }
+
+  .bg-gradient-50-years-to-tr {
+    background-image: linear-gradient(
+      to top right,
+      #f0efe5 0%,
+      #939ab4 15%,
+      #546193 30%,
+      #354582 60%,
+      #1d1d1e 100%
+    );
+  }
+
+  .bg-gradient-50-years-to-br {
+    background-image: linear-gradient(
+      to bottom right,
+      #f0efe5 0%,
+      #939ab4 15%,
+      #546193 30%,
+      #354582 60%,
+      #1d1d1e 100%
+    );
+  }
 }
 
 @layer utilities {

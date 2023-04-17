@@ -138,9 +138,9 @@ export const dashboardLinks = [
     ),
   },
   {
-    href: '/dashboard/purchase',
+    href: '/dashboard/history',
     label: 'Your Purchase',
-    segment: 'purchase',
+    segment: 'history',
     logo: (
       <svg
         xmlns='http://www.w3.org/2000/svg'

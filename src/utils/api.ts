@@ -5,6 +5,10 @@ import {
   getAdminToken,
   getRefreshToken,
   getToken,
+  setAdminRefreshToken,
+  setAdminToken,
+  setRefreshToken,
+  setToken,
 } from '@/utils/token';
 
 const isServer = () => {
@@ -12,6 +16,7 @@ const isServer = () => {
 };
 
 export const baseURL = 'https://tedxits2023-server.azurewebsites.net/api';
+// export const baseURL = 'http://localhost:5000';
 
 // Regular API
 export const api = axios.create({
@@ -52,7 +57,10 @@ api.interceptors.response.use(
           },
         });
 
-        const newAccessToken = newAccessTokenResponse.data.accessToken;
+        const newAccessToken = newAccessTokenResponse.data.data.accessToken;
+        const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
+        setToken(newAccessToken);
+        setRefreshToken(newRefreshToken);
 
         // Update the original request with the new access token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
@@ -105,7 +113,10 @@ adminApi.interceptors.response.use(
           },
         });
 
-        const newAccessToken = newAccessTokenResponse.data.accessToken;
+        const newAccessToken = newAccessTokenResponse.data.data.accessToken;
+        const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
+        setAdminToken(newAccessToken);
+        setAdminRefreshToken(newRefreshToken);
 
         // Update the original request with the new access token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
