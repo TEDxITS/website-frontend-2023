@@ -6,7 +6,7 @@ const isServer = () => {
   return typeof window === 'undefined';
 };
 
-export const baseURL = 'https://tesdeveloper.me/api';
+export const baseURL = 'https://tedxits2023-server.azurewebsites.net/api';
 
 export const api = axios.create({
   baseURL: baseURL,
