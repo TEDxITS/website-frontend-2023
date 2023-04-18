@@ -79,7 +79,7 @@ export default function TicketPage() {
           </Link>
           <OurPilotsContainer />
         </div>
-        <Link href='/dashboard/tickets'>
+        <Link href='/dashboard'>
           <h1 className='relative z-10 mt-24 cursor-pointer font-quaker text-base font-medium duration-300 hover:-translate-y-2 hover:scale-125 sm:mt-12 sm:text-xl md:text-2xl xl:text-3xl'>
             <Image
               src={titleDecoration3}

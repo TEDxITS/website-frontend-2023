@@ -44,14 +44,21 @@ export default function UserPaymentContainer({
   const mutation = useMutation({
     mutationFn: async (data: UploadPaymentProps) => {
       const { data: response } = await api.put('/booking/upload-payment', data);
+
       return response;
     },
     onSuccess: () => {
-      // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      toast.success('Payment proof uploaded', { id: 'uploading' });
+      queryClient.invalidateQueries({
+        queryKey: ['booking', { id: booking.id }],
+      });
     },
   });
 
+  const [ticketCounts, setTicketCounts] = React.useState<{
+    [key: string]: number;
+  }>({});
+  const [totalPrice, setTotalPrice] = React.useState(0);
   const [previewImage, setPreviewImage] = React.useState<string>('');
   const imageInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -72,7 +79,6 @@ export default function UserPaymentContainer({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast.loading(`Uploading..`, { id: 'uploading' });
     const file = imageInputRef.current?.files?.[0];
 
     if (!file) {
@@ -80,10 +86,10 @@ export default function UserPaymentContainer({
       return;
     }
 
+    toast.loading(`Uploading..`, { id: 'uploading' });
     const storageRef = ref(storage, `files/${file.name}`);
     uploadBytes(storageRef, file)
       .then((snapshot) => {
-        toast.success('Upload success');
         getDownloadURL(snapshot.ref).then((downloadURL) => {
           mutation.mutate({ bookingId: booking.id, paymentProof: downloadURL });
         });
@@ -92,6 +98,23 @@ export default function UserPaymentContainer({
         toast.error(error.message);
       });
   };
+
+  React.useEffect(() => {
+    let price = 0;
+    const counts: {
+      [key: string]: number;
+    } = {};
+    for (const item of bookingDetailsQuery.data || []) {
+      const { ticket } = item;
+      if (ticket) {
+        counts[JSON.stringify(ticket)] =
+          (counts[JSON.stringify(ticket)] || 0) + 1;
+        price += ticket.price;
+      }
+    }
+    setTicketCounts(counts);
+    setTotalPrice(price);
+  }, [bookingDetailsQuery.data]);
 
   return (
     <section>
@@ -118,28 +141,35 @@ export default function UserPaymentContainer({
               </div>
             </div>
             <ul className='w-full'>
-              {bookingDetailsQuery.data?.map((bookingDetail) => (
-                <li
-                  key={bookingDetail.id}
-                  className='flex w-full items-center justify-between gap-x-2 pt-2'
-                >
-                  <div>
-                    <p className='text-sm'>{bookingDetail.ticket.name}</p>
-                  </div>
-                  <div className='grow border-b border-dashed border-black pb-2'></div>
-                  <div>
-                    <p className='text-sm'>Rp. {bookingDetail.ticket.price}</p>
-                  </div>
-                </li>
-              ))}
-
+              {ticketCounts &&
+                Object.keys(ticketCounts).map((ticket) => {
+                  const ticketData = JSON.parse(ticket);
+                  return (
+                    <li
+                      key={ticketData.id}
+                      className='flex w-full items-center justify-between gap-x-2 pt-2'
+                    >
+                      <div>
+                        <p className='text-sm'>
+                          {ticketCounts[ticket]} x {ticketData.name}
+                        </p>
+                      </div>
+                      <div className='grow border-b border-dashed border-black pb-2'></div>
+                      <div>
+                        <p className='text-sm'>
+                          Rp. {ticketData.price * ticketCounts[ticket]}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
               <li className='mt-4 flex w-full items-center justify-between gap-x-2 border-t border-black pt-2 font-semibold'>
                 <div>
                   <p className=''>Total</p>
                 </div>
                 <div className='grow border-b border-dashed border-black pb-2'></div>
                 <div>
-                  <p className=''>Rp. 100.000</p>
+                  <p className=''>Rp. {totalPrice}</p>
                 </div>
               </li>
             </ul>

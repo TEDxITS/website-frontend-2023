@@ -23,6 +23,9 @@ export type BookingData = {
   status: BookingStatus;
   paymentProof: string;
   verificator: string;
+  isActive: boolean;
+  totalPrice: number;
+  deadline: string;
 };
 
 export type BookingDetailData = {

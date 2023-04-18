@@ -19,7 +19,7 @@ const itemSchema = z.object({
   src: z.string().optional(),
   thumbnail: z.string().optional(),
   caption: z.string().min(1, { message: 'The caption cannot be empty' }),
-  article_src: z.string().optional(),
+  articleSrc: z.string().optional(),
 });
 
 type itemType = z.infer<typeof itemSchema>;
@@ -169,11 +169,11 @@ export default function EditItemModal({
             )}
             {initialValue.type === 'article' && (
               <Input
-                id='article_src'
+                id='articleSrc'
                 label='Article link'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
                 labelClassName='block text-sm font-medium text-gray-900'
-                defaultValue={initialValue.article_src || ''}
+                defaultValue={initialValue.articleSrc || ''}
               />
             )}
             <TextAreaInput

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '@/components/button/Button';
+import UnstyledLink from '@/components/link/UnstyledLink';
 import Ticket, {
   TicketLeftSide,
   TicketRightSide,
@@ -10,12 +12,26 @@ import { BookingDetailData, TicketType } from '@/types/dashboard.types';
 export default function UserTicket({
   ticketType,
   bookingDetail,
+  index,
+  onDetailPage = false,
 }: {
   ticketType: TicketType;
   bookingDetail: BookingDetailData;
+  index: number;
+  onDetailPage?: boolean;
 }) {
   return (
-    <>
+    <div>
+      {!onDetailPage && (
+        <div className='mb-5 flex items-center justify-between'>
+          <h3 className='text-cwhite'>Ticket #{index}</h3>
+          <UnstyledLink href={`/dashboard/history/ticket/${bookingDetail.id}`}>
+            <Button variant='primary' className='bg-red-600'>
+              See Ticket
+            </Button>
+          </UnstyledLink>
+        </div>
+      )}
       <Ticket>
         <TicketLeftSide type={ticketType}>
           <div className='relative flex border-inherit py-10 px-2 md:py-5 md:px-10'>
@@ -39,10 +55,12 @@ export default function UserTicket({
                     <p className='font-quaker'>Email</p>
                     <p className='text-lg'>{bookingDetail.email}</p>
                   </div>
-                  <div className='mb-3 flex flex-col border-inherit'>
-                    <p className='font-quaker'>Phone Number</p>
-                    <p className='text-lg'>{bookingDetail.phoneNumber}</p>
-                  </div>
+                  {!onDetailPage && (
+                    <div className='mb-3 flex flex-col border-inherit'>
+                      <p className='font-quaker'>Phone Number</p>
+                      <p className='text-lg'>{bookingDetail.phoneNumber}</p>
+                    </div>
+                  )}
                 </div>
                 <div className='flex w-full flex-col justify-center border-inherit md:w-1/2'>
                   <div className='mb-3 flex flex-col border-inherit'>
@@ -70,6 +88,6 @@ export default function UserTicket({
           </div>
         </TicketRightSide>
       </Ticket>
-    </>
+    </div>
   );
 }

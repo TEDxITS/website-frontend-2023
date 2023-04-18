@@ -99,10 +99,10 @@ export default function BookingForm({
       .promise(bookTicketPromise, {
         loading: 'Loading..',
         success: 'Ticket booked successfully',
-        error: (e) => e.message,
+        error: (e) => e.response.data.message,
       })
-      .then(() => {
-        router.push('/dashboard/history');
+      .then((data) => {
+        router.push(`/dashboard/history/purchase/${data.data.id}`);
       })
       .catch((e) => e)
       .finally(() => {
@@ -148,12 +148,11 @@ export default function BookingForm({
               })
             }
             type='button'
-            className='text-cpurple border-cpurple hover:bg-cpurple rounded-md hover:text-white'
           >
             Add Ticket
           </Button>
         </div>
-        <h2 className='mb-2 text-cwhite'>Order Summary</h2>
+        <h2 className='mb-5 text-cwhite'>Order Summary</h2>
         <div className='noisy mb-4 flex items-center justify-between rounded-xl bg-white p-4 text-black'>
           <ul className='w-full'>
             {Object.keys(orderSummary).map((key) => (

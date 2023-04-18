@@ -1,9 +1,14 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
 
+import UnstyledLink from '@/components/link/UnstyledLink';
 import Table from '@/components/table/Table';
 import DetailsTicketButton from '@/containers/admin/tickets/DetailsTicketButton';
 import VerificationButton from '@/containers/admin/tickets/VerificationButton';
+
+import { currencyFormat } from '@/utils/currency';
+
+import { BookingData } from '@/types/dashboard.types';
 
 type Ticket = {
   id: string;
@@ -18,14 +23,20 @@ const columns: ColumnDef<Ticket>[] = [
   {
     accessorKey: 'totalPrice',
     header: 'Total Price',
+    cell: (props) => currencyFormat(props.getValue() as number),
   },
   {
     accessorKey: 'paymentProof',
     header: 'Payment Proof',
-  },
-  {
-    accessorKey: 'verificator',
-    header: 'Verificator',
+    cell: (props) => (
+      <UnstyledLink
+        href={props.getValue() as string}
+        openNewTab
+        className='hover:underline'
+      >
+        {props.getValue() as string}
+      </UnstyledLink>
+    ),
   },
   {
     accessorKey: 'status',
@@ -53,6 +64,6 @@ const columns: ColumnDef<Ticket>[] = [
   },
 ];
 
-export default function LinkDatabaseTable({ data }: { data: Ticket[] | [] }) {
+export default function LinkDatabaseTable({ data }: { data: BookingData[] }) {
   return <Table data={data} columns={columns} withFilter withPagination />;
 }

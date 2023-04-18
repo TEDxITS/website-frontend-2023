@@ -17,8 +17,10 @@ export default function UserTicketsContainer({
     queryKey: ['booking-details', { id: bookingId }],
     queryFn: async () => {
       try {
-        const { data } = await api.get<BookingDetailData[]>(`/bookingDetails`);
-        return data;
+        const { data } = await api.get<{ data: BookingDetailData[] }>(
+          `/booking/booking-detail/booking/${bookingId}`
+        );
+        return data.data;
       } catch (error) {
         return Promise.reject(error);
       }
@@ -62,18 +64,16 @@ export default function UserTicketsContainer({
 
   return (
     <section>
-      <h1 className='mb-5 font-baron text-cwhite'>TICKETS</h1>
+      <h2 className='mb-5 font-baron text-cwhite'>TICKETS</h2>
       <div className='flex flex-col gap-y-5'>
-        {bookingDetailsQuery.data.map((bookingDetail) => {
-          const ticketType = bookingDetail.ticket.name
-            .split(' ')
-            .slice(0, -2)
-            .join(' ');
+        {bookingDetailsQuery.data.map((bookingDetail, i) => {
+          const ticketType = bookingDetail.ticket.name;
           return (
             <UserTicket
               key={bookingDetail.id}
               ticketType={ticketType as TicketType}
               bookingDetail={bookingDetail}
+              index={i + 1}
             />
           );
         })}

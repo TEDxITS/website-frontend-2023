@@ -2,8 +2,9 @@
 
 import BookingForm from '@/containers/dashboard/ticket/BookingForm';
 
-import { TicketType } from '@/types/dashboard.types';
+import { TicketData, TicketType } from '@/types/dashboard.types';
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const ticketData = [
   {
     id: '52e79553-c157-48c3-8c6f-4c5bec2929b8',
@@ -75,13 +76,11 @@ const ticketData = [
 
 export default function BookingFormContainer({
   ticketType,
+  selectedTickets,
 }: {
   ticketType: TicketType;
+  selectedTickets: TicketData[];
 }) {
-  const selectedTickets = ticketData.filter((ticket) =>
-    ticket.name.includes(ticketType)
-  );
-
   // const ticketTypeQuery = useQuery({
   //   queryKey: ['tickets'],
   //   queryFn: async () => {

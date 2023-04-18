@@ -1,6 +1,5 @@
 import { Disclosure } from '@headlessui/react';
 import Link from 'next/link';
-import { useSelectedLayoutSegments } from 'next/navigation';
 
 import { LinkType } from '@/data/links';
 
@@ -13,7 +12,6 @@ export default function MultipleSidebarLink({
   title: string;
   linkData: LinkType[];
 }) {
-  const segment = useSelectedLayoutSegments();
   return (
     <li>
       <Disclosure>
@@ -65,9 +63,7 @@ export default function MultipleSidebarLink({
                   key={link.href}
                   href={link.href}
                   className={clsxm(
-                    'mt-1 flex rounded-md py-1.5 pl-8 text-gray-700 hover:bg-cred/25',
-                    link.href.split('/')[3] === segment[1] &&
-                      'bg-cred/50 text-cwhite hover:bg-cred/50'
+                    'mt-1 flex rounded-md py-1.5 pl-8 text-gray-700 hover:bg-cred/25'
                   )}
                 >
                   <p>{link.label}</p>

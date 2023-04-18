@@ -27,7 +27,6 @@ export default function TicketDashboardPage() {
           <p className='py-10 text-center text-lg text-cwhite'>Loading..</p>
         }
       >
-        {/* @ts-expect-error Server Component */}
         <TicketDatabaseContainer />
       </Suspense>
     </section>

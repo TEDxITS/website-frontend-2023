@@ -5,7 +5,7 @@ import UserTicketContainer from '@/containers/dashboard/history/UserTicketContai
 import { generateTemplateMetadata } from '@/utils/metadata';
 
 const metadataObject = generateTemplateMetadata(
-  'User Ticket',
+  'Your Ticket',
   '',
   '/dashboard/history/ticket'
 );

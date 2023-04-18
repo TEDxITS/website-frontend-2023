@@ -16,7 +16,7 @@ export const BOOKING_STATUS = {
   TERVERIFIKASI: 'TERVERIFIKASI',
 };
 
-export default function UserPurchasesContainer() {
+export default function RecentPurchaseContainer() {
   const bookingsQuery = useQuery({
     queryKey: ['bookings'],
     queryFn: async () => {
@@ -36,9 +36,6 @@ export default function UserPurchasesContainer() {
   if (bookingsQuery.isLoading) {
     return (
       <section className='layout z-20 flex flex-col items-center p-5'>
-        <h1 className='mb-16 text-center font-baron text-cwhite'>
-          YOUR PURCHASE
-        </h1>
         <div role='status' className='mb-4'>
           <svg
             aria-hidden='true'
@@ -65,9 +62,6 @@ export default function UserPurchasesContainer() {
   if (bookingsQuery.isError) {
     return (
       <section className='layout z-20 flex flex-col items-center p-5'>
-        <h1 className='mb-10 text-center font-baron text-cwhite'>
-          PURCHASES NOT FOUND
-        </h1>
         <p className='mb-6 text-center text-cwhite'>
           Unfortunately, we could not find any purchases. Please try again
           later.
@@ -80,15 +74,9 @@ export default function UserPurchasesContainer() {
   }
 
   return (
-    <section className='layout z-20 p-5'>
-      <h1 className='mb-10 text-center font-baron text-cwhite'>
-        YOUR PURCHASE
-      </h1>
-      {bookingsQuery.data.data.map((booking, i) => (
+    <section className='z-20'>
+      {bookingsQuery.data.data.map((booking) => (
         <div key={booking.id} className='mb-4 flex gap-x-3'>
-          <div className='noisy flex h-8 w-16 items-center justify-center rounded-full bg-white sm:h-14 sm:w-14'>
-            <p className='text-lg font-semibold sm:text-xl'>{i + 1}</p>
-          </div>
           <PurchaseDetail booking={booking} />
         </div>
       ))}

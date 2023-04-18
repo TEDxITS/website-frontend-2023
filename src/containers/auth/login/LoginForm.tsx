@@ -69,14 +69,15 @@ export default function LoginForm({ isAdmin = false }: { isAdmin?: boolean }) {
             res.data.accessToken,
             res.data.refreshToken
           );
+          router.push('/admin/dashboard');
         } else {
           logIn(
             { name: res.data.user.name, email: res.data.user.email },
             res.data.accessToken,
             res.data.refreshToken
           );
+          router.push('/');
         }
-        router.push('/');
       })
       .catch((e) => e)
       .finally(() => {

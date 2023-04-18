@@ -30,7 +30,7 @@ export const orderLinks = [{ href: '/ticket', label: 'Ticket' }];
 
 export const adminDashboardLinks = [
   {
-    href: '/admin',
+    href: '/admin/dashboard',
     label: 'Home',
     segment: null,
     logo: (
@@ -51,7 +51,7 @@ export const adminDashboardLinks = [
     ),
   },
   {
-    href: '/admin/links',
+    href: '/admin/dashboard/links',
     label: 'Links',
     segment: 'links',
     logo: (
@@ -72,7 +72,7 @@ export const adminDashboardLinks = [
     ),
   },
   {
-    href: '/admin/anthropocene',
+    href: '/admin/dashboard/anthropocene',
     label: 'Anthropocene',
     segment: 'anthropocene',
     logo: (
@@ -93,7 +93,7 @@ export const adminDashboardLinks = [
     ),
   },
   {
-    href: '/admin/ticket',
+    href: '/admin/dashboard/ticket',
     label: 'Ticket',
     segment: 'ticket',
     logo: (
@@ -108,7 +108,7 @@ export const adminDashboardLinks = [
         <path
           strokeLinecap='round'
           strokeLinejoin='round'
-          d='M9,10a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V11A1,1,0,0,0,9,10Zm12,1a1,1,0,0,0,1-1V6a1,1,0,0,0-1-1H3A1,1,0,0,0,2,6v4a1,1,0,0,0,1,1,1,1,0,0,1,0,2,1,1,0,0,0-1,1v4a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1,1,1,0,0,1,0-2ZM20,9.18a3,3,0,0,0,0,5.64V17H10a1,1,0,0,0-2,0H4V14.82A3,3,0,0,0,4,9.18V7H8a1,1,0,0,0,2,0H20Z'
+          d='M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z'
         />
       </svg>
     ),

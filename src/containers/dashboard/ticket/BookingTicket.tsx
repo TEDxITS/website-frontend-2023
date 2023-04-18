@@ -8,6 +8,7 @@ import Ticket, {
 } from '@/containers/dashboard/Ticket';
 import { TicketArray } from '@/containers/dashboard/ticket/BookingForm';
 
+import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import clsxm from '@/utils/clsxm';
 
 import { TicketData, TicketType } from '@/types/dashboard.types';
@@ -27,7 +28,10 @@ export default function BookingTicket({
     formState: { errors },
   } = methods;
 
-  const [selectedTicket, setSelectedTicket] = React.useState<TicketData | null>(
+  const [selectedTicketId, setSelectedTicketId] = React.useState<string>(
+    selectedTickets[0].id
+  );
+  const [selectedTicket, setSelectedTicket] = React.useState<TicketData>(
     selectedTickets[0]
   );
 
@@ -49,8 +53,16 @@ export default function BookingTicket({
               {ticketType} TICKET
             </div>
             <div className='grow border-inherit'>
-              <div className='border-b-2 border-inherit px-4 pb-4'>
+              <div className='flex justify-between border-b-2 border-inherit px-4 pb-4'>
                 <h1 className='font-baron font-medium'>BOARDING PASS</h1>
+                {ticketType === 'Early Bird' ? (
+                  <FullTEDLogo className='hidden h-10 w-32 sm:block' />
+                ) : (
+                  <FullTEDLogo
+                    className='hidden h-10 w-32 sm:block'
+                    variant='white'
+                  />
+                )}
               </div>
               <div className='flex flex-col gap-10 border-inherit p-4 md:flex-row'>
                 <div className='w-full border-inherit md:w-1/2'>
@@ -144,12 +156,18 @@ export default function BookingTicket({
                   <Controller
                     control={control}
                     name={`tickets.${index}.ticketId`}
-                    render={({ field: { onChange } }) => (
+                    render={({ field: { onChange, onBlur } }) => (
                       <RadioGroup
-                        value={selectedTicket}
-                        onChange={(e: TicketData) => {
-                          onChange(e.id);
-                          setSelectedTicket(e);
+                        onBlur={onBlur}
+                        value={selectedTicketId}
+                        onChange={(e: string) => {
+                          onChange(e);
+                          setSelectedTicketId(e);
+                          setSelectedTicket(
+                            selectedTickets.find(
+                              (ticket) => ticket.id === e
+                            ) as TicketData
+                          );
                         }}
                       >
                         <RadioGroup.Label className='text-center font-quaker'>
@@ -157,7 +175,10 @@ export default function BookingTicket({
                         </RadioGroup.Label>
                         <div className='flex items-center space-x-4'>
                           {selectedTickets.map((ticket) => (
-                            <RadioGroup.Option key={ticket.id} value={ticket}>
+                            <RadioGroup.Option
+                              key={ticket.id}
+                              value={ticket.id}
+                            >
                               {({ checked }) => (
                                 <div className='flex items-center'>
                                   <div
@@ -183,7 +204,7 @@ export default function BookingTicket({
                                     )}
                                   </div>
                                   <div className='ml-3 text-sm font-medium'>
-                                    {ticket.name}
+                                    {ticket.type}
                                   </div>
                                 </div>
                               )}
@@ -207,11 +228,32 @@ export default function BookingTicket({
         </TicketLeftSide>
         <TicketRightSide type={ticketType}>
           <div className='relative px-10 py-5'>
-            <div className='border-b-2 border-white px-4 pb-4'>
-              <p className='text-center text-xl font-medium text-white'>
-                Information About Kit
-              </p>
-            </div>
+            {selectedTicket.type === 'Non Kit' ? (
+              <div>
+                <div className='border-b-2 border-white px-4 pb-4'>
+                  <p className='text-center text-xl font-medium text-white'>
+                    Non Kit Perks
+                  </p>
+                </div>
+                <ul className='list-decimal space-y-2 px-4 pt-4 pb-10 text-white md:pb-0'>
+                  <li>Lanyard and ID Card</li>
+                </ul>
+              </div>
+            ) : (
+              <div>
+                <div className='border-b-2 border-white px-4 pb-4'>
+                  <p className='text-center text-xl font-medium text-white'>
+                    With Kit Perks
+                  </p>
+                </div>
+                <ul className='list-decimal space-y-2 px-4 pt-4 pb-10 text-white md:pb-0'>
+                  <li>Costumized Mini Notebook</li>
+                  <li>Special Sticker Pack</li>
+                  <li>Keychain</li>
+                  <li>Lanyard and ID Card</li>
+                </ul>
+              </div>
+            )}
           </div>
         </TicketRightSide>
       </Ticket>

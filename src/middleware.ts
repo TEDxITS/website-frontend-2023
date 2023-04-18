@@ -1,57 +1,66 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+
+import { baseURL } from '@/utils/api';
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get('tedxits2023-token');
-  const refreshToken = request.cookies.get('tedxits2023-refresh-token');
-  if (!accessToken) {
-    return NextResponse.redirect(new URL('/auth/login', request.url));
+  const accessToken = request.cookies.get('tedxits2023-token')?.value;
+  const refreshToken = request.cookies.get('tedxits2023-refresh-token')?.value;
+  const adminAccessToken = request.cookies.get(
+    'tedxits2023-admin-token'
+  )?.value;
+  const adminRefreshToken = request.cookies.get(
+    'tedxits2023-admin-refresh-token'
+  )?.value;
+
+  if (request.nextUrl.pathname.startsWith('/admin/dashboard')) {
+    if (!adminAccessToken || !adminRefreshToken) {
+      return NextResponse.redirect(new URL('/admin/login', request.nextUrl));
+    }
+    return NextResponse.next();
   }
 
-  const isAuthenticated = await fetch(
-    'https://us-central1-tedxits2023.cloudfunctions.net/isAuthenticated',
-    {
+  if (request.nextUrl.pathname.startsWith('/dashboard')) {
+    if (request.nextUrl.pathname.startsWith('/dashboard/history/ticket')) {
+      return NextResponse.next();
+    }
+
+    if (!accessToken) {
+      return NextResponse.redirect(new URL('/auth/login', request.nextUrl));
+    }
+
+    const isAuthenticated = await fetch(`${baseURL}/user/get-info`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-    }
-  )
-    .then((res) => {
-      if (res.status === 401) {
-        return fetch(
-          'https://us-central1-tedxits2023.cloudfunctions.net/refreshToken',
-          {
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          return fetch(`${baseURL}/auth/refresh-token`, {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },
-          }
-        ).then((res) => {
-          if (res.status === 200) {
-            return res.json().then((data) => {
-              request.cookies.set('tedxits2023-token', data.token);
-              return true;
-            });
-          } else {
-            return false;
-          }
-        });
-      }
-      return true;
-    })
-    .catch(() => {
-      return false;
-    });
+          });
+        }
+        return res;
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.data) {
+          return true;
+        }
+        return false;
+      });
 
-  if (!isAuthenticated) {
-    return NextResponse.redirect(new URL('/auth/login', request.url));
+    if (!isAuthenticated) {
+      return NextResponse.redirect(new URL('/auth/login', request.nextUrl));
+    }
+
+    return NextResponse.next();
   }
-
-  return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  // Temporary workaround because the api is not ready yet
-  matcher: '/dashboards/:path*',
+  matcher: ['/dashboard/:path*', '/admin/dashboard/:path*'],
 };

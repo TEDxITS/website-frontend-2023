@@ -45,17 +45,24 @@ api.interceptors.response.use(
     if (
       response &&
       response.status === 401 &&
-      response.data.message === 'Invalid Token' &&
+      response.data.message === 'Invalid token' &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
       try {
         const refreshToken = getRefreshToken();
-        const newAccessTokenResponse = await axios.get('/refresh-token', {
-          headers: {
-            Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
-          },
-        });
+        const newAccessTokenResponse = await axios.get(
+          `${baseURL}/auth/refresh-token`,
+          {
+            headers: {
+              Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
+            },
+          }
+        );
+
+        if (!newAccessTokenResponse.data.data) {
+          return Promise.reject(error);
+        }
 
         const newAccessToken = newAccessTokenResponse.data.data.accessToken;
         const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
@@ -63,7 +70,9 @@ api.interceptors.response.use(
         setRefreshToken(newRefreshToken);
 
         // Update the original request with the new access token
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = newAccessToken
+          ? `Bearer ${newAccessToken}`
+          : '';
 
         // Resend the original request
         return api(originalRequest);
@@ -101,17 +110,24 @@ adminApi.interceptors.response.use(
     if (
       response &&
       response.status === 401 &&
-      response.data.message === 'Invalid Token' &&
+      response.data.message === 'Invalid token' &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
       try {
         const refreshToken = getAdminRefreshToken();
-        const newAccessTokenResponse = await axios.get('/admin-refresh-token', {
-          headers: {
-            Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
-          },
-        });
+        const newAccessTokenResponse = await axios.get(
+          `${baseURL}/auth/admin-refresh-token`,
+          {
+            headers: {
+              Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
+            },
+          }
+        );
+
+        if (!newAccessTokenResponse.data.data) {
+          return Promise.reject(error);
+        }
 
         const newAccessToken = newAccessTokenResponse.data.data.accessToken;
         const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
@@ -122,7 +138,7 @@ adminApi.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         // Resend the original request
-        return api(originalRequest);
+        return adminApi(originalRequest);
       } catch (error) {
         return Promise.reject(error);
       }
