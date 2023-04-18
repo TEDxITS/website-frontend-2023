@@ -151,7 +151,8 @@ export default function UserPaymentContainer({
                     >
                       <div>
                         <p className='text-sm'>
-                          {ticketCounts[ticket]} x {ticketData.name}
+                          {ticketCounts[ticket]} x {ticketData.name}{' '}
+                          {ticketData.type}
                         </p>
                       </div>
                       <div className='grow border-b border-dashed border-black pb-2'></div>

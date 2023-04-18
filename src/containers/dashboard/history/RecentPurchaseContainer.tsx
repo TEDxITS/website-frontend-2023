@@ -25,7 +25,7 @@ export default function RecentPurchaseContainer() {
           `/booking/user`
         );
 
-        return data;
+        return data.data;
       } catch (error) {
         return Promise.reject(error);
       }
@@ -66,17 +66,24 @@ export default function RecentPurchaseContainer() {
           Unfortunately, we could not find any purchases. Please try again
           later.
         </p>
-        <UnstyledLink href='/dashboard/ticket'>
-          <Button>&larr; Back</Button>
-        </UnstyledLink>
       </section>
     );
   }
 
   return (
     <section className='z-20'>
-      {bookingsQuery.data.data.map((booking) => (
-        <div key={booking.id} className='mb-4 flex gap-x-3'>
+      {bookingsQuery.data.length === 0 && (
+        <section className='layout z-20 flex flex-col items-center p-5'>
+          <p className='mb-6 text-center text-cwhite'>
+            You have not purchased any tickets yet.
+          </p>
+          <UnstyledLink href='/dashboard/ticket'>
+            <Button>Buy Ticket</Button>
+          </UnstyledLink>
+        </section>
+      )}
+      {bookingsQuery.data.map((booking) => (
+        <div key={booking.id} className='flex gap-x-3'>
           <PurchaseDetail booking={booking} />
         </div>
       ))}

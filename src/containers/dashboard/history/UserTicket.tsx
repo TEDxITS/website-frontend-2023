@@ -65,7 +65,9 @@ export default function UserTicket({
                 <div className='flex w-full flex-col justify-center border-inherit md:w-1/2'>
                   <div className='mb-3 flex flex-col border-inherit'>
                     <p className='font-quaker'>Ticket Type</p>
-                    <p className='text-lg'>{bookingDetail.ticket.name}</p>
+                    <p className='text-lg'>
+                      {bookingDetail.ticket.name} {bookingDetail.ticket.type}
+                    </p>
                   </div>
                   <div className='mb-3 flex flex-col border-inherit'>
                     <p className='font-quaker'>Price</p>

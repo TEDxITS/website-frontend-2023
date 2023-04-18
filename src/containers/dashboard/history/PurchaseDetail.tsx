@@ -14,7 +14,7 @@ export default function PurchaseDetail({
   onDetailPage?: boolean;
 }) {
   return (
-    <div className='mb-10 w-full'>
+    <div className='mb-5 w-full'>
       {onDetailPage && (
         <h2 className='mb-5 font-baron text-cwhite'>PURCHASE DETAIL</h2>
       )}
@@ -25,7 +25,7 @@ export default function PurchaseDetail({
             <span className='mb-2 font-semibold sm:text-lg'>{booking.id}</span>
           </p>
 
-          <div className='flex flex-col gap-x-2 border-t-2 border-dashed border-cblack pt-2 sm:flex-row sm:items-end sm:justify-between'>
+          <div className='flex flex-col gap-2 border-t-2 border-dashed border-cblack pt-2 sm:flex-row sm:items-end sm:justify-between'>
             <div>
               <p>Status:</p>
               <div
@@ -67,10 +67,12 @@ export default function PurchaseDetail({
                 <UnstyledLink
                   href={`/dashboard/history/purchase/${booking.id}`}
                 >
-                  <Button variant='primary'>
-                    {booking.status === BOOKING_STATUS.MENUNGGU_PEMBAYARAN
-                      ? 'Pay Now'
-                      : 'View Details'}
+                  <Button variant='primary' className='w-full'>
+                    <p className='w-full text-center'>
+                      {booking.status === BOOKING_STATUS.MENUNGGU_PEMBAYARAN
+                        ? 'Pay Now'
+                        : 'View Details'}
+                    </p>
                   </Button>
                 </UnstyledLink>
               </div>

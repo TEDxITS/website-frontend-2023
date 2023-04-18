@@ -90,7 +90,9 @@ function DetailsTicketModal({
               <li>: {detailTicket.name}</li>
               <li>: {detailTicket.email}</li>
               <li>: {detailTicket.phoneNumber}</li>
-              <li>: {detailTicket.ticket.name}</li>
+              <li>
+                : {detailTicket.ticket.name} {detailTicket.ticket.type}
+              </li>
               <li>: {currencyFormat(detailTicket.ticket.price)}</li>
             </ul>
           </div>

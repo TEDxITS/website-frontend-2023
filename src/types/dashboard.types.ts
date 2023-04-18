@@ -34,5 +34,5 @@ export type BookingDetailData = {
   email: string;
   phoneNumber: string;
   qrLink: string;
-  ticket: Pick<TicketData, 'id' | 'name' | 'price'>;
+  ticket: Pick<TicketData, 'id' | 'name' | 'price' | 'type'>;
 };
