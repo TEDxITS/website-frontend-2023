@@ -17,7 +17,7 @@ const itemSchema = z.object({
   src: z.string().optional(),
   thumbnail: z.string().optional(),
   caption: z.string().optional(),
-  article_src: z.string().optional(),
+  articleSrc: z.string().optional(),
 });
 
 type itemType = z.infer<typeof itemSchema>;
@@ -27,7 +27,7 @@ const itemInitialValue: itemType = {
   src: '',
   thumbnail: '',
   caption: '',
-  article_src: '',
+  articleSrc: '',
 };
 
 function getThumbnailLink(url: string): string | null {
@@ -163,7 +163,7 @@ export default function AddItemModal() {
             )}
             {watch('type') === 'article' && (
               <Input
-                id='article_src'
+                id='articleSrc'
                 label='Article link'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-300 focus:ring-red-300'
                 labelClassName='block text-sm font-medium text-gray-900'

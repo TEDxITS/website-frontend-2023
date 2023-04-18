@@ -8,7 +8,6 @@ import {
 } from '@/utils/token';
 
 interface User {
-  id: string;
   name: string;
   email: string;
 }

@@ -7,33 +7,155 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id                   String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email                String                @unique
+  name                 String
+  isVerified           Boolean               @default(false) @map("is_verified")
+  password             String
+  createdAt            DateTime              @default(now()) @map("created_at")
+  updatedAt            DateTime              @updatedAt @map("updated_at")
+  refreshToken         String?               @map("refresh_token")
+  accountVerifications AccountVerification[]
+  bookings             Booking[]
+  forgetPasswords      ForgetPassword?
+
+  @@map("users")
+}
+
+model Admin {
+  id           String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email        String    @unique
+  password     String
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  refreshToken String?   @map("refresh_token")
+  bookings     Booking[]
+
+  @@map("admins")
+}
+
+model AccountVerification {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  token     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("account_verifications")
+}
+
+model ForgetPassword {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId    String   @unique @map("user_id") @db.Uuid
+  token     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("forget_passwords")
+}
+
+model Ticket {
+  id            String          @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name          String
+  quota         Int
+  price         Float
+  type          String
+  dateOpen      DateTime        @map("date_open")
+  dateClose     DateTime        @map("date_close")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  BookingDetail BookingDetail[]
+
+  @@map("tickets")
+}
+
+model Booking {
+  id             String          @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  orderingUser   String          @map("ordering_user") @db.Uuid
+  totalPrice     Float           @map("total_price")
+  status         BookingStatus   @default(MENUNGGU_PEMBAYARAN)
+  paymentProof   String?         @map("payment_proof")
+  verificator    String?         @db.Uuid
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  deadline       DateTime
+  isActive       Boolean         @default(true) @map("is_active")
+  bookingDetails BookingDetail[]
+  user           User            @relation(fields: [orderingUser], references: [id])
+  admin          Admin?          @relation(fields: [verificator], references: [id])
+
+  @@map("bookings")
+}
+
+model BookingDetail {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String
+  email       String
+  phoneNumber String   @map("phone_number")
+  qrLink      String?  @map("qr_link")
+  ticketId    String   @map("ticket_id") @db.Uuid
+  bookingId   String   @map("booking_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  booking     Booking  @relation(fields: [bookingId], references: [id])
+  ticket      Ticket   @relation(fields: [ticketId], references: [id])
+
+  @@map("booking_details")
+}
+
+model Payment {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name       String
+  personName String   @map("person_name")
+  number     String
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("payments")
+}
+
 model Url {
   id         String   @id @default(cuid())
   url        String
   short_url  String   @unique
   created_at DateTime @default(now())
+
+  @@map("urls")
 }
 
 model LocalSpeaker {
-  id                String   @id @default(cuid())
-  full_name         String
-  email             String
-  department        String
-  batch             String
-  role              String
-  instagram         String
-  twibbon_link      String
-  google_drive_link String
-  reason_to_join    String
-  created_at        DateTime @default(now())
+  id              String   @id @default(cuid())
+  fullName        String   @map("full_name")
+  email           String
+  department      String
+  batch           String
+  role            String
+  instagram       String
+  twibbonLink     String   @map("twibbon_link")
+  googleDriveLink String   @map("google_drive_link")
+  reasonToJoin    String   @map("reason_to_join")
+  created_at      DateTime @default(now())
+
+  @@map("local_speakers")
 }
 
 model Anthropocene {
-  id          String   @id @default(cuid())
-  src         String?
-  article_src String?  @default("")
-  thumbnail   String?
-  caption     String
-  type        String
-  created_at  DateTime @default(now())
+  id         String   @id @default(cuid())
+  src        String?
+  articleSrc String?  @default("") @map("article_src")
+  thumbnail  String?
+  caption    String
+  type       String
+  created_at DateTime @default(now())
+
+  @@map("anthropocenes")
+}
+
+enum BookingStatus {
+  MENUNGGU_PEMBAYARAN
+  MENUNGGU_VERIFIKASI
+  TERVERIFIKASI
 }

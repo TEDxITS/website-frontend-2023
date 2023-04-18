@@ -1,18 +1,27 @@
+'use client';
+import { useQuery } from '@tanstack/react-query';
+
 import TicketDatabaseTable from '@/containers/admin/tickets/TicketDatabaseTable';
 
-import api from '@/utils/api';
+import { adminApi } from '@/utils/api';
 
-async function getTickets() {
-  try {
-    const { data } = await api.get('/booking');
-    return data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-}
+import { BookingData } from '@/types/dashboard.types';
 
-export default async function TicketDatabaseContainer() {
-  const allTickets = await getTickets();
+export default function TicketDatabaseContainer() {
+  const bookingQuery = useQuery({
+    queryKey: ['booking'],
+    queryFn: async () => {
+      try {
+        const { data } = await adminApi.get<{ data: BookingData[] }>(
+          '/booking'
+        );
+        return data.data;
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+    refetchOnWindowFocus: false,
+  });
   // const allTickets = {
   //   data: [
   //     {
@@ -25,8 +34,17 @@ export default async function TicketDatabaseContainer() {
   //     },
   //   ],
   // };
-  if (!allTickets.data) {
+  // if (!allTickets.data) {
+  //   return <p className='py-10 text-center text-lg text-cwhite'>Error</p>;
+  // }
+
+  if (bookingQuery.isLoading) {
+    return <p className='py-10 text-center text-lg text-cwhite'>Loading</p>;
+  }
+
+  if (bookingQuery.isError) {
     return <p className='py-10 text-center text-lg text-cwhite'>Error</p>;
   }
-  return <TicketDatabaseTable data={allTickets.data ? allTickets.data : []} />;
+
+  return <TicketDatabaseTable data={bookingQuery.data} />;
 }

@@ -8,5 +8,5 @@ export default function GreetingText() {
       ? 'Afternoon'
       : 'Evening';
 
-  return <h1 className='mb-5 font-baron text-cwhite'>Good {dayTime}!</h1>;
+  return <h1 className='mb-10 font-baron text-cwhite'>Good {dayTime}!</h1>;
 }

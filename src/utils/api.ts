@@ -5,6 +5,10 @@ import {
   getAdminToken,
   getRefreshToken,
   getToken,
+  setAdminRefreshToken,
+  setAdminToken,
+  setRefreshToken,
+  setToken,
 } from '@/utils/token';
 
 const isServer = () => {
@@ -12,6 +16,7 @@ const isServer = () => {
 };
 
 export const baseURL = 'https://tedxits2023-server.azurewebsites.net/api';
+// export const baseURL = 'http://localhost:5000';
 
 // Regular API
 export const api = axios.create({
@@ -40,22 +45,34 @@ api.interceptors.response.use(
     if (
       response &&
       response.status === 401 &&
-      response.data.message === 'Invalid Token' &&
+      response.data.message === 'Invalid token' &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
       try {
         const refreshToken = getRefreshToken();
-        const newAccessTokenResponse = await axios.get('/refresh-token', {
-          headers: {
-            Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
-          },
-        });
+        const newAccessTokenResponse = await axios.get(
+          `${baseURL}/auth/refresh-token`,
+          {
+            headers: {
+              Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
+            },
+          }
+        );
 
-        const newAccessToken = newAccessTokenResponse.data.accessToken;
+        if (!newAccessTokenResponse.data.data) {
+          return Promise.reject(error);
+        }
+
+        const newAccessToken = newAccessTokenResponse.data.data.accessToken;
+        const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
+        setToken(newAccessToken);
+        setRefreshToken(newRefreshToken);
 
         // Update the original request with the new access token
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers.Authorization = newAccessToken
+          ? `Bearer ${newAccessToken}`
+          : '';
 
         // Resend the original request
         return api(originalRequest);
@@ -93,25 +110,35 @@ adminApi.interceptors.response.use(
     if (
       response &&
       response.status === 401 &&
-      response.data.message === 'Invalid Token' &&
+      response.data.message === 'Invalid token' &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
       try {
         const refreshToken = getAdminRefreshToken();
-        const newAccessTokenResponse = await axios.get('/admin-refresh-token', {
-          headers: {
-            Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
-          },
-        });
+        const newAccessTokenResponse = await axios.get(
+          `${baseURL}/auth/admin-refresh-token`,
+          {
+            headers: {
+              Authorization: refreshToken ? `Bearer ${refreshToken}` : '',
+            },
+          }
+        );
 
-        const newAccessToken = newAccessTokenResponse.data.accessToken;
+        if (!newAccessTokenResponse.data.data) {
+          return Promise.reject(error);
+        }
+
+        const newAccessToken = newAccessTokenResponse.data.data.accessToken;
+        const newRefreshToken = newAccessTokenResponse.data.data.refreshToken;
+        setAdminToken(newAccessToken);
+        setAdminRefreshToken(newRefreshToken);
 
         // Update the original request with the new access token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         // Resend the original request
-        return api(originalRequest);
+        return adminApi(originalRequest);
       } catch (error) {
         return Promise.reject(error);
       }

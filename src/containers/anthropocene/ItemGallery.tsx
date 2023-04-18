@@ -104,7 +104,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
             } else if (item.type === 'article') {
               return (
                 <div key={item.id}>
-                  <UnstyledLink href={item.article_src || ''} openNewTab>
+                  <UnstyledLink href={item.articleSrc || ''} openNewTab>
                     <div className='w-56 transition duration-200 ease-in hover:scale-110'>
                       <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                         <Image

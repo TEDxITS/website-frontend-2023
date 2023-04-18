@@ -1,26 +1,15 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { TbListDetails } from 'react-icons/tb';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
 
-import api from '@/utils/api';
+import { adminApi } from '@/utils/api';
+import { currencyFormat } from '@/utils/currency';
 
-async function getDetailsTicket(id: string) {
-  try {
-    const { data } = await api.get(`/booking/booking-detail/${id}`);
-    return data;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-}
-
-const currencyFormat = (value: number) =>
-  new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-  }).format(value);
+import { BookingDetailData } from '@/types/dashboard.types';
 
 function DetailsTicketModal({
   setIsOpen,
@@ -32,9 +21,24 @@ function DetailsTicketModal({
   id: string;
   sourceItem: string;
 }) {
-  const detailsTicket = async () => {
-    await getDetailsTicket(id);
-  };
+  const detailsQuery = useQuery({
+    queryKey: ['booking', { bookingId: id }],
+    queryFn: async () => {
+      try {
+        const { data } = await adminApi.get<{ data: BookingDetailData[] }>(
+          `/booking/booking-detail/booking/${id}`
+        );
+        return data.data;
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  // const detailsTicket = async () => {
+  //   await getDetailsTicket(id);
+  // };
   // const detailsTicket = {
   //   data: [
   //     {
@@ -68,7 +72,9 @@ function DetailsTicketModal({
     <Modal setIsOpen={setIsOpen} isOpen={isOpen}>
       <Modal.Title>Details Ticket</Modal.Title>
       <Modal.Description className='mt-3 flex flex-col gap-4 text-lg'>
-        {detailsTicket.data.map((detailTicket, i) => (
+        {detailsQuery.isLoading && <p>Loading...</p>}
+        {detailsQuery.isError && <p>Error</p>}
+        {detailsQuery.data?.map((detailTicket, i) => (
           <div key={detailTicket.id} className='flex gap-2'>
             <span className='mr-2 h-min rounded-full bg-cblue px-2 text-cwhite'>
               {i + 1}
@@ -84,7 +90,9 @@ function DetailsTicketModal({
               <li>: {detailTicket.name}</li>
               <li>: {detailTicket.email}</li>
               <li>: {detailTicket.phoneNumber}</li>
-              <li>: {detailTicket.ticket.name}</li>
+              <li>
+                : {detailTicket.ticket.name} {detailTicket.ticket.type}
+              </li>
               <li>: {currencyFormat(detailTicket.ticket.price)}</li>
             </ul>
           </div>

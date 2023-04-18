@@ -1,9 +1,14 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
 
+import UnstyledLink from '@/components/link/UnstyledLink';
 import Table from '@/components/table/Table';
 import DetailsTicketButton from '@/containers/admin/tickets/DetailsTicketButton';
 import VerificationButton from '@/containers/admin/tickets/VerificationButton';
+
+import { currencyFormat } from '@/utils/currency';
+
+import { BookingData } from '@/types/dashboard.types';
 
 type Ticket = {
   id: string;
@@ -18,18 +23,37 @@ const columns: ColumnDef<Ticket>[] = [
   {
     accessorKey: 'totalPrice',
     header: 'Total Price',
+    cell: (props) => currencyFormat(props.getValue() as number),
   },
   {
     accessorKey: 'paymentProof',
     header: 'Payment Proof',
-  },
-  {
-    accessorKey: 'verificator',
-    header: 'Verificator',
+    cell: (props) => (
+      <UnstyledLink
+        href={props.getValue() as string}
+        openNewTab
+        className='hover:underline'
+      >
+        {props.getValue() as string}
+      </UnstyledLink>
+    ),
   },
   {
     accessorKey: 'status',
     header: 'Status',
+    cell: (props) => (
+      <span
+        className={`${
+          (props.getValue() as string) == 'TERVERIFIKASI'
+            ? 'bg-cgreen/30 text-cgreen'
+            : (props.getValue() as string) == 'MENUNGGU_PEMBAYARAN'
+            ? 'bg-cred/30 text-cred'
+            : 'bg-cyellow/30 text-cyellow'
+        } rounded-3xl px-4 py-3 font-medium text-cwhite`}
+      >
+        {props.getValue() as string}
+      </span>
+    ),
   },
   {
     accessorKey: 'id',
@@ -53,6 +77,6 @@ const columns: ColumnDef<Ticket>[] = [
   },
 ];
 
-export default function LinkDatabaseTable({ data }: { data: Ticket[] | [] }) {
+export default function LinkDatabaseTable({ data }: { data: BookingData[] }) {
   return <Table data={data} columns={columns} withFilter withPagination />;
 }
