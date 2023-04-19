@@ -139,16 +139,20 @@ const rocketList = [
     src: redRocket4,
     alt: 'red-rocket-4',
     isComingSoon: false,
-    href: '/ticket',
+    href: '/ticketME',
     text: 'Order Now!',
     title: (
       <div className='absolute top-0 font-quaker '>
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-xl text-transparent xs:text-3xl sm:text-6xl'>
+          Main Event
+        </span>
+        <br />
         <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-3xl text-transparent sm:text-3xl md:text-8xl'>
           Ticket
         </span>
       </div>
     ),
-    className: '',
+    className: 'h-[90%] w-[90%] xs:h-4/5 xs:w-4/5',
     animationSequenceFn: async function sequence(
       animationControls: AnimationControls
     ) {

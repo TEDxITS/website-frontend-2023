@@ -32,7 +32,7 @@ export default function UserTicketContainer({
 
   if (bookingDetailQuery.isLoading) {
     return (
-      <section className='layout z-20 flex flex-col items-center p-5'>
+      <section className='z-20 flex flex-col items-center p-5'>
         <h1 className='mb-10 text-center font-baron text-cwhite'>
           LOADING TICKET
         </h1>
@@ -42,7 +42,7 @@ export default function UserTicketContainer({
 
   if (bookingDetailQuery.isError) {
     return (
-      <section className='layout z-20 flex flex-col items-center p-5'>
+      <section className='z-20 flex flex-col items-center p-5'>
         <h1 className='mb-10 text-center font-baron text-cwhite'>
           TICKET NOT FOUND
         </h1>
@@ -58,7 +58,7 @@ export default function UserTicketContainer({
   }
 
   return (
-    <section className='layout z-20 p-5'>
+    <section className='z-20 p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>YOUR TICKET</h1>
       <UserTicket
         ticketType={bookingDetailQuery.data.ticket.name as TicketType}

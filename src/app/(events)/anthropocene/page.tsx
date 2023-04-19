@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Suspense } from 'react';
 
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import UnstyledLink from '@/components/link/UnstyledLink';
 import ItemGalleryContainer from '@/containers/anthropocene/ItemGalleryContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
+import peCover1 from '~/images/anthropocene/cover-1.png';
+import peCover2 from '~/images/anthropocene/cover-2.png';
 import bgTexturedPaper from '~/images/background/bg-textured-paper.jpg';
 import bgCircularOrnament from '~/images/call-for-local-speaker/bg-ornament-3.png';
 
@@ -23,6 +25,12 @@ export const metadata: Metadata = {
 
 // Revalidate on every request (same as getServerSideProps)
 export const dynamic = 'force-dynamic';
+
+const REELS_LINKS = {
+  reels1:
+    'https://www.instagram.com/reel/CrIWgRKJscf/?utm_source=ig_web_copy_link',
+  reels2: '#',
+};
 
 export default async function AnthropocenePage() {
   return (
@@ -65,7 +73,11 @@ export default async function AnthropocenePage() {
           </h1>
         </section>
         <section className='z-20 mb-16 flex w-full flex-col justify-center gap-10 px-4 sm:w-3/4 sm:flex-row'>
-          <div className='hidden w-56 rotate-[15deg] transition duration-200 ease-in hover:rotate-[30deg] lg:block'>
+          <UnstyledLink
+            openNewTab
+            href={REELS_LINKS.reels2}
+            className='hidden w-56 rotate-[15deg] transition duration-200 ease-in hover:rotate-[30deg] lg:block'
+          >
             <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
               <Image
                 src={bgTexturedPaper}
@@ -75,25 +87,30 @@ export default async function AnthropocenePage() {
                 placeholder='blur'
               />
               <div className='relative flex flex h-full items-center justify-center'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   alt='PE 2'
-                  src=''
+                  src={peCover2}
                   className='h-full w-full object-contain'
                 />
               </div>
             </div>
-          </div>
-          <div className='noisy flex w-full items-center bg-white p-3 shadow-xl lg:w-1/2'>
+          </UnstyledLink>
+          <div className='noisy flex w-full flex-col items-center justify-center bg-white py-3 px-5 shadow-xl lg:w-1/2'>
+            <p className='mb-7 text-center text-lg font-medium'>
+              The term "Anthropocene" is used to refer to the period when humans
+              have had a significant effect on our planet.
+            </p>
             <p className='text-center text-lg font-medium'>
-              The Anthropocene is a proposed epoch in the history of the Earth
-              during which human activity has been the dominant influence on
-              climate and the environment. The term was first used in 2000 by
-              Paul Crutzen and Eugene Stoermer in a paper published in the
-              journal Nature.
+              Through this campaign, our aim is to break the silence and take
+              affirmative action through our curated visions about humanity’s
+              current progress in the environment
             </p>
           </div>
-          <div className='hidden w-56 rotate-[-15deg] transition duration-200 ease-in hover:rotate-[-30deg] lg:block'>
+          <UnstyledLink
+            openNewTab
+            href={REELS_LINKS.reels1}
+            className='hidden w-56 rotate-[-15deg] transition duration-200 ease-in hover:rotate-[-30deg] lg:block'
+          >
             <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
               <Image
                 src={bgTexturedPaper}
@@ -103,17 +120,16 @@ export default async function AnthropocenePage() {
                 placeholder='blur'
               />
               <div className='relative flex flex h-full items-center justify-center'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   alt='PE 2'
-                  src=''
+                  src={peCover1}
                   className='h-full w-full object-contain'
                 />
               </div>
             </div>
-          </div>
+          </UnstyledLink>
           <div className='block flex flex-wrap justify-center gap-10 lg:hidden'>
-            <Link href='#'>
+            <UnstyledLink href={REELS_LINKS.reels2} openNewTab>
               <div className='w-56 rotate-[15deg] transition duration-200 ease-in hover:rotate-[30deg]'>
                 <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                   <Image
@@ -124,17 +140,16 @@ export default async function AnthropocenePage() {
                     placeholder='blur'
                   />
                   <div className='relative flex flex h-full items-center justify-center'>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       alt='PE 2'
-                      src=''
+                      src={peCover2}
                       className='h-full w-full object-contain'
                     />
                   </div>
                 </div>
               </div>
-            </Link>
-            <Link href='#'>
+            </UnstyledLink>
+            <UnstyledLink href={REELS_LINKS.reels1} openNewTab>
               <div className='w-56 rotate-[-15deg] transition duration-200 ease-in hover:rotate-[-30deg]'>
                 <div className='relative mx-auto h-64 w-56 bg-white p-3 shadow-lg md:w-56'>
                   <Image
@@ -145,16 +160,15 @@ export default async function AnthropocenePage() {
                     placeholder='blur'
                   />
                   <div className='relative flex flex h-full items-center justify-center'>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       alt='PE 2'
-                      src=''
+                      src={peCover1}
                       className='h-full w-full object-contain'
                     />
                   </div>
                 </div>
               </div>
-            </Link>
+            </UnstyledLink>
           </div>
         </section>
 

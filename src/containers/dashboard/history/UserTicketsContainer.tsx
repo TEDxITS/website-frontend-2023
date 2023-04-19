@@ -20,13 +20,11 @@ export default function UserTicketsContainer({
         const { data } = await api.get<{ data: BookingDetailData[] }>(
           `/booking/booking-detail/booking/${bookingId}`
         );
-
         return data.data;
       } catch (error) {
         return Promise.reject(error);
       }
     },
-    refetchOnWindowFocus: false,
   });
 
   if (bookingDetailsQuery.isLoading) {

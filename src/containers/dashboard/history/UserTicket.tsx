@@ -82,9 +82,14 @@ export default function UserTicket({
         </TicketLeftSide>
         <TicketRightSide type={ticketType}>
           <div className='relative px-10 py-5'>
-            <div className='border-b-2 border-white px-4 pb-4'>
+            <div className='mb-4 border-b-2 border-white px-4 pb-4'>
               <p className='text-center text-xl font-medium text-white'>
                 QR Code
+              </p>
+            </div>
+            <div className='flex h-[12rem] w-full items-center justify-center border-2 border-dashed border-cwhite'>
+              <p className='w-3/4 text-center text-xs text-cwhite'>
+                The QR Code will be here soon
               </p>
             </div>
           </div>

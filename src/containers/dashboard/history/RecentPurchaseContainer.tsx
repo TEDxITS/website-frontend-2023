@@ -1,5 +1,4 @@
 'use client';
-
 import { useQuery } from '@tanstack/react-query';
 
 import Button from '@/components/button/Button';
@@ -18,7 +17,7 @@ export const BOOKING_STATUS = {
 
 export default function RecentPurchaseContainer() {
   const bookingsQuery = useQuery({
-    queryKey: ['bookings'],
+    queryKey: ['recent-bookings'],
     queryFn: async () => {
       try {
         const { data } = await api.get<{ data: BookingData[] }>(
@@ -30,7 +29,6 @@ export default function RecentPurchaseContainer() {
         return Promise.reject(error);
       }
     },
-    refetchOnWindowFocus: false,
   });
 
   if (bookingsQuery.isLoading) {
@@ -82,7 +80,7 @@ export default function RecentPurchaseContainer() {
           </UnstyledLink>
         </section>
       )}
-      {bookingsQuery.data.map((booking) => (
+      {bookingsQuery.data?.map((booking) => (
         <div key={booking.id} className='flex gap-x-3'>
           <PurchaseDetail booking={booking} />
         </div>
