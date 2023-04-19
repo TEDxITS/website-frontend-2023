@@ -49,7 +49,7 @@ const columns: ColumnDef<Ticket>[] = [
             : (props.getValue() as string) == 'MENUNGGU_PEMBAYARAN'
             ? 'bg-cred/30 text-cred'
             : 'bg-cyellow/30 text-cyellow'
-        } rounded-3xl px-4 py-3 font-medium text-cwhite`}
+        } overflow-visible rounded-3xl px-4 py-3 text-xs font-medium text-cwhite`}
       >
         {props.getValue() as string}
       </span>

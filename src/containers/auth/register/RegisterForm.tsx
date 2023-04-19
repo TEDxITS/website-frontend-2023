@@ -14,7 +14,7 @@ import api from '@/utils/api';
 
 const registerSchema = z
   .object({
-    name: z.string(),
+    name: z.string().nonempty({ message: 'Name is required' }),
     email: z.string().email({ message: 'The provided email is not valid' }),
     password: z
       .string()
@@ -64,7 +64,8 @@ export default function RegisterForm() {
     toast
       .promise(registerPromise, {
         loading: 'Loading..',
-        success: 'Account created successfully',
+        success:
+          'Account created successfully. Please check your email to verify your account',
         error: (e) => e.response.data.message,
       })
       .then(() => {

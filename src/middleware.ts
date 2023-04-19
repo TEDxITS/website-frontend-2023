@@ -15,7 +15,11 @@ export async function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith('/admin/dashboard')) {
     if (!adminAccessToken || !adminRefreshToken) {
-      return NextResponse.redirect(new URL('/admin/login', request.nextUrl));
+      const response = NextResponse.rewrite(
+        new URL('/admin/login', request.nextUrl)
+      );
+      response.headers.set('x-middleware-cache', 'no-cache'); // Disables middleware caching
+      return response;
     }
     return NextResponse.next();
   }
@@ -26,13 +30,18 @@ export async function middleware(request: NextRequest) {
     }
 
     if (!accessToken) {
-      return NextResponse.redirect(new URL('/auth/login', request.nextUrl));
+      const response = NextResponse.rewrite(
+        new URL('/auth/login', request.nextUrl)
+      );
+      response.headers.set('x-middleware-cache', 'no-cache'); // Disables middleware caching
+      return response;
     }
 
     const isAuthenticated = await fetch(`${baseURL}/user/get-info`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      cache: 'no-store',
     })
       .then((res) => {
         if (res.status === 401) {
@@ -53,14 +62,22 @@ export async function middleware(request: NextRequest) {
       });
 
     if (!isAuthenticated) {
-      return NextResponse.redirect(new URL('/auth/login', request.nextUrl));
+      const response = NextResponse.rewrite(
+        new URL('/auth/login', request.nextUrl)
+      );
+      response.headers.set('x-middleware-cache', 'no-cache'); // Disables middleware caching
+      return response;
     }
-
     return NextResponse.next();
   }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/dashboard/:path*', '/admin/dashboard/:path*'],
+  matcher: [
+    '/dashboard',
+    '/dashboard/:path*',
+    '/admin/dashboard',
+    '/admin/dashboard/:path*',
+  ],
 };

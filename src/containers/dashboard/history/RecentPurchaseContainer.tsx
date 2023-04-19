@@ -68,9 +68,16 @@ export default function RecentPurchaseContainer() {
     );
   }
 
+  const activeBookings = bookingsQuery.data.filter((booking) => {
+    if (booking.status == 'MENUNGGU_PEMBAYARAN' && booking.isActive === false) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <section className='z-20'>
-      {bookingsQuery.data.length === 0 && (
+      {activeBookings.length === 0 && (
         <section className='layout z-20 flex flex-col items-center p-5'>
           <p className='mb-6 text-center text-cwhite'>
             You have not purchased any tickets yet.
@@ -80,7 +87,7 @@ export default function RecentPurchaseContainer() {
           </UnstyledLink>
         </section>
       )}
-      {bookingsQuery.data?.map((booking) => (
+      {activeBookings.map((booking) => (
         <div key={booking.id} className='flex gap-x-3'>
           <PurchaseDetail booking={booking} />
         </div>

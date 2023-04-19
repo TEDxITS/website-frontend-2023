@@ -76,6 +76,27 @@ export default function UserPurchaseContainer({
     );
   }
 
+  if (
+    bookingQuery.data.isActive === false &&
+    bookingQuery.data.status === 'MENUNGGU_PEMBAYARAN'
+  ) {
+    return (
+      <section className='layout z-20 flex flex-col items-center p-5'>
+        <h1 className='mb-10 text-center font-baron text-cwhite'>
+          PURCHASE IS EXPIRED
+        </h1>
+        <p className='mb-6 text-center text-cwhite'>
+          Unfortunately, the purchase you're looking for is expired. This might
+          be because you didn't complete the payment process in time. Please try
+          again later or contact our support team. Thank you.
+        </p>
+        <UnstyledLink href='/dashboard'>
+          <Button>&larr; Back</Button>
+        </UnstyledLink>
+      </section>
+    );
+  }
+
   if (bookingQuery.isSuccess) {
     if (bookingQuery.data.status === BOOKING_STATUS.MENUNGGU_PEMBAYARAN) {
       return (

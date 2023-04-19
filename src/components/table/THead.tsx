@@ -49,7 +49,7 @@ export default function THead<T extends RowData>({
                   {!omitSort &&
                   header.column.getCanSort() &&
                   !header.column.getIsSorted() ? (
-                    <VscTriangleDown className='group-hover:fill-typo w-2 rotate-180 fill-transparent' />
+                    <VscTriangleDown className='group-hover:fill-typo w-2 rotate-180' />
                   ) : (
                     {
                       asc: (

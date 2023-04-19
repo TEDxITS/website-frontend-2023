@@ -18,7 +18,7 @@ import toprightIcon from '~/images/ticketing/benefits/top-right-icon.png';
 const metadataObject = generateTemplateMetadata(
   'Ticket Benefit',
   '',
-  '/ticket/benefit'
+  '/ticketME/benefit'
 );
 export const metadata: Metadata = {
   ...metadataObject,

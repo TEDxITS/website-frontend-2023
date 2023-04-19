@@ -19,7 +19,11 @@ import titleDecoration1 from '~/images/ticket/titleDecoration1.png';
 import titleDecoration2 from '~/images/ticket/titleDecoration2.png';
 import titleDecoration3 from '~/images/ticket/titleDecoration3.png';
 
-const metadataObject = generateTemplateMetadata('Ticket', '', '/ticket');
+const metadataObject = generateTemplateMetadata(
+  'Main Event Ticket',
+  '',
+  '/ticketME'
+);
 export const metadata: Metadata = {
   ...metadataObject,
 };
@@ -63,7 +67,7 @@ export default function TicketPage() {
         <div className='mt-14 flex h-fit items-center justify-center gap-7 sm:mt-24 md:gap-11 xl:gap-16 '>
           <Link
             className='z-10 cursor-pointer rounded-lg border-[2.2px] border-cgreen px-2 duration-300 hover:-translate-y-3 hover:scale-125 xl:rounded-2xl xl:border-[3px] xl:px-3'
-            href='/ticket/benefit'
+            href='/ticketME/benefit'
           >
             <h1 className='font-primary text-xs font-medium xl:text-base'>
               Benefits
@@ -71,7 +75,7 @@ export default function TicketPage() {
           </Link>
           <Link
             className='z-10 cursor-pointer rounded-lg border-[2.2px] border-cgreen px-2 duration-300 hover:-translate-y-3 hover:scale-125 xl:rounded-2xl xl:border-[3px] xl:px-3'
-            href='/ticket/tutorial'
+            href='/ticketME/tutorial'
           >
             <h1 className='font-primary text-xs font-medium xl:text-base'>
               How To Buy?
@@ -79,7 +83,7 @@ export default function TicketPage() {
           </Link>
           <OurPilotsContainer />
         </div>
-        <Link href='/dashboard'>
+        <Link href='/dashboard' prefetch>
           <h1 className='relative z-10 mt-24 cursor-pointer font-quaker text-base font-medium duration-300 hover:-translate-y-2 hover:scale-125 sm:mt-12 sm:text-xl md:text-2xl xl:text-3xl'>
             <Image
               src={titleDecoration3}

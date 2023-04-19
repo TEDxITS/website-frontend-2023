@@ -94,6 +94,16 @@ export default function BookingForm({
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
+    if (data.tickets.length === 0) {
+      toast.error('Please add at least 1 ticket');
+      setIsLoading(false);
+      return;
+    }
+    if (data.tickets.length > 5) {
+      toast.error('You can only book up to 5 tickets');
+      setIsLoading(false);
+      return;
+    }
     const bookTicketPromise = bookTicket(data.tickets);
     toast
       .promise(bookTicketPromise, {
@@ -139,14 +149,18 @@ export default function BookingForm({
         ))}
         <div className='mb-12 flex justify-center'>
           <Button
-            onClick={() =>
-              append({
-                name: '',
-                email: '',
-                phoneNumber: '',
-                ticketId: selectedTickets[0].id,
-              })
-            }
+            onClick={() => {
+              if (fields.length < 5) {
+                append({
+                  name: '',
+                  email: '',
+                  phoneNumber: '',
+                  ticketId: selectedTickets[0].id,
+                });
+              } else {
+                toast.error('You can only book up to 5 tickets');
+              }
+            }}
             type='button'
           >
             Add Ticket

@@ -25,7 +25,7 @@ export default function UserPurchasesContainer() {
           `/booking/user`
         );
 
-        return data;
+        return data.data;
       } catch (error) {
         return Promise.reject(error);
       }
@@ -78,12 +78,24 @@ export default function UserPurchasesContainer() {
     );
   }
 
+  const activeBookings = bookingsQuery.data.filter((booking) => {
+    if (booking.status == 'MENUNGGU_PEMBAYARAN' && booking.isActive === false) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <section className='layout z-20 p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>
         YOUR PURCHASE
       </h1>
-      {bookingsQuery.data?.data?.map((booking, i) => (
+      {activeBookings.length === 0 && (
+        <p className='mb-6 text-center text-cwhite'>
+          You have no active purchases.
+        </p>
+      )}
+      {activeBookings.map((booking, i) => (
         <div key={booking.id} className='flex gap-x-3'>
           <div className='noisy flex h-8 w-16 items-center justify-center rounded-full bg-white sm:h-14 sm:w-14'>
             <p className='text-lg font-semibold sm:text-xl'>{i + 1}</p>
