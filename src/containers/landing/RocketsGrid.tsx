@@ -6,14 +6,13 @@ import Rocket from '@/containers/landing/Rocket';
 
 import BgGlass1 from '~/images/landing/cracked-bg.png';
 import BgGlass2 from '~/images/landing/cracked-bg-lg.png';
-import grayRocket4 from '~/images/landing/rockets/gray4.png';
 import grayRocket5 from '~/images/landing/rockets/gray5.png';
 import grayRocket6 from '~/images/landing/rockets/gray6.png';
 import redRocket from '~/images/landing/rockets/red1.png';
 import redRocket2 from '~/images/landing/rockets/red2.png';
 import redRocket3 from '~/images/landing/rockets/red3.png';
+import redRocket4 from '~/images/landing/rockets/red5.png';
 
-// eslint-disable-next-line unused-imports/no-unused-vars
 const rocketList = [
   {
     id: 1,
@@ -137,13 +136,23 @@ const rocketList = [
   },
   {
     id: 4,
-    src: grayRocket4,
-    alt: 'gray-rocket-4',
-    isComingSoon: true,
-    href: '#',
-    text: 'Coming-soon',
-    title: <></>,
-    className: '',
+    src: redRocket4,
+    alt: 'red-rocket-4',
+    isComingSoon: false,
+    href: '/ticketME',
+    text: 'Order Now!',
+    title: (
+      <div className='absolute top-0 font-quaker '>
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-xl text-transparent xs:text-3xl sm:text-6xl'>
+          Main Event
+        </span>
+        <br />
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-3xl text-transparent sm:text-3xl md:text-8xl'>
+          Ticket
+        </span>
+      </div>
+    ),
+    className: 'h-[90%] w-[90%] xs:h-4/5 xs:w-4/5',
     animationSequenceFn: async function sequence(
       animationControls: AnimationControls
     ) {

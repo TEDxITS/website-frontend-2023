@@ -9,7 +9,7 @@ import AddItemModal from '@/containers/admin/anthropocene/AddItemModal';
 import DeleteItemButton from '@/containers/admin/anthropocene/DeleteItemButton';
 import EditItemModal from '@/containers/admin/anthropocene/EditItemModal';
 
-import { useFirebaseAuthContext } from '@/context/FirebaseAuthContext';
+import { useAuthStore } from '@/store/useAuthStore';
 
 import bgTexturedPaper from '~/images/background/bg-textured-paper.jpg';
 /* eslint-disable @next/next/no-img-element */
@@ -19,8 +19,7 @@ interface ItemGalleryProps {
 }
 
 export default function ItemGallery({ items }: ItemGalleryProps) {
-  const { user } = useFirebaseAuthContext();
-  const userRole = user?.role;
+  const admin = useAuthStore((state) => state.admin);
   const [type, setType] = useState<string>('all');
   const [filterItem, setFilterItem] = useState<Anthropocene[]>([]);
 
@@ -43,7 +42,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
 
   return (
     <>
-      {userRole === 'admin' && (
+      {admin && (
         <div className='layout my-2 flex justify-end'>
           <AddItemModal />
         </div>
@@ -91,7 +90,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                       </div>
                     </div>
                   </div>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -125,7 +124,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                       </div>
                     </div>
                   </UnstyledLink>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -159,7 +158,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                       </div>
                     </div>
                   </Link>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton
@@ -193,7 +192,7 @@ export default function ItemGallery({ items }: ItemGalleryProps) {
                       </div>
                     </div>
                   </Link>
-                  {userRole === 'admin' && (
+                  {admin && (
                     <div className='mt-5 flex justify-end gap-x-2'>
                       <EditItemModal initialValue={item} />
                       <DeleteItemButton

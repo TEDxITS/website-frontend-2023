@@ -1,12 +1,9 @@
 'use client';
 
-export default function GreetingText() {
-  const dayTime =
-    new Date().getHours() < 12
-      ? 'Morning'
-      : new Date().getHours() < 18
-      ? 'Afternoon'
-      : 'Evening';
+import { useAuthStore } from '@/store/useAuthStore';
 
-  return <h1 className='mb-5 font-baron text-cwhite'>Good {dayTime}!</h1>;
+export default function GreetingText() {
+  const user = useAuthStore((state) => state.user);
+
+  return <h1 className='mb-10 font-baron text-cwhite'>Hi, {user?.name}!</h1>;
 }

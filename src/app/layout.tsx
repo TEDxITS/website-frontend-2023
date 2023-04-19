@@ -6,6 +6,9 @@ import '../styles/globals.css';
 
 import Toast from '@/components/toast/Toast';
 import { AnalyticsProvider } from '@/components/utils/AnalyticsProvider';
+import ReactQueryWrapper from '@/components/utils/ReactQueryWrapper';
+
+import StoreInitializer from '@/store/StoreInitializer';
 
 import { BASE_METADATA } from '@/constant/metadata';
 import FirebaseAuthProvider from '@/context/FirebaseAuthContext';
@@ -88,11 +91,14 @@ export default async function RootLayout({
       */}
       <head />
       <body className='overflow-x-hidden'>
-        <FirebaseAuthProvider>
-          <Toast />
-          <AnalyticsProvider />
-          {children}
-        </FirebaseAuthProvider>
+        <ReactQueryWrapper>
+          <StoreInitializer />
+          <FirebaseAuthProvider>
+            <Toast />
+            <AnalyticsProvider />
+            {children}
+          </FirebaseAuthProvider>
+        </ReactQueryWrapper>
       </body>
     </html>
   );
