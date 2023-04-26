@@ -1,7 +1,7 @@
 import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
-import { BOOKING_STATUS } from '@/containers/dashboard/history/UserPurchasesContainer';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import clsxm from '@/utils/clsxm';
 
 import { BookingData } from '@/types/dashboard.types';
@@ -35,6 +35,8 @@ export default function PurchaseDetail({
                     ? 'bg-red-200 text-red-800'
                     : booking.status === BOOKING_STATUS.MENUNGGU_VERIFIKASI
                     ? 'bg-yellow-200 text-yellow-800'
+                    : booking.status === BOOKING_STATUS.KUOTA_HABIS
+                    ? 'bg-blue-200 text-blue-800'
                     : 'bg-green-200 text-green-800'
                 )}
               >
@@ -43,10 +45,13 @@ export default function PurchaseDetail({
                     ? 'Waiting for Payment'
                     : booking.status === BOOKING_STATUS.MENUNGGU_VERIFIKASI
                     ? 'Waiting for Admin Verification'
+                    : booking.status === BOOKING_STATUS.KUOTA_HABIS
+                    ? 'Out of Quota'
                     : 'Verified'}
                 </p>
               </div>
             </div>
+
             {booking.status === BOOKING_STATUS.MENUNGGU_PEMBAYARAN && (
               <div>
                 <p>Pay Before:</p>

@@ -5,9 +5,9 @@ import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import PurchaseDetail from '@/containers/dashboard/history/PurchaseDetail';
 import UserPaymentContainer from '@/containers/dashboard/history/UserPaymentContainer';
-import { BOOKING_STATUS } from '@/containers/dashboard/history/UserPurchasesContainer';
 import UserTicketsContainer from '@/containers/dashboard/history/UserTicketsContainer';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import api from '@/utils/api';
 
 import { BookingData } from '@/types/dashboard.types';
@@ -78,7 +78,7 @@ export default function UserPurchaseContainer({
 
   if (
     bookingQuery.data.isActive === false &&
-    bookingQuery.data.status === 'MENUNGGU_PEMBAYARAN'
+    bookingQuery.data.status === BOOKING_STATUS.MENUNGGU_PEMBAYARAN
   ) {
     return (
       <section className='layout z-20 flex flex-col items-center p-5'>
@@ -125,6 +125,26 @@ export default function UserPurchaseContainer({
           <h1 className='mb-10 text-center font-baron text-cwhite'>PURCHASE</h1>
           <PurchaseDetail booking={bookingQuery.data} onDetailPage />
           <UserTicketsContainer bookingId={bookingId} />;
+        </section>
+      );
+    }
+    if (bookingQuery.data.status === BOOKING_STATUS.KUOTA_HABIS) {
+      return (
+        <section className='layout z-20 p-5'>
+          <h1 className='mb-10 text-center font-baron text-cwhite'>PURCHASE</h1>
+          <PurchaseDetail booking={bookingQuery.data} onDetailPage />
+          <h2 className='mb-5 font-baron text-cwhite'>INFORMATION</h2>
+          <p className='mb-6 text-cwhite'>
+            Unfortunately, your purchase has been cancelled because the ticket
+            quota is unsufficient. If you already pay, We will refund your
+            payment within 1-3 business days. Thank you for your understanding.
+          </p>
+          <p className='z-10 font-primary text-xs font-normal text-cwhite xl:text-lg'>
+            Contact Person
+          </p>
+          <p className='z-10 font-primary text-[0.5rem] font-normal text-cwhite sm:text-xs xl:text-lg'>
+            LINE ID : knytlth (Kinaya) | WhatsApp : 085836649611 (Kinaya)
+          </p>
         </section>
       );
     }

@@ -112,6 +112,22 @@ export default async function BookingPage({
     );
   }
 
+  // return (
+  //   <section className='layout z-20 flex flex-col items-center p-5'>
+  //     <h1 className='mb-10 text-center font-baron text-cwhite'>
+  //       TICKET SELLING PERIOD HAS NOT STARTED OR HAS ENDED
+  //     </h1>
+  //     <p className='mb-6 text-center text-cwhite'>
+  //       Unfortunately, the ticket type you are looking for is not available at
+  //       the moment. Please check back later.
+  //     </p>
+  //     <UnstyledLink href='/dashboard/ticket'>
+  //       <Button>&larr; Back</Button>
+  //     </UnstyledLink>
+  //   </section>
+  // );
+
+  // Dont forget to uncomment the code before production
   return (
     <section className='layout z-20 p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>BUY TICKET</h1>

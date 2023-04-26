@@ -6,6 +6,7 @@ import Table from '@/components/table/Table';
 import DetailsTicketButton from '@/containers/admin/tickets/DetailsTicketButton';
 import VerificationButton from '@/containers/admin/tickets/VerificationButton';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import { currencyFormat } from '@/utils/currency';
 
 import { BookingData } from '@/types/dashboard.types';
@@ -44,10 +45,12 @@ const columns: ColumnDef<Ticket>[] = [
     cell: (props) => (
       <span
         className={`${
-          (props.getValue() as string) == 'TERVERIFIKASI'
+          (props.getValue() as string) == BOOKING_STATUS.TERVERIFIKASI
             ? 'bg-cgreen/30 text-cgreen'
-            : (props.getValue() as string) == 'MENUNGGU_PEMBAYARAN'
+            : (props.getValue() as string) == BOOKING_STATUS.MENUNGGU_PEMBAYARAN
             ? 'bg-cred/30 text-cred'
+            : (props.getValue() as string) == BOOKING_STATUS.KUOTA_HABIS
+            ? 'bg-cblue/30 text-cblue'
             : 'bg-cyellow/30 text-cyellow'
         } overflow-visible rounded-3xl px-4 py-3 text-xs font-medium text-cwhite`}
       >

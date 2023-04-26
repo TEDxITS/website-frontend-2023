@@ -6,15 +6,10 @@ import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import PurchaseDetail from '@/containers/dashboard/history/PurchaseDetail';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import api from '@/utils/api';
 
 import { BookingData } from '@/types/dashboard.types';
-
-export const BOOKING_STATUS = {
-  MENUNGGU_PEMBAYARAN: 'MENUNGGU_PEMBAYARAN',
-  MENUNGGU_VERIFIKASI: 'MENUNGGU_VERIFIKASI',
-  TERVERIFIKASI: 'TERVERIFIKASI',
-};
 
 export default function UserPurchasesContainer() {
   const bookingsQuery = useQuery({
@@ -79,24 +74,32 @@ export default function UserPurchasesContainer() {
   }
 
   const activeBookings = bookingsQuery.data.filter((booking) => {
-    if (booking.status == 'MENUNGGU_PEMBAYARAN' && booking.isActive === false) {
+    if (
+      booking.status == BOOKING_STATUS.MENUNGGU_PEMBAYARAN &&
+      booking.isActive === false
+    ) {
       return false;
     }
     return true;
   });
 
   return (
-    <section className='layout z-20 p-5'>
+    <section className='layout z-20 flex flex-col items-center p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>
         YOUR PURCHASE
       </h1>
       {activeBookings.length === 0 && (
-        <p className='mb-6 text-center text-cwhite'>
-          You have no active purchases.
-        </p>
+        <>
+          <p className='mb-6 text-center text-cwhite'>
+            You have no active purchases.
+          </p>
+          <UnstyledLink href='/dashboard/ticket'>
+            <Button>Buy Ticket</Button>
+          </UnstyledLink>
+        </>
       )}
       {activeBookings.map((booking, i) => (
-        <div key={booking.id} className='flex gap-x-3'>
+        <div key={booking.id} className='flex w-full gap-x-3'>
           <div className='noisy flex h-8 w-16 items-center justify-center rounded-full bg-white sm:h-14 sm:w-14'>
             <p className='text-lg font-semibold sm:text-xl'>{i + 1}</p>
           </div>

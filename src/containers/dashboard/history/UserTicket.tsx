@@ -45,15 +45,19 @@ export default function UserTicket({
               <div className='border-b-2 border-inherit px-4 pb-4'>
                 <h1 className='font-baron font-medium'>BOARDING PASS</h1>
               </div>
-              <div className='flex flex-col gap-10 border-inherit p-4 md:flex-row'>
+              <div className='flex flex-col gap-x-10 gap-y-3 border-inherit p-4 md:flex-row'>
                 <div className='w-full border-inherit md:w-1/2'>
                   <div className='mb-3 flex flex-col border-inherit'>
                     <p className='font-quaker'>Name</p>
-                    <p className='text-lg'>{bookingDetail.name}</p>
+                    <p className='text-xs xs:text-sm sm:text-lg'>
+                      {bookingDetail.name}
+                    </p>
                   </div>
                   <div className='mb-3 flex flex-col border-inherit'>
                     <p className='font-quaker'>Email</p>
-                    <p className='text-lg'>{bookingDetail.email}</p>
+                    <p className='text-xs xs:text-sm sm:text-lg'>
+                      {bookingDetail.email}
+                    </p>
                   </div>
                   {!onDetailPage && (
                     <div className='mb-3 flex flex-col border-inherit'>
@@ -87,7 +91,7 @@ export default function UserTicket({
                 QR Code
               </p>
             </div>
-            <div className='flex h-[12rem] w-full items-center justify-center border-2 border-dashed border-cwhite'>
+            <div className='mb-8 flex h-[12rem] w-full items-center justify-center border-2 border-dashed border-cwhite md:mb-0'>
               <p className='w-3/4 text-center text-xs text-cwhite'>
                 The QR Code will be here soon
               </p>

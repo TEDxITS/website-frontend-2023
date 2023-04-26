@@ -8,6 +8,7 @@ import Button from '@/components/button/Button';
 
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import api from '@/utils/api';
+import clsxm from '@/utils/clsxm';
 import { storage } from '@/utils/firebase/client';
 
 import { BookingData, BookingDetailData } from '@/types/dashboard.types';
@@ -53,8 +54,14 @@ export default function UserPaymentContainer({
         queryKey: ['booking', { id: booking.id }],
       });
     },
+    onError: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['booking', { id: booking.id }],
+      });
+    },
   });
 
+  const [isAnnouncementOpen, setIsAnnouncementOpen] = React.useState(true);
   const [ticketCounts, setTicketCounts] = React.useState<{
     [key: string]: number;
   }>({});
@@ -119,6 +126,50 @@ export default function UserPaymentContainer({
   return (
     <section>
       <h2 className='mb-10 font-baron text-cwhite'>Payments</h2>
+      <div
+        className={clsxm(
+          'noisy mb-5 flex w-full items-center gap-x-4 rounded-lg bg-white p-4',
+          isAnnouncementOpen ? 'flex' : 'hidden'
+        )}
+      >
+        <div>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='h-6 w-6 text-cred'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z'
+            />
+          </svg>
+        </div>
+        <div>
+          Please note that your ticket reservation is not confirmed until the
+          payment proof is submitted. To ensure that you secure your booking,
+          please make your payment and submit the proof as soon as possible.
+        </div>
+        <button onClick={() => setIsAnnouncementOpen(false)}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='h-6 w-6'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M6 18L18 6M6 6l12 12'
+            />
+          </svg>
+        </button>
+      </div>
       <div className='mb-5 flex flex-col justify-between gap-4 lg:flex-row'>
         {/* Receipt */}
         <div className="flex h-full flex-col bg-[url('/images/purchase/bg-receipt.png')] lg:sticky lg:top-5">

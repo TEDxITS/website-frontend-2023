@@ -104,10 +104,55 @@ export default function BookingForm({
       setIsLoading(false);
       return;
     }
+
+    toast.loading('Checking quota...', { id: 'quota' });
+
+    // Fetch all ticket type to get the quota
+    const allTicketType = await fetch('/api/ticket')
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        toast.error('Failed to fetch ticket quota', { id: 'quota' });
+        setIsLoading(false);
+        return Promise.reject(res);
+      })
+      .catch((e) => {
+        toast.error('Failed to fetch ticket quota', { id: 'quota' });
+        setIsLoading(false);
+        return Promise.reject(e);
+      });
+
+    // Check if quota is sufficient
+    let isQuotaInsufficient = false;
+    Object.keys(orderSummary).forEach((key) => {
+      const ticketData = JSON.parse(key);
+      const ticketType = allTicketType.data.find(
+        (ticket: TicketData) => ticket.id === ticketData.id
+      );
+      if (ticketType) {
+        if (ticketType.quota < orderSummary[key]) {
+          toast.error(
+            `Quota insufficient for ${ticketType.name} ${ticketType.type} ticket. Please reduce the number of tickets`,
+            { id: 'quota' }
+          );
+          isQuotaInsufficient = true;
+          return;
+        }
+      }
+    });
+
+    if (isQuotaInsufficient) {
+      setIsLoading(false);
+      return;
+    }
+
+    toast.dismiss('quota');
+
     const bookTicketPromise = bookTicket(data.tickets);
     toast
       .promise(bookTicketPromise, {
-        loading: 'Loading..',
+        loading: 'Booking ticket...',
         success: 'Ticket booked successfully',
         error: (e) => e.response.data.message,
       })

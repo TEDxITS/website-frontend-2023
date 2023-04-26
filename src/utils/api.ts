@@ -16,7 +16,7 @@ const isServer = () => {
 };
 
 export const baseURL = 'https://tedxits2023-server.azurewebsites.net/api';
-// export const baseURL = 'http://localhost:5000';
+// export const baseURL = 'https://0775-140-213-165-9.ngrok-free.app/api';
 
 // Regular API
 export const api = axios.create({

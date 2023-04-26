@@ -8,8 +8,8 @@ import RecentPurchaseContainer from '@/containers/dashboard/history/RecentPurcha
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
-import earlybirdTicket from '~/images/dashboard/ticket-earlybird.png';
-import earlybirdMobileTicket from '~/images/dashboard/ticket-earlybird-mobile.png';
+import presaleTicket from '~/images/dashboard/ticket-presale.png';
+import presaleMobileTicket from '~/images/dashboard/ticket-presale-mobile.png';
 
 const metadataObject = generateTemplateMetadata('Dashboard', '', '/dashboard');
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function DashboardPage() {
   return (
     <section className='layout z-20'>
       <GreetingText />
+
       <div className='mb-5 flex w-full flex-col gap-5 sm:flex-row'>
         <section className='flex w-full flex-col'>
           <h2 className='mb-5 font-baron text-xl text-cwhite'>Announcement</h2>
@@ -34,20 +35,20 @@ export default function DashboardPage() {
             Featured Ticket
           </h2>
           <div className='mb-5 flex items-end justify-between'>
-            <h3 className='font-baron text-cwhite'>Early Bird Ticket</h3>
-            <UnstyledLink href='/dashboard/ticket/early-bird'>
+            <h3 className='font-baron text-cwhite'>Pre Sale Ticket</h3>
+            <UnstyledLink href='/dashboard/ticket/pre-sale'>
               <Button variant='primary' size='sm' className='px-3'>
                 Buy Now
               </Button>
             </UnstyledLink>
           </div>
           <Image
-            src={earlybirdTicket}
+            src={presaleTicket}
             alt='Featured Ticket'
             className='hidden sm:block'
           />
           <Image
-            src={earlybirdMobileTicket}
+            src={presaleMobileTicket}
             alt='Featured Ticket'
             className='mx-auto block sm:hidden'
           />

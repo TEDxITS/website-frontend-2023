@@ -48,9 +48,14 @@ export default function AuthMobileHeaderLink() {
           )}
         </Disclosure>
       ) : (
-        <Link href='/auth/login' className='text-2xl'>
-          <span className='font-primary text-2xl'>Login</span>
-        </Link>
+        <div className='flex w-full justify-center font-primary text-lg'>
+          <Link
+            href='/auth/login'
+            className='w-full text-center font-primary text-2xl'
+          >
+            Login
+          </Link>
+        </div>
       )}
     </li>
   );

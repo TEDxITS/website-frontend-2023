@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import TicketDatabaseTable from '@/containers/admin/tickets/TicketDatabaseTable';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import { adminApi } from '@/utils/api';
 
 import { BookingData } from '@/types/dashboard.types';
@@ -32,7 +33,10 @@ export default function TicketDatabaseContainer() {
   }
 
   const activeBooking = bookingQuery.data.filter((booking) => {
-    if (booking.status == 'MENUNGGU_PEMBAYARAN' && booking.isActive === false) {
+    if (
+      booking.status == BOOKING_STATUS.MENUNGGU_PEMBAYARAN &&
+      booking.isActive === false
+    ) {
       return false;
     }
     return true;

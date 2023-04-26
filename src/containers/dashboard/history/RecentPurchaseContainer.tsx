@@ -5,15 +5,10 @@ import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import PurchaseDetail from '@/containers/dashboard/history/PurchaseDetail';
 
+import { BOOKING_STATUS } from '@/constant/ticket';
 import api from '@/utils/api';
 
 import { BookingData } from '@/types/dashboard.types';
-
-export const BOOKING_STATUS = {
-  MENUNGGU_PEMBAYARAN: 'MENUNGGU_PEMBAYARAN',
-  MENUNGGU_VERIFIKASI: 'MENUNGGU_VERIFIKASI',
-  TERVERIFIKASI: 'TERVERIFIKASI',
-};
 
 export default function RecentPurchaseContainer() {
   const bookingsQuery = useQuery({
@@ -69,7 +64,10 @@ export default function RecentPurchaseContainer() {
   }
 
   const activeBookings = bookingsQuery.data.filter((booking) => {
-    if (booking.status == 'MENUNGGU_PEMBAYARAN' && booking.isActive === false) {
+    if (
+      booking.status == BOOKING_STATUS.MENUNGGU_PEMBAYARAN &&
+      booking.isActive === false
+    ) {
       return false;
     }
     return true;
