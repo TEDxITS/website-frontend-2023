@@ -95,32 +95,40 @@ export default async function TicketsPage() {
           >
             <h2 className='font-baron text-cwhite'>{ticket.name} Ticket</h2>
             <div className='relative'>
-              {/* Dont forget to uncomment before production */}
-              {new Date() < new Date(ticket.dateOpen) && (
-                <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
-                  <Image alt='tickets' src={comingSoon} />
-                </div>
-              )}
-
-              {new Date() > new Date(ticket.dateClose) && (
-                <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
-                  <Image alt='tickets' src={soldOut} />
-                </div>
-              )}
-
-              {/* {ticket.name === 'Early Bird' ? (
-                <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
-                  <Image alt='tickets' src={soldOut} />
-                </div>
+              {process.env.NEXT_PUBLIC_MANUAL_TICKETING_CLOSE === 'true' ? (
+                <>
+                  {ticket.name === 'Early Bird' ||
+                  ticket.name === 'Pre Sale' ? (
+                    <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
+                      <Image alt='tickets' src={soldOut} />
+                    </div>
+                  ) : (
+                    <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
+                      <Image alt='tickets' src={comingSoon} />
+                    </div>
+                  )}
+                </>
               ) : (
-                <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
-                  <Image alt='tickets' src={comingSoon} />
-                </div>
-              )} */}
+                <>
+                  {new Date() < new Date(ticket.dateOpen) && (
+                    <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
+                      <Image alt='tickets' src={comingSoon} />
+                    </div>
+                  )}
+
+                  {new Date() > new Date(ticket.dateClose) && (
+                    <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
+                      <Image alt='tickets' src={soldOut} />
+                    </div>
+                  )}
+                </>
+              )}
 
               <div className='mb-10 flex w-full flex-col gap-x-10 gap-y-4 md:flex-row md:items-center'>
                 <div className='grow rounded-md border-[10px] border-cgray bg-black px-3 py-5'>
-                  {new Date() < new Date(ticket.dateOpen) ? (
+                  {(process.env.NEXT_PUBLIC_MANUAL_TICKETING_CLOSE === 'true' &&
+                    ticket.name === 'Normal') ||
+                  new Date() < new Date(ticket.dateOpen) ? (
                     <div className='flex justify-around gap-x-3'>
                       <ComingSoonMarquee />
                     </div>
