@@ -4,3 +4,7 @@ export const BOOKING_STATUS = {
   TERVERIFIKASI: 'TERVERIFIKASI',
   KUOTA_HABIS: 'KUOTA_HABIS',
 };
+
+export const REGULAR_TICKET = ['Early Bird', 'Pre Sale', 'Normal'];
+
+export const REGULAR_TICKET_PARAMS = ['early-bird', 'pre-sale', 'normal'];

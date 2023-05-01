@@ -16,5 +16,6 @@ async function getAllTicketType() {
 
 export async function QuotaDatabaseContainer() {
   const { data } = await getAllTicketType();
+
   return <QuotaDatabaseTable data={(data as TicketData[] | null) || []} />;
 }

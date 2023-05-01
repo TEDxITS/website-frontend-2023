@@ -1,50 +1,42 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
+'use client';
+import Image from 'next/image';
 
-import { QuotaDatabaseContainer } from '@/containers/admin/tickets/QuotaDatabaseContainer';
-import TicketDatabaseContainer from '@/containers/admin/tickets/TicketDatabaseContainer';
+import Button from '@/components/button/Button';
+import UnstyledLink from '@/components/link/UnstyledLink';
+import ComingSoonMarquee from '@/containers/dashboard/ticket/ComingSoonMarquee';
 
-import { generateTemplateMetadata } from '@/utils/metadata';
+import { useAuthStore } from '@/store/useAuthStore';
 
-// Revalidate on every request (same as getServerSideProps)
-export const dynamic = 'force-dynamic';
+import { TicketData } from '@/types/dashboard.types';
 
-const metadataObject = generateTemplateMetadata(
-  'Ticket Dashboard',
-  '',
-  '/admin/tickets'
-);
-export const metadata: Metadata = {
-  ...metadataObject,
-};
+import comingSoon from '~/images/dashboard/coming-soon.png';
+import soldOut from '~/images/dashboard/sold-out.png';
+import normalTicket from '~/images/dashboard/ticket-normal.png';
+import normalMobileTicket from '~/images/dashboard/ticket-normal-mobile.png';
 
-export default async function TicketDashboardPage() {
+export default function BoothTicket({
+  ticketData,
+}: {
+  ticketData: TicketData | undefined;
+}) {
+  const user = useAuthStore((state) => state.user);
+
+  if (!user || user?.email !== 'admin@tedxits.org') {
+    return null;
+  }
+
   return (
-    <section className='layout z-20'>
-      <h1 className='mb-5 font-baron text-cwhite'>Ticket Admin Database</h1>
-      <h2 className='mb-5 font-baron text-cwhite'>Quota</h2>
-      <Suspense
-        fallback={
-          <p className='py-10 text-center text-lg text-cwhite'>Loading...</p>
-        }
-      >
-        {/* @ts-expect-error Server Component */}
-        <QuotaDatabaseContainer />
-      </Suspense>
-
-      <h2 className='mb-5 font-baron text-cwhite'>Verification</h2>
-      <TicketDatabaseContainer />
-
-      {/* <h2 className='mb-5 font-baron text-cwhite'>Booth Ticket</h2>
-      {boothTicket.data ? (
+    <>
+      <h2 className='mb-10 font-baron text-cwhite'>Booth Ticket</h2>
+      {ticketData ? (
         <div className='relative pb-10'>
-          {new Date() < new Date(boothTicket.data.dateOpen) && (
+          {new Date() < new Date(ticketData.dateOpen) && (
             <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
               <Image alt='tickets' src={comingSoon} />
             </div>
           )}
 
-          {new Date() > new Date(boothTicket.data.dateClose) && (
+          {new Date() > new Date(ticketData.dateClose) && (
             <div className='absolute z-20 flex h-full w-full scale-105 items-center justify-center rounded-3xl bg-black/50'>
               <Image alt='tickets' src={soldOut} />
             </div>
@@ -52,7 +44,7 @@ export default async function TicketDashboardPage() {
 
           <div className='mb-10 flex w-full flex-col gap-x-10 gap-y-4 md:flex-row md:items-center'>
             <div className='grow rounded-md border-[10px] border-cgray bg-black px-3 py-5'>
-              {new Date() < new Date(boothTicket.data.dateOpen) ? (
+              {new Date() < new Date(ticketData.dateOpen) ? (
                 <div className='flex justify-around gap-x-3'>
                   <ComingSoonMarquee />
                 </div>
@@ -61,13 +53,13 @@ export default async function TicketDashboardPage() {
                   <div className='flex flex-wrap items-center gap-x-4'>
                     <p className='font-medium text-green-300'>Price:</p>
                     <h3 className='mb-1 font-baron text-sm leading-none text-green-300 sm:text-base lg:text-xl'>
-                      Rp. {boothTicket.data.price}
+                      Rp. {ticketData.price}
                     </h3>
                   </div>
                   <div className='flex flex-wrap items-center gap-x-4'>
                     <p className='font-medium text-green-300'>Sale Period:</p>
                     <h3 className='mb-1 font-baron text-sm leading-none text-green-300 sm:text-base lg:text-xl'>
-                      {new Date(boothTicket.data.dateOpen).toLocaleDateString(
+                      {new Date(ticketData.dateOpen).toLocaleDateString(
                         'en-US',
                         {
                           year: 'numeric',
@@ -76,7 +68,7 @@ export default async function TicketDashboardPage() {
                         }
                       )}{' '}
                       -{' '}
-                      {new Date(boothTicket.data.dateClose).toLocaleDateString(
+                      {new Date(ticketData.dateClose).toLocaleDateString(
                         'en-US',
                         {
                           year: 'numeric',
@@ -89,7 +81,7 @@ export default async function TicketDashboardPage() {
                 </div>
               )}
             </div>
-            <UnstyledLink href='/admin/dashboard/ticket/booth'>
+            <UnstyledLink href='/dashboard/ticket/booth'>
               <Button size='xl' className='w-full whitespace-nowrap'>
                 <div className='w-full text-center'>Buy Now</div>
               </Button>
@@ -109,7 +101,7 @@ export default async function TicketDashboardPage() {
             Ticket type not found. Please contact the administrator.
           </p>
         </div>
-      )} */}
-    </section>
+      )}
+    </>
   );
 }

@@ -3,11 +3,15 @@ import Image from 'next/image';
 
 import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
+import BoothTicket from '@/containers/dashboard/ticket/BoothTicket';
 import ComingSoonMarquee from '@/containers/dashboard/ticket/ComingSoonMarquee';
 
+import { REGULAR_TICKET } from '@/constant/ticket';
 import { generateTemplateMetadata } from '@/utils/metadata';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
+
+import { TicketData } from '@/types/dashboard.types';
 
 import comingSoon from '~/images/dashboard/coming-soon.png';
 import soldOut from '~/images/dashboard/sold-out.png';
@@ -76,8 +80,13 @@ export default async function TicketsPage() {
     );
   }
 
+  const boothTicket = data.find((ticket) => ticket.name === 'Booth');
+
   const filteredTicket = data
-    .filter((ticket) => ticket.type !== 'With Kit')
+    .filter(
+      (ticket) =>
+        REGULAR_TICKET.includes(ticket.name) && ticket.type !== 'With Kit'
+    )
     .sort(
       (a, b) => new Date(a.dateOpen).getTime() - new Date(b.dateOpen).getTime()
     );
@@ -188,6 +197,7 @@ export default async function TicketsPage() {
             </div>
           </div>
         ))}
+        <BoothTicket ticketData={boothTicket as TicketData | undefined} />
       </div>
     </section>
   );

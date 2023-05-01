@@ -55,6 +55,7 @@ export default function UserPaymentContainer({
       });
     },
     onError: () => {
+      toast.error('There is a problem', { id: 'uploading' });
       queryClient.invalidateQueries({
         queryKey: ['booking', { id: booking.id }],
       });

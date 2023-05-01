@@ -4,6 +4,7 @@ import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
 import BookingFormContainer from '@/containers/dashboard/ticket/BookingFormContainer';
 
+import { REGULAR_TICKET_PARAMS } from '@/constant/ticket';
 import { generateTemplateMetadata } from '@/utils/metadata';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
@@ -20,8 +21,6 @@ function toTitleCase(str: string): string {
   });
   return capitalizedWords.join(' ');
 }
-
-const validParams = ['early-bird', 'pre-sale', 'normal'];
 
 export async function generateMetadata({
   params,
@@ -52,7 +51,9 @@ export default async function BookingPage({
   params: { type: string };
 }) {
   const { data } = await getAllTicketType();
-  const isParamValid = validParams.includes(params.type);
+  const isParamValid = [...REGULAR_TICKET_PARAMS, 'booth'].includes(
+    params.type
+  );
 
   if (!isParamValid || !data) {
     return (
@@ -94,7 +95,8 @@ export default async function BookingPage({
 
   if (
     new Date(filteredTickets[0].dateOpen) > new Date() ||
-    new Date(filteredTickets[0].dateClose) < new Date()
+    new Date(filteredTickets[0].dateClose) < new Date() ||
+    process.env.NEXT_PUBLIC_MANUAL_TICKETING_CLOSE === 'true'
   ) {
     return (
       <section className='layout z-20 flex flex-col items-center p-5'>
@@ -112,22 +114,6 @@ export default async function BookingPage({
     );
   }
 
-  // return (
-  //   <section className='layout z-20 flex flex-col items-center p-5'>
-  //     <h1 className='mb-10 text-center font-baron text-cwhite'>
-  //       TICKET SELLING PERIOD HAS NOT STARTED OR HAS ENDED
-  //     </h1>
-  //     <p className='mb-6 text-center text-cwhite'>
-  //       Unfortunately, the ticket type you are looking for is not available at
-  //       the moment. Please check back later.
-  //     </p>
-  //     <UnstyledLink href='/dashboard/ticket'>
-  //       <Button>&larr; Back</Button>
-  //     </UnstyledLink>
-  //   </section>
-  // );
-
-  // Dont forget to uncomment the code before production
   return (
     <section className='layout z-20 p-5'>
       <h1 className='mb-10 text-center font-baron text-cwhite'>BUY TICKET</h1>

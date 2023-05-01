@@ -2,6 +2,8 @@
 
 import BookingForm from '@/containers/dashboard/ticket/BookingForm';
 
+import { useAuthStore } from '@/store/useAuthStore';
+
 import { TicketData, TicketType } from '@/types/dashboard.types';
 
 export default function BookingFormContainer({
@@ -11,6 +13,12 @@ export default function BookingFormContainer({
   ticketType: TicketType;
   selectedTickets: TicketData[];
 }) {
+  const user = useAuthStore((state) => state.user);
+
+  if (user?.email !== 'admin@tedxits.org' && ticketType === 'Booth') {
+    return null;
+  }
+
   // const ticketTypeQuery = useQuery({
   //   queryKey: ['tickets'],
   //   queryFn: async () => {

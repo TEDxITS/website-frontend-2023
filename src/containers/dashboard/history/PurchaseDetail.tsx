@@ -1,5 +1,8 @@
 import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
+import TransferPurchaseModal from '@/containers/dashboard/history/TransferPurchaseModal';
+
+import { useAuthStore } from '@/store/useAuthStore';
 
 import { BOOKING_STATUS } from '@/constant/ticket';
 import clsxm from '@/utils/clsxm';
@@ -13,6 +16,7 @@ export default function PurchaseDetail({
   booking: BookingData;
   onDetailPage?: boolean;
 }) {
+  const user = useAuthStore((state) => state.user);
   return (
     <div className='mb-5 w-full'>
       {onDetailPage && (
@@ -68,7 +72,7 @@ export default function PurchaseDetail({
             )}
 
             {!onDetailPage && (
-              <div>
+              <div className='space-y-2'>
                 <UnstyledLink
                   href={`/dashboard/history/purchase/${booking.id}`}
                 >
@@ -80,6 +84,9 @@ export default function PurchaseDetail({
                     </p>
                   </Button>
                 </UnstyledLink>
+                {user && user.email === 'admin@tedxits.org' && (
+                  <TransferPurchaseModal bookingId={booking.id} />
+                )}
               </div>
             )}
           </div>
