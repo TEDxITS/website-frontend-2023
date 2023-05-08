@@ -26,7 +26,12 @@ export default function DashboardPage() {
           <h2 className='mb-5 font-baron text-xl text-cwhite'>Announcement</h2>
           <div className='noisy w-full grow rounded-lg bg-white p-4'>
             <p className='text-cblack'>
-              There is no announcement at the moment. Please check back later.
+              The Pre Event 3 ticket is now available for purchase!{' '}
+              <span className='font-semibold'>
+                Each Pre Event 3 ticket is only valid for one Pre Event 3 day,
+              </span>{' '}
+              so make sure to buy the ticket for the day you want to attend the
+              event.
             </p>
           </div>
         </section>

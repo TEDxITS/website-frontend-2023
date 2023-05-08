@@ -95,8 +95,15 @@ export default async function TicketsPage() {
     .filter(
       (ticket) =>
         REGULAR_TICKET.includes(ticket.name) &&
-        ticket.type !== 'With Kit' &&
-        ticket.type !== '16-19 May 2023'
+        ![
+          'With Kit',
+          '14 May 2023',
+          '16 May 2023',
+          '17 May 2023',
+          '18 May 2023',
+          '19 May 2023',
+          '16-19 May 2023',
+        ].includes(ticket.type)
     )
     .sort(
       (a, b) => new Date(a.dateOpen).getTime() - new Date(b.dateOpen).getTime()

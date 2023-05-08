@@ -38,6 +38,14 @@ export default function BookingTicket({
     selectedTickets[0]
   );
 
+  const dateSortedSelectedTickets = React.useMemo(
+    () =>
+      selectedTickets.sort(
+        (a, b) => new Date(a.type).getTime() - new Date(b.type).getTime()
+      ),
+    [selectedTickets]
+  );
+
   return (
     <>
       <input
@@ -159,69 +167,96 @@ export default function BookingTicket({
                   </div>
                 </div>
                 <div className='flex w-full flex-col justify-center gap-5 md:w-1/2'>
-                  <Controller
-                    control={control}
-                    name={`tickets.${index}.ticketId`}
-                    render={({ field: { onChange, onBlur } }) => (
-                      <RadioGroup
-                        onBlur={onBlur}
-                        value={selectedTicketId}
-                        onChange={(e: string) => {
-                          onChange(e);
-                          setSelectedTicketId(e);
-                          setSelectedTicket(
-                            selectedTickets.find(
-                              (ticket) => ticket.id === e
-                            ) as TicketData
-                          );
-                        }}
+                  {ticketType === 'Pre Event 3' ? (
+                    <div className='flex flex-col'>
+                      <label
+                        htmlFor={`tickets[${index}].ticketId`}
+                        className='font-quaker'
                       >
-                        <RadioGroup.Label className='text-center font-quaker'>
-                          {ticketType === 'Pre Event 3'
-                            ? 'Choose Date'
-                            : 'Ticket Type'}
-                        </RadioGroup.Label>
-                        <div className='flex items-center space-x-4'>
-                          {selectedTickets.map((ticket) => (
-                            <RadioGroup.Option
-                              key={ticket.id}
-                              value={ticket.id}
-                            >
-                              {({ checked }) => (
-                                <div className='flex items-center'>
-                                  <div
-                                    className={`h-6 w-6 ${
-                                      checked ? 'bg-blue-500' : 'bg-gray-400'
-                                    } flex cursor-pointer items-center justify-center rounded-full p-0.5`}
-                                  >
-                                    {checked && (
-                                      <svg
-                                        className='h-3 w-3 text-white'
-                                        viewBox='0 0 12 12'
-                                        fill='none'
-                                        xmlns='http://www.w3.org/2000/svg'
-                                      >
-                                        <path
-                                          d='M2 7.5L4.5 10L10 2'
-                                          stroke='currentColor'
-                                          strokeWidth='2'
-                                          strokeLinecap='round'
-                                          strokeLinejoin='round'
-                                        />
-                                      </svg>
-                                    )}
+                        Choose Date
+                      </label>
+                      <select
+                        id={`tickets[${index}].ticketId`}
+                        {...methods.register(`tickets.${index}.ticketId`, {
+                          required: 'Ticket type is required',
+                        })}
+                        className='rounded-md border-inherit p-1.5 focus:outline-none'
+                      >
+                        {dateSortedSelectedTickets.map((ticket) => (
+                          <option key={ticket.id} value={ticket.id}>
+                            {ticket.type}
+                          </option>
+                        ))}
+                      </select>
+                      {errors?.tickets?.[index]?.ticketId && (
+                        <p className={clsxm('text-cred')}>
+                          {errors.tickets[index]?.ticketId?.message}
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <Controller
+                      control={control}
+                      name={`tickets.${index}.ticketId`}
+                      render={({ field: { onChange, onBlur } }) => (
+                        <RadioGroup
+                          onBlur={onBlur}
+                          value={selectedTicketId}
+                          onChange={(e: string) => {
+                            onChange(e);
+                            setSelectedTicketId(e);
+                            setSelectedTicket(
+                              selectedTickets.find(
+                                (ticket) => ticket.id === e
+                              ) as TicketData
+                            );
+                          }}
+                        >
+                          <RadioGroup.Label className='text-center font-quaker'>
+                            Ticket Type
+                          </RadioGroup.Label>
+                          <div className='flex items-center space-x-4'>
+                            {selectedTickets.map((ticket) => (
+                              <RadioGroup.Option
+                                key={ticket.id}
+                                value={ticket.id}
+                              >
+                                {({ checked }) => (
+                                  <div className='flex items-center'>
+                                    <div
+                                      className={`h-6 w-6 ${
+                                        checked ? 'bg-blue-500' : 'bg-gray-400'
+                                      } flex cursor-pointer items-center justify-center rounded-full p-0.5`}
+                                    >
+                                      {checked && (
+                                        <svg
+                                          className='h-3 w-3 text-white'
+                                          viewBox='0 0 12 12'
+                                          fill='none'
+                                          xmlns='http://www.w3.org/2000/svg'
+                                        >
+                                          <path
+                                            d='M2 7.5L4.5 10L10 2'
+                                            stroke='currentColor'
+                                            strokeWidth='2'
+                                            strokeLinecap='round'
+                                            strokeLinejoin='round'
+                                          />
+                                        </svg>
+                                      )}
+                                    </div>
+                                    <div className='ml-3 text-sm font-medium'>
+                                      {ticket.type}
+                                    </div>
                                   </div>
-                                  <div className='ml-3 text-sm font-medium'>
-                                    {ticket.type}
-                                  </div>
-                                </div>
-                              )}
-                            </RadioGroup.Option>
-                          ))}
-                        </div>
-                      </RadioGroup>
-                    )}
-                  />
+                                )}
+                              </RadioGroup.Option>
+                            ))}
+                          </div>
+                        </RadioGroup>
+                      )}
+                    />
+                  )}
 
                   <div>
                     <p className='font-quaker'>Price</p>

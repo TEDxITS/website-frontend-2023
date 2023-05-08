@@ -73,7 +73,7 @@ export default function TicketPage() {
           </Link>
         </div>
         <Link href='/dashboard' prefetch>
-          <h1 className='relative z-10 mt-24 cursor-pointer font-quaker text-base font-medium duration-300 hover:-translate-y-2 hover:scale-125 sm:mt-12 sm:text-xl md:text-2xl xl:text-3xl'>
+          <h1 className='relative z-10 mx-3 mt-24 cursor-pointer rounded-full bg-gradient-to-r from-cgreen to-cblue py-4 px-8 text-center font-quaker text-base font-medium duration-300 hover:-translate-y-2 hover:scale-125 sm:mt-12 sm:text-xl md:text-2xl xl:text-3xl'>
             <Image
               src={titleDecoration3}
               alt='Title Decoration'
