@@ -8,8 +8,8 @@ import RecentPurchaseContainer from '@/containers/dashboard/history/RecentPurcha
 
 import { generateTemplateMetadata } from '@/utils/metadata';
 
-import normalTicket from '~/images/dashboard/ticket-normal.png';
-import normalMobileTicket from '~/images/dashboard/ticket-normal-mobile.png';
+import preEventTicket from '~/images/dashboard/ticket-pre-event.png';
+import preEventMobileTicket from '~/images/dashboard/ticket-pre-event-mobile.png';
 
 const metadataObject = generateTemplateMetadata('Dashboard', '', '/dashboard');
 export const metadata: Metadata = {
@@ -35,20 +35,20 @@ export default function DashboardPage() {
             Featured Ticket
           </h2>
           <div className='mb-5 flex items-end justify-between'>
-            <h3 className='font-baron text-cwhite'>Normal Ticket</h3>
-            <UnstyledLink href='/dashboard/ticket/normal'>
+            <h3 className='font-baron text-cwhite'>Pre Event 3 Ticket</h3>
+            <UnstyledLink href='/dashboard/ticket/pre-event-3'>
               <Button variant='primary' size='sm' className='px-3'>
                 Buy Now
               </Button>
             </UnstyledLink>
           </div>
           <Image
-            src={normalTicket}
+            src={preEventTicket}
             alt='Featured Ticket'
             className='hidden sm:block'
           />
           <Image
-            src={normalMobileTicket}
+            src={preEventMobileTicket}
             alt='Featured Ticket'
             className='mx-auto block sm:hidden'
           />

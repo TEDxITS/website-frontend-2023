@@ -19,6 +19,8 @@ import earlybirdTicket from '~/images/dashboard/ticket-earlybird.png';
 import earlybirdMobileTicket from '~/images/dashboard/ticket-earlybird-mobile.png';
 import normalTicket from '~/images/dashboard/ticket-normal.png';
 import normalMobileTicket from '~/images/dashboard/ticket-normal-mobile.png';
+import preEventTicket from '~/images/dashboard/ticket-pre-event.png';
+import preEventMobileTicket from '~/images/dashboard/ticket-pre-event-mobile.png';
 import presaleTicket from '~/images/dashboard/ticket-presale.png';
 import presaleMobileTicket from '~/images/dashboard/ticket-presale-mobile.png';
 
@@ -40,6 +42,9 @@ const getTicketImage = (ticketName: string) => {
   if (ticketName.includes('Normal')) {
     return normalTicket;
   }
+  if (ticketName.includes('Pre Event')) {
+    return preEventTicket;
+  }
   return earlybirdTicket;
 };
 
@@ -53,10 +58,14 @@ const getTicketMobileImage = (ticketName: string) => {
   if (ticketName.includes('Normal')) {
     return normalMobileTicket;
   }
+  if (ticketName.includes('Pre Event')) {
+    return preEventMobileTicket;
+  }
   return earlybirdMobileTicket;
 };
 
 const makeTicketSlug = (ticketName: string) => {
+  if (ticketName === 'Pre Event 3') return 'pre-event-3';
   return ticketName.toLowerCase().replace(' ', '-');
 };
 

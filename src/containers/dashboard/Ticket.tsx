@@ -18,7 +18,7 @@ export function TicketLeftSide({ children, type }: TicketProps) {
     <div
       className={clsxm(
         'relative w-full rounded-t-3xl border-b-2 border-r-0 border-dashed border-black md:w-[75%] md:rounded-l-3xl md:border-b-0 md:border-r-2',
-        type === 'Early Bird'
+        type === 'Early Bird' || type === 'Pre Event 3'
           ? 'noisy bg-white'
           : type === 'Pre Sale'
           ? 'bg-gradient-to-b from-cyellow via-corange to-cpink md:bg-gradient-to-r'
@@ -32,7 +32,7 @@ export function TicketLeftSide({ children, type }: TicketProps) {
       <div className='absolute -right-6 -bottom-6 h-12 w-12 rounded-full bg-black md:-bottom-5'></div>
       <div
         className={clsxm(
-          type === 'Early Bird'
+          type === 'Early Bird' || type === 'Pre Event 3'
             ? 'border-black text-black'
             : 'border-white text-white'
         )}
@@ -52,7 +52,9 @@ export function TicketRightSide({ children, type }: TicketProps) {
           ? 'noisy bg-cred'
           : type === 'Pre Sale'
           ? 'bg-gradient-to-b from-cpink to-cblue md:bg-gradient-to-r'
-          : 'bg-gradient-50-years-to-br'
+          : type === 'Normal'
+          ? 'bg-gradient-50-years-to-br'
+          : 'bg-cgreen'
       )}
     >
       <div className='absolute -right-5 hidden h-full items-center md:flex'>

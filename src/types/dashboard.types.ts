@@ -1,4 +1,9 @@
-export type TicketType = 'Early Bird' | 'Pre Sale' | 'Normal' | 'Booth';
+export type TicketType =
+  | 'Early Bird'
+  | 'Pre Sale'
+  | 'Normal'
+  | 'Booth'
+  | 'Pre Event 3';
 
 export type TicketData = {
   id: string;

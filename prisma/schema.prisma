@@ -19,6 +19,8 @@ model User {
   accountVerifications AccountVerification[]
   bookings             Booking[]
   forgetPasswords      ForgetPassword?
+  MerchPurchase        MerchPurchase[]
+  MerchCart            MerchCart[]
 
   @@map("users")
 }
@@ -154,7 +156,102 @@ model Anthropocene {
   @@map("anthropocenes")
 }
 
+model PEGallery {
+  id          String   @id @default(cuid())
+  src         String?
+  description String?
+  name        String
+  song        String
+  created_at  DateTime @default(now())
+
+  @@map("pe_galleries")
+}
+
+model Merch {
+  id                  String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                String
+  price               Float
+  image               String?
+  type                String
+  created_at          DateTime              @default(now())
+  MerchPurchaseDetail MerchPurchaseDetail[]
+  MerchCart           MerchCart[]
+  MerchBundle         MerchBundle?
+  MerchBundleDetail   MerchBundleDetail[]
+
+  @@map("merches")
+}
+
+model MerchBundle {
+  id                String              @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  merchId           String              @unique @map("merch_id") @db.Uuid
+  created_at        DateTime            @default(now())
+  merch             Merch               @relation(fields: [merchId], references: [id])
+  MerchBundleDetail MerchBundleDetail[]
+
+  @@map("merch_bundles")
+}
+
+model MerchBundleDetail {
+  id            String      @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  merchId       String      @map("merch_id") @db.Uuid
+  merchBundleId String      @map("merch_bundle_id") @db.Uuid
+  quantity      Int
+  created_at    DateTime    @default(now())
+  merch         Merch       @relation(fields: [merchId], references: [id])
+  merchBundle   MerchBundle @relation(fields: [merchBundleId], references: [id])
+
+  @@map("merch_bundle_merches")
+}
+
+model MerchPurchase {
+  id                  String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId              String                @map("userId") @db.Uuid
+  name                String
+  email               String
+  phoneNumber         String                @map("phone_number")
+  address             String
+  totalPrice          Float                 @map("total_price")
+  paymentProof        String?               @map("payment_proof")
+  status              MerchPurchaseStatus   @default(MENUNGGU_PEMBAYARAN)
+  created_at          DateTime              @default(now())
+  user                User                  @relation(fields: [userId], references: [id])
+  MerchPurchaseDetail MerchPurchaseDetail[]
+
+  @@map("merch_purchases")
+}
+
+model MerchPurchaseDetail {
+  id              String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  merchId         String        @map("merch_id") @db.Uuid
+  merchPurchaseId String        @map("merch_purchase_id") @db.Uuid
+  quantity        Int
+  created_at      DateTime      @default(now())
+  merch           Merch         @relation(fields: [merchId], references: [id])
+  merchPurchase   MerchPurchase @relation(fields: [merchPurchaseId], references: [id])
+
+  @@map("merch_purchase_details")
+}
+
+model MerchCart {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  merchId    String   @map("merch_id") @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  quantity   Int
+  created_at DateTime @default(now())
+  merch      Merch    @relation(fields: [merchId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@map("merch_carts")
+}
+
+enum MerchPurchaseStatus {
+  MENUNGGU_PEMBAYARAN
+  SUDAH_DIBAYAR
+}
+
 enum BookingStatus {
+  KUOTA_HABIS
   MENUNGGU_PEMBAYARAN
   MENUNGGU_VERIFIKASI
   TERVERIFIKASI

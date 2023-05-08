@@ -55,7 +55,7 @@ export default function BookingTicket({
             <div className='grow border-inherit'>
               <div className='flex justify-between border-b-2 border-inherit px-4 pb-4'>
                 <h1 className='font-baron font-medium'>BOARDING PASS</h1>
-                {ticketType === 'Early Bird' ? (
+                {ticketType === 'Early Bird' || ticketType === 'Pre Event 3' ? (
                   <FullTEDLogo className='hidden h-10 w-32 sm:block' />
                 ) : (
                   <FullTEDLogo
@@ -84,7 +84,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.name && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
@@ -115,7 +116,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.email && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
@@ -142,7 +144,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.phoneNumber && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
