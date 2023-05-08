@@ -26,7 +26,10 @@ export const eventLinks = [
   { href: '/voyagers-test', label: 'Voyagers Test' },
 ];
 
-export const orderLinks = [{ href: '/ticketME', label: 'Main Event Ticket' }];
+export const orderLinks = [
+  { href: '/ticketME', label: 'Main Event Ticket' },
+  { href: '/ticketPE3', label: 'Project 2073 Ticket' },
+];
 
 export const adminDashboardLinks = [
   {

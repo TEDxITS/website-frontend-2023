@@ -1,4 +1,9 @@
-export type TicketType = 'Early Bird' | 'Pre Sale' | 'Normal' | 'Booth';
+export type TicketType =
+  | 'Early Bird'
+  | 'Pre Sale'
+  | 'Normal'
+  | 'Booth'
+  | 'Pre Event 3';
 
 export type TicketData = {
   id: string;
@@ -26,6 +31,22 @@ export type BookingData = {
   isActive: boolean;
   totalPrice: number;
   deadline: string;
+};
+
+export type BookingDataWithTicketName = {
+  id: string;
+  orderingUser: string;
+  status: BookingStatus;
+  paymentProof: string;
+  verificator: string;
+  isActive: boolean;
+  totalPrice: number;
+  deadline: string;
+  bookingDetails: {
+    ticket: {
+      name: string;
+    };
+  }[];
 };
 
 export type BookingDetailData = {

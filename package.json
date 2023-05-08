@@ -89,6 +89,7 @@
     ]
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "anthropocene-seed": "node prisma/seeder/anthropocene-seed.js",
+    "seed": "node prisma/seeder/merch-seed.js"
   }
 }

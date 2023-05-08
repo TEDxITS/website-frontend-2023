@@ -1,4 +1,5 @@
 import { RadioGroup } from '@headlessui/react';
+import Image from 'next/image';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -12,6 +13,8 @@ import FullTEDLogo from '@/assets/logo/FullTEDLogo';
 import clsxm from '@/utils/clsxm';
 
 import { TicketData, TicketType } from '@/types/dashboard.types';
+
+import whiteRocket from '~/images/dashboard/white-rocket-2x.png';
 
 export default function BookingTicket({
   selectedTickets,
@@ -55,7 +58,7 @@ export default function BookingTicket({
             <div className='grow border-inherit'>
               <div className='flex justify-between border-b-2 border-inherit px-4 pb-4'>
                 <h1 className='font-baron font-medium'>BOARDING PASS</h1>
-                {ticketType === 'Early Bird' ? (
+                {ticketType === 'Early Bird' || ticketType === 'Pre Event 3' ? (
                   <FullTEDLogo className='hidden h-10 w-32 sm:block' />
                 ) : (
                   <FullTEDLogo
@@ -84,7 +87,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.name && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
@@ -115,7 +119,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.email && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
@@ -142,7 +147,8 @@ export default function BookingTicket({
                     {errors?.tickets?.[index]?.phoneNumber && (
                       <p
                         className={clsxm(
-                          ticketType === 'Early Bird'
+                          ticketType === 'Early Bird' ||
+                            ticketType == 'Pre Event 3'
                             ? 'text-cred'
                             : 'text-red-100'
                         )}
@@ -171,7 +177,9 @@ export default function BookingTicket({
                         }}
                       >
                         <RadioGroup.Label className='text-center font-quaker'>
-                          Ticket Type
+                          {ticketType === 'Pre Event 3'
+                            ? 'Choose Date'
+                            : 'Ticket Type'}
                         </RadioGroup.Label>
                         <div className='flex items-center space-x-4'>
                           {selectedTickets.map((ticket) => (
@@ -239,7 +247,7 @@ export default function BookingTicket({
                   <li>Lanyard and ID Card</li>
                 </ul>
               </div>
-            ) : (
+            ) : selectedTicket.type === 'With Kit' ? (
               <div>
                 <div className='border-b-2 border-white px-4 pb-4'>
                   <p className='text-center text-xl font-medium text-white'>
@@ -252,6 +260,10 @@ export default function BookingTicket({
                   <li>Keychain</li>
                   <li>Lanyard and ID Card</li>
                 </ul>
+              </div>
+            ) : (
+              <div className='flex items-center justify-center px-4 pb-10 md:pt-10 md:pb-0'>
+                <Image src={whiteRocket} alt='white-rocket' />
               </div>
             )}
           </div>

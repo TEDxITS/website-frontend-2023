@@ -34,7 +34,7 @@ export default function UserTicketContainer({
       <section className='z-20 flex flex-col items-center p-5'>
         <h1 className='mb-10 inline-flex w-full flex-wrap items-start justify-center gap-y-3 text-center font-baron text-cwhite'>
           <FullTEDLogo className='mt-1 h-10 w-32' variant='white' />
-          <span>MAIN EVENT E-TICKET</span>
+          <span>E-TICKET</span>
         </h1>
         <div role='status' className='mb-4'>
           <svg
@@ -83,7 +83,12 @@ export default function UserTicketContainer({
     <section className='z-20 p-5'>
       <h1 className='mb-10 inline-flex w-full flex-wrap items-start justify-center gap-y-3 text-center font-baron text-cwhite'>
         <FullTEDLogo className='mt-1 h-10 w-32' variant='white' />
-        <span>MAIN EVENT E-TICKET</span>
+        <span>
+          {bookingDetailQuery.data.ticket.name === 'Pre Event 3'
+            ? 'Project 2073'
+            : 'Main Event'}{' '}
+          E-TICKET
+        </span>
       </h1>
       <UserTicket
         ticketType={bookingDetailQuery.data.ticket.name as TicketType}

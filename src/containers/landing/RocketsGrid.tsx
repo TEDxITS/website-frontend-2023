@@ -6,12 +6,12 @@ import Rocket from '@/containers/landing/Rocket';
 
 import BgGlass1 from '~/images/landing/cracked-bg.png';
 import BgGlass2 from '~/images/landing/cracked-bg-lg.png';
-import grayRocket5 from '~/images/landing/rockets/gray5.png';
-import grayRocket6 from '~/images/landing/rockets/gray6.png';
+import grayRocket6 from '~/images/landing/rockets/gray4.png';
 import redRocket from '~/images/landing/rockets/red1.png';
 import redRocket2 from '~/images/landing/rockets/red2.png';
 import redRocket3 from '~/images/landing/rockets/red3.png';
 import redRocket4 from '~/images/landing/rockets/red5.png';
+import redRocket5 from '~/images/landing/rockets/red6.png';
 
 const rocketList = [
   {
@@ -176,13 +176,24 @@ const rocketList = [
   },
   {
     id: 5,
-    src: grayRocket5,
-    alt: 'gray-rocket-5',
-    isComingSoon: true,
-    href: '#',
-    text: 'Coming-soon',
-    title: <></>,
-    className: '',
+    src: redRocket5,
+    alt: 'red-rocket-5',
+    isComingSoon: false,
+    href: 'ticketPE3',
+    text: 'Order Now!',
+    title: (
+      <div className='absolute top-0 font-quaker '>
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text font-baron text-xl font-black text-transparent xs:text-3xl sm:text-5xl'>
+          PROJECT 2073
+        </span>
+
+        <br />
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-3xl text-transparent sm:text-3xl md:text-8xl'>
+          Ticket
+        </span>
+      </div>
+    ),
+    className: 'h-[90%] w-[90%] xs:h-4/5 xs:w-4/5',
     animationSequenceFn: async function sequence(
       animationControls: AnimationControls
     ) {
