@@ -5,7 +5,7 @@ import UserPurchaseContainer from '@/containers/dashboard/history/UserPurchaseCo
 import { generateTemplateMetadata } from '@/utils/metadata';
 
 const metadataObject = generateTemplateMetadata(
-  'Your Purchase',
+  'Your Ticket Purchase',
   '',
   '/dashboard/history/purchase'
 );
