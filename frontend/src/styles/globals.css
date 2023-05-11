@@ -1,0 +1,602 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tw-color-primary-50: 240 249 255;
+  --tw-color-primary-100: 224 242 254;
+  --tw-color-primary-200: 186 230 253;
+  --tw-color-primary-300: 125 211 252;
+  --tw-color-primary-400: 56 189 248;
+  --tw-color-primary-500: 14 165 233;
+  --tw-color-primary-600: 2 132 199;
+  --tw-color-primary-700: 3 105 161;
+  --tw-color-primary-800: 7 89 133;
+  --tw-color-primary-900: 12 74 110;
+  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #f0f9ff */
+  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #e0f2fe */
+  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #bae6fd */
+  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #7dd3fc */
+  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #38bdf8 */
+  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #0ea5e9 */
+  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #0284c7 */
+  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #0369a1 */
+  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #075985 */
+  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0c4a6e */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .layout {
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
+  }
+
+  .cursor-newtab {
+    cursor: url('/images/new-tab.png') 10 10, pointer;
+  }
+
+  /* #region  /**=========== Typography =========== */
+  .h0 {
+    @apply font-primary text-3xl font-bold md:text-5xl;
+  }
+
+  h1,
+  .h1 {
+    @apply font-primary text-2xl font-bold md:text-4xl;
+  }
+
+  h2,
+  .h2 {
+    @apply font-primary text-xl font-bold md:text-3xl;
+  }
+
+  h3,
+  .h3 {
+    @apply font-primary text-lg font-bold md:text-2xl;
+  }
+
+  h4,
+  .h4 {
+    @apply font-primary text-base font-bold md:text-lg;
+  }
+
+  body,
+  .p {
+    @apply font-primary text-sm md:text-base;
+  }
+  /* #endregion  /**======== Typography =========== */
+
+  .layout {
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
+  }
+
+  .bg-dark a.custom-link {
+    @apply border-gray-200 hover:border-gray-200/0;
+  }
+
+  /* Class to adjust with sticky footer */
+  .min-h-main {
+    @apply min-h-[calc(100vh-56px)];
+  }
+
+  /* For debugging */
+  .bw {
+    @apply border-2 border-white;
+  }
+
+  .bb {
+    @apply border-2 border-black;
+  }
+
+  .noisy {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);
+  }
+
+  .question {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+  .question::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .bg-gradient-50-years-to-tr {
+    background-image: linear-gradient(
+      to top right,
+      #f0efe5 0%,
+      #939ab4 15%,
+      #546193 30%,
+      #354582 60%,
+      #1d1d1e 100%
+    );
+  }
+
+  .bg-gradient-50-years-to-br {
+    background-image: linear-gradient(
+      to bottom right,
+      #f0efe5 0%,
+      #939ab4 15%,
+      #546193 30%,
+      #354582 60%,
+      #1d1d1e 100%
+    );
+  }
+}
+
+@layer utilities {
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #212121;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #eb5d37;
+    opacity: 0.5;
+    border-radius: 4px;
+  }
+
+  /* Custom Scrollbar for CFLS Gamepad */
+  .gamepad::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  .gamepad::-webkit-scrollbar-track {
+    background-color: #212121;
+  }
+  .gamepad::-webkit-scrollbar-thumb {
+    background: #86efac;
+    opacity: 0.5;
+    border-radius: 4px;
+  }
+
+  /* Underline Link */
+  .animated-underline {
+    background-image: linear-gradient(#33333300, #33333300),
+      linear-gradient(to right, #e83525, #e83525);
+    background-size: 100% 2px, 0 2px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .animated-underline {
+      transition: 0.3s ease;
+      transition-property: background-size, color, background-color,
+        border-color;
+    }
+  }
+  .animated-underline:hover,
+  .animated-underline:focus-visible {
+    background-size: 0 2px, 100% 2px;
+  }
+
+  /* Temporary fade in for react-three-fiber starfield */
+  .star-fade {
+    animation: fadein 10s;
+  }
+
+  /* Circular starfield effect for coming soon page (the one without react-three-fiber) */
+  .starfield {
+    user-select: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: fadein 5s;
+  }
+
+  .starfield > * {
+    position: absolute;
+    top: -450%;
+    left: 0;
+    height: 1000%;
+    width: 100%;
+  }
+
+  .starfield > * {
+    background-size: 200px 200px;
+    background-image: radial-gradient(
+        2px 2px at 40px 60px,
+        #ccc,
+        rgba(0, 0, 0, 0)
+      ),
+      radial-gradient(2px 2px at 20px 50px, white, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 30px 100px, white, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 40px 60px, white, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 110px 90px, white, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 190px 150px, white, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+  }
+
+  .starfield > * {
+    transform-origin: 50% 50%;
+    animation-name: starfieldRotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  .starfield > *:nth-child(1) {
+    animation-duration: 16s;
+  }
+  .starfield > *:nth-child(2) {
+    animation-duration: 20s;
+  }
+  .starfield > *:nth-child(3) {
+    animation-duration: 35s;
+  }
+  .starfield > *:nth-child(4) {
+    animation-duration: 55s;
+  }
+  .starfield > *:nth-child(5) {
+    animation-duration: 120s;
+  }
+
+  @keyframes starfieldRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Typewriter effect */
+  .typewriter {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: 0.15em solid #bbf7d0; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    padding: 0 0.15em;
+    letter-spacing: 0.15em; /* Adjust as needed */
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  .typewriter-fast {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: 0.15em solid #bbf7d0; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    padding: 0 0.15em;
+    letter-spacing: 0.15em; /* Adjust as needed */
+    animation: typing 0.7s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: #bbf7d0;
+    }
+  }
+
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #01070a;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .scene .rocket {
+    position: relative;
+    animation: animateRocket 0.2s ease infinite;
+  }
+  @keyframes animateRocket {
+    0%,
+    100% {
+      transform: translateY(-2px);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+  }
+  .scene .rocket::before {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 200px;
+    background: linear-gradient(#00d0ff, transparent);
+  }
+  .scene .rocket::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 200px;
+    background: linear-gradient(#00d0ff, transparent);
+    filter: blur(20px);
+  }
+  .scene .star {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    animation: animateStars linear infinite;
+    bottom: -150px;
+  }
+
+  @keyframes animateStars {
+    from {
+      transform: translateY(-200vh);
+    }
+    to {
+      tranform: translateY(250vh);
+    }
+  }
+
+  /* Call for local speaker retro effect */
+  /* credits to creme (https://codepen.io/creme)*/
+
+  @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 400;
+    opacity: 0.8;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 450;
+  }
+
+  .noise:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://ice-creme.de/images/background-noise.png');
+    pointer-events: none;
+    will-change: background-position;
+    animation: noise 1s infinite alternate;
+  }
+
+  .lines {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 300;
+    opacity: 0.6;
+    will-change: opacity;
+    animation: opacity 3s linear infinite;
+  }
+
+  .lines:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.5) 51%
+    );
+    background-size: 100% 4px;
+    will-change: background, background-size;
+    animation: scanlines 0.2s linear infinite;
+  }
+
+  .main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    font-size: 2rem;
+    width: 100vw;
+    height: 100vh;
+    background: #2b52ff;
+  }
+
+  .main .noise:before {
+    background-size: 150%;
+  }
+
+  .main .vhs {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    will-change: text-shadow;
+    animation: rgbText 2s steps(9) 0s infinite alternate;
+  }
+
+  .main .vhs .char {
+    will-change: opacity;
+    animation: type 1.2s infinite alternate;
+    animation-delay: calc(60ms * var(--char-index));
+  }
+
+  .main .time {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    will-change: text-shadow;
+    animation: rgbText 1s steps(9) 0s infinite alternate;
+  }
+
+  .main .counter {
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+    will-change: text-shadow;
+    animation: rgbText 1s steps(9) 0s infinite alternate;
+  }
+
+  @keyframes noise {
+    0%,
+    100% {
+      background-position: 0 0;
+    }
+    10% {
+      background-position: -5% -10%;
+    }
+    20% {
+      background-position: -15% 5%;
+    }
+    30% {
+      background-position: 7% -25%;
+    }
+    40% {
+      background-position: 20% 25%;
+    }
+    50% {
+      background-position: -25% 10%;
+    }
+    60% {
+      background-position: 15% 5%;
+    }
+    70% {
+      background-position: 0 15%;
+    }
+    80% {
+      background-position: 25% 35%;
+    }
+    90% {
+      background-position: -10% 10%;
+    }
+  }
+
+  @keyframes opacity {
+    0% {
+      opacity: 0.6;
+    }
+    20% {
+      opacity: 0.3;
+    }
+    35% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    60% {
+      opacity: 0.4;
+    }
+    80% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes scanlines {
+    from {
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.5) 51%
+      );
+      background-size: 100% 4px;
+    }
+    to {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5) 50%,
+        transparent 51%
+      );
+      background-size: 100% 4px;
+    }
+  }
+
+  @keyframes rgbText {
+    0% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8),
+        0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8),
+        0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    }
+    25% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8),
+        0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8),
+        0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    }
+    45% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8),
+        0 5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8),
+        0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+    }
+    50% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8),
+        0 -5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8),
+        0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+    }
+    55% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 3px rgba(251, 0, 231, 0.8),
+        0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8),
+        0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    }
+    90% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8),
+        0 5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8),
+        0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+    }
+    100% {
+      text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6),
+        1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8),
+        0 -5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8),
+        0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+    }
+  }
+
+  @keyframes type {
+    0%,
+    19% {
+      opacity: 0;
+    }
+    20%,
+    100% {
+      opacity: 1;
+    }
+  }
+}
