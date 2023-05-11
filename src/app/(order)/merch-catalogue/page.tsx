@@ -5,15 +5,15 @@ import MerchGridContainer from '@/containers/dashboard/merch/MerchGridContainer'
 import { generateTemplateMetadata } from '@/utils/metadata';
 
 const metadataObject = generateTemplateMetadata(
-  'Merch',
+  'Merch Catalogue',
   '',
-  '/dashboard/merch'
+  '/merch-catalogue'
 );
 export const metadata: Metadata = {
   ...metadataObject,
 };
 
-export default function MerchPage() {
+export default function MerchCataloguePage() {
   return (
     <>
       <div className='bw max-h-fit min-h-screen'>
