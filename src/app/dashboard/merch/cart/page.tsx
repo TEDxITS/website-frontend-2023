@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import MerchCartContainer from '@/containers/dashboard/merch/MerchCartContainer';
+
 import { generateTemplateMetadata } from '@/utils/metadata';
 
 const metadataObject = generateTemplateMetadata(
@@ -12,5 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default function UserMerchCartPage() {
-  return <></>;
+  return (
+    <div className='layout'>
+      <MerchCartContainer />
+    </div>
+  );
 }
