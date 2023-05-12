@@ -32,7 +32,7 @@ export default function MerchItemContainer(props: MerchProps) {
           </div>
         ))}
       </div>
-      <div className='bg-gradient-50-years-to-r z-20 rounded-3xl py-1 px-6 md:mb-5 md:py-2 md:px-8 lg:mb-7 lg:py-3 lg:px-10 xl:mb-9'>
+      <div className='bg-gradient-50-years-to-r z-20 rounded-[3rem] py-1 px-6 md:mb-5 md:py-2 md:px-8 lg:mb-7 lg:py-3 lg:px-10 xl:mb-9'>
         <span className='mx-auto block text-center font-quaker text-xl sm:text-2xl md:text-3xl lg:text-4xl'>
           Bundle
         </span>

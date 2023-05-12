@@ -21,7 +21,7 @@ export default function MerchCarouselContainer(props: MerchProps) {
   // console.log(props.merchandise);
 
   return (
-    <div className='z-20 mt-5 flex h-fit w-full items-center justify-center overflow-hidden sm:mt-7'>
+    <div className='z-20 mt-5 flex h-min w-full items-center justify-center overflow-hidden sm:mt-7'>
       {/* <Image
         src={LeftSide}
         alt='LeftSide'
@@ -90,7 +90,7 @@ export default function MerchCarouselContainer(props: MerchProps) {
           </h2>
           <div className='bg-gradient-50-years-to-r flex h-24 w-36 items-center justify-center md:h-48 md:w-72'>
             <Image
-              src={props.merchandise[4].image}
+              src={props.merchandise[5].image}
               alt='...'
               width={200}
               height={200}
