@@ -21,7 +21,7 @@ export default function MerchCarouselContainer(props: MerchProps) {
   // console.log(props.merchandise);
 
   return (
-    <div className='mt-5 flex h-fit w-full items-center justify-center overflow-hidden sm:mt-7'>
+    <div className='z-20 mt-5 flex h-fit w-full items-center justify-center overflow-hidden sm:mt-7'>
       {/* <Image
         src={LeftSide}
         alt='LeftSide'

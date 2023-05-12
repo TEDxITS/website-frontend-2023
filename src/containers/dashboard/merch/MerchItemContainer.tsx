@@ -16,7 +16,7 @@ export default function MerchItemContainer(props: MerchProps) {
   );
   return (
     <>
-      <div className='z-10 grid grid-cols-1 justify-center gap-10 p-2 pt-6 pb-2 sm:mb-8 sm:grid-cols-2 md:mb-10 md:gap-28 lg:mb-12 lg:gap-x-48 xl:gap-x-64'>
+      <div className='z-20 grid grid-cols-1 justify-center gap-10 p-2 pt-6 pb-2 sm:mb-8 sm:grid-cols-2 md:mb-10 md:gap-28 lg:mb-12 lg:gap-x-48 xl:gap-x-64'>
         {normalMerch.map((merch: MerchTypes) => (
           <div
             className='flex w-full flex-col items-center p-3 md:scale-110 lg:scale-125'
@@ -32,12 +32,12 @@ export default function MerchItemContainer(props: MerchProps) {
           </div>
         ))}
       </div>
-      <div className='bg-gradient-50-years-to-r z-10 rounded-3xl py-1 px-6 md:mb-5 md:py-2 md:px-8 lg:mb-7 lg:py-3 lg:px-10 xl:mb-9'>
+      <div className='bg-gradient-50-years-to-r z-20 rounded-3xl py-1 px-6 md:mb-5 md:py-2 md:px-8 lg:mb-7 lg:py-3 lg:px-10 xl:mb-9'>
         <span className='mx-auto block text-center font-quaker text-xl sm:text-2xl md:text-3xl lg:text-4xl'>
           Bundle
         </span>
       </div>
-      <div className='z-10 mt-4 grid grid-cols-1 justify-center gap-10 p-2 sm:grid-cols-2 md:gap-28 lg:gap-48 xl:gap-64'>
+      <div className='z-20 mt-4 grid grid-cols-1 justify-center gap-10 p-2 sm:grid-cols-2 md:gap-28 lg:gap-48 xl:gap-64'>
         {bundleMerch.map((merch: MerchTypes) => (
           <div
             className='flex w-full flex-col items-center p-3 md:scale-110 lg:scale-125'
