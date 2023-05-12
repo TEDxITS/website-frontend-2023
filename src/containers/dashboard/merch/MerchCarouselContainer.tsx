@@ -9,6 +9,9 @@ import { MerchTypes } from '@/types/merch.types';
 // import LeftSide from '~/images/merch/left-side.png';
 // import RightSide from '~/images/merch/right-side.png';
 
+// import LeftSide from '~/images/merch/left-side.png';
+// import RightSide from '~/images/merch/right-side.png';
+
 interface MerchProps {
   merchandise: MerchTypes[];
 }
