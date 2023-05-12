@@ -16,6 +16,7 @@ export default function TicketDatabaseContainer() {
         const { data } = await localApi.get<{
           data: BookingDataWithTicketName[];
         }>('/booking');
+
         return data.data;
       } catch (error) {
         return Promise.reject(error);

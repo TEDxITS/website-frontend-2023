@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function UserTicketPage({ params }: { params: { id: string } }) {
   return (
-    <section className='min-h-screen bg-black bg-transparent-stars pt-16'>
+    <section className='min-h-screen bg-black bg-transparent-stars py-16'>
       <div className='layout'>
         <UserTicketContainer bookingDetailId={params.id} />
         <h3 className='my-5 text-center font-baron text-cwhite'>Information</h3>

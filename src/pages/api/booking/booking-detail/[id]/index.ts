@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/utils/prisma';
 import createResponse from '@/utils/response';
 
-// GET /api/booking
+// GET /api/booking/booking-detail/[id]
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -12,7 +12,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case 'GET':
-      await getBookings(res);
+      await getBookingDetailById(req, res);
       break;
     default:
       return res
@@ -24,17 +24,19 @@ export default async function handler(
   return;
 }
 
-async function getBookings(res: NextApiResponse) {
+async function getBookingDetailById(req: NextApiRequest, res: NextApiResponse) {
+  const id = req.query.id;
   try {
-    const result = await prisma.booking.findMany({
+    const result = await prisma.bookingDetail.findUnique({
+      where: {
+        id: id?.toString(),
+      },
       include: {
-        bookingDetails: {
+        ticket: {
           select: {
-            ticket: {
-              select: {
-                name: true,
-              },
-            },
+            name: true,
+            type: true,
+            price: true,
           },
         },
       },
@@ -43,8 +45,14 @@ async function getBookings(res: NextApiResponse) {
     if (result) {
       return res
         .status(200)
-        .json(createResponse(200, 'Bookings fetched successfully', result));
+        .json(
+          createResponse(200, 'Booking detail fetched successfully', result)
+        );
     }
+
+    return res
+      .status(404)
+      .json(createResponse(404, 'Booking detail not found', null));
   } catch (e) {
     if (
       e instanceof Prisma.PrismaClientUnknownRequestError ||
