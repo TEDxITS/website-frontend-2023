@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function MerchPage() {
   return (
     <>
-      <div className='bw max-h-fit min-h-screen'>
+      <div className='max-h-fit min-h-screen p-5'>
         <MerchGridContainer />
       </div>
     </>
