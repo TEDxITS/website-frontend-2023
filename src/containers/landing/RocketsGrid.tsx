@@ -6,10 +6,10 @@ import Rocket from '@/containers/landing/Rocket';
 
 import BgGlass1 from '~/images/landing/cracked-bg.png';
 import BgGlass2 from '~/images/landing/cracked-bg-lg.png';
-import grayRocket6 from '~/images/landing/rockets/gray4.png';
 import redRocket from '~/images/landing/rockets/red1.png';
 import redRocket2 from '~/images/landing/rockets/red2.png';
 import redRocket3 from '~/images/landing/rockets/red3.png';
+import redRocket6 from '~/images/landing/rockets/red4.png';
 import redRocket4 from '~/images/landing/rockets/red5.png';
 import redRocket5 from '~/images/landing/rockets/red6.png';
 
@@ -217,13 +217,23 @@ const rocketList = [
   },
   {
     id: 6,
-    src: grayRocket6,
-    alt: 'gray-rocket-6',
-    isComingSoon: true,
-    href: '#',
-    text: 'Coming-soon',
-    title: <></>,
-    className: '',
+    src: redRocket6,
+    alt: 'red-rocket-6',
+    isComingSoon: false,
+    href: '/cosmoventure',
+    text: 'Order Now!',
+    title: (
+      <div className='absolute top-0 font-quaker '>
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-xl text-xl text-transparent  xs:text-3xl sm:text-8xl'>
+          Cosmo
+        </span>
+        <br />
+        <span className='bg-gradient-to-r from-cblack to-cblue bg-clip-text text-2xl text-transparent xs:text-4xl sm:text-7xl'>
+          Venture
+        </span>
+      </div>
+    ),
+    className: 'h-[90%] w-[90%] xs:h-4/5 xs:w-4/5',
     animationSequenceFn: async function sequence(
       animationControls: AnimationControls
     ) {

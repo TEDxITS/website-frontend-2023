@@ -29,6 +29,7 @@ export const eventLinks = [
 export const orderLinks = [
   { href: '/ticketME', label: 'Main Event Ticket' },
   { href: '/ticketPE3', label: 'Project 2073 Ticket' },
+  { href: '/cosmoventure', label: 'Cosmo Venture Merch' },
 ];
 
 export const adminDashboardLinks = [
