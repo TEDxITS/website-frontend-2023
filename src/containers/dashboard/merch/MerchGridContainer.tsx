@@ -31,10 +31,13 @@ export default function MerchGridContainer() {
   }
 
   return (
-    <div className='z-10 flex min-h-screen w-full flex-col items-center gap-3 px-7 py-3 text-white'>
-      <TedIcon className='h-14 w-20 md:h-20 md:w-20' />
-      <div className='bg-gradient-50-years-to-r lg:-px-8 z-10 flex rounded-3xl py-1 px-4 md:mb-3 md:py-2 md:px-6 lg:mb-4 lg:py-3'>
-        <span className='mx-auto block text-center font-quaker text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>
+    <div className='z-20 flex min-h-screen w-full flex-col items-center gap-3 px-7 py-3 text-white'>
+      <div className='flex items-center justify-center gap-3 text-xl font-bold'>
+        <TedIcon className='h-14 w-20 md:h-20 md:w-20' />
+        <span>Merch Vol. 2</span>
+      </div>
+      <div className='bg-gradient-50-years-to-r z-20 mb-10 flex items-center justify-center rounded-[3rem] py-2 px-5 md:mb-0 md:py-4 md:px-10'>
+        <span className='mx-auto flex items-center justify-center text-center font-quaker text-3xl sm:text-3xl md:text-4xl lg:text-7xl'>
           Cosmo Venture Pack
         </span>
       </div>
