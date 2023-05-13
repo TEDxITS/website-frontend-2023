@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import UserTicket from '@/containers/dashboard/history/UserTicket';
 
 import FullTEDLogo from '@/assets/logo/FullTEDLogo';
-import api from '@/utils/api';
+import { localApi } from '@/utils/local-api';
 
 import { BookingDetailData, TicketType } from '@/types/dashboard.types';
 
@@ -18,7 +18,7 @@ export default function UserTicketContainer({
     queryKey: ['booking-detail', { id: bookingDetailId }],
     queryFn: async () => {
       try {
-        const { data } = await api.get<{ data: BookingDetailData }>(
+        const { data } = await localApi.get<{ data: BookingDetailData }>(
           `/booking/booking-detail/${bookingDetailId}`
         );
         return data.data;

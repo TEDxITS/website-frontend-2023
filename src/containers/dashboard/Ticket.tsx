@@ -52,7 +52,7 @@ export function TicketRightSide({ children, type }: TicketProps) {
           ? 'noisy bg-cred'
           : type === 'Pre Sale'
           ? 'bg-gradient-to-b from-cpink to-cblue md:bg-gradient-to-r'
-          : type === 'Normal'
+          : type === 'Normal' || type === 'Booth'
           ? 'bg-gradient-50-years-to-br'
           : 'bg-cgreen'
       )}

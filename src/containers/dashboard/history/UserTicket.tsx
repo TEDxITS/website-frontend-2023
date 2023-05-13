@@ -1,4 +1,5 @@
 import React from 'react';
+import QRCode from 'react-qr-code';
 
 import Button from '@/components/button/Button';
 import UnstyledLink from '@/components/link/UnstyledLink';
@@ -92,9 +93,23 @@ export default function UserTicket({
               </p>
             </div>
             <div className='mb-8 flex h-[12rem] w-full items-center justify-center border-2 border-dashed border-cwhite md:mb-0'>
-              <p className='w-3/4 text-center text-xs text-cwhite'>
-                The QR Code will be here soon
-              </p>
+              <div
+                style={{
+                  height: 'auto',
+                  margin: '0 auto',
+                  maxWidth: 150,
+                  width: '100%',
+                  background: 'white',
+                  padding: '10px',
+                }}
+              >
+                <QRCode
+                  size={256}
+                  style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
+                  value={bookingDetail.id}
+                  viewBox='0 0 256 256'
+                />
+              </div>
             </div>
           </div>
         </TicketRightSide>

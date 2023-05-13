@@ -11,9 +11,9 @@ import LongOrnament from '~/images/merch/LongOrnament.png';
 import TopRightOrnament from '~/images/merch/TopRightOrnament.png';
 
 const metadataObject = generateTemplateMetadata(
-  'Merch Catalogue',
+  'Cosmo Venture Merch Pack',
   '',
-  '/merch-catalogue'
+  '/cosmoventure'
 );
 export const metadata: Metadata = {
   ...metadataObject,

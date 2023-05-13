@@ -98,6 +98,7 @@ model BookingDetail {
   email       String
   phoneNumber String   @map("phone_number")
   qrLink      String?  @map("qr_link")
+  isRedeemed  Boolean  @default(false) @map("is_redeemed")
   ticketId    String   @map("ticket_id") @db.Uuid
   bookingId   String   @map("booking_id") @db.Uuid
   createdAt   DateTime @default(now()) @map("created_at")
@@ -159,9 +160,8 @@ model Anthropocene {
 model PEGallery {
   id          String   @id @default(cuid())
   src         String?
-  description String?
+  description String
   name        String
-  song        String
   created_at  DateTime @default(now())
 
   @@map("pe_galleries")

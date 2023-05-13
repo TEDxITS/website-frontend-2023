@@ -6,7 +6,7 @@ const nextConfig = {
   eslint: {
     dirs: ['src'],
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
     remotePatterns: [
