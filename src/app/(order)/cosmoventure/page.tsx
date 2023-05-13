@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 
+import UnstyledLink from '@/components/link/UnstyledLink';
 import MerchGridContainer from '@/containers/dashboard/merch/MerchGridContainer';
 
 import { generateTemplateMetadata } from '@/utils/metadata';
@@ -83,14 +83,15 @@ export default function MerchCataloguePage() {
         </div>
 
         <div className='mb-16 flex flex-col items-center justify-center text-center'>
-          <Link
-            href=''
+          <UnstyledLink
+            href='https://forms.gle/JBsWNYGxGN7ppRk36'
             className='fixed bottom-12  z-20 mx-auto  block animate-bounce'
+            openNewTab
           >
             <button className='inline-flex items-center rounded-full border border-transparent bg-gradient-to-r from-cblack to-cblack px-12 py-4 font-quaker text-sm font-extrabold text-white shadow-2xl transition-all duration-150 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-cred hover:to-cgreen hover:shadow-md focus:outline-none focus-visible:ring disabled:cursor-not-allowed disabled:border-cgray disabled:bg-cgray/30 disabled:bg-none disabled:text-gray-300 disabled:hover:scale-100 disabled:hover:bg-none disabled:hover:shadow-none md:text-xl'>
               GRAB YOURS NOW
             </button>
-          </Link>
+          </UnstyledLink>
         </div>
       </div>
     </>

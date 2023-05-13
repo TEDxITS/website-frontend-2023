@@ -127,7 +127,7 @@ export default function RedeemModal() {
                 setSelectedUserTicketId(result.getText());
               }
             }}
-            constraints={{ facingMode: 'user' }}
+            constraints={{ facingMode: 'environment' }}
             scanDelay={1000}
           />
         )}
