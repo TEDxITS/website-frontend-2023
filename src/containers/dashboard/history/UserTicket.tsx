@@ -8,6 +8,8 @@ import Ticket, {
   TicketRightSide,
 } from '@/containers/dashboard/Ticket';
 
+import { getSeatOpenDate } from '@/utils/seat';
+
 import { BookingDetailData, TicketType } from '@/types/dashboard.types';
 
 export default function UserTicket({
@@ -21,16 +23,32 @@ export default function UserTicket({
   index: number;
   onDetailPage?: boolean;
 }) {
+  const isSeatingOpen =
+    new Date() > new Date(getSeatOpenDate(bookingDetail.ticket.name));
   return (
     <div>
       {!onDetailPage && (
         <div className='mb-5 flex items-center justify-between'>
           <h3 className='text-cwhite'>Ticket #{index}</h3>
-          <UnstyledLink href={`/dashboard/history/ticket/${bookingDetail.id}`}>
-            <Button variant='primary' className='bg-red-600'>
-              See Ticket
-            </Button>
-          </UnstyledLink>
+          <div className='flex gap-x-3'>
+            {isSeatingOpen && bookingDetail.seatId === null && (
+              <UnstyledLink
+                href={`/dashboard/history/seat/${bookingDetail.id}`}
+              >
+                <Button variant='primary' className='bg-red-600'>
+                  Pick Seat
+                </Button>
+              </UnstyledLink>
+            )}
+
+            <UnstyledLink
+              href={`/dashboard/history/ticket/${bookingDetail.id}`}
+            >
+              <Button variant='primary' className='bg-red-600'>
+                See Ticket
+              </Button>
+            </UnstyledLink>
+          </div>
         </div>
       )}
       <Ticket>
@@ -72,6 +90,14 @@ export default function UserTicket({
                     <p className='font-quaker'>Ticket Type</p>
                     <p className='text-lg'>
                       {bookingDetail.ticket.name} {bookingDetail.ticket.type}
+                    </p>
+                  </div>
+                  <div className='mb-3 flex flex-col border-inherit'>
+                    <p className='font-quaker'>Seat</p>
+                    <p className='text-lg'>
+                      {bookingDetail.seat
+                        ? bookingDetail.seat.name
+                        : 'Not Picked Yet'}
                     </p>
                   </div>
                   <div className='mb-3 flex flex-col border-inherit'>

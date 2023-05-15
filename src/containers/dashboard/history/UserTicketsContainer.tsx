@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import UserTicket from '@/containers/dashboard/history/UserTicket';
 
-import api from '@/utils/api';
+import { localApi } from '@/utils/local-api';
 
 import { BookingDetailData, TicketType } from '@/types/dashboard.types';
 
@@ -17,10 +17,10 @@ export default function UserTicketsContainer({
     queryKey: ['booking-details', { id: bookingId }],
     queryFn: async () => {
       try {
-        const { data } = await api.get<{ data: BookingDetailData[] }>(
-          `/booking/booking-detail/booking/${bookingId}`
-        );
-        return data.data;
+        const { data } = await localApi.get<{
+          data: { bookingDetails: BookingDetailData[] };
+        }>(`/booking/booking-detail/booking/${bookingId}`);
+        return data.data.bookingDetails;
       } catch (error) {
         return Promise.reject(error);
       }

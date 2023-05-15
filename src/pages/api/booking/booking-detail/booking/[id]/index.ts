@@ -12,7 +12,7 @@ export default async function handler(
   const method = req.method;
   switch (method) {
     case 'GET':
-      await getBookingDetailById(req, res);
+      await getBookingDetailByBookingId(req, res);
       break;
     default:
       return res
@@ -24,24 +24,36 @@ export default async function handler(
   return;
 }
 
-async function getBookingDetailById(req: NextApiRequest, res: NextApiResponse) {
+async function getBookingDetailByBookingId(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const id = req.query.id;
   try {
-    const result = await prisma.bookingDetail.findUnique({
+    const result = await prisma.booking.findUnique({
       where: {
         id: id?.toString(),
       },
-      include: {
-        ticket: {
-          select: {
-            name: true,
-            type: true,
-            price: true,
-          },
-        },
-        booking: {
-          select: {
-            id: true,
+      select: {
+        bookingDetails: {
+          include: {
+            ticket: {
+              select: {
+                name: true,
+                type: true,
+                price: true,
+              },
+            },
+            booking: {
+              select: {
+                id: true,
+              },
+            },
+            seat: {
+              select: {
+                name: true,
+              },
+            },
           },
         },
       },

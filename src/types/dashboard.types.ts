@@ -55,5 +55,16 @@ export type BookingDetailData = {
   email: string;
   phoneNumber: string;
   qrLink: string;
+  seatId: string;
+  booking: Pick<BookingData, 'id'>;
   ticket: Pick<TicketData, 'id' | 'name' | 'price' | 'type'>;
+  seat: Pick<SeatingData, 'name'>;
+};
+
+export type SeatingData = {
+  id: string;
+  name: string;
+  BookingDetail: {
+    id: string;
+  } | null;
 };

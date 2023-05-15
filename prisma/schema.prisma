@@ -101,12 +101,24 @@ model BookingDetail {
   isRedeemed  Boolean  @default(false) @map("is_redeemed")
   ticketId    String   @map("ticket_id") @db.Uuid
   bookingId   String   @map("booking_id") @db.Uuid
+  seatId      String?  @unique @map("seat_id") @db.Uuid
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
   booking     Booking  @relation(fields: [bookingId], references: [id])
   ticket      Ticket   @relation(fields: [ticketId], references: [id])
+  seat        Seat?    @relation(fields: [seatId], references: [id])
 
   @@map("booking_details")
+}
+
+model Seat {
+  id            String         @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name          String         @unique
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  BookingDetail BookingDetail?
+
+  @@map("seats")
 }
 
 model Payment {
