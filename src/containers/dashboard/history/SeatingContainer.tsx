@@ -432,7 +432,7 @@ export default function SeatingContainer({
                     )}
                     key={j}
                     onClick={() => handleSeat(alphabet, +number)}
-                    disabled={!isSeatAvailable(alphabet, number)}
+                    disabled={isSeatTaken(alphabet, number)}
                   >
                     {alphabet}
                     {number}

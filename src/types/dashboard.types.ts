@@ -68,3 +68,19 @@ export type SeatingData = {
     id: string;
   } | null;
 };
+
+export type SeatingWithBookingDetailData = {
+  id: string;
+  name: string;
+  BookingDetail: {
+    id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    ticket: {
+      name: string;
+      type: string;
+      price: number;
+    };
+  } | null;
+};
