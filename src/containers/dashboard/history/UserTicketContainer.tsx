@@ -79,6 +79,26 @@ export default function UserTicketContainer({
     );
   }
 
+  if (bookingDetailQuery.data.booking.status !== 'TERVERIFIKASI') {
+    return (
+      <section className='z-20 flex flex-col items-center p-5'>
+        <h1 className='mb-10 text-center font-baron text-cwhite'>
+          TICKET NOT FOUND
+        </h1>
+        <p className='mb-6 text-center text-cwhite'>
+          Unfortunately, the ticket you are looking for is not available or not
+          exist. If you think this is a mistake, please contact us.
+        </p>
+        <p className='z-10 font-primary text-xs font-normal text-cwhite xl:text-lg'>
+          Contact Person
+        </p>
+        <p className='z-10 font-primary text-[0.5rem] font-normal text-cwhite sm:text-xs xl:text-lg'>
+          LINE ID : knytlth (Kinaya) | WhatsApp : 085836649611 (Kinaya)
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section className='z-20 p-5'>
       <h1 className='mb-10 inline-flex w-full flex-wrap items-start justify-center gap-y-3 text-center font-baron text-cwhite'>
@@ -87,7 +107,7 @@ export default function UserTicketContainer({
           {bookingDetailQuery.data.ticket.name === 'Pre Event 3'
             ? 'Project 2073'
             : 'Main Event'}{' '}
-          E-TICKET
+          E-TICKET {bookingDetailQuery.data.booking.status}
         </span>
       </h1>
       <UserTicket

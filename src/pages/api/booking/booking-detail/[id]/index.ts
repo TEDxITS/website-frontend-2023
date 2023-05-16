@@ -42,6 +42,8 @@ async function getBookingDetailById(req: NextApiRequest, res: NextApiResponse) {
         booking: {
           select: {
             id: true,
+            status: true,
+            isActive: true,
           },
         },
       },

@@ -56,7 +56,7 @@ export type BookingDetailData = {
   phoneNumber: string;
   qrLink: string;
   seatId: string;
-  booking: Pick<BookingData, 'id'>;
+  booking: Pick<BookingData, 'id' | 'status' | 'isActive'>;
   ticket: Pick<TicketData, 'id' | 'name' | 'price' | 'type'>;
   seat: Pick<SeatingData, 'name'>;
 };

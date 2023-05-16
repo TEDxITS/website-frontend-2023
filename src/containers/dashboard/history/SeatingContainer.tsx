@@ -169,6 +169,22 @@ export default function SeatingContainer({
     );
   }
 
+  if (bookingQuery.data.booking.status !== 'TERVERIFIKASI') {
+    return (
+      <section className='z-20 flex flex-col items-center p-5 px-10'>
+        <h1 className='mb-10 text-center font-baron text-cwhite'>
+          TICKET NOT FOUND
+        </h1>
+        <p className='mb-5 text-center text-cwhite'>
+          The ticket you are looking for is not found. Please try again later
+        </p>
+        <Link href='/dashboard/history'>
+          <Button>Go Back</Button>
+        </Link>
+      </section>
+    );
+  }
+
   if (bookingQuery.data.ticket.name === 'Pre Event 3') {
     return (
       <section className='z-20 flex flex-col items-center p-5 px-10'>
