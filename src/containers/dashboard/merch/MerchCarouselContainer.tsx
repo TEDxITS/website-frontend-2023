@@ -6,33 +6,15 @@ import { currencyFormat } from '@/utils/currency';
 
 import { MerchTypes } from '@/types/merch.types';
 
-// import LeftSide from '~/images/merch/left-side.png';
-// import RightSide from '~/images/merch/right-side.png';
-
-// import LeftSide from '~/images/merch/left-side.png';
-// import RightSide from '~/images/merch/right-side.png';
-
 interface MerchProps {
   merchandise: MerchTypes[];
 }
 
 export default function MerchCarouselContainer(props: MerchProps) {
   const [lastShow, setLastShow] = useState(1);
-  // console.log(props.merchandise);
 
   return (
     <div className='z-20 mt-5 flex h-min w-full items-center justify-center overflow-hidden sm:mt-7'>
-      {/* <Image
-        src={LeftSide}
-        alt='LeftSide'
-        className='absolute -left-72 scale-90'
-      />
-      <Image
-        src={RightSide}
-        alt='RightSide'
-        className='absolute -right-72 scale-90'
-      /> */}
-
       <GrPrevious
         onClick={() => {
           if (lastShow === 1) {
@@ -58,7 +40,7 @@ export default function MerchCarouselContainer(props: MerchProps) {
           >
             {props.merchandise[4].name}
           </h2>
-          <div className='bg-gradient-50-years-to-r flex h-24 w-36 items-center justify-center md:h-48 md:w-72'>
+          <div className='flex h-24 w-36 items-center justify-center md:h-48 md:w-72'>
             <Image
               src={props.merchandise[4].image}
               alt='...'
@@ -88,7 +70,7 @@ export default function MerchCarouselContainer(props: MerchProps) {
           >
             {props.merchandise[5].name}
           </h2>
-          <div className='bg-gradient-50-years-to-r flex h-24 w-36 items-center justify-center md:h-48 md:w-72'>
+          <div className='flex h-24 w-36 items-center justify-center md:h-48 md:w-72'>
             <Image
               src={props.merchandise[5].image}
               alt='...'

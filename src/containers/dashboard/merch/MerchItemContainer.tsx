@@ -43,7 +43,7 @@ export default function MerchItemContainer(props: MerchProps) {
             className='flex w-full flex-col items-center p-3 md:scale-110 lg:scale-125'
             key={merch.id}
           >
-            <div className='bg-gradient-50-years-to-r p-3'>
+            <div className=' p-3'>
               <img
                 src={merch.image}
                 className='h-40 w-40 md:scale-125'
