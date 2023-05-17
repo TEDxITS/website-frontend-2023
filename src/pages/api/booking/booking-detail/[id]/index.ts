@@ -46,6 +46,11 @@ async function getBookingDetailById(req: NextApiRequest, res: NextApiResponse) {
             isActive: true,
           },
         },
+        seat: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 

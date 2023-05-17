@@ -59,7 +59,10 @@ async function redeemBookingDetailById(
         );
     }
 
-    if (new Date().getTime() < new Date(result.ticket.type).getTime()) {
+    if (
+      new Date().getTime() < new Date(result.ticket.type).getTime() ||
+      new Date().getTime() > new Date(result.ticket.type).getTime() + 86400000
+    ) {
       return res
         .status(400)
         .json(

@@ -28,7 +28,7 @@ export default function UserTicket({
   return (
     <div>
       {!onDetailPage && (
-        <div className='mb-5 flex items-center justify-between'>
+        <div className='mb-10 flex flex-col items-center justify-between gap-y-2 sm:flex-row'>
           <h3 className='text-cwhite'>Ticket #{index}</h3>
           <div className='flex gap-x-3'>
             {isSeatingOpen &&
@@ -94,14 +94,16 @@ export default function UserTicket({
                       {bookingDetail.ticket.name} {bookingDetail.ticket.type}
                     </p>
                   </div>
-                  <div className='mb-3 flex flex-col border-inherit'>
-                    <p className='font-quaker'>Seat</p>
-                    <p className='text-lg'>
-                      {bookingDetail.seat
-                        ? bookingDetail.seat.name
-                        : 'Not Picked Yet'}
-                    </p>
-                  </div>
+                  {bookingDetail.ticket.name !== 'Pre Event 3' && (
+                    <div className='mb-3 flex flex-col border-inherit'>
+                      <p className='font-quaker'>Seat</p>
+                      <p className='text-lg'>
+                        {bookingDetail.seat
+                          ? bookingDetail.seat.name
+                          : 'Not Picked Yet'}
+                      </p>
+                    </div>
+                  )}
                   <div className='mb-3 flex flex-col border-inherit'>
                     <p className='font-quaker'>Price</p>
                     <p className='font-baron text-2xl'>

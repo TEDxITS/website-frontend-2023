@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-hot-toast';
+import { unknown } from 'zod';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
@@ -33,9 +34,16 @@ const isSeatAvailable = (row: string, column: number) => {
 
 export default function SeatingContainer({
   bookingDetailsId,
+  isOnModal = false,
+  setIsSeatModelOpen = () => unknown,
 }: {
   bookingDetailsId: string;
+  isOnModal?: boolean;
+  setIsSeatModelOpen?:
+    | React.Dispatch<React.SetStateAction<boolean>>
+    | (() => unknown);
 }) {
+  const queryClient = useQueryClient();
   const [selectedSeat, setSelectedSeat] = React.useState<{
     row: string;
     column: number;
@@ -85,9 +93,15 @@ export default function SeatingContainer({
     },
     onSuccess: () => {
       toast.success('Seat picked successfully', { id: 'seat' });
-      router.push(
-        `/dashboard/history/purchase/${bookingQuery.data?.booking.id}`
-      );
+      isOnModal
+        ? setIsSeatModelOpen(false)
+        : router.push(
+            `/dashboard/history/purchase/${bookingQuery.data?.booking.id}`
+          );
+      queryClient.invalidateQueries([
+        'booking-detail',
+        { id: bookingDetailsId },
+      ]);
     },
     onError: (e: any) => {
       toast.error(e.response.data.message, { id: 'seat' });
@@ -97,7 +111,12 @@ export default function SeatingContainer({
   if (bookingQuery.isLoading) {
     return (
       <section className='z-20 flex flex-col items-center p-5 px-10'>
-        <h1 className='mb-20 text-center font-baron text-cwhite'>
+        <h1
+          className={clsxm(
+            'mb-20 text-center font-baron text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           CHOOSE SEAT
         </h1>
         <div role='status' className='mb-4'>
@@ -118,7 +137,14 @@ export default function SeatingContainer({
             />
           </svg>
         </div>
-        <p className='text-center text-cwhite'>Loading...</p>
+        <p
+          className={clsxm(
+            'text-center text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
+          Loading...
+        </p>
       </section>
     );
   }
@@ -126,7 +152,12 @@ export default function SeatingContainer({
   if (seatingQuery.isLoading) {
     return (
       <section className='z-20 flex flex-col items-center p-5 px-10'>
-        <h1 className='mb-20 text-center font-baron text-cwhite'>
+        <h1
+          className={clsxm(
+            'mb-20 text-center font-baron text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           CHOOSE SEAT
         </h1>
         <div role='status' className='mb-4'>
@@ -147,7 +178,14 @@ export default function SeatingContainer({
             />
           </svg>
         </div>
-        <p className='text-center text-cwhite'>Loading...</p>
+        <p
+          className={clsxm(
+            'text-center text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
+          Loading...
+        </p>
       </section>
     );
   }
@@ -155,16 +193,28 @@ export default function SeatingContainer({
   if (!bookingQuery.data || !seatingQuery.data) {
     return (
       <section className='z-20 flex flex-col items-center p-5 px-10'>
-        <h1 className='mb-10 text-center font-baron text-cwhite'>
+        <h1
+          className={clsxm(
+            'mb-10 text-center font-baron text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           TICKET NOT FOUND
         </h1>
 
-        <p className='mb-5 text-center text-cwhite'>
+        <p
+          className={clsxm(
+            'mb-5 text-center text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           There is a problem when getting your data. Please try again later
         </p>
-        <Link href='/dashboard/history'>
-          <Button>Go Back</Button>
-        </Link>
+        {!isOnModal && (
+          <Link href='/dashboard/history'>
+            <Button>Go Back</Button>
+          </Link>
+        )}
       </section>
     );
   }
@@ -172,15 +222,27 @@ export default function SeatingContainer({
   if (bookingQuery.data.booking.status !== 'TERVERIFIKASI') {
     return (
       <section className='z-20 flex flex-col items-center p-5 px-10'>
-        <h1 className='mb-10 text-center font-baron text-cwhite'>
+        <h1
+          className={clsxm(
+            'mb-10 text-center font-baron text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           TICKET NOT FOUND
         </h1>
-        <p className='mb-5 text-center text-cwhite'>
+        <p
+          className={clsxm(
+            'mb-5 text-center text-cwhite',
+            isOnModal && 'text-black'
+          )}
+        >
           The ticket you are looking for is not found. Please try again later
         </p>
-        <Link href='/dashboard/history'>
-          <Button>Go Back</Button>
-        </Link>
+        {!isOnModal && (
+          <Link href='/dashboard/history'>
+            <Button>Go Back</Button>
+          </Link>
+        )}
       </section>
     );
   }
@@ -297,92 +359,116 @@ export default function SeatingContainer({
         seatName={`${selectedSeat?.row}${selectedSeat?.column}`}
       />
       <div className='flex w-full items-start justify-between'>
-        <h1 className='mb-10 text-center font-baron text-cwhite'>
+        <h1
+          className={clsxm(
+            'mb-20 text-center font-baron text-cwhite',
+            isOnModal && 'mb-10 text-black'
+          )}
+        >
           CHOOSE SEAT
         </h1>
-        <Button onClick={handleOpenConfirmationModal}>Select Seat</Button>
+        <div className='flex gap-x-3'>
+          <Button
+            variant='primary'
+            className='bg-cred'
+            onClick={() => setIsSeatModelOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button onClick={handleOpenConfirmationModal}>Select Seat</Button>
+        </div>
       </div>
-      <section className='mb-10 w-full rounded-lg bg-cwhite p-10'>
-        <h2 className='mb-5'>Ticket Details</h2>
-        {bookingQuery.data && (
-          <div className='grid grid-cols-1 sm:grid-cols-2'>
-            <div className='col-span-1 flex flex-col'>
-              <div className='mb-5 sm:text-lg'>
-                <span className='font-semibold'>Name:</span>{' '}
-                <p>{bookingQuery.data.name}</p>
+      {!isOnModal && (
+        <>
+          <section className='mb-10 w-full rounded-lg bg-cwhite p-10'>
+            <h2 className='mb-5'>Ticket Details</h2>
+            {bookingQuery.data && (
+              <div className='grid grid-cols-1 sm:grid-cols-2'>
+                <div className='col-span-1 flex flex-col'>
+                  <div className='mb-5 sm:text-lg'>
+                    <span className='font-semibold'>Name:</span>{' '}
+                    <p>{bookingQuery.data.name}</p>
+                  </div>
+                  <div className='mb-5 sm:text-lg'>
+                    <span className='font-semibold'>Email:</span>{' '}
+                    <p>{bookingQuery.data.email}</p>
+                  </div>
+                </div>
+                <div className='col-span-1 flex flex-col'>
+                  <div className='mb-5 sm:text-lg'>
+                    <span className='font-semibold'>Ticket Type:</span>
+                    <p>
+                      {bookingQuery.data.ticket.name}{' '}
+                      {bookingQuery.data.ticket.type}
+                    </p>
+                  </div>
+                  <div className='mb-5 sm:text-lg'>
+                    <span className='font-semibold'>Seat:</span>{' '}
+                    <p className='text-3xl font-bold'>
+                      {selectedSeat?.row}
+                      {selectedSeat?.column}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className='mb-5 sm:text-lg'>
-                <span className='font-semibold'>Email:</span>{' '}
-                <p>{bookingQuery.data.email}</p>
-              </div>
-            </div>
-            <div className='col-span-1 flex flex-col'>
-              <div className='mb-5 sm:text-lg'>
-                <span className='font-semibold'>Ticket Type:</span>
-                <p>
-                  {bookingQuery.data.ticket.name}{' '}
-                  {bookingQuery.data.ticket.type}
-                </p>
-              </div>
-              <div className='mb-5 sm:text-lg'>
-                <span className='font-semibold'>Seat:</span>{' '}
-                <p className='text-3xl font-bold'>
-                  {selectedSeat?.row}
-                  {selectedSeat?.column}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
-      <section
-        className={clsxm(
-          'mb-10 flex w-full items-center gap-x-4 rounded-lg bg-cwhite p-4',
-          isAnnouncementOpen ? 'flex' : 'hidden'
-        )}
-      >
-        <div>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='h-6 w-6 text-cred'
+            )}
+          </section>
+          <section
+            className={clsxm(
+              'mb-10 flex w-full items-center gap-x-4 rounded-lg bg-cwhite p-4',
+              isAnnouncementOpen ? 'flex' : 'hidden'
+            )}
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z'
-            />
-          </svg>
-        </div>
-        <div className='w-full'>
-          Open in personal computer or laptop for better experience. If you're
-          in a small to medium width screen, you can use scrollbar below the
-          seats to move left or right. If you're in a phone screen, you can use
-          your finger to move left or right.
-        </div>
-        <button onClick={() => setIsAnnouncementOpen(false)}>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='h-6 w-6'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M6 18L18 6M6 6l12 12'
-            />
-          </svg>
-        </button>
-      </section>
+            <div>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='h-6 w-6 text-cred'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z'
+                />
+              </svg>
+            </div>
+            <div className='w-full'>
+              Open in personal computer or laptop for better experience. If
+              you're in a small to medium width screen, you can use scrollbar
+              below the seats to move left or right. If you're in a phone
+              screen, you can use your finger to move left or right.
+            </div>
+            <button onClick={() => setIsAnnouncementOpen(false)}>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='h-6 w-6'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M6 18L18 6M6 6l12 12'
+                />
+              </svg>
+            </button>
+          </section>
+        </>
+      )}
+
       <section className='w-full rounded-lg bg-cwhite p-10'>
         <div className='mb-10 rounded-md bg-red-300 p-3 text-center'>Stage</div>
-        <div className='mb-10 flex gap-x-6 overflow-x-auto 2xl:justify-center'>
+        <div
+          className={clsxm(
+            'mb-10 flex gap-x-6 overflow-x-auto 2xl:justify-center',
+            '2xl:justify-start'
+          )}
+        >
           <div>
             {ROW_ALPHABET.map((alphabet, i) => (
               <div className='mb-5 flex justify-center' key={i}>

@@ -7,9 +7,12 @@ import { QrReader } from 'react-qr-reader';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
+import RedeemSeatModal from '@/containers/admin/redeem/RedeemSeatModal';
 
 import clsxm from '@/utils/clsxm';
 import { localApi } from '@/utils/local-api';
+
+import { BookingDetailData } from '@/types/dashboard.types';
 
 export default function RedeemModal() {
   const queryClient = useQueryClient();
@@ -20,7 +23,7 @@ export default function RedeemModal() {
     queryKey: ['booking-detail', { id: selectedUserTicketId }],
     queryFn: async () => {
       try {
-        const { data } = await localApi.get<any>(
+        const { data } = await localApi.get<{ data: BookingDetailData }>(
           `/booking/booking-detail/${selectedUserTicketId}`
         );
         return data.data;
@@ -56,6 +59,14 @@ export default function RedeemModal() {
   });
 
   const redeemHandler = () => {
+    if (!selectedUserTicketId) return;
+    if (
+      bookingDetailQuery.data?.ticket.name !== 'Pre Event 3' &&
+      !bookingDetailQuery.data?.seat
+    ) {
+      toast.error('Please pick a seat first', { id: 'redeem' });
+      return;
+    }
     redeemMutation.mutate({
       ticketId: selectedUserTicketId,
     });
@@ -77,8 +88,8 @@ export default function RedeemModal() {
             ) : bookingDetailQuery.isError ? (
               <div className='py-10 text-center'>Error</div>
             ) : (
-              <div className='mb-5 grid grid-cols-2 gap-4'>
-                <div className='flex flex-col gap-1'>
+              <div className='mb-5 grid grid-cols-1 gap-4 text-center sm:grid-cols-2 sm:text-start'>
+                <div className='flex flex-col'>
                   <span className='font-bold'>Ticket ID</span>
                   <span>{bookingDetailQuery.data?.id}</span>
                 </div>
@@ -102,6 +113,21 @@ export default function RedeemModal() {
                   <span className='font-bold'>Ticket Type</span>
                   <span>{bookingDetailQuery.data?.ticket?.type}</span>
                 </div>
+
+                {bookingDetailQuery.data.ticket.name !== 'Pre Event 3' && (
+                  <div className='flex flex-col gap-1'>
+                    <span className='font-bold'>Seat</span>
+                    <span>
+                      {bookingDetailQuery.data.seat ? (
+                        bookingDetailQuery.data.seat.name
+                      ) : (
+                        <RedeemSeatModal
+                          bookingDetailsId={bookingDetailQuery.data.id}
+                        />
+                      )}
+                    </span>
+                  </div>
+                )}
               </div>
             )}
             <div className='flex justify-center gap-x-4'>
