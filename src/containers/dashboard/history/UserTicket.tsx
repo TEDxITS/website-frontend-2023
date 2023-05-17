@@ -31,15 +31,17 @@ export default function UserTicket({
         <div className='mb-5 flex items-center justify-between'>
           <h3 className='text-cwhite'>Ticket #{index}</h3>
           <div className='flex gap-x-3'>
-            {isSeatingOpen && bookingDetail.seatId === null && (
-              <UnstyledLink
-                href={`/dashboard/history/seat/${bookingDetail.id}`}
-              >
-                <Button variant='primary' className='bg-red-600'>
-                  Pick Seat
-                </Button>
-              </UnstyledLink>
-            )}
+            {isSeatingOpen &&
+              bookingDetail.seatId === null &&
+              bookingDetail.ticket.name !== 'Pre Event 3' && (
+                <UnstyledLink
+                  href={`/dashboard/history/seat/${bookingDetail.id}`}
+                >
+                  <Button variant='primary' className='bg-red-600'>
+                    Pick Seat
+                  </Button>
+                </UnstyledLink>
+              )}
 
             <UnstyledLink
               href={`/dashboard/history/ticket/${bookingDetail.id}`}
