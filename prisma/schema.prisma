@@ -257,6 +257,15 @@ model MerchCart {
   @@map("merch_carts")
 }
 
+model VoyagersTest {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name       String
+  result     String
+  created_at DateTime @default(now())
+
+  @@map("voyagers_tests")
+}
+
 enum MerchPurchaseStatus {
   MENUNGGU_PEMBAYARAN
   SUDAH_DIBAYAR

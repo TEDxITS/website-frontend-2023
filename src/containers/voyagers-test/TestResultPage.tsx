@@ -1,13 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useMutation } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import NextImage from 'next/image';
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
 import Button from '@/components/button/Button';
 import { Modal } from '@/components/modal/Modal';
 import HyperStarfieldContainer from '@/containers/stars/HyperStarfieldContainer';
+import ExplanationModal from '@/containers/voyagers-test/ExplanationModal';
 
 import { DEFAULT_CARD_FILEPATH } from '@/constant/voyagers-test';
 import { useTestContext } from '@/context/TestContext';
+import { localApi } from '@/utils/local-api';
 
 import modalBgLarge from '~/images/voyagers-test/large-modal.png';
 import modalBg from '~/images/voyagers-test/modal.png';
@@ -32,6 +37,7 @@ function TestResultModal({
     setIsOpen(false);
     nextStep();
   };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -79,7 +85,25 @@ function TestResultModal({
 }
 
 export default function TestResultPage() {
-  const { getMostAnswer, resetTest, fromNextPage, setFromNextPage } =
+  const voyagersMutation = useMutation({
+    mutationFn: async (data: any) => {
+      toast.loading('Saving your result...', { id: 'voyagers' });
+      try {
+        const { data: response } = await localApi.post<any>(
+          '/voyagers-test',
+          data
+        );
+        return response;
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message, { id: 'voyagers' });
+    },
+  });
+
+  const { getMostAnswer, resetTest, fromNextPage, setFromNextPage, userName } =
     useTestContext();
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(
@@ -97,10 +121,23 @@ export default function TestResultPage() {
       const imageElement = new Image();
       imageElement.src = image;
     }
-    // ends here
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 4000);
+    if (!fromNextPage) {
+      voyagersMutation.mutate(
+        {
+          name: userName,
+          result: getMostAnswer(),
+        },
+        {
+          onSuccess: () => {
+            setIsLoading(false);
+          },
+          onError: () => {
+            setIsLoading(false);
+          },
+        }
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -126,6 +163,7 @@ export default function TestResultPage() {
             {getMostAnswer()}
           </h1>
           <div className='flex w-full flex-col gap-y-4 sm:w-auto'>
+            <ExplanationModal />
             <Button
               className='px-10 text-center'
               onClick={() => setIsOpen(true)}
