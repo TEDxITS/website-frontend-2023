@@ -184,7 +184,9 @@ export default function BookingTicket({
                       >
                         {dateSortedSelectedTickets.map((ticket) => (
                           <option key={ticket.id} value={ticket.id}>
-                            {ticket.type}
+                            {ticket.type === '20 May 2023'
+                              ? `${ticket.type} (11.30 - 16.30)`
+                              : ticket.type}
                           </option>
                         ))}
                       </select>
