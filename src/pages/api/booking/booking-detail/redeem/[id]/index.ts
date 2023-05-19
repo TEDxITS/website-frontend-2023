@@ -51,17 +51,19 @@ async function redeemBookingDetailById(
         .json(createResponse(404, 'Ticket not found', null));
     }
 
-    if (!(result.ticket.name === 'Pre Event 3')) {
-      return res
-        .status(400)
-        .json(
-          createResponse(400, 'Main event ticket is not redeemable yet', null)
-        );
-    }
+    // if (!(result.ticket.name === 'Pre Event 3')) {
+    //   return res
+    //     .status(400)
+    //     .json(
+    //       createResponse(400, 'Main event ticket is not redeemable yet', null)
+    //     );
+    // }
 
     if (
-      new Date().getTime() < new Date(result.ticket.type).getTime() ||
-      new Date().getTime() > new Date(result.ticket.type).getTime() + 86400000
+      result.ticket.name === 'Pre Event 3' &&
+      (new Date().getTime() < new Date(result.ticket.type).getTime() ||
+        new Date().getTime() >
+          new Date(result.ticket.type).getTime() + 86400000)
     ) {
       return res
         .status(400)
