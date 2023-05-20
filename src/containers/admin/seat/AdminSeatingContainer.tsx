@@ -2,7 +2,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 import React from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -92,9 +91,6 @@ export default function AdminSeatingContainer() {
         <p className='mb-5 text-center text-cwhite'>
           There is a problem when getting your data. Please try again later
         </p>
-        <Link href='/dashboard/history'>
-          <Button>Go Back</Button>
-        </Link>
       </section>
     );
   }

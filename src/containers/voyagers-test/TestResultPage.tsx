@@ -87,7 +87,6 @@ function TestResultModal({
 export default function TestResultPage() {
   const voyagersMutation = useMutation({
     mutationFn: async (data: any) => {
-      toast.loading('Saving your result...', { id: 'voyagers' });
       try {
         const { data: response } = await localApi.post<any>(
           '/voyagers-test',
@@ -97,9 +96,6 @@ export default function TestResultPage() {
       } catch (error) {
         return Promise.reject(error);
       }
-    },
-    onError: (error: any) => {
-      toast.error(error.response.data.message, { id: 'voyagers' });
     },
   });
 
@@ -131,7 +127,8 @@ export default function TestResultPage() {
           onSuccess: () => {
             setIsLoading(false);
           },
-          onError: () => {
+          onError: (error: any) => {
+            toast.error(error.response.data.message, { id: 'voyagers' });
             setIsLoading(false);
           },
         }

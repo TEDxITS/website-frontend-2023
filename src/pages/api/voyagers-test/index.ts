@@ -29,7 +29,12 @@ export default async function handler(
 
 async function getVoyagersTestResults(res: NextApiResponse) {
   try {
-    const result = await prisma.voyagersTest.findMany();
+    const result = await prisma.voyagersTest.groupBy({
+      by: ['result'],
+      _count: {
+        result: true,
+      },
+    });
     if (result) {
       return res
         .status(200)
