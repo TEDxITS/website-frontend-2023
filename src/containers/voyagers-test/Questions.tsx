@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RadioGroup } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
