@@ -61,6 +61,7 @@ export default function VoyagersChartContainer() {
         return Promise.reject(error);
       }
     },
+    refetchInterval: 2000,
   });
 
   if (voyagersQuery.isLoading) {

@@ -5,9 +5,9 @@ import VoyagersChartContainer from '@/containers/admin/voyagers-test/VoyagersCha
 import { generateTemplateMetadata } from '@/utils/metadata';
 
 const metadataObject = generateTemplateMetadata(
-  'Redeem Ticket',
+  'Voyagers Test Result',
   '',
-  '/admin/dashboard/redeem'
+  '/admin/dashboard/voyagers-test'
 );
 export const metadata: Metadata = {
   ...metadataObject,
