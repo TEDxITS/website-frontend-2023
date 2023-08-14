@@ -18,6 +18,7 @@ export const aboutLinks = [
   { href: '/starter-kit', label: 'TED and TEDx Starter Kit' },
   { href: '/last-year-journey', label: 'Last Year’s Journey' },
   { href: '/grand-theme', label: 'Grand Theme' },
+  { href: '/2023-journey', label: 'This Year’s Glory' },
 ];
 
 export const eventLinks = [
