@@ -10,14 +10,14 @@ export default function AlumniSection() {
           wouldn’t be here without you.
         </p>
       </div>
-      <h3 className='mb-14 text-center text-3xl text-white'>
+      {/* <h3 className='mb-14 text-center text-3xl text-white'>
         Our Alumni, where are they?
       </h3>
       <div className='layout mb-14 rounded-md bg-gray-100 bg-opacity-50 p-3'>
         *isi logo Telkomsel, Pertamina, Garuda, Phillip-Morris, Deloitte,
         Ruangguru, Gojek, IISMA, Mawapres ITS, Duta ITS, BCA, GenBi, YLI (Young
         Leaders Indonesia), XLFL, Astra, competition winner achievers.
-      </div>
+      </div> */}
     </section>
   );
 }
