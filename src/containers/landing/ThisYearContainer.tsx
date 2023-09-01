@@ -1,13 +1,17 @@
+'use client';
 import Image from 'next/image';
+import React from 'react';
 
 import UnstyledLink from '@/components/link/UnstyledLink';
+import { Modal } from '@/components/modal/Modal';
 
 import ComingSoon from '~/images/dashboard/coming-soon-small.png';
 import FloatWhats from '~/images/landing/bg-whats2.png';
+import thumbnail from '~/images/landing/thumbnail.jpg';
 import TvStatic from '~/images/landing/tv-static-small.jpg';
 
-const AFTER_MOVIE_URL = '';
-const AFTER_MOVIE_THUMBNAIL_URL = '';
+const AFTER_MOVIE_URL = 'https://www.youtube.com/watch?v=ip9aSeA7evU';
+const AFTER_MOVIE_THUMBNAIL_URL = thumbnail;
 
 // const AFTER_MOVIE_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 // const AFTER_MOVIE_THUMBNAIL_URL = DummyThumbnail;
@@ -18,15 +22,17 @@ export default function ThisYearContainer() {
     AFTER_MOVIE_URL && AFTER_MOVIE_THUMBNAIL_URL
       ? AFTER_MOVIE_THUMBNAIL_URL
       : TvStatic;
+
   const afterMovieLinkButton = AFTER_MOVIE_URL ? (
     <div className='absolute top-[30%] flex justify-center sm:top-[40%]'>
       <UnstyledLink
         href={AFTER_MOVIE_URL}
         openNewTab
-        className='border-4 border-cgray bg-black px-8 pb-4 pt-3 font-baron text-base text-white sm:text-xl'
+        className='block border-4 border-cgray bg-black px-8 pb-4 pt-3 font-baron text-base text-white sm:hidden sm:text-xl'
       >
         Watch Now
       </UnstyledLink>
+      <AfterMovieModal />
     </div>
   ) : (
     <div className='absolute top-[10%] flex justify-center sm:top-[20%]'>
@@ -42,7 +48,7 @@ export default function ThisYearContainer() {
       <div className='absolute z-20 h-full w-full'>
         <div className='layout flex h-full flex-col items-center justify-start xs:justify-center lg:justify-start lg:pt-20'>
           <h3 className='pb-12 text-center font-baron text-3xl text-cwhite lg:text-5xl'>
-            THIS IS NOT THE END
+            TEDxITS 2023 After Movie
           </h3>
           <div className='noisy relative flex flex-col items-center border-[10px] border-cgray bg-black'>
             <div className='absolute -left-4 bottom-6 z-40 h-32 w-4 rounded-l-md bg-cgray'></div>
@@ -77,5 +83,34 @@ export default function ThisYearContainer() {
         placeholder='blur'
       />
     </section>
+  );
+}
+
+function AfterMovieModal() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <div className='hidden sm:block'>
+      <button
+        className='border-4 border-cgray bg-black px-8 pb-4 pt-3 font-baron text-base text-white sm:text-xl'
+        onClick={() => setIsOpen(true)}
+      >
+        Watch Now
+      </button>
+      <Modal
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        className='flex max-w-3xl justify-center'
+      >
+        <iframe
+          width='900'
+          height='450'
+          src='https://www.youtube.com/embed/ip9aSeA7evU?si=OUWN9Q1f_7W5TWVM'
+          title='YouTube video player'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          allowFullScreen
+        ></iframe>
+      </Modal>
+    </div>
   );
 }
