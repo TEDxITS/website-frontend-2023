@@ -125,7 +125,7 @@ const carouselData = [
     title: 'How Can Digital Transitions Bridge Equality and Sustainability?',
     description: 'Prasetya Dwicahya',
     image: Prasetya, // Replace with actual image URL
-    href: 'https://www.youtube.com/watch?v=gfijZDnyTi8',
+    href: 'https://www.youtube.com/watch?v=TdB1-rsxAJ8',
   },
   {
     name: 'Demographic Bonuses: A Bull or a Bush?',
