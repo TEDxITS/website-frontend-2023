@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { NormalFooter } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import LightCarousel from '@/containers/landing/LightCarousel';
+import OurSponsors from '@/containers/landing/OurSponsors';
 import RocketsGrid from '@/containers/landing/RocketsGrid';
 import ThisYearContainer from '@/containers/landing/ThisYearContainer';
 import RandomStarfieldContainer from '@/containers/stars/RandomStarfieldContainer';
@@ -30,6 +31,7 @@ export default function LandingPage() {
         </RandomStarfieldContainer>
         <RocketsGrid />
         <div className='w-screen bg-stars py-16'></div>
+        <OurSponsors />
         <NormalFooter />
       </div>
     </div>
